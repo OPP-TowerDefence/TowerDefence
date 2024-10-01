@@ -1,7 +1,4 @@
 ﻿namespace TowerDefense.Models;
-public class Tower
+public class Tower : Unit
 {
-    public required int X { get; set; }
-
-    public required int Y { get; set; }
 }

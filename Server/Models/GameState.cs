@@ -2,13 +2,12 @@
 public class GameState
 {
     public Map Map { get; } = new Map(10, 10);
-    public List<Tower> Towers { get; set; } = [];
 
     private readonly Queue<(int x, int y)> _towerPlacementQueue = new();
 
     public object GetMap()
     {
-        return Towers
+        return Map.Towers
             .Select(t => new 
             { 
                 t.X,
@@ -19,7 +18,7 @@ public class GameState
 
     public bool IsOccupied(int x, int y)
     {
-        return Towers.Any(t => t.X == x && t.Y == y);
+        return Map.Towers.Any(t => t.X == x && t.Y == y);
     }
 
     private bool IsValidPosition(int x, int y)
@@ -31,7 +30,7 @@ public class GameState
     {
         if (!IsOccupied(x, y) && IsValidPosition(x, y))
         {
-            Towers.Add(new Tower { X = x, Y = y });
+            Map.Towers.Add(new Tower { X = x, Y = y });
         }
     }
 
