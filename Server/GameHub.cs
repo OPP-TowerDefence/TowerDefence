@@ -24,7 +24,7 @@ public class GameHub(GameService gameService) : Hub
             .SendAsync("UserJoined", username);
     }
 
-    public override Task OnDisconnectedAsync(Exception exception)
+    public override Task OnDisconnectedAsync(Exception? exception)
     {
         return base.OnDisconnectedAsync(exception);
     }

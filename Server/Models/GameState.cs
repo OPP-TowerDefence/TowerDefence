@@ -4,11 +4,15 @@ public class GameState
     public Map Map { get; } = new Map(10, 10);
     public List<Tower> Towers { get; set; } = [];
 
-    private readonly Queue<(int x, int y)> _towerPlacementQueue = new();
-
     public object GetMap()
     {
-        return Towers.Select(t => new { t.X, t.Y }).ToList() ?? [];
+        return Towers
+            .Select(t => new 
+            { 
+                t.X,
+                t.Y 
+            })
+            .ToList();
     }
 
     public bool IsOccupied(int x, int y)
@@ -34,6 +38,7 @@ public class GameState
         while (_towerPlacementQueue.Count > 0)
         {
             var (x, y) = _towerPlacementQueue.Dequeue();
+
             PlaceTower(x, y);
         }
     }
