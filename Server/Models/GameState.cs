@@ -1,10 +1,7 @@
 ﻿namespace TowerDefense.Models;
 public class GameState
 {
-    public int MapWidth { get; private set; } = 10;
-
-    public int MapHeight { get; private set; } = 10;
-
+    public Map Map { get; } = new Map(10, 10);
     public List<Tower> Towers { get; set; } = [];
 
     private readonly Queue<(int x, int y)> _towerPlacementQueue = new();
@@ -21,7 +18,7 @@ public class GameState
 
     private bool IsValidPosition(int x, int y)
     {
-        return x >= 0 && x < MapWidth && y >= 0 && y < MapHeight;
+        return x >= 0 && x < Map.MapWidth && y >= 0 && y < Map.MapHeight;
     }
 
     private void PlaceTower(int x, int y)
