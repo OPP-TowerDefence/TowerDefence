@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tower Defence Game</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/5.0.11/signalr.min.js"></script>
+    <link rel="stylesheet" href="stylesheet.css">
+</head>
+<body>
+    <div class="game-container">
+        <div id="loginForm">
+            Room Code: <input type="text" id="roomCode" placeholder="Enter Room Code">
+            Username: <input type="text" id="username" placeholder="Enter Username">
+            <button onclick="joinRoom()">Join Room</button>
+        </div>
+
+        <div id="gameInterface" class="hidden">
+            <div id="gameMap"></div>
+            <ul id="messagesList"></ul>
+        </div>
+    </div>
+
+    <div id="roomInfo" class="hidden top-right"></div>
+
+    <script src="site.js"></script>
+</body>
+</html>
