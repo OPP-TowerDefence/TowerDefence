@@ -4,6 +4,8 @@ public class GameState
     public Map Map { get; } = new Map(10, 10);
     public List<Tower> Towers { get; set; } = [];
 
+    private readonly Queue<(int x, int y)> _towerPlacementQueue = new();
+
     public object GetMap()
     {
         return Towers
@@ -22,7 +24,7 @@ public class GameState
 
     private bool IsValidPosition(int x, int y)
     {
-        return x >= 0 && x < Map.MapWidth && y >= 0 && y < Map.MapHeight;
+        return x >= 0 && x < Map.Width && y >= 0 && y < Map.Height;
     }
 
     private void PlaceTower(int x, int y)

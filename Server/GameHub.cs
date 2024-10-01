@@ -17,7 +17,7 @@ public class GameHub(GameService gameService) : Hub
 
         await Groups.AddToGroupAsync(Context.ConnectionId, roomCode);
 
-        await Clients.Caller.SendAsync("InitializeMap", gameState.Map.MapWidth, gameState.Map.MapHeight, gameState.GetMap());
+        await Clients.Caller.SendAsync("InitializeMap", gameState.Map.Width, gameState.Map.Height, gameState.GetMap());
 
         await Clients
             .Group(roomCode)

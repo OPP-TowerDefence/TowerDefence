@@ -2,13 +2,13 @@
 {
     public class Map
     {
-        public int MapWidth { get; private set; } = 10;
-        public int MapHeight { get; private set; } = 10;
+        public int Width { get; private set; } = 10;
+        public int Height { get; private set; } = 10;
 
-        public Map(int mapWidth, int mapHeight)
+        public Map(int width, int height)
         {
-            MapWidth = mapWidth;
-            MapHeight = mapHeight;
+            Width = width;
+            Height = height;
         }
     }
 }
