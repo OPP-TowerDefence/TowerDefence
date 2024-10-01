@@ -1,17 +1,23 @@
 ﻿namespace TowerDefense.Models;
 public class GameState
 {
-    public int MapWidth { get; private set; } = 10;
+    private readonly Queue<(int x, int y)> _towerPlacementQueue = new();
 
     public int MapHeight { get; private set; } = 10;
 
-    public List<Tower> Towers { get; set; } = [];
+    public int MapWidth { get; private set; } = 10;
 
-    private readonly Queue<(int x, int y)> _towerPlacementQueue = new();
+    public List<Tower> Towers { get; set; } = [];
 
     public object GetMap()
     {
-        return Towers.Select(t => new { t.X, t.Y }).ToList() ?? [];
+        return Towers
+            .Select(t => new 
+            { 
+                t.X,
+                t.Y 
+            })
+            .ToList();
     }
 
     public bool IsOccupied(int x, int y)
@@ -37,6 +43,7 @@ public class GameState
         while (_towerPlacementQueue.Count > 0)
         {
             var (x, y) = _towerPlacementQueue.Dequeue();
+
             PlaceTower(x, y);
         }
     }
