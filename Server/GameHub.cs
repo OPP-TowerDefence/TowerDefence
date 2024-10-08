@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.SignalR;
+using TowerDefense.Enums;
 using TowerDefense.Models;
 using TowerDefense.Services;
 
@@ -17,8 +18,7 @@ public class GameHub(GameService gameService) : Hub
 
         await Groups.AddToGroupAsync(Context.ConnectionId, roomCode);
 
-        var player = new Player(username, Context.ConnectionId);
-        gameState.AddPlayer(player);
+        gameState.AddPlayer(username, Context.ConnectionId);
 
         await Clients.Caller.SendAsync("InitializeMap", gameState.Map.Width, gameState.Map.Height, gameState.GetMap());
 
@@ -48,11 +48,11 @@ public class GameHub(GameService gameService) : Hub
         await base.OnDisconnectedAsync(exception);
     }
 
-    public async Task PlaceTower(string roomCode, int x, int y)
+    public async Task PlaceTower(string roomCode, string connectionId, int x, int y, TowerCategories towerCategory)
     {
         if (_gameService.Rooms.TryGetValue(roomCode, out var gameState))
         {
-             gameState.QueueTowerPlacement(x, y);
+             gameState.QueueTowerPlacement(x, y, connectionId, towerCategory);
         }
     }
 }

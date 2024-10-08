@@ -1,12 +1,16 @@
-﻿namespace TowerDefense.Models;
+﻿using TowerDefense.Enums;
+using TowerDefense.Models.Towers;
+
+namespace TowerDefense.Models;
+
 public class GameState
 {
     public Map Map { get; } = new Map(10, 10);
 
-    private readonly Queue<(int x, int y)> _towerPlacementQueue = new();
+    private readonly Queue<Tower> _towerPlacementQueue = new();
     private readonly List<Player> _players = new();
-
     public List<Player> Players => _players;
+    private readonly List<TowerTypes> _availableTowerTypes = Enum.GetValues(typeof(TowerTypes)).Cast<TowerTypes>().ToList();
 
     public object GetMap()
     {
@@ -29,11 +33,11 @@ public class GameState
         return x >= 0 && x < Map.Width && y >= 0 && y < Map.Height;
     }
 
-    private void PlaceTower(int x, int y)
+    private void PlaceTower(Tower tower)
     {
-        if (!IsOccupied(x, y) && IsValidPosition(x, y))
+        if (!IsOccupied(tower.X, tower.Y) && IsValidPosition(tower.X, tower.Y))
         {
-            Map.Towers.Add(new Tower { X = x, Y = y });
+            Map.Towers.Add(tower);
         }
     }
 
@@ -41,25 +45,39 @@ public class GameState
     {
         while (_towerPlacementQueue.Count > 0)
         {
-            var (x, y) = _towerPlacementQueue.Dequeue();
+            var tower  = _towerPlacementQueue.Dequeue();
 
-            PlaceTower(x, y);
+            PlaceTower(tower);
         }
     }
 
-    public void QueueTowerPlacement(int x, int y)
+    public void QueueTowerPlacement(int x, int y, string connectionId, TowerCategories towerCategory)
     {
         if (IsValidPosition(x, y) && !IsOccupied(x, y))
         {
-            _towerPlacementQueue.Enqueue((x, y));
+            var player = _players.FirstOrDefault(p => p.ConnectionId == connectionId);
+
+            if(player != null)
+            {
+                var tower = player.CreateTower(x, y, towerCategory);
+                _towerPlacementQueue.Enqueue(tower);
+            }
         }
     }
 
-    public void AddPlayer(Player player)
+    public void AddPlayer(string username, string connectionId)
     {
-        if (!_players.Any(p => p.ConnectionId == player.ConnectionId))
+        if (!_players.Any(p => p.ConnectionId == connectionId))
         {
-            _players.Add(player);
+            if (_availableTowerTypes.Count > 0)
+            {
+                TowerTypes playerTowerType = _availableTowerTypes.First();
+
+                var player = new Player(username, connectionId, playerTowerType);
+                _players.Add(player);
+
+                _availableTowerTypes.Remove(playerTowerType);
+            }
         }
     }
 
@@ -68,6 +86,8 @@ public class GameState
         var player = _players.FirstOrDefault(p => p.ConnectionId == connectionId);
         if (player != null)
         {
+            _availableTowerTypes.Add(player.TowerType);
+
             _players.Remove(player);
         }
     }
