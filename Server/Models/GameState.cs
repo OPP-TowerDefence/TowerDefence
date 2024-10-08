@@ -4,6 +4,9 @@ public class GameState
     public Map Map { get; } = new Map(10, 10);
 
     private readonly Queue<(int x, int y)> _towerPlacementQueue = new();
+    private readonly List<Player> _players = new();
+
+    public List<Player> Players => _players;
 
     public object GetMap()
     {
@@ -50,5 +53,27 @@ public class GameState
         {
             _towerPlacementQueue.Enqueue((x, y));
         }
+    }
+
+    public void AddPlayer(Player player)
+    {
+        if (!_players.Any(p => p.ConnectionId == player.ConnectionId))
+        {
+            _players.Add(player);
+        }
+    }
+
+    public void RemovePlayer(string connectionId)
+    {
+        var player = _players.FirstOrDefault(p => p.ConnectionId == connectionId);
+        if (player != null)
+        {
+            _players.Remove(player);
+        }
+    }
+
+    public IEnumerable<string> GetPlayersUsernames()
+    {
+        return _players.Select(p => p.Username);
     }
 }

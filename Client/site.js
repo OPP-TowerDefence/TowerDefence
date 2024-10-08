@@ -3,6 +3,9 @@ const connection = new signalR.HubConnectionBuilder()
     .configureLogging(signalR.LogLevel.Information)
     .build();
 
+console.log("Test log");
+
+
 let mapWidth = 0;
 let mapHeight = 0;
 
@@ -19,6 +22,9 @@ async function joinRoom() {
         const roomInfo = document.getElementById('roomInfo');
         roomInfo.textContent = `Room: ${roomCode} | Username: ${username}`;
         roomInfo.classList.remove('hidden');
+
+        const activePlayersContainer = document.getElementById('activePlayersContainer');
+        activePlayersContainer.classList.remove('hidden');
 
         clearMap();
     }
@@ -44,11 +50,36 @@ connection.on("InitializeMap", function (width, height, map) {
     renderMap(map);
 });
 
-connection.on("UserJoined", function (username) {
+connection.on("UserJoined", function (username, activeUsernames) {
     const messageList = document.getElementById('messagesList');
     const listItem = document.createElement('li');
     listItem.textContent = `${username} has joined the room!`;
     messageList.appendChild(listItem);
+
+    const activeUsersList = document.getElementById('activeUsersList');
+    activeUsersList.innerHTML = '';
+
+    activeUsernames.forEach(user => {
+        const userItem = document.createElement('li');
+        userItem.textContent = user;
+        activeUsersList.appendChild(userItem);
+    });
+});
+
+connection.on("UserLeft", function (username, activeUsernames) {
+    const messageList = document.getElementById('messagesList');
+    const listItem = document.createElement('li');
+    listItem.textContent = `${username} has left the room!`;
+    messageList.appendChild(listItem);
+
+    const activeUsersList = document.getElementById('activeUsersList');
+    activeUsersList.innerHTML = ''; 
+    
+    activeUsernames.forEach(user => {
+        const userItem = document.createElement('li');
+        userItem.textContent = user;
+        activeUsersList.appendChild(userItem);
+    });
 });
 
 connection.on("OnTick", function (map) {
