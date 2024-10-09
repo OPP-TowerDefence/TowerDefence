@@ -102,23 +102,3 @@ input, button {
     width: 400px;
 }
 
-.tower-selection {
-    font-size: 16px;
-    padding: 10px 20px;
-    cursor: pointer;
-    border: 1px solid #000;
-    border-radius: 5px;
-    background-color: #e0e0e0;
-    text-align: center;
-}
-
-.tower-selection:hover {
-    background-color: #d0d0d0;
-}
-
-.tower-selection.active {
-    background-color: #778beb;
-    color: white;
-    border-color: #000;
-}
-
