@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.SignalR;
+using TowerDefense.Enums;
 using TowerDefense.Models;
 using TowerDefense.Services;
 
@@ -17,23 +18,43 @@ public class GameHub(GameService gameService) : Hub
 
         await Groups.AddToGroupAsync(Context.ConnectionId, roomCode);
 
+        gameState.AddPlayer(username, Context.ConnectionId);
+
         await Clients.Caller.SendAsync("InitializeMap", gameState.Map.Width, gameState.Map.Height, gameState.GetMap());
+
+        var activeUsernames = gameState.GetActivePlayers();
 
         await Clients
             .Group(roomCode)
-            .SendAsync("UserJoined", username);
+            .SendAsync("UserJoined", username, activeUsernames);
     }
 
-    public override Task OnDisconnectedAsync(Exception? exception)
+    public override async Task OnDisconnectedAsync(Exception? exception)
     {
-        return base.OnDisconnectedAsync(exception);
+        foreach (var room in _gameService.Rooms)
+        {
+            var gameState = room.Value;
+
+            var player = gameState.Players.FirstOrDefault(p => p.ConnectionId == Context.ConnectionId);
+            if (player != null)
+            {
+                gameState.RemovePlayer(Context.ConnectionId);
+
+                var activeUsernames = gameState.GetActivePlayers();
+                await Clients
+                    .Group(room.Key)
+                    .SendAsync("UserLeft", player.Username, activeUsernames);
+            }
+        }
+
+        await base.OnDisconnectedAsync(exception);
     }
 
-    public async Task PlaceTower(string roomCode, int x, int y)
+    public async Task PlaceTower(string roomCode, int x, int y, TowerCategories towerCategory)
     {
         if (_gameService.Rooms.TryGetValue(roomCode, out var gameState))
         {
-             gameState.QueueTowerPlacement(x, y);
+             gameState.QueueTowerPlacement(x, y, Context.ConnectionId, towerCategory);
         }
     }
 }

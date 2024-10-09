@@ -2,8 +2,14 @@
 {
     public abstract class Unit
     {
-        public required int X { get; set; }
+        public int X { get; set; }
 
-        public required int Y { get; set; }
+        public int Y { get; set; }
+
+        public Unit(int x, int y)
+        {
+            X = x;
+            Y = y;
+        }
     }
 }

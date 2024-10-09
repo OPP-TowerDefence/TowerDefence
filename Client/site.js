@@ -6,6 +6,9 @@ const connection = new signalR.HubConnectionBuilder()
 let mapWidth = 0;
 let mapHeight = 0;
 
+let activeTowerCategory = 0;
+let activeSelectionDiv = document.getElementById('longDistanceTowerDiv');
+
 async function joinRoom() {
     const roomCode = document.getElementById('roomCode').value;
     const username = document.getElementById('username').value;
@@ -19,6 +22,15 @@ async function joinRoom() {
         const roomInfo = document.getElementById('roomInfo');
         roomInfo.textContent = `Room: ${roomCode} | Username: ${username}`;
         roomInfo.classList.remove('hidden');
+
+        const activePlayersContainer = document.getElementById('activePlayersContainer');
+        activePlayersContainer.classList.remove('hidden');
+
+        const towerSelectionBar = document.getElementById('towerSelectionBar');
+        towerSelectionBar.classList.remove('hidden');
+        towerSelectionBar.style.display = 'flex';
+
+        activeSelectionDiv.classList.add('active');
 
         clearMap();
     }
@@ -44,11 +56,39 @@ connection.on("InitializeMap", function (width, height, map) {
     renderMap(map);
 });
 
-connection.on("UserJoined", function (username) {
+connection.on("UserJoined", function (username, players) {
     const messageList = document.getElementById('messagesList');
     const listItem = document.createElement('li');
     listItem.textContent = `${username} has joined the room!`;
     messageList.appendChild(listItem);
+
+    const activeUsersList = document.getElementById('activeUsersList');
+    activeUsersList.innerHTML = '';
+
+    players.forEach(player => {
+        const userItem = document.createElement('li');
+        userItem.textContent = `${player.username} - ${player.towerType}`;
+        activeUsersList.appendChild(userItem);
+    });
+});
+
+connection.on("UserLeft", function (username, players) {
+    const messageList = document.getElementById('messagesList');
+    const listItem = document.createElement('li');
+    listItem.textContent = `${username} has left the room!`;
+    messageList.appendChild(listItem);
+
+    const activeUsersList = document.getElementById('activeUsersList');
+    activeUsersList.innerHTML = '';
+
+    players.forEach(player => {
+        const userItem = document.createElement('li');
+        userItem.textContent = `${player.username} - ${player.towerType}`;
+        activeUsersList.appendChild(userItem);
+    });
+
+    const towerSelectionBar = document.getElementById('towerSelectionBar');
+    towerSelectionBar.style.display = 'none';
 });
 
 connection.on("OnTick", function (map) {
@@ -62,6 +102,8 @@ function renderMap(map) {
     map.forEach(tower => {
         const cell = document.createElement('div');
         cell.className = 'grid-cell tower';
+        cell.classList.add(tower.type.toLowerCase());
+        cell.classList.add(tower.category.toLowerCase());
         gameMap.appendChild(cell);
 
         cell.style.gridColumnStart = tower.x + 1;
@@ -82,8 +124,24 @@ document.getElementById('gameMap').addEventListener('click', function (event) {
 
     if (gridX >= 0 && gridX < mapWidth && gridY >= 0 && gridY < mapHeight) {
         const roomCode = document.getElementById('roomCode').value;
-        connection.invoke("PlaceTower", roomCode, gridX, gridY);
+        connection.invoke("PlaceTower", roomCode, gridX, gridY, activeTowerCategory);
     } else {
         console.log('Tower placement is outside the grid boundaries.');
     }
 });
+
+function selectTowerCategory(towerCategory) {
+    activeTowerCategory = towerCategory;
+
+    if (activeSelectionDiv) {
+        activeSelectionDiv.classList.remove('active');
+    }
+
+    if (towerCategory === 0) {
+        activeSelectionDiv = document.getElementById('longDistanceTowerDiv');
+    } else {
+        activeSelectionDiv = document.getElementById('heavyTowerDiv');
+    }
+
+    activeSelectionDiv.classList.add('active');
+}

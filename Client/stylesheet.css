@@ -27,13 +27,6 @@ button {
     margin-top: 20px;
 }
 
-.grid-cell {
-    background-color: #fff;
-    border: 1px solid #000;
-    height: 50px;
-    width: 50px;
-}
-
 input, button {
     font-size: 16px;
     margin: 5px;
@@ -45,7 +38,7 @@ input, button {
     border: 2px solid #000;
     border-radius: 5px;
     margin-top: 20px;
-    max-height: 150px;
+    height: 150px;
     overflow-y: auto;
     padding: 10px;
     width: 100%;
@@ -54,10 +47,6 @@ input, button {
 #messagesList li {
     list-style-type: none;
     padding: 5px 0;
-}
-
-.tower {
-    background-color: #778beb;
 }
 
 .hidden {
@@ -74,3 +63,31 @@ input, button {
     right: 10px;
     top: 10px;
 }
+
+#activePlayersContainer {
+    margin-top: 60px; 
+}
+
+#activeUsersList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#activeUsersList li {
+    padding: 5px;
+}
+
+.bottom-bar {
+    background-color: #ffffff;
+    border: 2px solid #000;
+    border-radius: 5px;
+    display: none;
+    justify-content: space-around;
+    margin-top: 20px;
+    padding: 10px;
+    position: absolute;
+    bottom: 10px;
+    width: 400px;
+}
+

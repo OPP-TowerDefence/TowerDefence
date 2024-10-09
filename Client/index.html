@@ -5,6 +5,7 @@
     <title>Tower Defence Game</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/5.0.11/signalr.min.js"></script>
     <link rel="stylesheet" href="stylesheet.css">
+    <link rel="stylesheet" href="towers.css">
 </head>
 <body>
     <div class="game-container">
@@ -21,6 +22,21 @@
     </div>
 
     <div id="roomInfo" class="hidden top-right"></div>
+
+    <div id="activePlayersContainer" class="hidden top-right">
+        <h3>Active Players</h3>
+        <ul id="activeUsersList"></ul>
+    </div>
+
+    <div id="towerSelectionBar" class="hidden bottom-bar">
+        <div id="longDistanceTowerDiv" class="tower-selection" onclick="selectTowerCategory(0)">
+            Long Distance Tower
+        </div>
+        <div id="heavyTowerDiv" class="tower-selection" onclick="selectTowerCategory(1)">
+            Heavy Tower
+        </div>
+    </div>
+
 
     <script src="site.js"></script>
 </body>
