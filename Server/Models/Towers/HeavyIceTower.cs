@@ -1,7 +1,10 @@
-﻿namespace TowerDefense.Models.Towers
+﻿using TowerDefense.Enums;
+
+namespace TowerDefense.Models.Towers
 {
     public class HeavyIceTower : HeavyTower
     {
+        public override TowerTypes Type => TowerTypes.Ice;
         public HeavyIceTower(int x, int y) : base(x, y)
         {
             this.Power = 40;

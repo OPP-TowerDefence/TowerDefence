@@ -18,7 +18,9 @@ public class GameState
             .Select(t => new 
             { 
                 t.X,
-                t.Y 
+                t.Y,
+                Category = t.Category.ToString(),
+                Type = t.Type.ToString()
             })
             .ToList();
     }
