@@ -5,13 +5,66 @@ public class GameState
 
     private readonly Queue<(int x, int y)> _towerPlacementQueue = new();
 
-    public object GetMap()
+    public void SpawnEnemies()
+    {
+        EnemyFactory factory;
+
+        Random rand = new Random();
+        int enemyType = rand.Next(0, 3);
+
+        switch (enemyType)
+        {
+            case 0:
+                factory = new FastEnemyFactory();
+                break;
+            case 1:
+                factory = new StrongEnemyFactory();
+                break;
+            case 2:
+                factory = new FlyingEnemyFactory();
+                break;
+            default:
+                throw new Exception("Unknown enemy type");
+        }
+
+        Enemy enemy = factory.CreateEnemy();
+
+        Map.Enemies.Add(enemy);
+    }
+
+    public void UpdateEnemies()
+    {
+        foreach (var enemy in Map.Enemies.ToList())
+        {
+            enemy.MoveTowardsTarget();
+
+            if (enemy.HasReachedDestination())
+            {
+                Map.Enemies.Remove(enemy);                                         
+            }
+        }
+    }
+
+    public object GetMapTowers()
     {
         return Map.Towers
-            .Select(t => new 
-            { 
+            .Select(t => new
+            {
                 t.X,
-                t.Y 
+                t.Y
+            })
+            .ToList();
+    }
+
+    public object GetMapEnemies()
+    {
+        return Map.Enemies
+            .Select(e => new
+            {
+                e.X,
+                e.Y,
+                e.Health,
+                e.Speed
             })
             .ToList();
     }

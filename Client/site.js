@@ -29,7 +29,7 @@ function clearMap() {
     gameMap.innerHTML = '';
 }
 
-connection.on("InitializeMap", function (width, height, map) {
+connection.on("InitializeMap", function (width, height, map, mapEnemies) {
     mapWidth = width;
     mapHeight = height;
 
@@ -41,8 +41,9 @@ connection.on("InitializeMap", function (width, height, map) {
     gameMap.style.width = `${width * 50}px`;
     gameMap.style.height = `${height * 50}px`;
 
-    renderMap(map);
+    renderMap(map, mapEnemies);
 });
+
 
 connection.on("UserJoined", function (username) {
     const messageList = document.getElementById('messagesList');
@@ -51,11 +52,11 @@ connection.on("UserJoined", function (username) {
     messageList.appendChild(listItem);
 });
 
-connection.on("OnTick", function (map) {
-    renderMap(map);
+connection.on("OnTick", function (map, mapEnemies) {
+    renderMap(map, mapEnemies);
 });
 
-function renderMap(map) {
+function renderMap(map, mapEnemies) {
     const gameMap = document.getElementById('gameMap');
     gameMap.innerHTML = '';
 
@@ -66,6 +67,25 @@ function renderMap(map) {
 
         cell.style.gridColumnStart = tower.x + 1;
         cell.style.gridRowStart = tower.y + 1;
+    });
+
+    mapEnemies.forEach(enemy => {
+        const cell = document.createElement('div');
+        cell.className = 'grid-cell enemy';
+
+        if (enemy.speed == 1) {
+            cell.classList.add('strong-enemy');
+        } else if (enemy.speed == 2) {
+            cell.classList.add('flying-enemy');
+        }
+        else{
+            cell.classList.add('fast-enemy');
+        }
+
+        gameMap.appendChild(cell);
+
+        cell.style.gridColumnStart = enemy.x + 1;
+        cell.style.gridRowStart = enemy.y + 1;
     });
 }
 

@@ -10,6 +10,9 @@ public class GameService
     private readonly System.Timers.Timer _gameTickTimer;
     private readonly IHubContext<GameHub> _hubContext;
 
+    private double _timeSinceLastSpawn = 0; 
+    private const double SpawnInterval = 3000; 
+
     public GameService(IHubContext<GameHub> hubContext)
     {
         _hubContext = hubContext;
@@ -24,15 +27,25 @@ public class GameService
 
     private async void GameTickHandler(object sender, ElapsedEventArgs e)
     {
+        _timeSinceLastSpawn += 250;
+
         foreach (var room in _rooms)
         {
             var gameState = room.Value;
 
             gameState.ProcessTowerPlacements();
 
+            if (_timeSinceLastSpawn >= SpawnInterval)
+            {
+                gameState.SpawnEnemies();
+                _timeSinceLastSpawn = 0; 
+            }
+
+            gameState.UpdateEnemies();
+
             await _hubContext.Clients
                 .Group(room.Key)
-                .SendAsync("OnTick", gameState.GetMap());
+                .SendAsync("OnTick", gameState.GetMapTowers(), gameState.GetMapEnemies());
         }
     }
 }

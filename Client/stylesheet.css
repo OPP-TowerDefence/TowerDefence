@@ -74,3 +74,24 @@ input, button {
     right: 10px;
     top: 10px;
 }
+
+.enemy {
+    background-color: red;
+}
+
+.fast-enemy {
+    background-color: #ff6347; 
+}
+
+.flying-enemy {
+    background-color: #87ceeb;
+}
+
+.strong-enemy {
+    background-color: #8b0000; 
+}
+
+
+
+
+
