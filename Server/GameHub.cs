@@ -52,7 +52,6 @@ public class GameHub(GameService gameService) : Hub
 
     public async Task PlaceTower(string roomCode, int x, int y, TowerCategories towerCategory)
     {
-        Console.WriteLine(towerCategory);
         if (_gameService.Rooms.TryGetValue(roomCode, out var gameState))
         {
              gameState.QueueTowerPlacement(x, y, Context.ConnectionId, towerCategory);

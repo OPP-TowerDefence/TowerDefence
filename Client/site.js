@@ -101,7 +101,7 @@ function renderMap(map) {
 
     map.forEach(tower => {
         const cell = document.createElement('div');
-        cell.className = 'grid-cell';
+        cell.className = 'grid-cell tower';
         cell.classList.add(tower.type.toLowerCase());
         cell.classList.add(tower.category.toLowerCase());
         gameMap.appendChild(cell);

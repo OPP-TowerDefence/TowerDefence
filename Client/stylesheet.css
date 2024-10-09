@@ -27,13 +27,6 @@ button {
     margin-top: 20px;
 }
 
-.grid-cell {
-    background-color: #fff;
-    border: 1px solid #000;
-    height: 50px;
-    width: 50px;
-}
-
 input, button {
     font-size: 16px;
     margin: 5px;
@@ -54,10 +47,6 @@ input, button {
 #messagesList li {
     list-style-type: none;
     padding: 5px 0;
-}
-
-.tower {
-    background-color: #778beb;
 }
 
 .hidden {
