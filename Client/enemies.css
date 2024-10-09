@@ -1,0 +1,26 @@
+.grid-cell.enemy {
+    background-color: red;
+}
+
+.grid-cell.enemy.fast-enemy {
+    background-color: #ff6347;  
+    width: 30px;
+    height: 30px;
+    border-radius: 50%; 
+    border: 2px solid #000;
+}
+
+.grid-cell.enemy.flying-enemy {
+    background-color: #87ceeb;  
+    width: 40px;
+    height: 40px;
+    transform: rotate(45deg);
+    border: 2px solid #000;
+}
+
+.grid-cell.enemy.strong-enemy {
+    background-color: #8b0000;
+    width: 50px;
+    height: 50px;
+    border: 3px solid #000;
+}
