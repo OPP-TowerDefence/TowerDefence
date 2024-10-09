@@ -1,8 +1,8 @@
 ﻿namespace TowerDefense.Models
 {
-    public class FastEnemyFactory : EnemyFactory
+    public class FastEnemyFactory : IEnemyFactory
     {
-        public override Enemy CreateEnemy()
+        public Enemy CreateEnemy()
         {
             return new FastEnemy { X = 0, Y = 0 };
         }

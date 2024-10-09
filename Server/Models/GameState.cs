@@ -7,7 +7,7 @@ public class GameState
 
     public void SpawnEnemies()
     {
-        EnemyFactory factory;
+        IEnemyFactory factory;
 
         Random rand = new Random();
         int enemyType = rand.Next(0, 3);
