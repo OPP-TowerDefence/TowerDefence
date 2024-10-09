@@ -50,12 +50,12 @@ public class GameHub(GameService gameService) : Hub
         await base.OnDisconnectedAsync(exception);
     }
 
-    public async Task PlaceTower(string roomCode, string connectionId, int x, int y, TowerCategories towerCategory)
+    public async Task PlaceTower(string roomCode, int x, int y, TowerCategories towerCategory)
     {
         Console.WriteLine(towerCategory);
         if (_gameService.Rooms.TryGetValue(roomCode, out var gameState))
         {
-             gameState.QueueTowerPlacement(x, y, connectionId, towerCategory);
+             gameState.QueueTowerPlacement(x, y, Context.ConnectionId, towerCategory);
         }
     }
 }
