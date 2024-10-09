@@ -5,30 +5,36 @@ public class GameState
 
     private readonly Queue<(int x, int y)> _towerPlacementQueue = new();
 
-    public void SpawnEnemies()
-    {
-        IEnemyFactory factory;
+    private IEnemyFactory _enemyFactory;
 
+    public GameState()
+    {
+        _enemyFactory = RandomEnemyFactory(); 
+    }
+
+    private IEnemyFactory RandomEnemyFactory()
+    {
         Random rand = new Random();
         int enemyType = rand.Next(0, 3);
 
         switch (enemyType)
         {
             case 0:
-                factory = new FastEnemyFactory();
-                break;
+                return new FastEnemyFactory();
             case 1:
-                factory = new StrongEnemyFactory();
-                break;
+                return new StrongEnemyFactory();
             case 2:
-                factory = new FlyingEnemyFactory();
-                break;
+                return new FlyingEnemyFactory();
             default:
                 throw new Exception("Unknown enemy type");
         }
+    }
 
-        Enemy enemy = factory.CreateEnemy();
+    public void SpawnEnemies()
+    {
+        _enemyFactory = RandomEnemyFactory();
 
+        Enemy enemy = _enemyFactory.CreateEnemy();
         Map.Enemies.Add(enemy);
     }
 
