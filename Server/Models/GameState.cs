@@ -1,4 +1,7 @@
-﻿namespace TowerDefense.Models;
+﻿using TowerDefense.Interfaces;
+using TowerDefense.Models.Enemies;
+
+namespace TowerDefense.Models;
 public class GameState
 {
     public Map Map { get; } = new Map(10, 10);

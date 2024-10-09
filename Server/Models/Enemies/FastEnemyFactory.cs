@@ -1,4 +1,6 @@
-﻿namespace TowerDefense.Models
+﻿using TowerDefense.Interfaces;
+
+namespace TowerDefense.Models.Enemies
 {
     public class FastEnemyFactory : IEnemyFactory
     {

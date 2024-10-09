@@ -1,4 +1,4 @@
-﻿namespace TowerDefense.Models
+﻿namespace TowerDefense.Models.Enemies
 {
     public class StrongEnemy : Enemy
     {

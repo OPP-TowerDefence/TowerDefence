@@ -1,4 +1,6 @@
-﻿namespace TowerDefense.Models
+﻿using TowerDefense.Models.Enemies;
+
+namespace TowerDefense.Interfaces
 {
     public interface IEnemyFactory
     {
