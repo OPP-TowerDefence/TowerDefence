@@ -22,7 +22,7 @@ public class GameHub(GameService gameService) : Hub
 
         await Clients.Caller.SendAsync("InitializeMap", gameState.Map.Width, gameState.Map.Height, gameState.GetMap());
 
-        var activeUsernames = gameState.GetPlayersUsernames();
+        var activeUsernames = gameState.GetActivePlayers();
 
         await Clients
             .Group(roomCode)
@@ -40,8 +40,10 @@ public class GameHub(GameService gameService) : Hub
             {
                 gameState.RemovePlayer(Context.ConnectionId);
 
-                var activeUsernames = gameState.GetPlayersUsernames();
-                await Clients.Group(room.Key).SendAsync("UserLeft", player.Username, activeUsernames);
+                var activeUsernames = gameState.GetActivePlayers();
+                await Clients
+                    .Group(room.Key)
+                    .SendAsync("UserLeft", player.Username, activeUsernames);
             }
         }
 
@@ -50,6 +52,7 @@ public class GameHub(GameService gameService) : Hub
 
     public async Task PlaceTower(string roomCode, string connectionId, int x, int y, TowerCategories towerCategory)
     {
+        Console.WriteLine(towerCategory);
         if (_gameService.Rooms.TryGetValue(roomCode, out var gameState))
         {
              gameState.QueueTowerPlacement(x, y, connectionId, towerCategory);

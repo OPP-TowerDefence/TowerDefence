@@ -92,8 +92,18 @@ public class GameState
         }
     }
 
-    public IEnumerable<string> GetPlayersUsernames()
+    public IEnumerable<object> GetActivePlayers()
     {
-        return _players.Select(p => p.Username);
+        return _players.Select(p => new
+        {
+            Username = p.Username,
+            TowerType = p.TowerType.ToString()
+        }).ToList();
+    }
+
+
+    public Player? GetPlayer(string connectionId)
+    {
+        return _players.FirstOrDefault(p => p.ConnectionId == connectionId);
     }
 }
