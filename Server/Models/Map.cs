@@ -1,4 +1,5 @@
 ﻿using TowerDefense.Models.Towers;
+using TowerDefense.Models.Enemies;
 
 namespace TowerDefense.Models
 {

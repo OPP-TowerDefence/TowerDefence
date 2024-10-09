@@ -20,7 +20,7 @@ public class GameHub(GameService gameService) : Hub
 
         gameState.AddPlayer(username, Context.ConnectionId);
 
-        await Clients.Caller.SendAsync("InitializeMap", gameState.Map.Width, gameState.Map.Height, gameState.GetMap());
+        await Clients.Caller.SendAsync("InitializeMap", gameState.Map.Width, gameState.Map.Height, gameState.GetMapTowers(), gameState.GetMapEnemies());
 
         var activeUsernames = gameState.GetActivePlayers();
 

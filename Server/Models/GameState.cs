@@ -1,4 +1,6 @@
 ﻿using TowerDefense.Enums;
+using TowerDefense.Interfaces;
+using TowerDefense.Models.Enemies;
 using TowerDefense.Models.Towers;
 
 namespace TowerDefense.Models;
@@ -11,8 +13,53 @@ public class GameState
     private readonly List<Player> _players = new();
     public List<Player> Players => _players;
     private readonly List<TowerTypes> _availableTowerTypes = Enum.GetValues(typeof(TowerTypes)).Cast<TowerTypes>().ToList();
+    private IEnemyFactory _enemyFactory;
 
-    public object GetMap()
+    public GameState()
+    {
+        _enemyFactory = RandomEnemyFactory();
+    }
+
+    private IEnemyFactory RandomEnemyFactory()
+    {
+        Random rand = new Random();
+        int enemyType = rand.Next(0, 3);
+
+        switch (enemyType)
+        {
+            case 0:
+                return new FastEnemyFactory();
+            case 1:
+                return new StrongEnemyFactory();
+            case 2:
+                return new FlyingEnemyFactory();
+            default:
+                throw new Exception("Unknown enemy type");
+        }
+    }
+
+    public void SpawnEnemies()
+    {
+        _enemyFactory = RandomEnemyFactory();
+
+        Enemy enemy = _enemyFactory.CreateEnemy(0,0);
+        Map.Enemies.Add(enemy);
+    }
+
+    public void UpdateEnemies()
+    {
+        foreach (var enemy in Map.Enemies.ToList())
+        {
+            enemy.MoveTowardsTarget();
+
+            if (enemy.HasReachedDestination())
+            {
+                Map.Enemies.Remove(enemy);
+            }
+        }
+    }
+
+    public object GetMapTowers()
     {
         return Map.Towers
             .Select(t => new 
@@ -21,6 +68,19 @@ public class GameState
                 t.Y,
                 Category = t.Category.ToString(),
                 Type = t.Type.ToString()
+            })
+            .ToList();
+    }
+
+    public object GetMapEnemies()
+    {
+        return Map.Enemies
+            .Select(e => new
+            {
+                e.X,
+                e.Y,
+                e.Health,
+                e.Speed
             })
             .ToList();
     }
