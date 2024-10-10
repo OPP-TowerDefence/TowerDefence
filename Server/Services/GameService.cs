@@ -2,6 +2,7 @@
 using System.Collections.Concurrent;
 using System.Timers;
 using TowerDefense.Models;
+using TowerDefense.Utils;
 
 namespace TowerDefense.Services;
 public class GameService
@@ -21,6 +22,8 @@ public class GameService
         _gameTickTimer.Elapsed += GameTickHandler;
         _gameTickTimer.AutoReset = true;
         _gameTickTimer.Start();
+
+        Logger.Instance.LogInfo("GameService initialized and game tick timer started.");
     }
 
     public ConcurrentDictionary<string, GameState> Rooms => _rooms;
@@ -33,19 +36,26 @@ public class GameService
         {
             var gameState = room.Value;
 
-            gameState.ProcessTowerPlacements();
-
-            if (_timeSinceLastSpawn >= SpawnInterval)
+            try
             {
-                gameState.SpawnEnemies();
-                _timeSinceLastSpawn = 0;
+                gameState.ProcessTowerPlacements();
+
+                if (_timeSinceLastSpawn >= SpawnInterval)
+                {
+                    gameState.SpawnEnemies();
+                    _timeSinceLastSpawn = 0;
+                }
+
+                gameState.UpdateEnemies();
+
+                await _hubContext.Clients
+                    .Group(room.Key)
+                    .SendAsync("OnTick", gameState.GetMapTowers(), gameState.GetMapEnemies());
             }
-
-            gameState.UpdateEnemies();
-
-            await _hubContext.Clients
-                .Group(room.Key)
-                .SendAsync("OnTick", gameState.GetMapTowers(), gameState.GetMapEnemies());
+            catch (Exception ex)
+            {
+                Logger.Instance.LogException(ex);
+            }
         }
     }
 }

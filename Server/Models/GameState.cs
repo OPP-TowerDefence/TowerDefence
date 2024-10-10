@@ -2,6 +2,7 @@
 using TowerDefense.Interfaces;
 using TowerDefense.Models.Enemies;
 using TowerDefense.Models.Towers;
+using TowerDefense.Utils;
 
 namespace TowerDefense.Models;
 
@@ -9,11 +10,13 @@ public class GameState
 {
     public Map Map { get; } = new Map(10, 10);
 
-    private readonly Queue<Tower> _towerPlacementQueue = new();
-    private readonly List<Player> _players = new();
-    public List<Player> Players => _players;
     private readonly List<TowerTypes> _availableTowerTypes = Enum.GetValues(typeof(TowerTypes)).Cast<TowerTypes>().ToList();
+    private readonly List<Player> _players = [];
+    private readonly Queue<Tower> _towerPlacementQueue = new();
+
     private IEnemyFactory _enemyFactory;
+
+    public List<Player> Players => _players;
 
     public GameState()
     {
@@ -34,6 +37,7 @@ public class GameState
             case 2:
                 return new FlyingEnemyFactory();
             default:
+                Logger.Instance.LogError($"Unknown enemy type {enemyType} generated in RandomEnemyFactory.");
                 throw new Exception("Unknown enemy type");
         }
     }
@@ -43,6 +47,7 @@ public class GameState
         _enemyFactory = RandomEnemyFactory();
 
         Enemy enemy = _enemyFactory.CreateEnemy(0,0);
+
         Map.Enemies.Add(enemy);
     }
 
@@ -101,6 +106,10 @@ public class GameState
         {
             Map.Towers.Add(tower);
         }
+        else
+        {
+            Logger.Instance.LogError($"Unable to place tower at position ({tower.X},{tower.Y}). Position is either occupied or invalid.");
+        }
     }
 
     public void ProcessTowerPlacements()
@@ -119,10 +128,15 @@ public class GameState
         {
             var player = _players.FirstOrDefault(p => p.ConnectionId == connectionId);
 
-            if(player != null)
+            if (player != null)
             {
-                var tower = player.CreateTower(x, y, towerCategory);
-                _towerPlacementQueue.Enqueue(tower);
+                _towerPlacementQueue.Enqueue(player.CreateTower(x, y, towerCategory));
+
+                Logger.Instance.LogInfo($"Player {player.Username} queued a tower of category {towerCategory} at position ({x},{y}).");
+            }
+            else
+            {
+                Logger.Instance.LogError($"Unable to queue tower. Player with connection ID {connectionId} was not found.");
             }
         }
     }
@@ -135,10 +149,15 @@ public class GameState
             {
                 TowerTypes playerTowerType = _availableTowerTypes.First();
 
-                var player = new Player(username, connectionId, playerTowerType);
-                _players.Add(player);
+                _players.Add(new Player(username, connectionId, playerTowerType));
 
                 _availableTowerTypes.Remove(playerTowerType);
+
+                Logger.Instance.LogInfo($"Player {username} joined the game. Tower type assigned: {playerTowerType}.");
+            }
+            else
+            {
+                Logger.Instance.LogError($"Player {username} could not be added. No available tower types left to assign to a new player.");
             }
         }
     }
@@ -146,26 +165,29 @@ public class GameState
     public void RemovePlayer(string connectionId)
     {
         var player = _players.FirstOrDefault(p => p.ConnectionId == connectionId);
+
         if (player != null)
         {
             _availableTowerTypes.Add(player.TowerType);
 
             _players.Remove(player);
+
+            Logger.Instance.LogInfo($"Player {player.Username} left the game.");
+        }
+        else
+        {
+            Logger.Instance.LogError($"Could not remove player with connection ID {connectionId}. Player was not found.");
         }
     }
 
     public IEnumerable<object> GetActivePlayers()
     {
-        return _players.Select(p => new
-        {
-            Username = p.Username,
-            TowerType = p.TowerType.ToString()
-        }).ToList();
-    }
-
-
-    public Player? GetPlayer(string connectionId)
-    {
-        return _players.FirstOrDefault(p => p.ConnectionId == connectionId);
+        return _players
+            .Select(p => new
+            {
+                Username = p.Username,
+                TowerType = p.TowerType.ToString()
+            })
+            .ToList();
     }
 }
