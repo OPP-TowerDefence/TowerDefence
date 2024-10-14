@@ -1,0 +1,74 @@
+10/14/2024 8:52:20 PM: INFO: GameService initialized and game tick timer started.
+10/14/2024 8:52:22 PM: INFO: Player aa is attempting to join room adada.
+10/14/2024 8:52:22 PM: INFO: New room created with code: adada.
+10/14/2024 8:52:22 PM: INFO: Player aa joined the game. Tower type assigned: Flame.
+10/14/2024 8:52:22 PM: INFO: Player aa with connection ID Hx0oyvSE84JwUqpOMCkBCQ has joined room adada.
+10/14/2024 8:52:24 PM: INFO: Player aa queued a tower of category LongDistance at position (9,1).
+10/14/2024 8:52:24 PM: INFO: Player aa queued a tower of category LongDistance at position (8,1).
+10/14/2024 8:52:25 PM: INFO: Player aa queued a tower of category LongDistance at position (8,2).
+10/14/2024 8:52:25 PM: INFO: Player aa queued a tower of category LongDistance at position (9,2).
+10/14/2024 8:52:27 PM: INFO: Player aa queued a tower of category Heavy at position (9,0).
+10/14/2024 8:52:27 PM: INFO: Player aa queued a tower of category Heavy at position (8,0).
+10/14/2024 8:52:38 PM: INFO: Player aaa is attempting to join room adada.
+10/14/2024 8:52:38 PM: INFO: Player aaa joined the game. Tower type assigned: Ice.
+10/14/2024 8:52:38 PM: INFO: Player aaa with connection ID Gcz8VfITqGDQhSSSLYgCgw has joined room adada.
+10/14/2024 8:52:38 PM: INFO: Player aaa queued a tower of category LongDistance at position (9,4).
+10/14/2024 8:52:39 PM: INFO: Player aaa queued a tower of category LongDistance at position (9,3).
+10/14/2024 8:52:40 PM: INFO: Player aaa queued a tower of category Heavy at position (9,5).
+10/14/2024 8:52:40 PM: INFO: Player aaa queued a tower of category Heavy at position (8,5).
+10/14/2024 8:52:40 PM: INFO: Player aaa queued a tower of category Heavy at position (8,4).
+10/14/2024 8:52:42 PM: INFO: Player aaa queued a tower of category LongDistance at position (9,6).
+10/14/2024 8:52:42 PM: INFO: Player aaa queued a tower of category LongDistance at position (8,6).
+10/14/2024 8:52:42 PM: INFO: Player aaa queued a tower of category LongDistance at position (8,7).
+10/14/2024 8:52:43 PM: INFO: Player aaa queued a tower of category LongDistance at position (9,7).
+10/14/2024 8:52:44 PM: INFO: Player aaa queued a tower of category Heavy at position (9,8).
+10/14/2024 8:52:46 PM: INFO: Player aaa queued a tower of category Heavy at position (9,9).
+10/14/2024 8:52:47 PM: INFO: Player aaa queued a tower of category LongDistance at position (0,9).
+10/14/2024 8:52:47 PM: INFO: Player aaa queued a tower of category LongDistance at position (0,8).
+10/14/2024 8:52:54 PM: INFO: Player aaa is attempting to join room adada.
+10/14/2024 8:52:54 PM: INFO: Player aaa joined the game. Tower type assigned: Laser.
+10/14/2024 8:52:54 PM: INFO: Player aaa with connection ID 7hejwYmuYjboP3w07WlYUQ has joined room adada.
+10/14/2024 8:52:55 PM: INFO: Player aaa queued a tower of category LongDistance at position (0,0).
+10/14/2024 8:52:56 PM: INFO: Player aaa queued a tower of category Heavy at position (0,1).
+10/14/2024 8:52:57 PM: INFO: Player aaa queued a tower of category Heavy at position (0,2).
+10/14/2024 8:52:58 PM: INFO: Player aaa queued a tower of category LongDistance at position (0,3).
+10/14/2024 8:52:59 PM: INFO: Player aaa queued a tower of category LongDistance at position (0,4).
+10/14/2024 8:53:01 PM: INFO: Player aa queued a tower of category LongDistance at position (1,0).
+10/14/2024 8:53:02 PM: INFO: Player aa queued a tower of category Heavy at position (1,1).
+10/14/2024 8:53:06 PM: INFO: Player aaa queued a tower of category LongDistance at position (0,7).
+10/14/2024 8:53:08 PM: INFO: Player aaa queued a tower of category Heavy at position (1,9).
+10/14/2024 8:53:09 PM: INFO: Player aaa left the game.
+10/14/2024 8:53:09 PM: INFO: Player aaa left room adada.
+10/14/2024 8:53:10 PM: INFO: Player aa left the game.
+10/14/2024 8:53:10 PM: INFO: Player aa left room adada.
+10/14/2024 8:53:10 PM: INFO: Player aaa left the game.
+10/14/2024 8:53:10 PM: INFO: Player aaa left room adada.
+10/14/2024 8:54:49 PM: INFO: GameService initialized and game tick timer started.
+10/14/2024 8:54:50 PM: INFO: Player aa is attempting to join room a.
+10/14/2024 8:54:50 PM: INFO: New room created with code: a.
+10/14/2024 8:54:50 PM: INFO: Player aa joined the game. Tower type assigned: Flame.
+10/14/2024 8:54:50 PM: INFO: Player aa with connection ID sCuoj27UrHXPsWmlUQYHlg has joined room a.
+10/14/2024 8:54:51 PM: INFO: Player aa queued a tower of category LongDistance at position (9,2).
+10/14/2024 8:54:51 PM: INFO: Player aa queued a tower of category LongDistance at position (9,3).
+10/14/2024 8:54:52 PM: INFO: Player aa queued a tower of category Heavy at position (9,4).
+10/14/2024 8:54:52 PM: INFO: Player aa queued a tower of category Heavy at position (9,1).
+10/14/2024 8:54:56 PM: INFO: Player aa is attempting to join room a.
+10/14/2024 8:54:56 PM: INFO: Player aa joined the game. Tower type assigned: Ice.
+10/14/2024 8:54:56 PM: INFO: Player aa with connection ID A06N8wDI9n6T_U44A80L_g has joined room a.
+10/14/2024 8:54:57 PM: INFO: Player aa queued a tower of category LongDistance at position (0,0).
+10/14/2024 8:54:58 PM: INFO: Player aa queued a tower of category LongDistance at position (0,1).
+10/14/2024 8:54:59 PM: INFO: Player aa queued a tower of category Heavy at position (0,2).
+10/14/2024 8:54:59 PM: INFO: Player aa queued a tower of category Heavy at position (0,3).
+10/14/2024 8:55:05 PM: INFO: Player aa is attempting to join room a.
+10/14/2024 8:55:05 PM: INFO: Player aa joined the game. Tower type assigned: Laser.
+10/14/2024 8:55:05 PM: INFO: Player aa with connection ID 7QZrDdALJXx8zYxekrunYw has joined room a.
+10/14/2024 8:55:06 PM: INFO: Player aa queued a tower of category LongDistance at position (9,5).
+10/14/2024 8:55:06 PM: INFO: Player aa queued a tower of category LongDistance at position (9,6).
+10/14/2024 8:55:07 PM: INFO: Player aa queued a tower of category Heavy at position (9,7).
+10/14/2024 8:55:08 PM: INFO: Player aa queued a tower of category Heavy at position (8,7).
+10/14/2024 8:55:13 PM: INFO: Player aa left the game.
+10/14/2024 8:55:13 PM: INFO: Player aa left room a.
+10/14/2024 8:55:14 PM: INFO: Player aa left the game.
+10/14/2024 8:55:14 PM: INFO: Player aa left room a.
+10/14/2024 8:55:14 PM: INFO: Player aa left the game.
+10/14/2024 8:55:14 PM: INFO: Player aa left room a.
