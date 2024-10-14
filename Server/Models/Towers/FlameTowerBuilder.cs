@@ -4,19 +4,15 @@ using TowerDefense.Interfaces;
 
 namespace TowerDefense.Models.Towers
 {
-    public class FlameTowerBuilder : ITowerBuilder
+    public class FlameTowerBuilder : TowerBuilder
     {
-        private Tower _tower;
-        private TowerCategories _category;
-
-        public FlameTowerBuilder(TowerCategories catergory)
+        public FlameTowerBuilder(TowerCategories category) : base(category)
         {
-            _category = catergory;
         }
 
-        public void BuildBase(int x, int y)
+        public override void BuildBase(int x, int y)
         {
-            if(_category == TowerCategories.Heavy)
+            if (_category == TowerCategories.Heavy)
             {
                 _tower = new HeavyFlameTower(x, y);
             }
@@ -26,7 +22,7 @@ namespace TowerDefense.Models.Towers
             }
         }
 
-        public void AddWeapon()
+        public override void AddWeapon()
         {
             if (_category == TowerCategories.Heavy)
             {
@@ -38,9 +34,8 @@ namespace TowerDefense.Models.Towers
             }
         }
 
-        public void AddArmor()
+        public override void AddArmor()
         {
-
             if (_category == TowerCategories.Heavy)
             {
                 _tower.Armor = new Armor("Heat Shield", 10);
@@ -49,9 +44,9 @@ namespace TowerDefense.Models.Towers
             {
                 _tower.Armor = new Armor("Heat Shield", 5);
             }
-        } 
+        }
 
-        public Tower GetResult()
+        public override Tower GetResult()
         {
             return _tower;
         }

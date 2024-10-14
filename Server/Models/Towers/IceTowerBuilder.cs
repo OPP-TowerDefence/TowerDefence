@@ -4,17 +4,13 @@ using TowerDefense.Interfaces;
 
 namespace TowerDefense.Models.Towers
 {
-    public class IceTowerBuilder : ITowerBuilder
+    public class IceTowerBuilder : TowerBuilder
     {
-        private Tower _tower;
-        private TowerCategories _category;
-
-        public IceTowerBuilder(TowerCategories catergory)
+        public IceTowerBuilder(TowerCategories catergory) : base(catergory)
         {
-            _category = catergory;
         }
 
-        public void BuildBase(int x, int y)
+        public override void BuildBase(int x, int y)
         {
             if (_category == TowerCategories.Heavy)
             {
@@ -26,7 +22,7 @@ namespace TowerDefense.Models.Towers
             }
         }
 
-        public void AddWeapon()
+        public override void AddWeapon()
         {
             if (_category == TowerCategories.Heavy)
             {
@@ -38,7 +34,7 @@ namespace TowerDefense.Models.Towers
             }
         }
 
-        public void AddArmor()
+        public override void AddArmor()
         {
             if (_category == TowerCategories.Heavy)
             {
@@ -50,7 +46,7 @@ namespace TowerDefense.Models.Towers
             }
         }
 
-        public Tower GetResult()
+        public override Tower GetResult()
         {
             return _tower;
         }
