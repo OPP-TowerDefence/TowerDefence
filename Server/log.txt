@@ -72,3 +72,34 @@
 10/14/2024 8:55:14 PM: INFO: Player aa left room a.
 10/14/2024 8:55:14 PM: INFO: Player aa left the game.
 10/14/2024 8:55:14 PM: INFO: Player aa left room a.
+10/14/2024 10:42:26 PM: INFO: GameService initialized and game tick timer started.
+10/14/2024 10:42:27 PM: INFO: Player aaa is attempting to join room adad.
+10/14/2024 10:42:27 PM: INFO: New room created with code: adad.
+10/14/2024 10:42:27 PM: INFO: Player aaa joined the game. Tower type assigned: Flame.
+10/14/2024 10:42:27 PM: INFO: Player aaa with connection ID 2XhvSNR54SlxgNu6E9JQ2A has joined room adad.
+10/14/2024 10:42:29 PM: INFO: Player aaa queued a tower of category LongDistance at position (9,0).
+10/14/2024 10:42:30 PM: INFO: Player aaa queued a tower of category LongDistance at position (9,1).
+10/14/2024 10:42:30 PM: INFO: Player aaa queued a tower of category LongDistance at position (8,0).
+10/14/2024 10:42:31 PM: INFO: Player aaa queued a tower of category Heavy at position (9,2).
+10/14/2024 10:42:32 PM: INFO: Player aaa queued a tower of category Heavy at position (8,2).
+10/14/2024 10:42:32 PM: INFO: Player aaa queued a tower of category Heavy at position (8,1).
+10/14/2024 10:42:40 PM: INFO: Player asdads is attempting to join room adad.
+10/14/2024 10:42:40 PM: INFO: Player asdads joined the game. Tower type assigned: Ice.
+10/14/2024 10:42:40 PM: INFO: Player asdads with connection ID EomGSaXjisbzDtAQOL-pbQ has joined room adad.
+10/14/2024 10:42:40 PM: INFO: Player asdads queued a tower of category LongDistance at position (9,3).
+10/14/2024 10:42:41 PM: INFO: Player asdads queued a tower of category LongDistance at position (8,3).
+10/14/2024 10:42:42 PM: INFO: Player asdads queued a tower of category Heavy at position (8,5).
+10/14/2024 10:42:42 PM: INFO: Player asdads queued a tower of category Heavy at position (9,4).
+10/14/2024 10:42:47 PM: INFO: Player aaa is attempting to join room adad.
+10/14/2024 10:42:47 PM: INFO: Player aaa joined the game. Tower type assigned: Laser.
+10/14/2024 10:42:47 PM: INFO: Player aaa with connection ID Du6KWKspUlewfJGKleSpAA has joined room adad.
+10/14/2024 10:42:48 PM: INFO: Player aaa queued a tower of category LongDistance at position (7,0).
+10/14/2024 10:42:48 PM: INFO: Player aaa queued a tower of category LongDistance at position (6,0).
+10/14/2024 10:42:49 PM: INFO: Player aaa queued a tower of category Heavy at position (5,0).
+10/14/2024 10:42:49 PM: INFO: Player aaa queued a tower of category Heavy at position (4,0).
+10/14/2024 10:42:51 PM: INFO: Player aaa left the game.
+10/14/2024 10:42:51 PM: INFO: Player aaa left room adad.
+10/14/2024 10:42:52 PM: INFO: Player asdads left the game.
+10/14/2024 10:42:52 PM: INFO: Player asdads left room adad.
+10/14/2024 10:42:52 PM: INFO: Player aaa left the game.
+10/14/2024 10:42:52 PM: INFO: Player aaa left room adad.
