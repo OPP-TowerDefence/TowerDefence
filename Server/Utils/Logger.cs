@@ -1,6 +1,6 @@
 ﻿namespace TowerDefense.Utils
 {
-    public sealed class Logger
+    public sealed class Logger : Interfaces.ILogger
     {
         private static readonly Logger _instance = new();
         private readonly string _logFilePath;

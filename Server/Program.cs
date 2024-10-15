@@ -1,5 +1,7 @@
+using Serilog;
 using TowerDefense;
 using TowerDefense.Services;
+using TowerDefense.Utils;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +13,21 @@ builder.Services.AddCors(options =>
                .AllowAnyHeader()
                .AllowCredentials());
 });
+
+if (builder.Environment.IsProduction())
+{
+    builder.Host.UseSerilog((hostingContext, loggerConfiguration) =>
+    loggerConfiguration.ReadFrom.Configuration(hostingContext.Configuration)
+);
+
+    builder.Services.AddSingleton<TowerDefense.Interfaces.ILogger, SerilogAdapter>();
+
+}
+else
+{
+    builder.Services.AddSingleton<TowerDefense.Interfaces.ILogger>(Logger.Instance);
+}
+
 
 builder.Services.AddSingleton<GameService>();
 

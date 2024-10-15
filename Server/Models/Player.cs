@@ -1,6 +1,7 @@
 ﻿using TowerDefense.Enums;
 using TowerDefense.Interfaces;
 using TowerDefense.Models.Towers;
+using TowerDefense.Utils;
 
 namespace TowerDefense.Models
 {
@@ -9,7 +10,7 @@ namespace TowerDefense.Models
         public TowerTypes TowerType { get; set; }
         public string Username { get; set; }
         public string ConnectionId { get; set; }
-        private readonly ITowerFactory _towerFactory; 
+        private readonly ITowerFactory _towerFactory;
 
         public Player(string username, string connectionId, TowerTypes towerType)
         {
@@ -17,7 +18,7 @@ namespace TowerDefense.Models
             Username = username;
             ConnectionId = connectionId;
 
-            switch(towerType)
+            switch (towerType)
             {
                 case TowerTypes.Flame:
                     _towerFactory = new FlameTowerFactory();
@@ -33,6 +34,8 @@ namespace TowerDefense.Models
                     break;
 
             }
+
+            Logger.Instance.LogInfo($"{username} has received {towerType.ToString()} towers");
         }
 
         public Tower CreateTower(int x, int y, TowerCategories towerCategory)

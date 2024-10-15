@@ -5,13 +5,14 @@ using TowerDefense.Services;
 using TowerDefense.Utils;
 
 namespace TowerDefense;
-public class GameHub(GameService gameService) : Hub
+public class GameHub(GameService gameService, Interfaces.ILogger logger) : Hub
 {
     private readonly GameService _gameService = gameService;
+    private readonly Interfaces.ILogger _logger = logger;
 
     public async Task JoinRoom(string roomCode, string username)
     {
-        Logger.Instance.LogInfo($"Player {username} is attempting to join room {roomCode}.");
+        _logger.LogInfo($"Player {username} is attempting to join room {roomCode}.");
 
         if (!_gameService.Rooms.TryGetValue(roomCode, out var gameState))
         {
@@ -19,7 +20,7 @@ public class GameHub(GameService gameService) : Hub
 
             _gameService.Rooms.TryAdd(roomCode, gameState);
 
-            Logger.Instance.LogInfo($"New room created with code: {roomCode}.");
+            _logger.LogInfo($"New room created with code: {roomCode}.");
         }
 
         await Groups.AddToGroupAsync(Context.ConnectionId, roomCode);
@@ -28,7 +29,7 @@ public class GameHub(GameService gameService) : Hub
 
         await Clients.Caller.SendAsync("InitializeMap", gameState.Map.Width, gameState.Map.Height, gameState.GetMapTowers(), gameState.GetMapEnemies());
 
-        Logger.Instance.LogInfo($"Player {username} with connection ID {Context.ConnectionId} has joined room {roomCode}.");
+        _logger.LogInfo($"Player {username} with connection ID {Context.ConnectionId} has joined room {roomCode}.");
 
         var activeUsernames = gameState.GetActivePlayers();
 
@@ -49,7 +50,7 @@ public class GameHub(GameService gameService) : Hub
             {
                 gameState.RemovePlayer(Context.ConnectionId);
 
-                Logger.Instance.LogInfo($"Player {player.Username} left room {room.Key}.");
+                _logger.LogInfo($"Player {player.Username} left room {room.Key}.");
 
                 var activeUsernames = gameState.GetActivePlayers();
 
@@ -61,7 +62,7 @@ public class GameHub(GameService gameService) : Hub
 
         if (exception != null)
         {
-            Logger.Instance.LogException(exception);
+            _logger.LogException(exception);
         }
 
         await base.OnDisconnectedAsync(exception);
@@ -75,7 +76,7 @@ public class GameHub(GameService gameService) : Hub
         }
         else
         {
-            Logger.Instance.LogError($"Failed to place tower: room code {roomCode} does not exist.");
+            _logger.LogError($"Failed to place tower: room code {roomCode} does not exist.");
         }
     }
 }
