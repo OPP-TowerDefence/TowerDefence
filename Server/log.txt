@@ -152,3 +152,11 @@
 10/15/2024 8:00:17 PM: INFO: Player ccc queued a tower of category Heavy at position (6,3).
 10/15/2024 8:00:18 PM: INFO: Player ccc queued a tower of category Heavy at position (8,3).
 10/15/2024 8:00:18 PM: INFO: Player ccc queued a tower of category Heavy at position (9,2).
+10/15/2024 8:15:58 PM: INFO: GameService initialized and game tick timer started.
+10/15/2024 8:16:00 PM: INFO: Player vvv is attempting to join room aaa.
+10/15/2024 8:16:00 PM: INFO: New room created with code: aaa.
+10/15/2024 8:16:00 PM: INFO: vvv has received Flame towers
+10/15/2024 8:16:00 PM: INFO: Player vvv joined the game. Tower type assigned: Flame.
+10/15/2024 8:16:00 PM: INFO: Player vvv with connection ID HJxebdiSxee-cOn3Uw1cZQ has joined room aaa.
+10/15/2024 8:16:32 PM: INFO: Player vvv queued a tower of category Heavy at position (8,7).
+10/15/2024 8:16:33 PM: INFO: Player vvv queued a tower of category Heavy at position (6,6).

@@ -155,7 +155,7 @@ public class GameState
 
                 _availableTowerTypes.Remove(playerTowerType);
 
-                _logger.LogInfo($"Player {username} joined the game. Tower type assigned: {playerTowerType}.");
+                _logger.LogInfo($"Player {username} joined the game.");
             }
             else
             {

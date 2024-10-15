@@ -3,25 +3,25 @@ namespace TowerDefense.Utils
 {
     public class SerilogAdapter : Interfaces.ILogger
     {
-        private readonly Serilog.ILogger _logger;
+        private readonly Serilog.ILogger _serilog;
 
-        public SerilogAdapter(Serilog.ILogger logger)
+        public SerilogAdapter(Serilog.ILogger serilog)
         {
-            _logger = logger;
+            _serilog = serilog;
         }
         public void LogError(string message)
         {
-            _logger.Error(message);
+            _serilog.Error(message);
         }
 
         public void LogException(Exception exception)
         {
-            _logger.Error(exception, exception.Message);
+            _serilog.Error(exception, exception.Message);
         }
 
         public void LogInfo(string message)
         {
-            _logger.Information(message);
+            _serilog.Information(message);
         }
     }
 }
