@@ -13,13 +13,15 @@ public class GameState
     private readonly List<TowerTypes> _availableTowerTypes = Enum.GetValues(typeof(TowerTypes)).Cast<TowerTypes>().ToList();
     private readonly List<Player> _players = [];
     private readonly Queue<Tower> _towerPlacementQueue = new();
+    private readonly Interfaces.ILogger _logger;
 
     private IEnemyFactory _enemyFactory;
 
     public List<Player> Players => _players;
 
-    public GameState()
+    public GameState(Interfaces.ILogger logger)
     {
+        _logger = logger;
         _enemyFactory = RandomEnemyFactory();
     }
 
@@ -37,7 +39,7 @@ public class GameState
             case 2:
                 return new FlyingEnemyFactory();
             default:
-                Logger.Instance.LogError($"Unknown enemy type {enemyType} generated in RandomEnemyFactory.");
+                _logger.LogError($"Unknown enemy type {enemyType} generated in RandomEnemyFactory.");
                 throw new Exception("Unknown enemy type");
         }
     }
@@ -108,7 +110,7 @@ public class GameState
         }
         else
         {
-            Logger.Instance.LogError($"Unable to place tower at position ({tower.X},{tower.Y}). Position is either occupied or invalid.");
+            _logger.LogError($"Unable to place tower at position ({tower.X},{tower.Y}). Position is either occupied or invalid.");
         }
     }
 
@@ -132,11 +134,11 @@ public class GameState
             {
                 _towerPlacementQueue.Enqueue(player.CreateTower(x, y, towerCategory));
 
-                Logger.Instance.LogInfo($"Player {player.Username} queued a tower of category {towerCategory} at position ({x},{y}).");
+                _logger.LogInfo($"Player {player.Username} queued a tower of category {towerCategory} at position ({x},{y}).");
             }
             else
             {
-                Logger.Instance.LogError($"Unable to queue tower. Player with connection ID {connectionId} was not found.");
+                _logger.LogError($"Unable to queue tower. Player with connection ID {connectionId} was not found.");
             }
         }
     }
@@ -153,11 +155,11 @@ public class GameState
 
                 _availableTowerTypes.Remove(playerTowerType);
 
-                Logger.Instance.LogInfo($"Player {username} joined the game. Tower type assigned: {playerTowerType}.");
+                _logger.LogInfo($"Player {username} joined the game. Tower type assigned: {playerTowerType}.");
             }
             else
             {
-                Logger.Instance.LogError($"Player {username} could not be added. No available tower types left to assign to a new player.");
+                _logger.LogError($"Player {username} could not be added. No available tower types left to assign to a new player.");
             }
         }
     }
@@ -172,11 +174,11 @@ public class GameState
 
             _players.Remove(player);
 
-            Logger.Instance.LogInfo($"Player {player.Username} left the game.");
+            _logger.LogInfo($"Player {player.Username} left the game.");
         }
         else
         {
-            Logger.Instance.LogError($"Could not remove player with connection ID {connectionId}. Player was not found.");
+            _logger.LogError($"Could not remove player with connection ID {connectionId}. Player was not found.");
         }
     }
 

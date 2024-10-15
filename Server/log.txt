@@ -103,3 +103,52 @@
 10/14/2024 10:42:52 PM: INFO: Player asdads left room adad.
 10/14/2024 10:42:52 PM: INFO: Player aaa left the game.
 10/14/2024 10:42:52 PM: INFO: Player aaa left room adad.
+10/15/2024 7:35:53 PM: INFO: GameService initialized and game tick timer started.
+10/15/2024 7:36:05 PM: INFO: Player vvv is attempting to join room aaa.
+10/15/2024 7:36:05 PM: INFO: New room created with code: aaa.
+10/15/2024 7:36:05 PM: INFO: Player vvv joined the game. Tower type assigned: Flame.
+10/15/2024 7:36:05 PM: INFO: Player vvv with connection ID XTirQlLav7m5wkncG7ro9Q has joined room aaa.
+10/15/2024 7:36:07 PM: INFO: Player vvv queued a tower of category LongDistance at position (9,2).
+10/15/2024 7:36:07 PM: INFO: Player vvv queued a tower of category LongDistance at position (7,0).
+10/15/2024 7:36:08 PM: INFO: Player vvv queued a tower of category LongDistance at position (6,2).
+10/15/2024 7:36:09 PM: INFO: Player vvv queued a tower of category Heavy at position (8,6).
+10/15/2024 7:36:09 PM: INFO: Player vvv queued a tower of category Heavy at position (4,5).
+10/15/2024 7:36:10 PM: INFO: Player vvv queued a tower of category Heavy at position (4,4).
+10/15/2024 7:40:54 PM: INFO: GameService initialized and game tick timer started.
+10/15/2024 7:40:57 PM: INFO: Player ccc is attempting to join room aaaa.
+10/15/2024 7:40:57 PM: INFO: New room created with code: aaaa.
+10/15/2024 7:40:57 PM: INFO: Player ccc joined the game. Tower type assigned: Flame.
+10/15/2024 7:40:57 PM: INFO: Player ccc with connection ID fyGzVNcn9VCROt58N77fug has joined room aaaa.
+10/15/2024 7:40:58 PM: INFO: Player ccc queued a tower of category Heavy at position (8,6).
+10/15/2024 7:40:58 PM: INFO: Player ccc queued a tower of category Heavy at position (3,5).
+10/15/2024 7:40:59 PM: INFO: Player ccc queued a tower of category Heavy at position (5,2).
+10/15/2024 7:40:59 PM: INFO: Player ccc queued a tower of category Heavy at position (8,2).
+10/15/2024 7:59:09 PM: INFO: GameService initialized and game tick timer started.
+10/15/2024 7:59:12 PM: INFO: Player vvv is attempting to join room aaa.
+10/15/2024 7:59:12 PM: INFO: New room created with code: aaa.
+10/15/2024 7:59:12 PM: INFO: Player vvv joined the game. Tower type assigned: Flame.
+10/15/2024 7:59:12 PM: INFO: Player vvv with connection ID GhbqNk1l-HhhSJT2ZRWmRQ has joined room aaa.
+10/15/2024 7:59:13 PM: INFO: Player vvv queued a tower of category LongDistance at position (5,3).
+10/15/2024 7:59:16 PM: INFO: Player vvv queued a tower of category LongDistance at position (4,4).
+10/15/2024 7:59:16 PM: INFO: Player vvv queued a tower of category LongDistance at position (3,6).
+10/15/2024 7:59:17 PM: INFO: Player vvv queued a tower of category LongDistance at position (5,7).
+10/15/2024 7:59:17 PM: INFO: Player vvv queued a tower of category LongDistance at position (7,5).
+10/15/2024 7:59:17 PM: INFO: Player vvv queued a tower of category LongDistance at position (9,3).
+10/15/2024 7:59:19 PM: INFO: Player vvv queued a tower of category LongDistance at position (7,1).
+10/15/2024 8:00:03 PM: INFO: Player ccc joined the game. Tower type assigned: Flame.
+10/15/2024 8:00:11 PM: INFO: Player ccc queued a tower of category LongDistance at position (6,4).
+10/15/2024 8:00:12 PM: INFO: Player ccc queued a tower of category LongDistance at position (8,6).
+10/15/2024 8:00:12 PM: INFO: Player ccc queued a tower of category LongDistance at position (7,7).
+10/15/2024 8:00:13 PM: INFO: Player ccc queued a tower of category LongDistance at position (4,7).
+10/15/2024 8:00:13 PM: INFO: Player ccc queued a tower of category LongDistance at position (2,5).
+10/15/2024 8:00:13 PM: INFO: Player ccc queued a tower of category LongDistance at position (2,3).
+10/15/2024 8:00:13 PM: INFO: Player ccc queued a tower of category LongDistance at position (7,1).
+10/15/2024 8:00:14 PM: INFO: Player ccc queued a tower of category LongDistance at position (8,1).
+10/15/2024 8:00:14 PM: INFO: Player ccc queued a tower of category LongDistance at position (4,2).
+10/15/2024 8:00:15 PM: INFO: Player ccc queued a tower of category Heavy at position (6,5).
+10/15/2024 8:00:16 PM: INFO: Player ccc queued a tower of category Heavy at position (0,1).
+10/15/2024 8:00:16 PM: INFO: Player ccc queued a tower of category Heavy at position (3,6).
+10/15/2024 8:00:17 PM: INFO: Player ccc queued a tower of category Heavy at position (4,4).
+10/15/2024 8:00:17 PM: INFO: Player ccc queued a tower of category Heavy at position (6,3).
+10/15/2024 8:00:18 PM: INFO: Player ccc queued a tower of category Heavy at position (8,3).
+10/15/2024 8:00:18 PM: INFO: Player ccc queued a tower of category Heavy at position (9,2).

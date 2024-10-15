@@ -10,20 +10,22 @@ public class GameService
     private static readonly ConcurrentDictionary<string, GameState> _rooms = new();
     private readonly System.Timers.Timer _gameTickTimer;
     private readonly IHubContext<GameHub> _hubContext;
+    private readonly Interfaces.ILogger _logger;
 
     private double _timeSinceLastSpawn = 0;
     private const double SpawnInterval = 3000;
 
-    public GameService(IHubContext<GameHub> hubContext)
+    public GameService(IHubContext<GameHub> hubContext, Interfaces.ILogger logger)
     {
         _hubContext = hubContext;
+        _logger = logger;
 
         _gameTickTimer = new System.Timers.Timer(250);
         _gameTickTimer.Elapsed += GameTickHandler;
         _gameTickTimer.AutoReset = true;
         _gameTickTimer.Start();
 
-        Logger.Instance.LogInfo("GameService initialized and game tick timer started.");
+        _logger.LogInfo("GameService initialized and game tick timer started.");
     }
 
     public ConcurrentDictionary<string, GameState> Rooms => _rooms;
@@ -54,7 +56,7 @@ public class GameService
             }
             catch (Exception ex)
             {
-                Logger.Instance.LogException(ex);
+                _logger.LogException(ex);
             }
         }
     }
