@@ -16,7 +16,7 @@ public class GameHub(GameService gameService, Interfaces.ILogger logger) : Hub
 
         if (!_gameService.Rooms.TryGetValue(roomCode, out var gameState))
         {
-            gameState = new GameState(_logger);
+            gameState = new GameState();
 
             _gameService.Rooms.TryAdd(roomCode, gameState);
 
