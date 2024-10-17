@@ -169,7 +169,6 @@ public class GameState
 
                 _availableTowerTypes.Remove(playerTowerType);
 
-
                 Logger.Instance.LogInfo($"Player {username} joined the game.");
             }
             else

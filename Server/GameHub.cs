@@ -7,7 +7,6 @@ namespace TowerDefense;
 public class GameHub(GameService gameService, Interfaces.ILogger logger) : Hub
 {
     private readonly GameService _gameService = gameService;
-
     private readonly Interfaces.ILogger _logger = logger;
 
     public async Task JoinRoom(string roomCode, string username)

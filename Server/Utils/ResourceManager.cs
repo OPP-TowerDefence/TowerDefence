@@ -3,7 +3,7 @@ using TowerDefense.Models.Enemies;
 
 public class ResourceManager
 {
-    private List<IResourceObserver> _observers = new();
+    private List<IResourceObserver> _observers = [];
     private int _resources;
 
 
