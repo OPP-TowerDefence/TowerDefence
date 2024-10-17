@@ -1,4 +1,5 @@
-﻿using TowerDefense.Enums;
+﻿using Microsoft.AspNetCore.SignalR;
+using TowerDefense.Enums;
 using TowerDefense.Interfaces;
 using TowerDefense.Models.Enemies;
 using TowerDefense.Models.Towers;
@@ -10,17 +11,28 @@ public class GameState
 {
     public Map Map { get; } = new Map(10, 10);
 
-    private readonly List<TowerTypes> _availableTowerTypes = Enum.GetValues(typeof(TowerTypes)).Cast<TowerTypes>().ToList();
-    private readonly List<Player> _players = [];
-    private readonly Queue<Tower> _towerPlacementQueue = new();
+    private readonly List<TowerTypes> _availableTowerTypes;
+    private readonly IHubContext<GameHub> _hubContext;
+    private readonly List<Player> _players;
+    private readonly ResourceManager _resourceManager;
+    private readonly Queue<Tower> _towerPlacementQueue;
 
     private IEnemyFactory _enemyFactory;
 
     public List<Player> Players => _players;
 
-    public GameState()
+    public GameState(IHubContext<GameHub> hubContext)
     {
+        _availableTowerTypes = Enum
+            .GetValues(typeof(TowerTypes))
+            .Cast<TowerTypes>()
+            .ToList();
+
         _enemyFactory = RandomEnemyFactory();
+        _hubContext = hubContext;
+        _players = [];
+        _resourceManager = new();
+        _towerPlacementQueue = new();
     }
 
     private IEnemyFactory RandomEnemyFactory()
@@ -60,6 +72,7 @@ public class GameState
             if (enemy.HasReachedDestination())
             {
                 Map.Enemies.Remove(enemy);
+                enemy.TakeDamage(enemy.Health, _resourceManager);
             }
         }
     }
@@ -149,7 +162,10 @@ public class GameState
             {
                 TowerTypes playerTowerType = _availableTowerTypes.First();
 
-                _players.Add(new Player(username, connectionId, playerTowerType));
+                var player = new Player(username, connectionId, playerTowerType, _hubContext);
+
+                _players.Add(player);
+                _resourceManager.Attach(player);
 
                 _availableTowerTypes.Remove(playerTowerType);
 
@@ -171,6 +187,7 @@ public class GameState
             _availableTowerTypes.Add(player.TowerType);
 
             _players.Remove(player);
+            _resourceManager.Detach(player);
 
             Logger.Instance.LogInfo($"Player {player.Username} left the game.");
         }
