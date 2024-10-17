@@ -30,19 +30,19 @@ namespace TowerDefense.Utils
             _observers.Remove(observer);
         }
 
+        public void OnEnemyDeath(Enemy enemy)
+        {
+            Resources += enemy.RewardValue;
+
+            NotifyResourceChanged();
+        }
+
         private void NotifyResourceChanged()
         {
             foreach (var observer in _observers)
             {
                 observer.OnResourceChanged(_resources);
             }
-        }
-
-        public void OnEnemyDied(Enemy enemy)
-        {
-            Resources += enemy.RewardValue;
-
-            NotifyResourceChanged();
         }
     }
 }

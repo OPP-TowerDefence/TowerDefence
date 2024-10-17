@@ -29,7 +29,7 @@ namespace TowerDefense.Models.Enemies
 
             if (Health <= 0)
             {
-                resourceManager.OnEnemyDied(this);
+                resourceManager.OnEnemyDeath(this);
             }
         }
     }
