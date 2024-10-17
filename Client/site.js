@@ -18,6 +18,7 @@ async function joinRoom() {
 
         document.getElementById('loginForm').classList.add('hidden');
         document.getElementById('gameInterface').classList.remove('hidden');
+        document.getElementById('resourcesDisplay').classList.remove('hidden');
 
         const roomInfo = document.getElementById('roomInfo');
         roomInfo.textContent = `Room: ${roomCode} | Username: ${username}`;
@@ -91,6 +92,10 @@ connection.on("UserLeft", function (username, players) {
     towerSelectionBar.style.display = 'none';
 });
 
+connection.on("OnResourceChanged", function (newResourceAmount) {
+    updateResources(newResourceAmount);
+});
+
 connection.on("OnTick", function (map, mapEnemies) {
     renderMap(map, mapEnemies);
 });
@@ -128,6 +133,12 @@ function renderMap(map, mapEnemies) {
         cell.style.gridColumnStart = enemy.x + 1;
         cell.style.gridRowStart = enemy.y + 1;
     });
+}
+
+function updateResources(resources) {
+    console.log(resources);
+    const resourcesDisplay = document.getElementById('resourcesDisplay');
+    resourcesDisplay.textContent = `Resources: ${resources}`;
 }
 
 connection.start().catch(function (err) {
