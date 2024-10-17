@@ -1,4 +1,6 @@
-﻿namespace TowerDefense.Models.Enemies
+﻿using TowerDefense.Utils;
+
+namespace TowerDefense.Models.Enemies
 {
     public abstract class Enemy(int x, int y) : Unit(x, y)
     {
