@@ -3006,3 +3006,9 @@
 2024-10-18 14:05:41: INFO: Player dfg queued a tower of category Heavy at position (66,32).
 2024-10-18 14:05:43: INFO: Player dfg queued a tower of category LongDistance at position (57,17).
 2024-10-18 14:05:43: INFO: Player dfg queued a tower of category LongDistance at position (81,23).
+2024-10-18 15:01:23: INFO: GameService initialized and game tick timer started.
+2024-10-18 15:01:24: INFO: Player sad is attempting to join room asd.
+2024-10-18 15:01:24: INFO: New room created with code: asd.
+2024-10-18 15:01:24: INFO: sad has received Flame towers
+2024-10-18 15:01:24: INFO: Player sad joined the game.
+2024-10-18 15:01:24: INFO: Player sad with connection ID EvJ827XHnu8bNeiXX7Kxhg has joined room asd.

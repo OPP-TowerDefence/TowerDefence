@@ -31,20 +31,37 @@ namespace TowerDefense.Models
             GenerateRandomPath(Map.Height, Map.Width); // Generate paths when the game starts
         }
 
-        public class PathStrategy : IPathStrategy
-        {
-            private int _pathIndex;
+public class Path1Strategy : IPathStrategy
+{
+    public Queue<(int X, int Y)> GetPath(GameState gameState)
+    {
+        return new Queue<(int X, int Y)>(gameState.GetPaths()[0]); // Select first path
+    }
+}
 
-            public PathStrategy(int pathIndex)
-            {
-                _pathIndex = pathIndex;
-            }
+public class Path2Strategy : IPathStrategy
+{
+    public Queue<(int X, int Y)> GetPath(GameState gameState)
+    {
+        return new Queue<(int X, int Y)>(gameState.GetPaths()[1]); // Select second path
+    }
+}
 
-            public Queue<(int X, int Y)> GetPath(GameState gameState)
-            {
-                return new Queue<(int X, int Y)>(gameState.GetPaths()[_pathIndex]);
-            }
-        }
+public class Path3Strategy : IPathStrategy
+{
+    public Queue<(int X, int Y)> GetPath(GameState gameState)
+    {
+        return new Queue<(int X, int Y)>(gameState.GetPaths()[2]); // Select third path
+    }
+}
+
+public class Path4Strategy : IPathStrategy
+{
+    public Queue<(int X, int Y)> GetPath(GameState gameState)
+    {
+        return new Queue<(int X, int Y)>(gameState.GetPaths()[3]); // Select fourth path
+    }
+}
 
         public List<List<(int X, int Y)>> GetPaths()
         {
@@ -63,20 +80,37 @@ namespace TowerDefense.Models
             };
         }
 
-        public void SpawnEnemies()
+public void SpawnEnemies()
+    {
+        IPathStrategy pathStrategy;
+        // Choose strategy based on the enemy count or other criteria
+        switch (_enemyCount % 4)
         {
-            IPathStrategy pathStrategy;
-            int pathIndex = (_enemyCount / 10) % 4; // Rotate through 4 paths based on enemy count
-            pathStrategy = new PathStrategy(pathIndex);
-
-            _enemyFactory = RandomEnemyFactory();
-            Queue<(int X, int Y)> pathQueue = pathStrategy.GetPath(this);
-            List<(int X, int Y)> pathList = pathQueue.ToList();
-            Enemy enemy = _enemyFactory.CreateEnemy(0, 0, pathList);
-            Map.Enemies.Add(enemy);
-
-            _enemyCount++;
+            case 0:
+                pathStrategy = new Path1Strategy();
+                break;
+            case 1:
+                pathStrategy = new Path2Strategy();
+                break;
+            case 2:
+                pathStrategy = new Path3Strategy();
+                break;
+            case 3:
+                pathStrategy = new Path4Strategy();
+                break;
+            default:
+                pathStrategy = new Path1Strategy(); // Fallback
+                break;
         }
+
+        _enemyFactory = RandomEnemyFactory(); // Select a random enemy factory
+        Queue<(int X, int Y)> pathQueue = pathStrategy.GetPath(this); // Get path from the selected strategy
+        List<(int X, int Y)> pathList = pathQueue.ToList();
+        Enemy enemy = _enemyFactory.CreateEnemy(0, 0, pathList);
+        Map.Enemies.Add(enemy);
+
+        _enemyCount++;
+    }
 
         public void UpdateEnemies()
         {
