@@ -1,27 +1,56 @@
 ﻿namespace TowerDefense.Models.Enemies
 {
     public abstract class Enemy : Unit
+{
+    public int Health { get; set; }
+    public int Speed { get; set; }
+    private Queue<(int X, int Y)> Path { get; set; } // Store the path
+
+    private bool IsAtFinalDestination { get; set; } = false; // Track if the enemy has reached the final tile
+
+    public Enemy(int x, int y, List<(int X, int Y)> path) : base(x, y)
     {
-        public int Health { get; set; }
-        public int Speed { get; set; }
-        public int TargetX { get; set; } = 10;
-        public int TargetY { get; set; } = 10;
+        Path = new Queue<(int X, int Y)>(path); // Initialize the path queue
+    }
 
-        public Enemy(int x, int y) : base(x, y)
+    // Moves enemy towards the next waypoint
+    public void MoveTowardsNextWaypoint()
+    {
+        // If already at final destination, no further movement
+        if (IsAtFinalDestination) return;
+
+        if (Path.Count == 0)
         {
+            IsAtFinalDestination = true; // Mark the enemy as at the destination
+            return;
         }
 
-        public void MoveTowardsTarget()
-        {
-            if (X < TargetX)
-                X += Math.Min(Speed, TargetX - X);
-            if (Y < TargetY)
-                Y += Math.Min(Speed, TargetY - Y);
-        }
+        var nextWaypoint = Path.Peek(); // Peek at the next waypoint
 
-        public bool HasReachedDestination()
+        // Move in the X direction
+        if (X < nextWaypoint.X)
+            X += Math.Min(Speed, nextWaypoint.X - X);
+        else if (X > nextWaypoint.X)
+            X -= Math.Min(Speed, X - nextWaypoint.X);
+
+        // Move in the Y direction
+        if (Y < nextWaypoint.Y)
+            Y += Math.Min(Speed, nextWaypoint.Y - Y);
+        else if (Y > nextWaypoint.Y)
+            Y -= Math.Min(Speed, Y - nextWaypoint.Y);
+
+        // If the enemy has reached the current waypoint, dequeue to move to the next
+        if (X == nextWaypoint.X && Y == nextWaypoint.Y)
         {
-            return X == TargetX && Y == TargetY;
+            Path.Dequeue();
         }
     }
+
+    // Check if enemy has reached its final destination (no more waypoints and the flag is set)
+    public bool HasReachedDestination()
+    {
+        // The enemy has reached the destination if the path is empty and they have physically reached the final tile
+        return IsAtFinalDestination;
+    }
+}
 }

@@ -1,26 +1,63 @@
+/* General enemy styles */
 .grid-cell.enemy {
-    background-color: red;
+    background-color: red;           /* Default enemy color */
+    width: 10px;                     /* Base width for enemies (1x1 grid size) */
+    height: 10px;                    /* Base height for enemies (1x1 grid size) */
+    border-radius: 10%;              /* Slightly rounded for general enemies */
+    border: 1px solid #000;          /* Black border for clarity */
+    display: flex;                   /* Flexbox for centering */
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.3s ease-in-out; /* Smooth animation on hover */
+    z-index: 10;
 }
 
+/* Fast Enemy: Smaller, rounded, faster look */
 .grid-cell.enemy.fast-enemy {
-    background-color: #ff6347;  
-    width: 30px;
-    height: 30px;
-    border-radius: 50%; 
-    border: 2px solid #000;
+    background-color: #ff6347;       /* Tomato red */
+    width: 8px;                      /* Slightly smaller size to represent speed */
+    height: 8px;
+    border-radius: 50%;              /* Fully circular to show agility */
+    border: 1px solid #000;
+    animation: pulse 1s infinite;    /* Pulsing animation to suggest speed */
 }
 
+/* Flying Enemy: Diamond-shaped, larger */
 .grid-cell.enemy.flying-enemy {
-    background-color: #87ceeb;  
-    width: 40px;
-    height: 40px;
-    transform: rotate(45deg);
-    border: 2px solid #000;
+    background-color: #87ceeb;       /* Sky blue to represent flying */
+    width: 10px;                     /* 1x1 grid size, same as default enemies */
+    height: 10px;
+    transform: rotate(45deg);        /* Diamond shape */
+    border: 1px solid #000;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5); /* Add shadow to suggest flying */
+    opacity: 0.9;                    /* Slight transparency */
 }
 
+/* Strong Enemy: Larger, heavier look */
 .grid-cell.enemy.strong-enemy {
-    background-color: #8b0000;
-    width: 50px;
-    height: 50px;
-    border: 3px solid #000;
+    background-color: #8b0000;       /* Dark red to represent strength */
+    width: 12px;                     /* Slightly larger size to show strength */
+    height: 12px;
+    border: 2px solid #000;
+    border-radius: 10%;              /* Slightly rounded, more robust */
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.7); /* Heavy shadow for a solid look */
+}
+
+/* Pulse animation for fast enemies */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+/* Hover effect for all enemies */
+.grid-cell.enemy:hover {
+    transform: scale(1.2);           /* Slightly enlarge on hover for emphasis */
+}
+
+/* Path style */
+.grid-cell.path {
+    background-color: #c74600;       /* Path color */
+    border: 1px solid #0b110b;       /* Dark border */
+    opacity: 0.6;                    /* Slight transparency for the path */
 }

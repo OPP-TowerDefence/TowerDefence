@@ -50,7 +50,7 @@ public class GameService
 
                 await _hubContext.Clients
                     .Group(room.Key)
-                    .SendAsync("OnTick", gameState.GetMapTowers(), gameState.GetMapEnemies());
+                    .SendAsync("OnTick", gameState.GetMapTowers(), gameState.GetMapEnemies(),gameState.SendPath());
             }
             catch (Exception ex)
             {

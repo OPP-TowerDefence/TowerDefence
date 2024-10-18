@@ -4,6 +4,6 @@ namespace TowerDefense.Interfaces
 {
     public interface IEnemyFactory
     {
-        public Enemy CreateEnemy(int x, int y);
+        public Enemy CreateEnemy(int x, int y, List<(int X, int Y)> path);
     }
 }
