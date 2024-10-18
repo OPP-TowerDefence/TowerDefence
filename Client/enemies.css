@@ -58,22 +58,44 @@
 /* Path style */
 /* Style for Path1 */
 .grid-cell.path1 {
-    background-color: #ff5900;       /* Red for Path1 */
+    background-color: #ff5900;       /* Orange for Path1 */
     border: 1px solid #0b110b;       /* Dark border */
     opacity: 0.6;                    /* Slight transparency */
-    width: 10px;                     /* Ensure path is 1x1 grid cell size */
+    width: 10px;
     height: 10px;
-    border-radius: 5%;               /* Slightly rounded */
-    z-index: 2;                      /* Higher z-index to prioritize Path1 over Path2 */
+    border-radius: 5%;
+    z-index: 5;                      /* Highest z-index among paths */
 }
 
-/* Style for Path2 (if you want a different color) */
+/* Style for Path2 */
 .grid-cell.path2 {
     background-color: #eaff00;       /* Yellow for Path2 */
-    border: 1px solid #0b110b;       /* Dark border */
-    opacity: 0.6;                    /* Slight transparency */
-    width: 10px;                     /* Ensure path is 1x1 grid cell size */
+    border: 1px solid #0b110b;
+    opacity: 0.6;
+    width: 10px;
     height: 10px;
-    border-radius: 5%;               /* Slightly rounded */
-    z-index: 1;                      /* Lower z-index to ensure Path1 appears on top */
+    border-radius: 5%;
+    z-index: 4;
+}
+
+/* Style for Path3 */
+.grid-cell.path3 {
+    background-color: #00ff00;       /* Green for Path3 */
+    border: 1px solid #0b110b;
+    opacity: 0.6;
+    width: 10px;
+    height: 10px;
+    border-radius: 5%;
+    z-index: 3;
+}
+
+/* Style for Path4 */
+.grid-cell.path4 {
+    background-color: #00bfff;       /* Deep Sky Blue for Path4 */
+    border: 1px solid #0b110b;
+    opacity: 0.6;
+    width: 10px;
+    height: 10px;
+    border-radius: 5%;
+    z-index: 2;                      /* Lowest z-index among paths */
 }

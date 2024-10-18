@@ -16,11 +16,10 @@ namespace TowerDefense.Models
         private readonly List<TowerTypes> _availableTowerTypes = Enum.GetValues(typeof(TowerTypes)).Cast<TowerTypes>().ToList();
         private readonly List<Player> _players = new();
         private readonly Queue<Tower> _towerPlacementQueue = new();
-        private List<(int X, int Y)> _path1; // First path after the split
-        private List<(int X, int Y)> _path2; // Second path after the split
+        private List<List<(int X, int Y)>> _paths; // List to store all paths
         private IEnemyFactory _enemyFactory;
         private Random _random = new Random();
-        private int _enemyCount = 0; // Track the number of enemies spawned
+        private int _enemyCount = 0;
 
         public List<Player> Players => _players;
         public double TimeSinceLastSpawn { get; set; } = 0;
@@ -28,36 +27,28 @@ namespace TowerDefense.Models
         public GameState()
         {
             _enemyFactory = RandomEnemyFactory();
+            _paths = new List<List<(int X, int Y)>>(); // Initialize the paths list
             GenerateRandomPath(Map.Height, Map.Width); // Generate paths when the game starts
         }
 
-        // Path strategy interface and implementations
-        public interface IPathStrategy
+        public class PathStrategy : IPathStrategy
         {
-            Queue<(int X, int Y)> GetPath(GameState gameState);
-        }
+            private int _pathIndex;
 
-        public class FirstPathStrategy : IPathStrategy
-        {
+            public PathStrategy(int pathIndex)
+            {
+                _pathIndex = pathIndex;
+            }
+
             public Queue<(int X, int Y)> GetPath(GameState gameState)
             {
-                var (path1, _) = gameState.GetPaths();
-                return new Queue<(int X, int Y)>(path1);
+                return new Queue<(int X, int Y)>(gameState.GetPaths()[_pathIndex]);
             }
         }
 
-        public class SecondPathStrategy : IPathStrategy
+        public List<List<(int X, int Y)>> GetPaths()
         {
-            public Queue<(int X, int Y)> GetPath(GameState gameState)
-            {
-                var (_, path2) = gameState.GetPaths();
-                return new Queue<(int X, int Y)>(path2);
-            }
-        }
-
-        public (List<(int X, int Y)> path1, List<(int X, int Y)> path2) GetPaths()
-        {
-            return (_path1, _path2);
+            return _paths;
         }
 
         private IEnemyFactory RandomEnemyFactory()
@@ -73,25 +64,19 @@ namespace TowerDefense.Models
         }
 
         public void SpawnEnemies()
-    {
-        IPathStrategy pathStrategy;
-        if (_enemyCount % 20 < 10)
         {
-            pathStrategy = new FirstPathStrategy();
-        }
-        else
-        {
-            pathStrategy = new SecondPathStrategy();
-        }
+            IPathStrategy pathStrategy;
+            int pathIndex = (_enemyCount / 10) % 4; // Rotate through 4 paths based on enemy count
+            pathStrategy = new PathStrategy(pathIndex);
 
-        _enemyFactory = RandomEnemyFactory();
-        Queue<(int X, int Y)> pathQueue = pathStrategy.GetPath(this); // Get the path as a Queue
-        List<(int X, int Y)> pathList = pathQueue.ToList(); // Convert the Queue to a List
-        Enemy enemy = _enemyFactory.CreateEnemy(0, 0, pathList); // Pass the path as a List
-        Map.Enemies.Add(enemy);
+            _enemyFactory = RandomEnemyFactory();
+            Queue<(int X, int Y)> pathQueue = pathStrategy.GetPath(this);
+            List<(int X, int Y)> pathList = pathQueue.ToList();
+            Enemy enemy = _enemyFactory.CreateEnemy(0, 0, pathList);
+            Map.Enemies.Add(enemy);
 
-        _enemyCount++; // Increment enemy count
-}
+            _enemyCount++;
+        }
 
         public void UpdateEnemies()
         {
@@ -129,11 +114,7 @@ namespace TowerDefense.Models
 
         public object SendPath()
         {
-             return new
-            {
-                Path1 = _path1.Select(point => new { X = point.X, Y = point.Y }).ToList(),
-                Path2 = _path2.Select(point => new { X = point.X, Y = point.Y }).ToList()
-            };
+            return _paths.Select(path => path.Select(point => new { X = point.X, Y = point.Y }).ToList()).ToList();
         }
 
         public bool IsOccupied(int x, int y)
@@ -228,8 +209,12 @@ namespace TowerDefense.Models
 
         public void GenerateRandomPath(int mapWidth, int mapHeight)
         {
-            _path1 = new List<(int X, int Y)>();
-            _path2 = new List<(int X, int Y)>();
+            _paths.Clear(); // Clear previous paths if any
+
+            for (int i = 0; i < 4; i++) // Create 4 empty paths
+            {
+                _paths.Add(new List<(int X, int Y)>());
+            }
 
             // Start at (0, 0)
             int currentX = 0;
@@ -237,7 +222,7 @@ namespace TowerDefense.Models
             List<(int X, int Y)> commonPath = new List<(int X, int Y)> { (currentX, currentY) };
 
             // Determine the halfway point
-            int halfway = (mapWidth + mapHeight) / 4; // You can tweak this to determine where the split should occur
+            int halfway = (mapWidth + mapHeight) / 4;
 
             // First half of the path (before the split)
             while (commonPath.Count < halfway)
@@ -246,78 +231,59 @@ namespace TowerDefense.Models
 
                 if (moveX && currentX < mapWidth - 1)
                 {
-                    currentX += 1; // Move in X by 1 step
+                    currentX += 1;
                 }
                 else if (currentY < mapHeight - 1)
                 {
-                    currentY += 1; // Move in Y by 1 step
+                    currentY += 1;
                 }
 
-                // Add the new position to the common path
                 if (!commonPath.Contains((currentX, currentY)))
                 {
                     commonPath.Add((currentX, currentY));
                 }
             }
 
-            // Split: copy the common path to both _path1 and _path2
-            _path1.AddRange(commonPath);
-            _path2.AddRange(commonPath);
+            // Split: copy the common path to all 4 paths
+            foreach (var path in _paths)
+            {
+                path.AddRange(commonPath);
+            }
 
-            // Generate the second half for _path1
-            int splitX1 = currentX;
-            int splitY1 = currentY;
+            // Generate the second half for each path
+            for (int i = 0; i < 4; i++)
+            {
+                GeneratePath(_paths[i], currentX, currentY, mapWidth, mapHeight);
+            }
+        }
 
-            while (_path1.Last() != (mapWidth - 1, mapHeight - 1))
+        private void GeneratePath(List<(int X, int Y)> path, int startX, int startY, int mapWidth, int mapHeight)
+        {
+            int splitX = startX;
+            int splitY = startY;
+
+            while (path.Last() != (mapWidth - 1, mapHeight - 1))
             {
                 bool moveX = _random.Next(0, 2) == 0;
 
-                if (moveX && splitX1 < mapWidth - 1)
+                if (moveX && splitX < mapWidth - 1)
                 {
-                    splitX1 += 1; // Move in X by 1 step
+                    splitX += 1;
                 }
-                else if (splitY1 < mapHeight - 1)
+                else if (splitY < mapHeight - 1)
                 {
-                    splitY1 += 1; // Move in Y by 1 step
-                }
-
-                if (!_path1.Contains((splitX1, splitY1)))
-                {
-                    _path1.Add((splitX1, splitY1));
-                }
-            }
-
-            // Generate the second half for _path2
-            int splitX2 = currentX;
-            int splitY2 = currentY;
-
-            while (_path2.Last() != (mapWidth - 1, mapHeight - 1))
-            {
-                bool moveX = _random.Next(0, 2) == 0;
-
-                if (moveX && splitX2 < mapWidth - 1)
-                {
-                    splitX2 += 1; // Move in X by 1 step
-                }
-                else if (splitY2 < mapHeight - 1)
-                {
-                    splitY2 += 1; // Move in Y by 1 step
+                    splitY += 1;
                 }
 
-                if (!_path2.Contains((splitX2, splitY2)))
+                if (!path.Contains((splitX, splitY)))
                 {
-                    _path2.Add((splitX2, splitY2));
+                    path.Add((splitX, splitY));
                 }
             }
 
-            // Ensure both paths end at the bottom-right corner
-            if (_path1.Last() != (mapWidth - 1, mapHeight - 1))
+            if (path.Last() != (mapWidth - 1, mapHeight - 1))
             {
-                _path1.Add((mapWidth - 1, mapHeight - 1));
-            }
-            if (_path2.Last() != (mapWidth - 1, mapHeight - 1))
-            {
-                _path2.Add((mapWidth - 1, mapHeight - 1));
+                path.Add((mapWidth - 1, mapHeight - 1));
             }
         }
     }

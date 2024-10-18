@@ -2926,3 +2926,83 @@
 2024-10-18 08:49:03: INFO: khjkhj has received Flame towers
 2024-10-18 08:49:03: INFO: Player khjkhj joined the game.
 2024-10-18 08:49:03: INFO: Player khjkhj with connection ID El8OMhCoVofiWpg7z_PQ2w has joined room kkjjh.
+2024-10-18 13:34:08: INFO: GameService initialized and game tick timer started.
+2024-10-18 13:34:11: INFO: Player fdgfd is attempting to join room gdfg.
+2024-10-18 13:34:11: INFO: New room created with code: gdfg.
+2024-10-18 13:34:11: INFO: fdgfd has received Flame towers
+2024-10-18 13:34:11: INFO: Player fdgfd joined the game.
+2024-10-18 13:34:11: INFO: Player fdgfd with connection ID UnV_lJ6HG8GY0RrmCHZp3Q has joined room gdfg.
+2024-10-18 13:34:52: INFO: Player fdgfd left the game.
+2024-10-18 13:34:52: INFO: Player fdgfd left room gdfg.
+2024-10-18 13:37:59: INFO: GameService initialized and game tick timer started.
+2024-10-18 13:38:04: INFO: Player asd is attempting to join room asd.
+2024-10-18 13:38:04: INFO: New room created with code: asd.
+2024-10-18 13:38:04: INFO: asd has received Flame towers
+2024-10-18 13:38:04: INFO: Player asd joined the game.
+2024-10-18 13:38:04: INFO: Player asd with connection ID lmOE6yAS1Kvv0gvGW8_L3A has joined room asd.
+2024-10-18 13:39:00: INFO: Player asd left the game.
+2024-10-18 13:39:00: INFO: Player asd left room asd.
+2024-10-18 13:41:17: INFO: Player sdfs is attempting to join room dfs.
+2024-10-18 13:41:17: INFO: New room created with code: dfs.
+2024-10-18 13:41:17: INFO: sdfs has received Flame towers
+2024-10-18 13:41:17: INFO: Player sdfs joined the game.
+2024-10-18 13:41:17: INFO: Player sdfs with connection ID Hhm1AUk3zsjq1dr6gKTNJA has joined room dfs.
+2024-10-18 13:43:58: INFO: Player sdfs left the game.
+2024-10-18 13:43:58: INFO: Player sdfs left room dfs.
+2024-10-18 13:44:04: INFO: Player asd is attempting to join room asd.
+2024-10-18 13:44:04: INFO: asd has received Ice towers
+2024-10-18 13:44:04: INFO: Player asd joined the game.
+2024-10-18 13:44:04: INFO: Player asd with connection ID nBI6JCluGzFZUWw2RFgmBg has joined room asd.
+2024-10-18 13:48:24: INFO: Player asd left the game.
+2024-10-18 13:48:24: INFO: Player asd left room asd.
+2024-10-18 13:48:37: INFO: GameService initialized and game tick timer started.
+2024-10-18 13:48:39: INFO: Player sad is attempting to join room adsa.
+2024-10-18 13:48:39: INFO: New room created with code: adsa.
+2024-10-18 13:48:39: INFO: sad has received Flame towers
+2024-10-18 13:48:39: INFO: Player sad joined the game.
+2024-10-18 13:48:39: INFO: Player sad with connection ID B9cPPuT6DCawJq1SU9WeHw has joined room adsa.
+2024-10-18 13:49:08: INFO: Player sad left the game.
+2024-10-18 13:49:08: INFO: Player sad left room adsa.
+2024-10-18 13:49:16: INFO: GameService initialized and game tick timer started.
+2024-10-18 13:49:17: INFO: Player sdfds is attempting to join room dsfd.
+2024-10-18 13:49:17: INFO: New room created with code: dsfd.
+2024-10-18 13:49:17: INFO: sdfds has received Flame towers
+2024-10-18 13:49:17: INFO: Player sdfds joined the game.
+2024-10-18 13:49:17: INFO: Player sdfds with connection ID scgwzyytbMgL9H9nabrBVw has joined room dsfd.
+2024-10-18 13:50:42: INFO: Player sdfds left the game.
+2024-10-18 13:50:42: INFO: Player sdfds left room dsfd.
+2024-10-18 13:50:47: INFO: Player asda is attempting to join room asd.
+2024-10-18 13:50:48: INFO: New room created with code: asd.
+2024-10-18 13:50:48: INFO: asda has received Flame towers
+2024-10-18 13:50:48: INFO: Player asda joined the game.
+2024-10-18 13:50:48: INFO: Player asda with connection ID vl0G1y2c2a3szHdiX3ZmTw has joined room asd.
+2024-10-18 13:54:04: INFO: Player asda left the game.
+2024-10-18 13:54:04: INFO: Player asda left room asd.
+2024-10-18 13:54:17: INFO: GameService initialized and game tick timer started.
+2024-10-18 13:54:18: INFO: Player asdsad is attempting to join room dadsa.
+2024-10-18 13:54:18: INFO: New room created with code: dadsa.
+2024-10-18 13:54:18: INFO: asdsad has received Flame towers
+2024-10-18 13:54:18: INFO: Player asdsad joined the game.
+2024-10-18 13:54:18: INFO: Player asdsad with connection ID e9_xAcRVa6M4vngn0R8PQA has joined room dadsa.
+2024-10-18 13:58:46: INFO: Player asdsad left the game.
+2024-10-18 13:58:46: INFO: Player asdsad left room dadsa.
+2024-10-18 13:58:52: INFO: Player gfd is attempting to join room dfg.
+2024-10-18 13:58:52: INFO: New room created with code: dfg.
+2024-10-18 13:58:52: INFO: gfd has received Flame towers
+2024-10-18 13:58:52: INFO: Player gfd joined the game.
+2024-10-18 13:58:52: INFO: Player gfd with connection ID GS-RnFNcwmzOzF8vQNLpZw has joined room dfg.
+2024-10-18 14:04:32: INFO: Player gfd left the game.
+2024-10-18 14:04:32: INFO: Player gfd left room dfg.
+2024-10-18 14:05:29: INFO: GameService initialized and game tick timer started.
+2024-10-18 14:05:30: INFO: Player dfg is attempting to join room dfg.
+2024-10-18 14:05:30: INFO: New room created with code: dfg.
+2024-10-18 14:05:30: INFO: dfg has received Flame towers
+2024-10-18 14:05:30: INFO: Player dfg joined the game.
+2024-10-18 14:05:31: INFO: Player dfg with connection ID Y869hLcjHnUi72GbchISrg has joined room dfg.
+2024-10-18 14:05:31: INFO: Player dfg queued a tower of category LongDistance at position (78,36).
+2024-10-18 14:05:39: INFO: Player dfg queued a tower of category Heavy at position (42,58).
+2024-10-18 14:05:39: INFO: Player dfg queued a tower of category Heavy at position (53,71).
+2024-10-18 14:05:40: INFO: Player dfg queued a tower of category Heavy at position (53,48).
+2024-10-18 14:05:41: INFO: Player dfg queued a tower of category Heavy at position (66,32).
+2024-10-18 14:05:43: INFO: Player dfg queued a tower of category LongDistance at position (57,17).
+2024-10-18 14:05:43: INFO: Player dfg queued a tower of category LongDistance at position (81,23).

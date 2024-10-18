@@ -5,8 +5,7 @@ const connection = new signalR.HubConnectionBuilder()
 
 let mapWidth = 0;
 let mapHeight = 0;
-let path1 = [];  // Path1 variable
-let path2 = [];  // Path2 variable
+let paths = [];
 
 let activeTowerCategory = 0;
 let activeSelectionDiv = document.getElementById('longDistanceTowerDiv');
@@ -45,12 +44,10 @@ function clearMap() {
     gameMap.innerHTML = '';
 }
 
-// Initialize the map and paths when the game starts
 connection.on("InitializeMap", function (width, height, map, mapEnemies, newPaths) {
     mapWidth = width;
     mapHeight = height;
-    path1 = newPaths.path1;  // Store Path1
-    path2 = newPaths.path2;  // Store Path2
+    paths = newPaths;  // Store the array of paths
 
     const gameMap = document.getElementById('gameMap');
 
@@ -64,10 +61,9 @@ connection.on("InitializeMap", function (width, height, map, mapEnemies, newPath
     renderMap(map, mapEnemies);
 });
 
-// Update the map on every tick
+
 connection.on("OnTick", function (map, mapEnemies, newPaths) {
-    path1 = newPaths.path1;  // Update Path1 on each tick
-    path2 = newPaths.path2;  // Update Path2 on each tick
+    paths = newPaths;  // Update the array of paths on each tick
     renderMap(map, mapEnemies);
 });
 
@@ -105,7 +101,6 @@ function updateActiveUsersList(players) {
     });
 }
 
-// Function to render the game map
 function renderMap(map, mapEnemies) {
     const gameMap = document.getElementById('gameMap');
     gameMap.innerHTML = ''; // Clear the map before re-rendering
@@ -125,10 +120,10 @@ function renderMap(map, mapEnemies) {
         cell.style.gridRowEnd = tower.y + 11;  // Towers are 10x10
     });
 
-    renderPath(path1, "path1"); 
-    renderPath(path2, "path2");
+    paths.forEach((path, index) => {
+        renderPath(path, `path${index + 1}`);
+    });
 
-    // Render the enemies
     mapEnemies.forEach(enemy => {
         const cell = document.createElement('div');
         cell.className = 'grid-cell enemy';
@@ -163,7 +158,7 @@ function renderPath(path, pathClass) {
 
     uniquePath.forEach((point) => {
         const cell = document.createElement('div');
-        cell.className = `grid-cell ${pathClass}`;  // Apply the provided path class (path1 or path2)
+        cell.className = `grid-cell ${pathClass}`;  // Apply the provided path class
         gameMap.appendChild(cell);
 
         // Set grid positions based on path coordinates
@@ -171,10 +166,6 @@ function renderPath(path, pathClass) {
         cell.style.gridRowStart = point.y + 1;
     });
 }
-
-// Call renderPath for both paths with different classes
-renderPath(path1, "path1");  // Render Path1 with the "path1" class
-renderPath(path2, "path2");  // Render Path2 with the "path2" class
 
 // Start the connection to the server
 connection.start().catch(function (err) {
@@ -208,10 +199,9 @@ document.getElementById('gameMap').addEventListener('click', function (event) {
     }
 });
 
-// Function to check if the 3x3 area overlaps with either path or existing towers
 function isPathBlocked(towerX, towerY) {
-    // Check against both paths
-    const allPaths = [...path1, ...path2];
+    // Check against all paths in the paths array
+    const allPaths = paths.flat();  // Flatten the paths array to get all path points
     
     for (let i = 0; i < allPaths.length; i++) {
         const pathPoint = allPaths[i];
