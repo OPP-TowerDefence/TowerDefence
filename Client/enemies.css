@@ -56,8 +56,24 @@
 }
 
 /* Path style */
-.grid-cell.path {
-    background-color: #c74600;       /* Path color */
+/* Style for Path1 */
+.grid-cell.path1 {
+    background-color: #ff5900;       /* Red for Path1 */
     border: 1px solid #0b110b;       /* Dark border */
-    opacity: 0.6;                    /* Slight transparency for the path */
+    opacity: 0.6;                    /* Slight transparency */
+    width: 10px;                     /* Ensure path is 1x1 grid cell size */
+    height: 10px;
+    border-radius: 5%;               /* Slightly rounded */
+    z-index: 2;                      /* Higher z-index to prioritize Path1 over Path2 */
+}
+
+/* Style for Path2 (if you want a different color) */
+.grid-cell.path2 {
+    background-color: #eaff00;       /* Yellow for Path2 */
+    border: 1px solid #0b110b;       /* Dark border */
+    opacity: 0.6;                    /* Slight transparency */
+    width: 10px;                     /* Ensure path is 1x1 grid cell size */
+    height: 10px;
+    border-radius: 5%;               /* Slightly rounded */
+    z-index: 1;                      /* Lower z-index to ensure Path1 appears on top */
 }

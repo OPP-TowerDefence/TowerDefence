@@ -28,34 +28,39 @@ public class GameService
 
     public ConcurrentDictionary<string, GameState> Rooms => _rooms;
 
-    private async void GameTickHandler(object sender, ElapsedEventArgs e)
+   private async void GameTickHandler(object sender, ElapsedEventArgs e)
+{
+    foreach (var room in _rooms)
     {
-        _timeSinceLastSpawn += 250;
+        var gameState = room.Value;
 
-        foreach (var room in _rooms)
+        try
         {
-            var gameState = room.Value;
+            // Process tower placements in the room
+            gameState.ProcessTowerPlacements();
 
-            try
+            // Increment the time since the last enemy spawn for this specific room
+            gameState.TimeSinceLastSpawn += 250; // Add 250ms for each tick
+
+            // Spawn enemies if the time since the last spawn exceeds the spawn interval
+            if (gameState.TimeSinceLastSpawn >= SpawnInterval)
             {
-                gameState.ProcessTowerPlacements();
-
-                if (_timeSinceLastSpawn >= SpawnInterval)
-                {
-                    gameState.SpawnEnemies();
-                    _timeSinceLastSpawn = 0;
-                }
-
-                gameState.UpdateEnemies();
-
-                await _hubContext.Clients
-                    .Group(room.Key)
-                    .SendAsync("OnTick", gameState.GetMapTowers(), gameState.GetMapEnemies(),gameState.SendPath());
+                gameState.SpawnEnemies(); // Spawn enemies in the room
+                gameState.TimeSinceLastSpawn = 0;  // Reset spawn timer for this room
             }
-            catch (Exception ex)
-            {
-                Logger.Instance.LogException(ex);
-            }
+
+            // Update enemy positions and other game logic
+            gameState.UpdateEnemies();
+
+            // Send the updated game state (towers, enemies, paths) to all clients in the room
+            await _hubContext.Clients
+                .Group(room.Key)
+                .SendAsync("OnTick", gameState.GetMapTowers(), gameState.GetMapEnemies(), gameState.SendPath());
+        }
+        catch (Exception ex)
+        {
+            Logger.Instance.LogException(ex);
         }
     }
+}
 }

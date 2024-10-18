@@ -36,9 +36,10 @@ button {
     display: grid;
     gap: 0px;
     margin-top: 20px;
-    width: fit-content; /* Automatically size to fit the grid */
-    height: fit-content; /* Automatically size to fit the grid */
-    overflow: auto; /* Add scroll behavior for the map if it exceeds the container */
+    width: 100%;  /* Ensure the map takes up full available width */
+    max-width: 100%;  /* Limit the map width to the container */
+    height: auto; /* Let height adjust to the content */
+    overflow: hidden; /* Hide the scroll behavior for the map */
 }
 
 input, button {

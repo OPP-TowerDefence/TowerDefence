@@ -5,7 +5,8 @@ const connection = new signalR.HubConnectionBuilder()
 
 let mapWidth = 0;
 let mapHeight = 0;
-let path = [];  // Define path globally
+let path1 = [];  // Path1 variable
+let path2 = [];  // Path2 variable
 
 let activeTowerCategory = 0;
 let activeSelectionDiv = document.getElementById('longDistanceTowerDiv');
@@ -44,11 +45,12 @@ function clearMap() {
     gameMap.innerHTML = '';
 }
 
-// Initialize the map and path when the game starts
-connection.on("InitializeMap", function (width, height, map, mapEnemies, newPath) {
+// Initialize the map and paths when the game starts
+connection.on("InitializeMap", function (width, height, map, mapEnemies, newPaths) {
     mapWidth = width;
     mapHeight = height;
-    path = newPath;  // Update the global path variable
+    path1 = newPaths.path1;  // Store Path1
+    path2 = newPaths.path2;  // Store Path2
 
     const gameMap = document.getElementById('gameMap');
 
@@ -59,13 +61,14 @@ connection.on("InitializeMap", function (width, height, map, mapEnemies, newPath
     gameMap.style.width = `${width * 10}px`;
     gameMap.style.height = `${height * 10}px`;
 
-    renderMap(map, mapEnemies, path);
+    renderMap(map, mapEnemies);
 });
 
 // Update the map on every tick
-connection.on("OnTick", function (map, mapEnemies, newPath) {
-    path = newPath;  // Update the global path variable on each tick
-    renderMap(map, mapEnemies, path);
+connection.on("OnTick", function (map, mapEnemies, newPaths) {
+    path1 = newPaths.path1;  // Update Path1 on each tick
+    path2 = newPaths.path2;  // Update Path2 on each tick
+    renderMap(map, mapEnemies);
 });
 
 // Event handler for when a new user joins the room
@@ -76,14 +79,7 @@ connection.on("UserJoined", function (username, players) {
     messageList.appendChild(listItem);
 
     // Update the active users list
-    const activeUsersList = document.getElementById('activeUsersList');
-    activeUsersList.innerHTML = ''; // Clear the list first
-
-    players.forEach(player => {
-        const userItem = document.createElement('li');
-        userItem.textContent = `${player.username} - ${player.towerType}`;
-        activeUsersList.appendChild(userItem);
-    });
+    updateActiveUsersList(players);
 });
 
 // Event handler for when a user leaves the room
@@ -94,6 +90,11 @@ connection.on("UserLeft", function (username, players) {
     messageList.appendChild(listItem);
 
     // Update the active users list
+    updateActiveUsersList(players);
+});
+
+// Function to update the list of active players
+function updateActiveUsersList(players) {
     const activeUsersList = document.getElementById('activeUsersList');
     activeUsersList.innerHTML = ''; // Clear the list first
 
@@ -102,10 +103,10 @@ connection.on("UserLeft", function (username, players) {
         userItem.textContent = `${player.username} - ${player.towerType}`;
         activeUsersList.appendChild(userItem);
     });
-});
+}
 
 // Function to render the game map
-function renderMap(map, mapEnemies, path) {
+function renderMap(map, mapEnemies) {
     const gameMap = document.getElementById('gameMap');
     gameMap.innerHTML = ''; // Clear the map before re-rendering
 
@@ -124,8 +125,8 @@ function renderMap(map, mapEnemies, path) {
         cell.style.gridRowEnd = tower.y + 11;  // Towers are 10x10
     });
 
-    // Render the path
-    renderPath(path);
+    renderPath(path1, "path1"); 
+    renderPath(path2, "path2");
 
     // Render the enemies
     mapEnemies.forEach(enemy => {
@@ -148,9 +149,12 @@ function renderMap(map, mapEnemies, path) {
     });
 }
 
-// Function to render the path
-function renderPath(path) {
+// Function to render a path (Path1 or Path2)
+function renderPath(path, pathClass) {
     const gameMap = document.getElementById('gameMap');
+
+    // Clear previous rendering for the current path class
+    gameMap.querySelectorAll(`.grid-cell.${pathClass}`).forEach(cell => cell.remove());
 
     // Filter out any duplicate coordinates
     const uniquePath = path.filter((point, index, self) =>
@@ -159,7 +163,7 @@ function renderPath(path) {
 
     uniquePath.forEach((point) => {
         const cell = document.createElement('div');
-        cell.className = 'grid-cell path';  // Assign the path cell class
+        cell.className = `grid-cell ${pathClass}`;  // Apply the provided path class (path1 or path2)
         gameMap.appendChild(cell);
 
         // Set grid positions based on path coordinates
@@ -167,6 +171,10 @@ function renderPath(path) {
         cell.style.gridRowStart = point.y + 1;
     });
 }
+
+// Call renderPath for both paths with different classes
+renderPath(path1, "path1");  // Render Path1 with the "path1" class
+renderPath(path2, "path2");  // Render Path2 with the "path2" class
 
 // Start the connection to the server
 connection.start().catch(function (err) {
@@ -189,7 +197,7 @@ document.getElementById('gameMap').addEventListener('click', function (event) {
     if (towerX >= 0 && towerX + 2 < mapWidth && towerY >= 0 && towerY + 2 < mapHeight) {
         const roomCode = document.getElementById('roomCode').value;
         
-        // Check if any part of the tower overlaps with the path or other towers
+        // Check if any part of the tower overlaps with either path
         if (!isPathBlocked(towerX, towerY)) {
             connection.invoke("PlaceTower", roomCode, towerX, towerY, activeTowerCategory);
         } else {
@@ -200,11 +208,13 @@ document.getElementById('gameMap').addEventListener('click', function (event) {
     }
 });
 
-// Function to check if the 3x3 area overlaps with the path or existing towers
+// Function to check if the 3x3 area overlaps with either path or existing towers
 function isPathBlocked(towerX, towerY) {
-    // Check against path
-    for (let i = 0; i < path.length; i++) {
-        const pathPoint = path[i];
+    // Check against both paths
+    const allPaths = [...path1, ...path2];
+    
+    for (let i = 0; i < allPaths.length; i++) {
+        const pathPoint = allPaths[i];
         
         // Check if any of the 3x3 area around (towerX, towerY) intersects with the path
         for (let dx = 0; dx < 3; dx++) {
