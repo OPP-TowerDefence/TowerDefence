@@ -170,7 +170,6 @@ function renderMap(map, mapEnemies) {
 }
 
 function updateResources(resources) {
-    console.log(resources);
     const resourcesDisplay = document.getElementById('resourcesDisplay');
     resourcesDisplay.textContent = `Resources: ${resources}`;
 }
