@@ -21,6 +21,12 @@ public class GameHub(GameService gameService, Interfaces.ILogger logger) : Hub
 
             _logger.LogInfo($"New room created with code: {roomCode}.");
         }
+        else if (gameState.GameStarted)
+        {
+            await Clients.Caller.SendAsync("Game has already started.");
+
+            return;
+        }
 
         await Groups.AddToGroupAsync(Context.ConnectionId, roomCode);
 
@@ -76,6 +82,22 @@ public class GameHub(GameService gameService, Interfaces.ILogger logger) : Hub
         else
         {
             _logger.LogError($"Failed to place tower: room code {roomCode} does not exist.");
+        }
+    }
+
+    public async Task StartGame(string roomCode, string username)
+    {
+        if (_gameService.Rooms.TryGetValue(roomCode, out var gameState) && !gameState.GameStarted)
+        {
+            gameState.StartGame(Context.ConnectionId);
+
+            await Clients
+                .Group(roomCode)
+                .SendAsync("GameStarted", $"Game has been started by {username}!");
+        }
+        else
+        {
+            _logger.LogError($"Could not start game: room code {roomCode} does not exist or the game has already started.");
         }
     }
 }

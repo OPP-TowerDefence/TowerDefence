@@ -6,7 +6,7 @@ using TowerDefense.Utils;
 
 namespace TowerDefense.Services;
 public class GameService
-{
+{    
     private static readonly ConcurrentDictionary<string, GameState> _rooms = new();
     private readonly System.Timers.Timer _gameTickTimer;
     private readonly IHubContext<GameHub> _hubContext;
@@ -32,7 +32,7 @@ public class GameService
     {
         _timeSinceLastSpawn += 250;
 
-        foreach (var room in _rooms)
+        foreach (var room in _rooms.Where(r => r.Value.GameStarted))
         {
             var gameState = room.Value;
 
