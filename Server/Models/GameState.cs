@@ -58,7 +58,7 @@ public class GameState
     {
         _enemyFactory = RandomEnemyFactory();
 
-        Enemy enemy = _enemyFactory.CreateEnemy(0,0);
+        var enemy = _enemyFactory.CreateEnemy(0,0);
 
         Map.Enemies.Add(enemy);
     }
@@ -71,8 +71,7 @@ public class GameState
 
             if (enemy.HasReachedDestination())
             {
-                Map.Enemies.Remove(enemy);
-                enemy.TakeDamage(enemy.Health, _resourceManager);
+                DamageEnemy(enemy, enemy.Health);
             }
         }
     }
@@ -160,7 +159,7 @@ public class GameState
         {
             if (_availableTowerTypes.Count > 0)
             {
-                TowerTypes playerTowerType = _availableTowerTypes.First();
+                var playerTowerType = _availableTowerTypes.First();
 
                 var player = new Player(username, connectionId, playerTowerType, _hubContext);
 
@@ -168,6 +167,7 @@ public class GameState
                 _resourceManager.Attach(player);
 
                 _availableTowerTypes.Remove(playerTowerType);
+
 
                 Logger.Instance.LogInfo($"Player {username} joined the game.");
             }
@@ -206,5 +206,17 @@ public class GameState
                 TowerType = p.TowerType.ToString()
             })
             .ToList();
+    }
+
+    private void DamageEnemy(Enemy enemy, int damage)
+    {
+        enemy.TakeDamage(damage);
+
+        if (enemy.Health <= 0)
+        {
+            Map.Enemies.Remove(enemy);
+
+            _resourceManager.OnEnemyDeath(enemy);
+        }
     }
 }

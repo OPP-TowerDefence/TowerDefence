@@ -23,14 +23,6 @@ namespace TowerDefense.Models.Enemies
                 Y += Math.Min(Speed, TargetY - Y);
         }
 
-        public void TakeDamage(int damage, ResourceManager resourceManager)
-        {
-            Health -= damage;
-
-            if (Health <= 0)
-            {
-                resourceManager.OnEnemyDeath(this);
-            }
-        }
+        public void TakeDamage(int damage) => Health -= damage;
     }
 }
