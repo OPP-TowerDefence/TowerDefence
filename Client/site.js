@@ -19,6 +19,7 @@ async function joinRoom() {
         document.getElementById('loginForm').classList.add('hidden');
         document.getElementById('gameInterface').classList.remove('hidden');
         document.getElementById('resourcesDisplay').classList.remove('hidden');
+        document.getElementById('startButton').classList.remove('hidden');
 
         const roomInfo = document.getElementById('roomInfo');
         roomInfo.textContent = `Room: ${roomCode} | Username: ${username}`;
@@ -35,6 +36,13 @@ async function joinRoom() {
 
         clearMap();
     }
+}
+
+async function startGame(){
+    const roomCode = document.getElementById('roomCode').value;
+    const username = document.getElementById('username').value;
+
+    connection.invoke("StartGame", roomCode, username);
 }
 
 function clearMap() {
@@ -56,6 +64,32 @@ connection.on("InitializeMap", function (width, height, map, mapEnemies) {
 
     renderMap(map, mapEnemies);
 });
+
+connection.on("GameStarted", function (message) {
+    const messageList = document.getElementById('messagesList');
+    const listItem = document.createElement('li');
+    listItem.textContent = message;
+    messageList.appendChild(listItem);
+
+    document.getElementById('startButton').classList.add('hidden');
+
+    document.getElementById('gameMap').addEventListener('click', handleMapClick);
+});
+
+function handleMapClick(event) {
+    const bounds = event.target.getBoundingClientRect();
+    const x = event.clientX - bounds.left;
+    const y = event.clientY - bounds.top;
+    const gridX = Math.floor(x / 50);
+    const gridY = Math.floor(y / 50);
+
+    if (gridX >= 0 && gridX < mapWidth && gridY >= 0 && gridY < mapHeight) {
+        const roomCode = document.getElementById('roomCode').value;
+        connection.invoke("PlaceTower", roomCode, gridX, gridY, activeTowerCategory);
+    } else {
+        console.log('Tower placement is outside the grid boundaries.');
+    }
+}
 
 connection.on("UserJoined", function (username, players) {
     const messageList = document.getElementById('messagesList');
@@ -136,28 +170,12 @@ function renderMap(map, mapEnemies) {
 }
 
 function updateResources(resources) {
-    console.log(resources);
     const resourcesDisplay = document.getElementById('resourcesDisplay');
     resourcesDisplay.textContent = `Resources: ${resources}`;
 }
 
 connection.start().catch(function (err) {
     console.error(err.toString());
-});
-
-document.getElementById('gameMap').addEventListener('click', function (event) {
-    const bounds = event.target.getBoundingClientRect();
-    const x = event.clientX - bounds.left;
-    const y = event.clientY - bounds.top;
-    const gridX = Math.floor(x / 50);
-    const gridY = Math.floor(y / 50);
-
-    if (gridX >= 0 && gridX < mapWidth && gridY >= 0 && gridY < mapHeight) {
-        const roomCode = document.getElementById('roomCode').value;
-        connection.invoke("PlaceTower", roomCode, gridX, gridY, activeTowerCategory);
-    } else {
-        console.log('Tower placement is outside the grid boundaries.');
-    }
 });
 
 function selectTowerCategory(towerCategory) {

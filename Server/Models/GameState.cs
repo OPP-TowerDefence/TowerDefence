@@ -11,6 +11,8 @@ public class GameState
 {
     public Map Map { get; } = new Map(10, 10);
 
+    public bool GameStarted { get; private set; }
+
     private readonly List<TowerTypes> _availableTowerTypes;
     private readonly IHubContext<GameHub> _hubContext;
     private readonly List<Player> _players;
@@ -217,5 +219,15 @@ public class GameState
 
             _resourceManager.OnEnemyDeath(enemy);
         }
+    }
+
+    public void StartGame(string connectionId)
+    {
+        if (!_players.Any(p => string.Equals(p.ConnectionId, connectionId)))
+        {
+            throw new Exception($"Game could not be started. The user with connection ID {connectionId} is not in the game.");
+        }
+
+        GameStarted = true;
     }
 }
