@@ -1,162 +1,174 @@
-10/14/2024 8:52:20 PM: INFO: GameService initialized and game tick timer started.
-10/14/2024 8:52:22 PM: INFO: Player aa is attempting to join room adada.
-10/14/2024 8:52:22 PM: INFO: New room created with code: adada.
-10/14/2024 8:52:22 PM: INFO: Player aa joined the game. Tower type assigned: Flame.
-10/14/2024 8:52:22 PM: INFO: Player aa with connection ID Hx0oyvSE84JwUqpOMCkBCQ has joined room adada.
-10/14/2024 8:52:24 PM: INFO: Player aa queued a tower of category LongDistance at position (9,1).
-10/14/2024 8:52:24 PM: INFO: Player aa queued a tower of category LongDistance at position (8,1).
-10/14/2024 8:52:25 PM: INFO: Player aa queued a tower of category LongDistance at position (8,2).
-10/14/2024 8:52:25 PM: INFO: Player aa queued a tower of category LongDistance at position (9,2).
-10/14/2024 8:52:27 PM: INFO: Player aa queued a tower of category Heavy at position (9,0).
-10/14/2024 8:52:27 PM: INFO: Player aa queued a tower of category Heavy at position (8,0).
-10/14/2024 8:52:38 PM: INFO: Player aaa is attempting to join room adada.
-10/14/2024 8:52:38 PM: INFO: Player aaa joined the game. Tower type assigned: Ice.
-10/14/2024 8:52:38 PM: INFO: Player aaa with connection ID Gcz8VfITqGDQhSSSLYgCgw has joined room adada.
-10/14/2024 8:52:38 PM: INFO: Player aaa queued a tower of category LongDistance at position (9,4).
-10/14/2024 8:52:39 PM: INFO: Player aaa queued a tower of category LongDistance at position (9,3).
-10/14/2024 8:52:40 PM: INFO: Player aaa queued a tower of category Heavy at position (9,5).
-10/14/2024 8:52:40 PM: INFO: Player aaa queued a tower of category Heavy at position (8,5).
-10/14/2024 8:52:40 PM: INFO: Player aaa queued a tower of category Heavy at position (8,4).
-10/14/2024 8:52:42 PM: INFO: Player aaa queued a tower of category LongDistance at position (9,6).
-10/14/2024 8:52:42 PM: INFO: Player aaa queued a tower of category LongDistance at position (8,6).
-10/14/2024 8:52:42 PM: INFO: Player aaa queued a tower of category LongDistance at position (8,7).
-10/14/2024 8:52:43 PM: INFO: Player aaa queued a tower of category LongDistance at position (9,7).
-10/14/2024 8:52:44 PM: INFO: Player aaa queued a tower of category Heavy at position (9,8).
-10/14/2024 8:52:46 PM: INFO: Player aaa queued a tower of category Heavy at position (9,9).
-10/14/2024 8:52:47 PM: INFO: Player aaa queued a tower of category LongDistance at position (0,9).
-10/14/2024 8:52:47 PM: INFO: Player aaa queued a tower of category LongDistance at position (0,8).
-10/14/2024 8:52:54 PM: INFO: Player aaa is attempting to join room adada.
-10/14/2024 8:52:54 PM: INFO: Player aaa joined the game. Tower type assigned: Laser.
-10/14/2024 8:52:54 PM: INFO: Player aaa with connection ID 7hejwYmuYjboP3w07WlYUQ has joined room adada.
-10/14/2024 8:52:55 PM: INFO: Player aaa queued a tower of category LongDistance at position (0,0).
-10/14/2024 8:52:56 PM: INFO: Player aaa queued a tower of category Heavy at position (0,1).
-10/14/2024 8:52:57 PM: INFO: Player aaa queued a tower of category Heavy at position (0,2).
-10/14/2024 8:52:58 PM: INFO: Player aaa queued a tower of category LongDistance at position (0,3).
-10/14/2024 8:52:59 PM: INFO: Player aaa queued a tower of category LongDistance at position (0,4).
-10/14/2024 8:53:01 PM: INFO: Player aa queued a tower of category LongDistance at position (1,0).
-10/14/2024 8:53:02 PM: INFO: Player aa queued a tower of category Heavy at position (1,1).
-10/14/2024 8:53:06 PM: INFO: Player aaa queued a tower of category LongDistance at position (0,7).
-10/14/2024 8:53:08 PM: INFO: Player aaa queued a tower of category Heavy at position (1,9).
-10/14/2024 8:53:09 PM: INFO: Player aaa left the game.
-10/14/2024 8:53:09 PM: INFO: Player aaa left room adada.
-10/14/2024 8:53:10 PM: INFO: Player aa left the game.
-10/14/2024 8:53:10 PM: INFO: Player aa left room adada.
-10/14/2024 8:53:10 PM: INFO: Player aaa left the game.
-10/14/2024 8:53:10 PM: INFO: Player aaa left room adada.
-10/14/2024 8:54:49 PM: INFO: GameService initialized and game tick timer started.
-10/14/2024 8:54:50 PM: INFO: Player aa is attempting to join room a.
-10/14/2024 8:54:50 PM: INFO: New room created with code: a.
-10/14/2024 8:54:50 PM: INFO: Player aa joined the game. Tower type assigned: Flame.
-10/14/2024 8:54:50 PM: INFO: Player aa with connection ID sCuoj27UrHXPsWmlUQYHlg has joined room a.
-10/14/2024 8:54:51 PM: INFO: Player aa queued a tower of category LongDistance at position (9,2).
-10/14/2024 8:54:51 PM: INFO: Player aa queued a tower of category LongDistance at position (9,3).
-10/14/2024 8:54:52 PM: INFO: Player aa queued a tower of category Heavy at position (9,4).
-10/14/2024 8:54:52 PM: INFO: Player aa queued a tower of category Heavy at position (9,1).
-10/14/2024 8:54:56 PM: INFO: Player aa is attempting to join room a.
-10/14/2024 8:54:56 PM: INFO: Player aa joined the game. Tower type assigned: Ice.
-10/14/2024 8:54:56 PM: INFO: Player aa with connection ID A06N8wDI9n6T_U44A80L_g has joined room a.
-10/14/2024 8:54:57 PM: INFO: Player aa queued a tower of category LongDistance at position (0,0).
-10/14/2024 8:54:58 PM: INFO: Player aa queued a tower of category LongDistance at position (0,1).
-10/14/2024 8:54:59 PM: INFO: Player aa queued a tower of category Heavy at position (0,2).
-10/14/2024 8:54:59 PM: INFO: Player aa queued a tower of category Heavy at position (0,3).
-10/14/2024 8:55:05 PM: INFO: Player aa is attempting to join room a.
-10/14/2024 8:55:05 PM: INFO: Player aa joined the game. Tower type assigned: Laser.
-10/14/2024 8:55:05 PM: INFO: Player aa with connection ID 7QZrDdALJXx8zYxekrunYw has joined room a.
-10/14/2024 8:55:06 PM: INFO: Player aa queued a tower of category LongDistance at position (9,5).
-10/14/2024 8:55:06 PM: INFO: Player aa queued a tower of category LongDistance at position (9,6).
-10/14/2024 8:55:07 PM: INFO: Player aa queued a tower of category Heavy at position (9,7).
-10/14/2024 8:55:08 PM: INFO: Player aa queued a tower of category Heavy at position (8,7).
-10/14/2024 8:55:13 PM: INFO: Player aa left the game.
-10/14/2024 8:55:13 PM: INFO: Player aa left room a.
-10/14/2024 8:55:14 PM: INFO: Player aa left the game.
-10/14/2024 8:55:14 PM: INFO: Player aa left room a.
-10/14/2024 8:55:14 PM: INFO: Player aa left the game.
-10/14/2024 8:55:14 PM: INFO: Player aa left room a.
-10/14/2024 10:42:26 PM: INFO: GameService initialized and game tick timer started.
-10/14/2024 10:42:27 PM: INFO: Player aaa is attempting to join room adad.
-10/14/2024 10:42:27 PM: INFO: New room created with code: adad.
-10/14/2024 10:42:27 PM: INFO: Player aaa joined the game. Tower type assigned: Flame.
-10/14/2024 10:42:27 PM: INFO: Player aaa with connection ID 2XhvSNR54SlxgNu6E9JQ2A has joined room adad.
-10/14/2024 10:42:29 PM: INFO: Player aaa queued a tower of category LongDistance at position (9,0).
-10/14/2024 10:42:30 PM: INFO: Player aaa queued a tower of category LongDistance at position (9,1).
-10/14/2024 10:42:30 PM: INFO: Player aaa queued a tower of category LongDistance at position (8,0).
-10/14/2024 10:42:31 PM: INFO: Player aaa queued a tower of category Heavy at position (9,2).
-10/14/2024 10:42:32 PM: INFO: Player aaa queued a tower of category Heavy at position (8,2).
-10/14/2024 10:42:32 PM: INFO: Player aaa queued a tower of category Heavy at position (8,1).
-10/14/2024 10:42:40 PM: INFO: Player asdads is attempting to join room adad.
-10/14/2024 10:42:40 PM: INFO: Player asdads joined the game. Tower type assigned: Ice.
-10/14/2024 10:42:40 PM: INFO: Player asdads with connection ID EomGSaXjisbzDtAQOL-pbQ has joined room adad.
-10/14/2024 10:42:40 PM: INFO: Player asdads queued a tower of category LongDistance at position (9,3).
-10/14/2024 10:42:41 PM: INFO: Player asdads queued a tower of category LongDistance at position (8,3).
-10/14/2024 10:42:42 PM: INFO: Player asdads queued a tower of category Heavy at position (8,5).
-10/14/2024 10:42:42 PM: INFO: Player asdads queued a tower of category Heavy at position (9,4).
-10/14/2024 10:42:47 PM: INFO: Player aaa is attempting to join room adad.
-10/14/2024 10:42:47 PM: INFO: Player aaa joined the game. Tower type assigned: Laser.
-10/14/2024 10:42:47 PM: INFO: Player aaa with connection ID Du6KWKspUlewfJGKleSpAA has joined room adad.
-10/14/2024 10:42:48 PM: INFO: Player aaa queued a tower of category LongDistance at position (7,0).
-10/14/2024 10:42:48 PM: INFO: Player aaa queued a tower of category LongDistance at position (6,0).
-10/14/2024 10:42:49 PM: INFO: Player aaa queued a tower of category Heavy at position (5,0).
-10/14/2024 10:42:49 PM: INFO: Player aaa queued a tower of category Heavy at position (4,0).
-10/14/2024 10:42:51 PM: INFO: Player aaa left the game.
-10/14/2024 10:42:51 PM: INFO: Player aaa left room adad.
-10/14/2024 10:42:52 PM: INFO: Player asdads left the game.
-10/14/2024 10:42:52 PM: INFO: Player asdads left room adad.
-10/14/2024 10:42:52 PM: INFO: Player aaa left the game.
-10/14/2024 10:42:52 PM: INFO: Player aaa left room adad.
-10/15/2024 7:35:53 PM: INFO: GameService initialized and game tick timer started.
-10/15/2024 7:36:05 PM: INFO: Player vvv is attempting to join room aaa.
-10/15/2024 7:36:05 PM: INFO: New room created with code: aaa.
-10/15/2024 7:36:05 PM: INFO: Player vvv joined the game. Tower type assigned: Flame.
-10/15/2024 7:36:05 PM: INFO: Player vvv with connection ID XTirQlLav7m5wkncG7ro9Q has joined room aaa.
-10/15/2024 7:36:07 PM: INFO: Player vvv queued a tower of category LongDistance at position (9,2).
-10/15/2024 7:36:07 PM: INFO: Player vvv queued a tower of category LongDistance at position (7,0).
-10/15/2024 7:36:08 PM: INFO: Player vvv queued a tower of category LongDistance at position (6,2).
-10/15/2024 7:36:09 PM: INFO: Player vvv queued a tower of category Heavy at position (8,6).
-10/15/2024 7:36:09 PM: INFO: Player vvv queued a tower of category Heavy at position (4,5).
-10/15/2024 7:36:10 PM: INFO: Player vvv queued a tower of category Heavy at position (4,4).
-10/15/2024 7:40:54 PM: INFO: GameService initialized and game tick timer started.
-10/15/2024 7:40:57 PM: INFO: Player ccc is attempting to join room aaaa.
-10/15/2024 7:40:57 PM: INFO: New room created with code: aaaa.
-10/15/2024 7:40:57 PM: INFO: Player ccc joined the game. Tower type assigned: Flame.
-10/15/2024 7:40:57 PM: INFO: Player ccc with connection ID fyGzVNcn9VCROt58N77fug has joined room aaaa.
-10/15/2024 7:40:58 PM: INFO: Player ccc queued a tower of category Heavy at position (8,6).
-10/15/2024 7:40:58 PM: INFO: Player ccc queued a tower of category Heavy at position (3,5).
-10/15/2024 7:40:59 PM: INFO: Player ccc queued a tower of category Heavy at position (5,2).
-10/15/2024 7:40:59 PM: INFO: Player ccc queued a tower of category Heavy at position (8,2).
-10/15/2024 7:59:09 PM: INFO: GameService initialized and game tick timer started.
-10/15/2024 7:59:12 PM: INFO: Player vvv is attempting to join room aaa.
-10/15/2024 7:59:12 PM: INFO: New room created with code: aaa.
-10/15/2024 7:59:12 PM: INFO: Player vvv joined the game. Tower type assigned: Flame.
-10/15/2024 7:59:12 PM: INFO: Player vvv with connection ID GhbqNk1l-HhhSJT2ZRWmRQ has joined room aaa.
-10/15/2024 7:59:13 PM: INFO: Player vvv queued a tower of category LongDistance at position (5,3).
-10/15/2024 7:59:16 PM: INFO: Player vvv queued a tower of category LongDistance at position (4,4).
-10/15/2024 7:59:16 PM: INFO: Player vvv queued a tower of category LongDistance at position (3,6).
-10/15/2024 7:59:17 PM: INFO: Player vvv queued a tower of category LongDistance at position (5,7).
-10/15/2024 7:59:17 PM: INFO: Player vvv queued a tower of category LongDistance at position (7,5).
-10/15/2024 7:59:17 PM: INFO: Player vvv queued a tower of category LongDistance at position (9,3).
-10/15/2024 7:59:19 PM: INFO: Player vvv queued a tower of category LongDistance at position (7,1).
-10/15/2024 8:00:03 PM: INFO: Player ccc joined the game. Tower type assigned: Flame.
-10/15/2024 8:00:11 PM: INFO: Player ccc queued a tower of category LongDistance at position (6,4).
-10/15/2024 8:00:12 PM: INFO: Player ccc queued a tower of category LongDistance at position (8,6).
-10/15/2024 8:00:12 PM: INFO: Player ccc queued a tower of category LongDistance at position (7,7).
-10/15/2024 8:00:13 PM: INFO: Player ccc queued a tower of category LongDistance at position (4,7).
-10/15/2024 8:00:13 PM: INFO: Player ccc queued a tower of category LongDistance at position (2,5).
-10/15/2024 8:00:13 PM: INFO: Player ccc queued a tower of category LongDistance at position (2,3).
-10/15/2024 8:00:13 PM: INFO: Player ccc queued a tower of category LongDistance at position (7,1).
-10/15/2024 8:00:14 PM: INFO: Player ccc queued a tower of category LongDistance at position (8,1).
-10/15/2024 8:00:14 PM: INFO: Player ccc queued a tower of category LongDistance at position (4,2).
-10/15/2024 8:00:15 PM: INFO: Player ccc queued a tower of category Heavy at position (6,5).
-10/15/2024 8:00:16 PM: INFO: Player ccc queued a tower of category Heavy at position (0,1).
-10/15/2024 8:00:16 PM: INFO: Player ccc queued a tower of category Heavy at position (3,6).
-10/15/2024 8:00:17 PM: INFO: Player ccc queued a tower of category Heavy at position (4,4).
-10/15/2024 8:00:17 PM: INFO: Player ccc queued a tower of category Heavy at position (6,3).
-10/15/2024 8:00:18 PM: INFO: Player ccc queued a tower of category Heavy at position (8,3).
-10/15/2024 8:00:18 PM: INFO: Player ccc queued a tower of category Heavy at position (9,2).
-10/15/2024 8:15:58 PM: INFO: GameService initialized and game tick timer started.
-10/15/2024 8:16:00 PM: INFO: Player vvv is attempting to join room aaa.
-10/15/2024 8:16:00 PM: INFO: New room created with code: aaa.
-10/15/2024 8:16:00 PM: INFO: vvv has received Flame towers
-10/15/2024 8:16:00 PM: INFO: Player vvv joined the game. Tower type assigned: Flame.
-10/15/2024 8:16:00 PM: INFO: Player vvv with connection ID HJxebdiSxee-cOn3Uw1cZQ has joined room aaa.
-10/15/2024 8:16:32 PM: INFO: Player vvv queued a tower of category Heavy at position (8,7).
-10/15/2024 8:16:33 PM: INFO: Player vvv queued a tower of category Heavy at position (6,6).
+2024-10-21 20:54:19: INFO: GameService initialized and game tick timer started.
+2024-10-21 20:54:22: INFO: Player asd is attempting to join room asd.
+2024-10-21 20:54:22: INFO: New room created with code: asd.
+2024-10-21 20:54:22: INFO: asd has received Flame towers
+2024-10-21 20:54:22: INFO: Player asd joined the game.
+2024-10-21 20:54:22: INFO: Player asd with connection ID 8FJF9p6C8XC2ps0_wfrr3w has joined room asd.
+2024-10-21 20:56:45: INFO: Player asd left the game.
+2024-10-21 20:56:45: INFO: Player asd left room asd.
+2024-10-21 20:56:46: INFO: Player t is attempting to join room t.
+2024-10-21 20:56:46: INFO: New room created with code: t.
+2024-10-21 20:56:46: INFO: t has received Flame towers
+2024-10-21 20:56:46: INFO: Player t joined the game.
+2024-10-21 20:56:46: INFO: Player t with connection ID YNs5uMdmMaIgEtv57cIo7Q has joined room t.
+2024-10-21 20:56:48: INFO: Player t left the game.
+2024-10-21 20:56:48: INFO: Player t left room t.
+2024-10-21 20:56:55: INFO: Player asd is attempting to join room asd.
+2024-10-21 20:57:03: INFO: Player asd is attempting to join room asd.
+2024-10-21 20:57:17: INFO: Player asd is attempting to join room asd.
+2024-10-21 20:57:39: INFO: Player t is attempting to join room t.
+2024-10-21 20:57:39: INFO: t has received Ice towers
+2024-10-21 20:57:39: INFO: Player t joined the game.
+2024-10-21 20:57:39: INFO: Player t with connection ID u5GGWpBRkFJc-NxwkwjsAA has joined room t.
+2024-10-21 20:57:41: INFO: Player t left the game.
+2024-10-21 20:57:41: INFO: Player t left room t.
+2024-10-21 20:57:43: INFO: Player t is attempting to join room t.
+2024-10-21 20:57:43: INFO: t has received Laser towers
+2024-10-21 20:57:43: INFO: Player t joined the game.
+2024-10-21 20:57:43: INFO: Player t with connection ID -u8cyL9TUoD__9kT5b9xyQ has joined room t.
+2024-10-21 20:59:33: INFO: Player asd is attempting to join room asd.
+2024-10-21 20:59:37: INFO: Player tt is attempting to join room asd.
+2024-10-21 20:59:41: INFO: Player a is attempting to join room tasdasdas.
+2024-10-21 20:59:41: INFO: New room created with code: tasdasdas.
+2024-10-21 20:59:41: INFO: a has received Flame towers
+2024-10-21 20:59:41: INFO: Player a joined the game.
+2024-10-21 20:59:41: INFO: Player a with connection ID NQtXxPQbDr3BHmyCMkP3Fg has joined room tasdasdas.
+2024-10-21 21:00:23: INFO: Player a left the game.
+2024-10-21 21:00:23: INFO: Player a left room tasdasdas.
+2024-10-21 21:00:27: INFO: Player grr is attempting to join room grr.
+2024-10-21 21:00:27: INFO: New room created with code: grr.
+2024-10-21 21:00:27: INFO: grr has received Flame towers
+2024-10-21 21:00:27: INFO: Player grr joined the game.
+2024-10-21 21:00:27: INFO: Player grr with connection ID nBpfEb62ozjN2Q8gwW0izQ has joined room grr.
+2024-10-21 21:01:03: INFO: GameService initialized and game tick timer started.
+2024-10-21 21:01:05: INFO: Player tss is attempting to join room tss.
+2024-10-21 21:01:05: INFO: New room created with code: tss.
+2024-10-21 21:01:05: INFO: tss has received Flame towers
+2024-10-21 21:01:05: INFO: Player tss joined the game.
+2024-10-21 21:01:05: INFO: Player tss with connection ID 1nCU9dEqLWuUbW8jkulXtg has joined room tss.
+2024-10-21 21:01:25: INFO: Player tss left the game.
+2024-10-21 21:01:25: INFO: Player tss left room tss.
+2024-10-21 21:01:27: INFO: Player asd is attempting to join room asd.
+2024-10-21 21:01:27: INFO: New room created with code: asd.
+2024-10-21 21:01:27: INFO: asd has received Flame towers
+2024-10-21 21:01:27: INFO: Player asd joined the game.
+2024-10-21 21:01:27: INFO: Player asd with connection ID dol-WivOY9qFlcuUuyOO0Q has joined room asd.
+2024-10-21 21:01:33: INFO: Player asd left the game.
+2024-10-21 21:01:33: INFO: Player asd left room asd.
+2024-10-21 21:01:37: INFO: Player trrrrrrrr is attempting to join room trrrrrrrr.
+2024-10-21 21:01:37: INFO: New room created with code: trrrrrrrr.
+2024-10-21 21:01:37: INFO: trrrrrrrr has received Flame towers
+2024-10-21 21:01:37: INFO: Player trrrrrrrr joined the game.
+2024-10-21 21:01:37: INFO: Player trrrrrrrr with connection ID RYl_X5COy64MTDpXVjehLA has joined room trrrrrrrr.
+2024-10-21 21:02:01: INFO: Player trrrrrrrr left the game.
+2024-10-21 21:02:01: INFO: Player trrrrrrrr left room trrrrrrrr.
+2024-10-21 21:02:03: INFO: Player statata is attempting to join room statata.
+2024-10-21 21:02:03: INFO: New room created with code: statata.
+2024-10-21 21:02:03: INFO: statata has received Flame towers
+2024-10-21 21:02:03: INFO: Player statata joined the game.
+2024-10-21 21:02:03: INFO: Player statata with connection ID WSFbiPreQ1WCtgFWIFB_bg has joined room statata.
+2024-10-21 21:03:42: INFO: GameService initialized and game tick timer started.
+2024-10-21 21:03:44: INFO: Player asd is attempting to join room asd.
+2024-10-21 21:03:44: INFO: New room created with code: asd.
+2024-10-21 21:03:44: INFO: asd has received Flame towers
+2024-10-21 21:03:44: INFO: Player asd joined the game.
+2024-10-21 21:03:44: INFO: Player asd with connection ID kgDQG5MAXuMoSM5hGzAGxA has joined room asd.
+2024-10-21 21:06:16: INFO: Player asd left the game.
+2024-10-21 21:06:16: INFO: Player asd left room asd.
+2024-10-21 21:06:19: INFO: Player tsss is attempting to join room tsss.
+2024-10-21 21:06:19: INFO: New room created with code: tsss.
+2024-10-21 21:06:19: INFO: tsss has received Flame towers
+2024-10-21 21:06:19: INFO: Player tsss joined the game.
+2024-10-21 21:06:19: INFO: Player tsss with connection ID E4iZu1xBa64G070xpEVUXg has joined room tsss.
+2024-10-21 21:08:38: INFO: Player tsss left the game.
+2024-10-21 21:08:38: INFO: Player tsss left room tsss.
+2024-10-21 21:08:42: INFO: Player t is attempting to join room aadasdasdasd.
+2024-10-21 21:08:42: INFO: New room created with code: aadasdasdasd.
+2024-10-21 21:08:42: INFO: t has received Flame towers
+2024-10-21 21:08:42: INFO: Player t joined the game.
+2024-10-21 21:08:42: INFO: Player t with connection ID 8_x9PR3V2JrMwvjBi1fSPg has joined room aadasdasdasd.
+2024-10-21 21:08:47: INFO: Player t queued a tower of category LongDistance at position (3,6).
+2024-10-21 21:08:53: INFO: Player t queued a tower of category LongDistance at position (4,2).
+2024-10-21 21:08:54: ERROR: Could not start game: room code aadasdasdasd does not exist or the game has already started.
+2024-10-21 21:08:55: ERROR: Could not start game: room code aadasdasdasd does not exist or the game has already started.
+2024-10-21 21:08:55: ERROR: Could not start game: room code aadasdasdasd does not exist or the game has already started.
+2024-10-21 21:08:55: ERROR: Could not start game: room code aadasdasdasd does not exist or the game has already started.
+2024-10-21 21:08:56: ERROR: Could not start game: room code aadasdasdasd does not exist or the game has already started.
+2024-10-21 21:08:58: INFO: Player t left the game.
+2024-10-21 21:08:58: INFO: Player t left room aadasdasdasd.
+2024-10-21 21:09:00: INFO: Player asd is attempting to join room asd.
+2024-10-21 21:09:10: INFO: Player asd is attempting to join room aaaaaaaaaaaaaaa.
+2024-10-21 21:09:10: INFO: New room created with code: aaaaaaaaaaaaaaa.
+2024-10-21 21:09:10: INFO: asd has received Flame towers
+2024-10-21 21:09:10: INFO: Player asd joined the game.
+2024-10-21 21:09:10: INFO: Player asd with connection ID KCT29uoSpmNOMXGKN43bzw has joined room aaaaaaaaaaaaaaa.
+2024-10-21 21:10:38: INFO: GameService initialized and game tick timer started.
+2024-10-21 21:10:41: INFO: Player test is attempting to join room test.
+2024-10-21 21:10:41: INFO: New room created with code: test.
+2024-10-21 21:10:41: INFO: test has received Flame towers
+2024-10-21 21:10:41: INFO: Player test joined the game.
+2024-10-21 21:10:41: INFO: Player test with connection ID OHi37rzajfbBENQefi6qTA has joined room test.
+2024-10-21 21:11:19: INFO: GameService initialized and game tick timer started.
+2024-10-21 21:11:23: INFO: Player bas is attempting to join room bas.
+2024-10-21 21:11:23: INFO: New room created with code: bas.
+2024-10-21 21:11:23: INFO: bas has received Flame towers
+2024-10-21 21:11:23: INFO: Player bas joined the game.
+2024-10-21 21:11:23: INFO: Player bas with connection ID EZM1LjkTA5QYWRHyICFHeA has joined room bas.
+2024-10-21 21:11:42: INFO: Player bas queued a tower of category LongDistance at position (1,6).
+2024-10-21 21:11:44: INFO: Player bas queued a tower of category Heavy at position (8,5).
+2024-10-21 21:11:56: INFO: Player bas left the game.
+2024-10-21 21:11:56: INFO: Player bas left room bas.
+2024-10-21 21:12:00: INFO: Player asd is attempting to join room asd.
+2024-10-21 21:12:00: INFO: New room created with code: asd.
+2024-10-21 21:12:00: INFO: asd has received Flame towers
+2024-10-21 21:12:00: INFO: Player asd joined the game.
+2024-10-21 21:12:00: INFO: Player asd with connection ID qDXGRUqIR4TzLNOzl_xzqA has joined room asd.
+2024-10-21 21:12:14: INFO: Player asd left the game.
+2024-10-21 21:12:14: INFO: Player asd left room asd.
+2024-10-21 21:12:45: INFO: Player asd is attempting to join room asd.
+2024-10-21 21:12:45: INFO: asd has received Ice towers
+2024-10-21 21:12:45: INFO: Player asd joined the game.
+2024-10-21 21:12:45: INFO: Player asd with connection ID jj9luD7DiFtr8bfJ4Q2PYg has joined room asd.
+2024-10-21 21:12:56: INFO: Player asd left the game.
+2024-10-21 21:12:56: INFO: Player asd left room asd.
+2024-10-21 21:12:58: INFO: Player gg is attempting to join room gggggggg.
+2024-10-21 21:12:58: INFO: New room created with code: gggggggg.
+2024-10-21 21:12:58: INFO: gg has received Flame towers
+2024-10-21 21:12:58: INFO: Player gg joined the game.
+2024-10-21 21:12:58: INFO: Player gg with connection ID EN-_zSXiVKMiWVAGF2y5Rg has joined room gggggggg.
+2024-10-21 21:13:17: INFO: Player gg left the game.
+2024-10-21 21:13:17: INFO: Player gg left room gggggggg.
+2024-10-21 21:13:47: INFO: GameService initialized and game tick timer started.
+2024-10-21 21:13:48: INFO: Player asd is attempting to join room asd.
+2024-10-21 21:13:48: INFO: New room created with code: asd.
+2024-10-21 21:13:48: INFO: asd has received Flame towers
+2024-10-21 21:13:48: INFO: Player asd joined the game.
+2024-10-21 21:13:48: INFO: Player asd with connection ID xQBv1TTj3c5acHEVXLEwCg has joined room asd.
+2024-10-21 21:13:55: INFO: Player test is attempting to join room asd.
+2024-10-21 21:13:55: INFO: test has received Ice towers
+2024-10-21 21:13:55: INFO: Player test joined the game.
+2024-10-21 21:13:55: INFO: Player test with connection ID -CuC8xbGG0PYlYO2TLVPvA has joined room asd.
+2024-10-21 21:15:19: INFO: GameService initialized and game tick timer started.
+2024-10-21 21:15:23: INFO: Player test is attempting to join room asd.
+2024-10-21 21:15:23: INFO: New room created with code: asd.
+2024-10-21 21:15:23: INFO: test has received Flame towers
+2024-10-21 21:15:23: INFO: Player test joined the game.
+2024-10-21 21:15:23: INFO: Player test with connection ID 3Ud4fj5WAs1T418qFycXnA has joined room asd.
+2024-10-21 21:15:30: INFO: Player test2 is attempting to join room asd.
+2024-10-21 21:15:30: INFO: test2 has received Ice towers
+2024-10-21 21:15:30: INFO: Player test2 joined the game.
+2024-10-21 21:15:30: INFO: Player test2 with connection ID aJfBOSuwda0ArOvzEbo1wA has joined room asd.
+2024-10-21 21:15:37: INFO: Player test2 left the game.
+2024-10-21 21:15:37: INFO: Player test2 left room asd.
+2024-10-21 21:15:38: INFO: Player test left the game.
+2024-10-21 21:15:38: INFO: Player test left room asd.
+2024-10-21 21:16:20: INFO: GameService initialized and game tick timer started.
+2024-10-21 21:16:24: INFO: Player test is attempting to join room test.
+2024-10-21 21:16:24: INFO: New room created with code: test.
+2024-10-21 21:16:24: INFO: test has received Flame towers
+2024-10-21 21:16:24: INFO: Player test joined the game.
+2024-10-21 21:16:24: INFO: Player test with connection ID EbNXDGKowF1-jgvhG3c_lg has joined room test.
+2024-10-21 21:16:33: INFO: Player test4 is attempting to join room test.
+2024-10-21 21:16:33: INFO: test4 has received Ice towers
+2024-10-21 21:16:33: INFO: Player test4 joined the game.
+2024-10-21 21:16:33: INFO: Player test4 with connection ID FNUMNzCMEj19zYokS-9ovQ has joined room test.

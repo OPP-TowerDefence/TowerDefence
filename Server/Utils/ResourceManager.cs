@@ -6,19 +6,8 @@ namespace TowerDefense.Utils
     public class ResourceManager
     {
         private readonly List<IResourceObserver> _observers = [];
+
         private int _resources;
-
-
-        public int Resources
-        {
-            get => _resources;
-
-            private set
-            {
-                _resources = value;
-                NotifyResourceChanged();
-            }
-        }
 
         public void Attach(IResourceObserver observer)
         {
@@ -32,7 +21,7 @@ namespace TowerDefense.Utils
 
         public void OnEnemyDeath(Enemy enemy)
         {
-            Resources += enemy.RewardValue;
+            _resources += enemy.RewardValue;
 
             NotifyResourceChanged();
         }
