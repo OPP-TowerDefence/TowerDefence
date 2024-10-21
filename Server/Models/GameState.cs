@@ -58,7 +58,7 @@ public class GameState
     {
         _enemyFactory = RandomEnemyFactory();
 
-        var enemy = _enemyFactory.CreateEnemy(0,0);
+        var enemy = _enemyFactory.CreateEnemy(0, 0);
 
         Map.Enemies.Add(enemy);
     }
@@ -167,7 +167,6 @@ public class GameState
                 _resourceManager.Attach(player);
 
                 _availableTowerTypes.Remove(playerTowerType);
-
 
                 Logger.Instance.LogInfo($"Player {username} joined the game.");
             }
