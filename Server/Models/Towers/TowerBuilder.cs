@@ -12,9 +12,9 @@ namespace TowerDefense.Models.Towers
             _category = category;
         }
 
-        public abstract void BuildBase(int x, int y);
-        public abstract void AddWeapon();
-        public abstract void AddArmor();
+        public abstract TowerBuilder BuildBase(int x, int y);
+        public abstract TowerBuilder AddWeapon();
+        public abstract TowerBuilder AddArmor();
         public abstract Tower GetResult();
     }
 }

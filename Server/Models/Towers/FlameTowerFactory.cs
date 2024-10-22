@@ -9,22 +9,14 @@ namespace TowerDefense.Models.Towers
         {
             //return new HeavyFlameTower(x, y); 
 
-            var builder = new FlameTowerBuilder(TowerCategories.Heavy); 
-            builder.BuildBase(x, y);
-            builder.AddWeapon(); 
-            builder.AddArmor(); 
-            return builder.GetResult(); 
+            return new FlameTowerBuilder(TowerCategories.Heavy).BuildBase(x, y).AddWeapon().AddArmor().GetResult();       
         }
 
         public Tower CreateLongDistanceTower(int x, int y)
         {
-            //return new LongDistanceFlameTower(x, y);
+            //return new HeavyFlameTower(x, y); 
 
-            var builder = new FlameTowerBuilder(TowerCategories.LongDistance);
-            builder.BuildBase(x, y);
-            builder.AddWeapon();
-            builder.AddArmor();
-            return builder.GetResult();
+            return new FlameTowerBuilder(TowerCategories.LongDistance).BuildBase(x, y).AddWeapon().AddArmor().GetResult();
         }
     }
 }
