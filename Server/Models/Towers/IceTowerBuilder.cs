@@ -10,7 +10,7 @@ namespace TowerDefense.Models.Towers
         {
         }
 
-        public override void BuildBase(int x, int y)
+        public override IceTowerBuilder BuildBase(int x, int y)
         {
             if (_category == TowerCategories.Heavy)
             {
@@ -20,9 +20,10 @@ namespace TowerDefense.Models.Towers
             {
                 _tower = new LongDistanceIceTower(x, y);
             }
+            return this;
         }
 
-        public override void AddWeapon()
+        public override IceTowerBuilder AddWeapon()
         {
             if (_category == TowerCategories.Heavy)
             {
@@ -32,9 +33,10 @@ namespace TowerDefense.Models.Towers
             {
                 _tower.Weapon = new Weapon("Ice Gun", 5, 10, 5);
             }
+            return this;
         }
 
-        public override void AddArmor()
+        public override IceTowerBuilder AddArmor()
         {
             if (_category == TowerCategories.Heavy)
             {
@@ -44,6 +46,7 @@ namespace TowerDefense.Models.Towers
             {
                 _tower.Armor = new Armor("Ice Barrier", 10);
             }
+            return this;
         }
 
         public override Tower GetResult()

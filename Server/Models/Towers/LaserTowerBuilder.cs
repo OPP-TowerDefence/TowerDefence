@@ -11,7 +11,7 @@ namespace TowerDefense.Models.Towers
         {
         }
 
-        public override void BuildBase(int x, int y)
+        public override LaserTowerBuilder BuildBase(int x, int y)
         {
             if (_category == TowerCategories.Heavy)
             {
@@ -21,9 +21,10 @@ namespace TowerDefense.Models.Towers
             {
                 _tower = new LongDistanceLaserTower(x, y);
             }
+            return this;
         }
 
-        public override void AddWeapon()
+        public override LaserTowerBuilder AddWeapon()
         {
             if (_category == TowerCategories.Heavy)
             {
@@ -33,9 +34,10 @@ namespace TowerDefense.Models.Towers
             {
                 _tower.Weapon = new Weapon("Laser Blaster", 1, 10, 10);
             }
+            return this;
         }
 
-        public override void AddArmor()
+        public override LaserTowerBuilder AddArmor()
         {
 
             if (_category == TowerCategories.Heavy)
@@ -46,6 +48,7 @@ namespace TowerDefense.Models.Towers
             {
                 _tower.Armor = new Armor("Laser Shield", 7);
             }
+            return this;
         }
 
         public override Tower GetResult()

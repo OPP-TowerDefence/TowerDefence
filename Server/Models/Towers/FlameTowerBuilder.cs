@@ -10,7 +10,7 @@ namespace TowerDefense.Models.Towers
         {
         }
 
-        public override void BuildBase(int x, int y)
+        public override FlameTowerBuilder BuildBase(int x, int y)
         {
             if (_category == TowerCategories.Heavy)
             {
@@ -20,9 +20,10 @@ namespace TowerDefense.Models.Towers
             {
                 _tower = new LongDistanceFlameTower(x, y);
             }
+            return this;
         }
 
-        public override void AddWeapon()
+        public override FlameTowerBuilder AddWeapon()
         {
             if (_category == TowerCategories.Heavy)
             {
@@ -32,9 +33,10 @@ namespace TowerDefense.Models.Towers
             {
                 _tower.Weapon = new Weapon("Flame Gun", 3, 10, 7);
             }
+            return this;
         }
 
-        public override void AddArmor()
+        public override FlameTowerBuilder AddArmor()
         {
             if (_category == TowerCategories.Heavy)
             {
@@ -44,6 +46,7 @@ namespace TowerDefense.Models.Towers
             {
                 _tower.Armor = new Armor("Heat Shield", 5);
             }
+            return this;
         }
 
         public override Tower GetResult()
