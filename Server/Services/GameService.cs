@@ -43,10 +43,10 @@ public class GameService
                 if (_timeSinceLastSpawn >= SpawnInterval)
                 {
                     gameState.SpawnEnemies();
-                    _timeSinceLastSpawn = 0;
+                    _timeSinceLastSpawn = -2000000;
                 }
 
-                gameState.UpdateEnemies();
+                //gameState.UpdateEnemies();
                 gameState.TowerAttack();
 
                 await _hubContext.Clients

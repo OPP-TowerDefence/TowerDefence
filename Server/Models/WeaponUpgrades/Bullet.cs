@@ -21,8 +21,6 @@ namespace TowerDefense.Models.WeaponUpgrades
 
         public void Move(int targetX, int targetY)
         {
-            Console.WriteLine($"Before move: X = {X}, Y = {Y}, TargetX = {targetX}, TargetY = {targetY}");
-
             int deltaX = targetX - X;
             int deltaY = targetY - Y;
 
@@ -53,8 +51,6 @@ namespace TowerDefense.Models.WeaponUpgrades
             {
                 Y += (int)moveY;
             }
-
-            Console.WriteLine($"After move: X = {X}, Y = {Y}");
         }
 
     }

@@ -227,7 +227,7 @@ public class GameState
     {
         enemy.TakeDamage(damage);
 
-        if (enemy.Health <= 0)
+        if (enemy.IsDead())
         {
             Map.Enemies.Remove(enemy);
 
@@ -263,11 +263,6 @@ public class GameState
                 if (bullet.X == enemyToAttack.X && bullet.Y == enemyToAttack.Y)
                 {
                     DamageEnemy(enemyToAttack, bullet.Damage);
-
-                    if (enemyToAttack.IsDead())
-                    {
-                        Map.Enemies.Remove(enemyToAttack);
-                    }
 
                     Map.Bullets.Remove(bullet);
                 }

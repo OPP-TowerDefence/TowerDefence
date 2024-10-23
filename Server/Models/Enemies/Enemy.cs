@@ -35,7 +35,6 @@ namespace TowerDefense.Models.Enemies
         public void TakeDamage(int damage)
         {
             Health -= damage;
-            Console.WriteLine($"health = {Health}");
         }
 
         public bool IsDead() => Health <= 0;
