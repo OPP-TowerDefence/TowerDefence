@@ -45,7 +45,10 @@ namespace TowerDefense.Models.Towers
                 return new List<Enemy>();
             }
 
-            return enemies.OrderBy(enemy => enemy.DistanceTo(tower)).Take(numb).ToList();
+            return enemies.Where(enemy => enemy.DistanceTo(tower) <= Range)
+                  .OrderBy(enemy => enemy.DistanceTo(tower))
+                  .Take(numb)
+                  .ToList();
         }
 
         public int GetDamage()

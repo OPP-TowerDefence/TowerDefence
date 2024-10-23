@@ -1161,3 +1161,13 @@
 10/24/2024 12:54:06 AM: INFO: Player fasfsa queued a tower of category LongDistance at position (2,4).
 10/24/2024 12:54:15 AM: INFO: Player fasfsa left the game.
 10/24/2024 12:54:15 AM: INFO: Player fasfsa left room fsafas.
+10/24/2024 1:06:39 AM: INFO: GameService initialized and game tick timer started.
+10/24/2024 1:06:41 AM: INFO: Player fasfa is attempting to join room fafsafa.
+10/24/2024 1:06:41 AM: INFO: New room created with code: fafsafa.
+10/24/2024 1:06:41 AM: INFO: fasfa has received Flame towers
+10/24/2024 1:06:41 AM: INFO: Player fasfa joined the game.
+10/24/2024 1:06:41 AM: INFO: Player fasfa with connection ID x_wxIdoPkxacfBpwjStkcA has joined room fafsafa.
+10/24/2024 1:06:44 AM: INFO: Player fasfa queued a tower of category LongDistance at position (9,9).
+10/24/2024 1:06:49 AM: INFO: Player fasfa queued a tower of category LongDistance at position (6,2).
+10/24/2024 1:06:54 AM: INFO: Player fasfa left the game.
+10/24/2024 1:06:54 AM: INFO: Player fasfa left room fafsafa.
