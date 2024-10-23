@@ -1,5 +1,6 @@
 ﻿using TowerDefense.Models.Towers;
 using TowerDefense.Models.Enemies;
+using TowerDefense.Models.WeaponUpgrades;
 
 namespace TowerDefense.Models
 {
@@ -9,6 +10,7 @@ namespace TowerDefense.Models
         public int Height { get; private set; } = 10;
         public List<Tower> Towers { get; set; } = new List<Tower>();
         public List<Enemy> Enemies { get; set; } = new List<Enemy>();
+        public List<Bullet> Bullets { get; set; } = new List<Bullet>();
 
         public Map(int width, int height)
         {

@@ -172,3 +172,972 @@
 2024-10-21 21:16:33: INFO: test4 has received Ice towers
 2024-10-21 21:16:33: INFO: Player test4 joined the game.
 2024-10-21 21:16:33: INFO: Player test4 with connection ID FNUMNzCMEj19zYokS-9ovQ has joined room test.
+10/23/2024 9:04:14 PM: INFO: GameService initialized and game tick timer started.
+10/23/2024 9:04:17 PM: INFO: Player ccc is attempting to join room aaa.
+10/23/2024 9:04:17 PM: INFO: New room created with code: aaa.
+10/23/2024 9:04:17 PM: INFO: ccc has received Flame towers
+10/23/2024 9:04:17 PM: INFO: Player ccc joined the game.
+10/23/2024 9:04:17 PM: INFO: Player ccc with connection ID SHouZKlkKTcGCunHBrt6dA has joined room aaa.
+10/23/2024 9:04:22 PM: INFO: Player ccc queued a tower of category LongDistance at position (0,9).
+10/23/2024 9:04:23 PM: INFO: Player ccc queued a tower of category LongDistance at position (4,9).
+10/23/2024 9:04:23 PM: INFO: Player ccc queued a tower of category LongDistance at position (6,6).
+10/23/2024 9:04:25 PM: INFO: Player ccc queued a tower of category Heavy at position (7,4).
+10/23/2024 9:04:25 PM: INFO: Player ccc queued a tower of category Heavy at position (5,4).
+10/23/2024 9:04:26 PM: INFO: Player ccc queued a tower of category Heavy at position (3,4).
+10/23/2024 9:04:26 PM: INFO: Player ccc queued a tower of category Heavy at position (3,7).
+10/23/2024 11:00:46 PM: INFO: GameService initialized and game tick timer started.
+10/23/2024 11:00:49 PM: INFO: Player cccc is attempting to join room aaaa.
+10/23/2024 11:00:49 PM: INFO: New room created with code: aaaa.
+10/23/2024 11:00:49 PM: INFO: cccc has received Flame towers
+10/23/2024 11:00:49 PM: INFO: Player cccc joined the game.
+10/23/2024 11:00:49 PM: INFO: Player cccc with connection ID 7UA4HAPdCI2OPkbWMAGrig has joined room aaaa.
+10/23/2024 11:01:07 PM: INFO: Player cccc queued a tower of category LongDistance at position (41,63).
+10/23/2024 11:01:10 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:01:13 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:01:16 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:01:16 PM: INFO: Player cccc queued a tower of category LongDistance at position (39,23).
+10/23/2024 11:01:17 PM: INFO: Player cccc queued a tower of category LongDistance at position (51,49).
+10/23/2024 11:01:21 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:01:21 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:01:21 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:01:21 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:01:22 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:01:22 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:01:22 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:01:22 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:01:26 PM: INFO: Player cccc queued a tower of category Heavy at position (57,69).
+10/23/2024 11:01:26 PM: INFO: Player cccc queued a tower of category Heavy at position (62,61).
+10/23/2024 11:01:26 PM: INFO: Player cccc queued a tower of category Heavy at position (67,52).
+10/23/2024 11:01:27 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:01:27 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:01:27 PM: INFO: Player cccc queued a tower of category Heavy at position (69,40).
+10/23/2024 11:01:27 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:01:27 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:01:28 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:01:28 PM: INFO: Player cccc queued a tower of category Heavy at position (63,56).
+10/23/2024 11:01:28 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:01:28 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:01:28 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:01:30 PM: INFO: Player cccc queued a tower of category Heavy at position (59,39).
+10/23/2024 11:01:30 PM: INFO: Player cccc queued a tower of category Heavy at position (73,51).
+10/23/2024 11:01:31 PM: INFO: Player cccc queued a tower of category Heavy at position (60,46).
+10/23/2024 11:01:31 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:01:32 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:01:32 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:01:32 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:01:32 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:01:33 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:01:33 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:01:34 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:01:34 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:01:35 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:01:39 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:01:39 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:01:39 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:01:39 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:01:40 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:01:40 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:01:40 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:01:40 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:01:41 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:01:41 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:01:41 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:01:41 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:01:42 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:01:42 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:01:43 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:01:43 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:01:44 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:01:44 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:01:44 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:01:46 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:01:47 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:01:47 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:01:47 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:01:47 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:01:49 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:01:49 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:01:50 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:01:50 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:01:52 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:01:52 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:01:53 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:01:53 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:01:53 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:01:53 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:01:54 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:01:55 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:01:55 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:01:56 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:01:56 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:01:56 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:01:56 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:00 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:00 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:00 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:00 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:01 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:01 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:01 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:01 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:02 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:02 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:02 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:02 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:03 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:03 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:04 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:04 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:05 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:05 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:09 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:09 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:09 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:09 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:10 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:10 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:10 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:10 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:11 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:11 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:11 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:11 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:12 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:12 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:12 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:13 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:14 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:14 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:14 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:16 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:16 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:17 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:21 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:21 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:21 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:21 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:22 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:22 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:22 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:22 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:23 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:23 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:23 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:23 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:24 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:24 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:27 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:27 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:27 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:27 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:28 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:28 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:28 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:28 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:29 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:29 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:29 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:29 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:30 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:30 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:30 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:31 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:31 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:34 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:35 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:35 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:35 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:35 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:37 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:37 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:42 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:42 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:42 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:42 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:43 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:43 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:43 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:43 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:44 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:44 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:44 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:44 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:45 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:45 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:45 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:46 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:46 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:49 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:49 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:50 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:50 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:52 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:53 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:53 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:53 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:55 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:56 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:56 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:56 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:58 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:59 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:59 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:59 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:02:59 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:03:00 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:03:00 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:03:01 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:03:02 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:03:02 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:03:02 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:03:02 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:03:03 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:03:03 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:03:04 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:03:05 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:03:05 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:03:05 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:03:07 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:03:07 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:03:08 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:03:08 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:03:08 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:03:08 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:03:10 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:03:11 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:03:11 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:03:11 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:03:11 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:03:12 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:03:12 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:03:12 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:03:12 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:03:15 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:03:15 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:03:25 PM: INFO: GameService initialized and game tick timer started.
+10/23/2024 11:03:30 PM: INFO: Player ccc is attempting to join room aaa.
+10/23/2024 11:03:30 PM: INFO: New room created with code: aaa.
+10/23/2024 11:03:30 PM: INFO: ccc has received Flame towers
+10/23/2024 11:03:30 PM: INFO: Player ccc joined the game.
+10/23/2024 11:03:30 PM: INFO: Player ccc with connection ID -c_VjcFPeY7Ap5drL_8NrA has joined room aaa.
+10/23/2024 11:03:36 PM: INFO: Player ccc queued a tower of category Heavy at position (1,6).
+10/23/2024 11:03:41 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:03:47 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:03:50 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:03:51 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:03:52 PM: INFO: Player ccc queued a tower of category LongDistance at position (7,1).
+10/23/2024 11:03:52 PM: INFO: Player ccc queued a tower of category LongDistance at position (6,4).
+10/23/2024 11:03:53 PM: INFO: Player ccc queued a tower of category LongDistance at position (6,7).
+10/23/2024 11:03:56 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:03:56 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:03:56 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:03:56 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:03:57 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:03:57 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:03:57 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:04:02 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:04:02 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:04:02 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:04:02 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:04:03 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:04:03 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:04:03 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:04:03 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:04:04 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:04:06 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:04:07 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:04:07 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:04:07 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:04:09 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:04:10 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:04:10 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:04:10 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:04:14 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:04:14 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:04:14 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:04:14 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:04:15 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:04:15 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:04:15 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:04:20 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:04:20 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:04:20 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:04:20 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:04:21 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:04:21 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:04:21 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:04:21 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:04:22 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:04:24 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:04:25 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:04:25 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:04:27 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:04:28 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:04:28 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:04:30 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:04:33 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:04:33 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:04:34 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:04:36 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:04:37 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:04:37 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:04:39 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:04:39 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:04:40 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:04:44 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:04:44 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:04:44 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:04:44 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:04:45 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:04:45 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:04:45 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:04:47 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:04:47 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:04:47 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:04:47 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:04:48 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:04:48 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:04:49 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:04:53 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:04:53 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:04:53 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:04:53 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:04:54 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:04:54 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:04:54 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:04:57 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:04:57 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:04:58 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:04:59 PM: INFO: Player ccc left the game.
+10/23/2024 11:04:59 PM: INFO: Player ccc left room aaa.
+10/23/2024 11:05:00 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:05:00 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:05:03 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:05:03 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:07:16 PM: INFO: GameService initialized and game tick timer started.
+10/23/2024 11:07:19 PM: INFO: Player ccc is attempting to join room aaa.
+10/23/2024 11:07:19 PM: INFO: New room created with code: aaa.
+10/23/2024 11:07:19 PM: INFO: ccc has received Flame towers
+10/23/2024 11:07:19 PM: INFO: Player ccc joined the game.
+10/23/2024 11:07:19 PM: INFO: Player ccc with connection ID PNYCLA1JC5Amk0l9Jd5LpQ has joined room aaa.
+10/23/2024 11:07:31 PM: INFO: Player ccc queued a tower of category LongDistance at position (9,0).
+10/23/2024 11:07:33 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:07:38 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:07:38 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:07:39 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:07:44 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:07:44 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:07:47 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:07:47 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:07:47 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:07:50 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:07:50 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:07:51 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:07:56 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:07:56 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:07:57 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:08:01 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:08:05 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:08:05 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:08:06 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:08:08 PM: INFO: Player ccc queued a tower of category LongDistance at position (2,9).
+10/23/2024 11:08:10 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:08:10 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:08:12 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:08:14 PM: INFO: Player ccc left the game.
+10/23/2024 11:08:14 PM: INFO: Player ccc left room aaa.
+10/23/2024 11:08:16 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:08:16 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:08:18 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:08:19 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:08:23 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:08:23 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:08:23 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:08:24 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:08:24 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:08:27 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:08:28 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:08:50 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:08:33 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:08:32 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:08:32 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:08:34 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:08:38 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:08:48 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:08:49 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:08:50 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:08:32 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:08:50 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:08:51 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:08:55 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:08:55 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:08:56 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:08:56 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:08:57 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:08:57 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:09:01 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:09:01 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:09:02 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:09:02 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:09:02 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:12:02 PM: INFO: GameService initialized and game tick timer started.
+10/23/2024 11:12:06 PM: INFO: Player ccc is attempting to join room aaac.
+10/23/2024 11:12:06 PM: INFO: New room created with code: aaac.
+10/23/2024 11:12:06 PM: INFO: ccc has received Flame towers
+10/23/2024 11:12:06 PM: INFO: Player ccc joined the game.
+10/23/2024 11:12:06 PM: INFO: Player ccc with connection ID irtc2xU3bW98WHRpAoUUCA has joined room aaac.
+10/23/2024 11:13:58 PM: INFO: GameService initialized and game tick timer started.
+10/23/2024 11:14:00 PM: INFO: Player ccc is attempting to join room aaa.
+10/23/2024 11:14:00 PM: INFO: New room created with code: aaa.
+10/23/2024 11:14:00 PM: INFO: ccc has received Flame towers
+10/23/2024 11:14:00 PM: INFO: Player ccc joined the game.
+10/23/2024 11:14:00 PM: INFO: Player ccc with connection ID oE-Zg_nQHx7tfj8-2dA9hA has joined room aaa.
+10/23/2024 11:14:03 PM: INFO: Player ccc queued a tower of category LongDistance at position (1,7).
+10/23/2024 11:16:15 PM: INFO: GameService initialized and game tick timer started.
+10/23/2024 11:16:17 PM: INFO: Player ccc is attempting to join room aaa.
+10/23/2024 11:16:17 PM: INFO: New room created with code: aaa.
+10/23/2024 11:16:17 PM: INFO: ccc has received Flame towers
+10/23/2024 11:16:17 PM: INFO: Player ccc joined the game.
+10/23/2024 11:16:17 PM: INFO: Player ccc with connection ID R66lic6vo4J8D1xSI3s9jw has joined room aaa.
+10/23/2024 11:16:18 PM: INFO: Player ccc queued a tower of category LongDistance at position (9,7).
+10/23/2024 11:21:27 PM: INFO: GameService initialized and game tick timer started.
+10/23/2024 11:21:30 PM: INFO: Player ccc is attempting to join room aa.
+10/23/2024 11:21:30 PM: INFO: New room created with code: aa.
+10/23/2024 11:21:30 PM: INFO: ccc has received Flame towers
+10/23/2024 11:21:30 PM: INFO: Player ccc joined the game.
+10/23/2024 11:21:30 PM: INFO: Player ccc with connection ID qptiU5rE2d7jOGvejdB_6g has joined room aa.
+10/23/2024 11:21:42 PM: INFO: Player ccc queued a tower of category LongDistance at position (51,97).
+10/23/2024 11:21:45 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:21:47 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:21:48 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:21:50 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:21:51 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:21:55 PM: INFO: Player ccc queued a tower of category LongDistance at position (41,61).
+10/23/2024 11:21:56 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:21:57 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:21:59 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:22:02 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:22:05 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:22:08 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:22:11 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:22:12 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:22:12 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:22:12 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:22:14 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:22:15 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:22:17 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:22:20 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:22:23 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:22:24 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:22:26 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:22:27 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:22:27 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:22:29 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:22:32 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:22:33 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:22:33 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:22:35 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:22:38 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:22:39 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:22:39 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:22:39 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:22:44 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:22:45 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:22:45 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:22:45 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:22:47 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:22:48 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:27:31 PM: INFO: GameService initialized and game tick timer started.
+10/23/2024 11:27:34 PM: INFO: Player ccc is attempting to join room aaa.
+10/23/2024 11:27:34 PM: INFO: New room created with code: aaa.
+10/23/2024 11:27:34 PM: INFO: ccc has received Flame towers
+10/23/2024 11:27:34 PM: INFO: Player ccc joined the game.
+10/23/2024 11:27:34 PM: INFO: Player ccc with connection ID g0ZsOmJC-1MV2APV6mC77g has joined room aaa.
+10/23/2024 11:27:41 PM: INFO: Player ccc queued a tower of category LongDistance at position (5,54).
+10/23/2024 11:27:41 PM: INFO: Player ccc queued a tower of category LongDistance at position (11,52).
+10/23/2024 11:27:42 PM: INFO: Player ccc queued a tower of category LongDistance at position (19,43).
+10/23/2024 11:27:45 PM: INFO: Player ccc queued a tower of category LongDistance at position (25,5).
+10/23/2024 11:27:48 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:27:49 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:27:49 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:27:51 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:27:52 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:27:52 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:27:54 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:27:55 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:27:55 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:27:55 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:27:57 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:28:03 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:28:04 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:28:04 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:28:04 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:28:06 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:28:07 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:28:07 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:28:07 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:28:09 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:28:12 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:28:13 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:28:13 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:28:18 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:28:19 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:28:19 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:28:29 PM: INFO: GameService initialized and game tick timer started.
+10/23/2024 11:28:32 PM: INFO: Player ccc is attempting to join room aaa.
+10/23/2024 11:28:32 PM: INFO: New room created with code: aaa.
+10/23/2024 11:28:32 PM: INFO: ccc has received Flame towers
+10/23/2024 11:28:32 PM: INFO: Player ccc joined the game.
+10/23/2024 11:28:32 PM: INFO: Player ccc with connection ID usjF6RbF8Ikkuayc5l_F0A has joined room aaa.
+10/23/2024 11:28:40 PM: INFO: Player ccc queued a tower of category LongDistance at position (51,45).
+10/23/2024 11:28:44 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:28:44 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:28:50 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:28:53 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:28:56 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:28:56 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:29:02 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:29:02 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:29:05 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:32:16 PM: INFO: GameService initialized and game tick timer started.
+10/23/2024 11:32:19 PM: INFO: Player ccc is attempting to join room aaa.
+10/23/2024 11:32:19 PM: INFO: New room created with code: aaa.
+10/23/2024 11:32:19 PM: INFO: ccc has received Flame towers
+10/23/2024 11:32:19 PM: INFO: Player ccc joined the game.
+10/23/2024 11:32:19 PM: INFO: Player ccc with connection ID NTptciQqunFGhOfcL1EW6g has joined room aaa.
+10/23/2024 11:32:24 PM: INFO: Player ccc queued a tower of category LongDistance at position (25,7).
+10/23/2024 11:32:44 PM: INFO: Player ccc left the game.
+10/23/2024 11:32:44 PM: INFO: Player ccc left room aaa.
+10/23/2024 11:32:46 PM: INFO: Player ccc is attempting to join room aaa.
+10/23/2024 11:32:49 PM: ERROR: Could not start game: room code aaa does not exist or the game has already started.
+10/23/2024 11:33:00 PM: INFO: Player aaa is attempting to join room vccc.
+10/23/2024 11:33:00 PM: INFO: New room created with code: vccc.
+10/23/2024 11:33:00 PM: INFO: aaa has received Flame towers
+10/23/2024 11:33:00 PM: INFO: Player aaa joined the game.
+10/23/2024 11:33:00 PM: INFO: Player aaa with connection ID AbrKzd0wGx94VcgQK7Recw has joined room vccc.
+10/23/2024 11:33:16 PM: INFO: Player aaa left the game.
+10/23/2024 11:33:16 PM: INFO: Player aaa left room vccc.
+10/23/2024 11:33:23 PM: INFO: Player aaaa is attempting to join room vvv.
+10/23/2024 11:33:23 PM: INFO: New room created with code: vvv.
+10/23/2024 11:33:23 PM: INFO: aaaa has received Flame towers
+10/23/2024 11:33:23 PM: INFO: Player aaaa joined the game.
+10/23/2024 11:33:23 PM: INFO: Player aaaa with connection ID hO7uWgovexK8yzylwSSG9A has joined room vvv.
+10/23/2024 11:33:29 PM: INFO: Player aaaa left the game.
+10/23/2024 11:33:29 PM: INFO: Player aaaa left room vvv.
+10/23/2024 11:33:46 PM: INFO: Player ccc is attempting to join room aaa.
+10/23/2024 11:33:48 PM: ERROR: Could not start game: room code aaa does not exist or the game has already started.
+10/23/2024 11:33:55 PM: ERROR: Could not start game: room code aaa does not exist or the game has already started.
+10/23/2024 11:33:56 PM: ERROR: Could not start game: room code aaa does not exist or the game has already started.
+10/23/2024 11:34:04 PM: INFO: Player aaaa is attempting to join room bvvvv.
+10/23/2024 11:34:04 PM: INFO: New room created with code: bvvvv.
+10/23/2024 11:34:04 PM: INFO: aaaa has received Flame towers
+10/23/2024 11:34:04 PM: INFO: Player aaaa joined the game.
+10/23/2024 11:34:04 PM: INFO: Player aaaa with connection ID UN7xv89U644fuYAA0lNiHA has joined room bvvvv.
+10/23/2024 11:34:11 PM: INFO: Player aaaa queued a tower of category LongDistance at position (32,45).
+10/23/2024 11:34:13 PM: INFO: Player aaaa queued a tower of category LongDistance at position (16,27).
+10/23/2024 11:34:14 PM: INFO: Player aaaa queued a tower of category LongDistance at position (21,22).
+10/23/2024 11:34:14 PM: INFO: Player aaaa queued a tower of category LongDistance at position (35,21).
+10/23/2024 11:34:14 PM: INFO: Player aaaa queued a tower of category LongDistance at position (36,28).
+10/23/2024 11:34:15 PM: INFO: Player aaaa queued a tower of category LongDistance at position (32,36).
+10/23/2024 11:34:15 PM: INFO: Player aaaa queued a tower of category LongDistance at position (23,38).
+10/23/2024 11:37:19 PM: INFO: GameService initialized and game tick timer started.
+10/23/2024 11:37:24 PM: INFO: Player ddd is attempting to join room gsdds.
+10/23/2024 11:37:24 PM: INFO: New room created with code: gsdds.
+10/23/2024 11:37:24 PM: INFO: ddd has received Flame towers
+10/23/2024 11:37:24 PM: INFO: Player ddd joined the game.
+10/23/2024 11:37:24 PM: INFO: Player ddd with connection ID eAe7aQQBgoBe-gsZzRLtLw has joined room gsdds.
+10/23/2024 11:38:08 PM: INFO: Player ccc is attempting to join room aaaa.
+10/23/2024 11:38:08 PM: INFO: New room created with code: aaaa.
+10/23/2024 11:38:08 PM: INFO: ccc has received Flame towers
+10/23/2024 11:38:08 PM: INFO: Player ccc joined the game.
+10/23/2024 11:38:08 PM: INFO: Player ccc with connection ID J1ROO2Pxi05rP21yXHQtMQ has joined room aaaa.
+10/23/2024 11:38:43 PM: INFO: Player ccc left the game.
+10/23/2024 11:38:43 PM: INFO: Player ccc left room aaaa.
+10/23/2024 11:38:46 PM: INFO: Player vxv is attempting to join room gfdg.
+10/23/2024 11:38:46 PM: INFO: New room created with code: gfdg.
+10/23/2024 11:38:46 PM: INFO: vxv has received Flame towers
+10/23/2024 11:38:46 PM: INFO: Player vxv joined the game.
+10/23/2024 11:38:46 PM: INFO: Player vxv with connection ID ZNg95V4AquKhV0XnCAJJ2Q has joined room gfdg.
+10/23/2024 11:38:50 PM: INFO: Player vxv queued a tower of category LongDistance at position (58,95).
+10/23/2024 11:38:56 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:38:56 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:38:59 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:38:59 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:39:02 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:39:02 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:39:08 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:39:08 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:39:11 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:39:17 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:39:17 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:39:17 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:40:24 PM: INFO: GameService initialized and game tick timer started.
+10/23/2024 11:40:28 PM: INFO: Player ccc is attempting to join room aaa.
+10/23/2024 11:40:28 PM: INFO: New room created with code: aaa.
+10/23/2024 11:40:28 PM: INFO: ccc has received Flame towers
+10/23/2024 11:40:28 PM: INFO: Player ccc joined the game.
+10/23/2024 11:40:28 PM: INFO: Player ccc with connection ID yp8xqVKNyjRoH0ThIql1qg has joined room aaa.
+10/23/2024 11:40:31 PM: INFO: Player ccc queued a tower of category LongDistance at position (53,95).
+10/23/2024 11:40:34 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:40:37 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:40:40 PM: INFO: Player ccc queued a tower of category LongDistance at position (60,47).
+10/23/2024 11:40:43 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:40:43 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:40:43 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:40:44 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:40:46 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:40:46 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:40:49 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:40:49 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:40:49 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:40:50 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:40:55 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:40:58 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:41:01 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:41:01 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:41:01 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:41:02 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:41:07 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:41:07 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:41:08 PM: INFO: Player ccc left the game.
+10/23/2024 11:41:08 PM: INFO: Player ccc left room aaa.
+10/23/2024 11:41:13 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:41:13 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:41:25 PM: INFO: GameService initialized and game tick timer started.
+10/23/2024 11:41:27 PM: INFO: Player ccc is attempting to join room aaa.
+10/23/2024 11:41:27 PM: INFO: New room created with code: aaa.
+10/23/2024 11:41:27 PM: INFO: ccc has received Flame towers
+10/23/2024 11:41:27 PM: INFO: Player ccc joined the game.
+10/23/2024 11:41:27 PM: INFO: Player ccc with connection ID j4YqWT5EZT_2wiPKNHFszA has joined room aaa.
+10/23/2024 11:41:31 PM: INFO: Player ccc queued a tower of category LongDistance at position (42,52).
+10/23/2024 11:41:36 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:41:36 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:41:39 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:41:39 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:41:42 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:41:45 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:41:45 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:41:48 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:41:51 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:41:54 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:41:57 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:41:57 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:42:03 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:42:06 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:42:12 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:42:12 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:42:12 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:42:18 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:42:18 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:42:24 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:42:24 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:42:27 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:42:33 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:42:36 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:42:42 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:42:42 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:42:42 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:42:48 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:42:54 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:42:57 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:43:21 PM: INFO: GameService initialized and game tick timer started.
+10/23/2024 11:43:24 PM: INFO: Player adads is attempting to join room dasdad.
+10/23/2024 11:43:24 PM: INFO: New room created with code: dasdad.
+10/23/2024 11:43:24 PM: INFO: adads has received Flame towers
+10/23/2024 11:43:24 PM: INFO: Player adads joined the game.
+10/23/2024 11:43:24 PM: INFO: Player adads with connection ID OdTBNIOkcp7i-Lht8ViyvA has joined room dasdad.
+10/23/2024 11:43:31 PM: INFO: Player adads queued a tower of category LongDistance at position (47,47).
+10/23/2024 11:43:32 PM: INFO: Player adads queued a tower of category LongDistance at position (55,49).
+10/23/2024 11:43:32 PM: INFO: Player adads queued a tower of category LongDistance at position (49,52).
+10/23/2024 11:47:07 PM: INFO: GameService initialized and game tick timer started.
+10/23/2024 11:47:10 PM: INFO: Player afsa is attempting to join room afsfsa.
+10/23/2024 11:47:10 PM: INFO: New room created with code: afsfsa.
+10/23/2024 11:47:10 PM: INFO: afsa has received Flame towers
+10/23/2024 11:47:10 PM: INFO: Player afsa joined the game.
+10/23/2024 11:47:10 PM: INFO: Player afsa with connection ID aqriMZgfZjk2lGRGphVMtA has joined room afsfsa.
+10/23/2024 11:47:17 PM: INFO: Player afsa queued a tower of category LongDistance at position (35,95).
+10/23/2024 11:47:30 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:47:31 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:47:32 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:47:34 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:47:35 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:47:36 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:47:37 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:47:39 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:47:40 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:47:41 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:47:42 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:47:44 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:50:39 PM: INFO: GameService initialized and game tick timer started.
+10/23/2024 11:50:41 PM: INFO: Player fsaf is attempting to join room afaf.
+10/23/2024 11:50:41 PM: INFO: New room created with code: afaf.
+10/23/2024 11:50:41 PM: INFO: fsaf has received Flame towers
+10/23/2024 11:50:41 PM: INFO: Player fsaf joined the game.
+10/23/2024 11:50:41 PM: INFO: Player fsaf with connection ID evThuwwZGuvkkyaMJXAMQw has joined room afaf.
+10/23/2024 11:50:49 PM: INFO: Player fsaf queued a tower of category LongDistance at position (1,8).
+10/23/2024 11:50:53 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:50:57 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:50:59 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:51:02 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:51:06 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:51:08 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:51:11 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:51:12 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:51:14 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:51:18 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:51:20 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:51:23 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:51:26 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:51:32 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:51:35 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:51:39 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:51:41 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:51:44 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:51:47 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:51:48 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:51:50 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:51:56 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:51:57 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:51:59 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:52:03 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:52:05 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:52:06 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:52:08 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:57:02 PM: INFO: GameService initialized and game tick timer started.
+10/23/2024 11:57:05 PM: INFO: Player cccc is attempting to join room aaa.
+10/23/2024 11:57:05 PM: INFO: New room created with code: aaa.
+10/23/2024 11:57:05 PM: INFO: cccc has received Flame towers
+10/23/2024 11:57:05 PM: INFO: Player cccc joined the game.
+10/23/2024 11:57:05 PM: INFO: Player cccc with connection ID P4O560SjCCep0qtbPT5klw has joined room aaa.
+10/23/2024 11:57:08 PM: INFO: Player cccc queued a tower of category LongDistance at position (2,8).
+10/23/2024 11:57:13 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:57:15 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:57:19 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:57:22 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:57:23 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:57:25 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:57:29 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:57:34 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:57:35 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:57:37 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:57:39 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:57:41 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:57:46 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:57:47 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/23/2024 11:59:00 PM: INFO: GameService initialized and game tick timer started.
+10/23/2024 11:59:02 PM: INFO: Player asfsa is attempting to join room fafsf.
+10/23/2024 11:59:02 PM: INFO: New room created with code: fafsf.
+10/23/2024 11:59:02 PM: INFO: asfsa has received Flame towers
+10/23/2024 11:59:02 PM: INFO: Player asfsa joined the game.
+10/23/2024 11:59:02 PM: INFO: Player asfsa with connection ID TZMU4PWGQfnNKCRDiuWslA has joined room fafsf.
+10/23/2024 11:59:05 PM: INFO: Player asfsa queued a tower of category LongDistance at position (1,2).
+10/23/2024 11:59:53 PM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/24/2024 12:02:03 AM: INFO: GameService initialized and game tick timer started.
+10/24/2024 12:02:05 AM: INFO: Player fafsa is attempting to join room fasfsa.
+10/24/2024 12:02:05 AM: INFO: New room created with code: fasfsa.
+10/24/2024 12:02:05 AM: INFO: fafsa has received Flame towers
+10/24/2024 12:02:05 AM: INFO: Player fafsa joined the game.
+10/24/2024 12:02:06 AM: INFO: Player fafsa with connection ID _M2iQht6lQRswUwv6KVnbw has joined room fasfsa.
+10/24/2024 12:02:07 AM: INFO: Player fafsa queued a tower of category LongDistance at position (7,6).
+10/24/2024 12:02:34 AM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/24/2024 12:02:34 AM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/24/2024 12:02:37 AM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/24/2024 12:02:43 AM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/24/2024 12:02:44 AM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/24/2024 12:02:46 AM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/24/2024 12:02:50 AM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/24/2024 12:02:51 AM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/24/2024 12:02:53 AM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/24/2024 12:02:58 AM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/24/2024 12:03:02 AM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/24/2024 12:03:05 AM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/24/2024 12:03:06 AM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/24/2024 12:03:08 AM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/24/2024 12:03:10 AM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/24/2024 12:05:07 AM: INFO: GameService initialized and game tick timer started.
+10/24/2024 12:05:23 AM: INFO: GameService initialized and game tick timer started.
+10/24/2024 12:05:25 AM: INFO: Player fasf is attempting to join room fasfas.
+10/24/2024 12:05:25 AM: INFO: New room created with code: fasfas.
+10/24/2024 12:05:25 AM: INFO: fasf has received Flame towers
+10/24/2024 12:05:25 AM: INFO: Player fasf joined the game.
+10/24/2024 12:05:25 AM: INFO: Player fasf with connection ID gNxp6IMX0yI7sOpwxTLYsA has joined room fasfas.
+10/24/2024 12:05:32 AM: INFO: Player fasf queued a tower of category LongDistance at position (3,4).
+10/24/2024 12:06:46 AM: INFO: GameService initialized and game tick timer started.
+10/24/2024 12:06:49 AM: INFO: Player sds is attempting to join room aaa.
+10/24/2024 12:06:49 AM: INFO: New room created with code: aaa.
+10/24/2024 12:06:49 AM: INFO: sds has received Flame towers
+10/24/2024 12:06:49 AM: INFO: Player sds joined the game.
+10/24/2024 12:06:49 AM: INFO: Player sds with connection ID X2EHF6pcKW-w5TAfLLnr_Q has joined room aaa.
+10/24/2024 12:06:51 AM: INFO: Player sds queued a tower of category LongDistance at position (1,3).
+10/24/2024 12:07:31 AM: INFO: GameService initialized and game tick timer started.
+10/24/2024 12:07:34 AM: INFO: Player ccc is attempting to join room aaa.
+10/24/2024 12:07:34 AM: INFO: New room created with code: aaa.
+10/24/2024 12:07:34 AM: INFO: ccc has received Flame towers
+10/24/2024 12:07:34 AM: INFO: Player ccc joined the game.
+10/24/2024 12:07:34 AM: INFO: Player ccc with connection ID w0I9kBiYlRKbyzF2kaVbyg has joined room aaa.
+10/24/2024 12:07:36 AM: INFO: Player ccc queued a tower of category LongDistance at position (2,4).
+10/24/2024 12:08:44 AM: INFO: GameService initialized and game tick timer started.
+10/24/2024 12:08:48 AM: INFO: Player ffffff is attempting to join room ffff.
+10/24/2024 12:08:48 AM: INFO: New room created with code: ffff.
+10/24/2024 12:08:48 AM: INFO: ffffff has received Flame towers
+10/24/2024 12:08:48 AM: INFO: Player ffffff joined the game.
+10/24/2024 12:08:48 AM: INFO: Player ffffff with connection ID wP3IaaKqGAXImXypLvntpQ has joined room ffff.
+10/24/2024 12:08:51 AM: INFO: Player ffffff queued a tower of category LongDistance at position (9,9).
+10/24/2024 12:08:54 AM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/24/2024 12:08:55 AM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/24/2024 12:08:56 AM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/24/2024 12:08:57 AM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/24/2024 12:08:59 AM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/24/2024 12:09:00 AM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/24/2024 12:09:01 AM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/24/2024 12:09:02 AM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/24/2024 12:09:04 AM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/24/2024 12:09:05 AM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/24/2024 12:09:06 AM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/24/2024 12:11:37 AM: INFO: GameService initialized and game tick timer started.
+10/24/2024 12:11:40 AM: INFO: Player cccc is attempting to join room aaa.
+10/24/2024 12:11:40 AM: INFO: New room created with code: aaa.
+10/24/2024 12:11:40 AM: INFO: cccc has received Flame towers
+10/24/2024 12:11:40 AM: INFO: Player cccc joined the game.
+10/24/2024 12:11:40 AM: INFO: Player cccc with connection ID YzHFCsNUy94qMmDY0laGww has joined room aaa.
+10/24/2024 12:11:44 AM: INFO: Player cccc queued a tower of category Heavy at position (4,7).
+10/24/2024 12:11:48 AM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/24/2024 12:11:50 AM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/24/2024 12:12:46 AM: INFO: GameService initialized and game tick timer started.
+10/24/2024 12:12:49 AM: INFO: Player cccc is attempting to join room aaa.
+10/24/2024 12:12:49 AM: INFO: New room created with code: aaa.
+10/24/2024 12:12:49 AM: INFO: cccc has received Flame towers
+10/24/2024 12:12:49 AM: INFO: Player cccc joined the game.
+10/24/2024 12:12:49 AM: INFO: Player cccc with connection ID ZDdyQbKTxsTfEsthtL9Y_Q has joined room aaa.
+10/24/2024 12:12:53 AM: INFO: Player cccc queued a tower of category LongDistance at position (3,7).
+10/24/2024 12:12:55 AM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/24/2024 12:12:56 AM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/24/2024 12:12:58 AM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/24/2024 12:12:59 AM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/24/2024 12:13:00 AM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/24/2024 12:13:01 AM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/24/2024 12:13:03 AM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/24/2024 12:13:04 AM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/24/2024 12:13:05 AM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/24/2024 12:13:06 AM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/24/2024 12:13:07 AM: INFO: Player cccc queued a tower of category Heavy at position (7,3).
+10/24/2024 12:13:08 AM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/24/2024 12:13:09 AM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/24/2024 12:13:10 AM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/24/2024 12:13:11 AM: INFO: Player cccc queued a tower of category Heavy at position (7,1).
+10/24/2024 12:13:11 AM: INFO: Player cccc queued a tower of category Heavy at position (7,5).
+10/24/2024 12:13:11 AM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/24/2024 12:13:11 AM: INFO: Player cccc queued a tower of category Heavy at position (6,7).
+10/24/2024 12:13:12 AM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/24/2024 12:13:12 AM: INFO: Player cccc queued a tower of category Heavy at position (6,8).
+10/24/2024 12:13:12 AM: INFO: Player cccc queued a tower of category Heavy at position (5,5).
+10/24/2024 12:13:13 AM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/24/2024 12:13:13 AM: INFO: Player cccc queued a tower of category Heavy at position (4,5).
+10/24/2024 12:13:14 AM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/24/2024 12:13:15 AM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/24/2024 12:13:16 AM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/24/2024 12:13:16 AM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/24/2024 12:13:17 AM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/24/2024 12:14:50 AM: INFO: GameService initialized and game tick timer started.
+10/24/2024 12:14:52 AM: INFO: Player aaaa is attempting to join room fff.
+10/24/2024 12:14:52 AM: INFO: New room created with code: fff.
+10/24/2024 12:14:52 AM: INFO: aaaa has received Flame towers
+10/24/2024 12:14:52 AM: INFO: Player aaaa joined the game.
+10/24/2024 12:14:52 AM: INFO: Player aaaa with connection ID xkOj_tUIL9Stlp6npAnbhQ has joined room fff.
+10/24/2024 12:14:56 AM: INFO: Player aaaa queued a tower of category LongDistance at position (8,2).
+10/24/2024 12:14:59 AM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/24/2024 12:15:00 AM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/24/2024 12:15:02 AM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/24/2024 12:15:03 AM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/24/2024 12:15:04 AM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/24/2024 12:15:05 AM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/24/2024 12:15:07 AM: EXCEPTION: InvalidOperationException - Collection was modified; enumeration operation may not execute.
+10/24/2024 12:19:44 AM: INFO: GameService initialized and game tick timer started.
+10/24/2024 12:19:47 AM: INFO: Player cccc is attempting to join room aaa.
+10/24/2024 12:19:47 AM: INFO: New room created with code: aaa.
+10/24/2024 12:19:47 AM: INFO: cccc has received Flame towers
+10/24/2024 12:19:47 AM: INFO: Player cccc joined the game.
+10/24/2024 12:19:47 AM: INFO: Player cccc with connection ID OHIJ4o12k4rq1Ibfhd96PA has joined room aaa.
+10/24/2024 12:19:49 AM: INFO: Player cccc queued a tower of category LongDistance at position (3,7).
+10/24/2024 12:20:47 AM: INFO: GameService initialized and game tick timer started.
+10/24/2024 12:20:50 AM: INFO: Player afsa is attempting to join room fsafa.
+10/24/2024 12:20:50 AM: INFO: New room created with code: fsafa.
+10/24/2024 12:20:50 AM: INFO: afsa has received Flame towers
+10/24/2024 12:20:50 AM: INFO: Player afsa joined the game.
+10/24/2024 12:20:50 AM: INFO: Player afsa with connection ID 8Xytd06xB4x5xdhneFD2cg has joined room fsafa.
+10/24/2024 12:20:53 AM: INFO: Player afsa queued a tower of category LongDistance at position (2,6).
+10/24/2024 12:20:54 AM: INFO: Player afsa queued a tower of category Heavy at position (8,1).
+10/24/2024 12:20:55 AM: INFO: Player afsa queued a tower of category Heavy at position (9,0).
+10/24/2024 12:20:56 AM: INFO: Player afsa queued a tower of category Heavy at position (8,0).
+10/24/2024 12:20:56 AM: INFO: Player afsa queued a tower of category Heavy at position (7,0).
+10/24/2024 12:20:57 AM: INFO: Player afsa queued a tower of category Heavy at position (7,1).
+10/24/2024 12:22:15 AM: INFO: GameService initialized and game tick timer started.
+10/24/2024 12:22:18 AM: INFO: Player cccc is attempting to join room aaaa.
+10/24/2024 12:22:18 AM: INFO: New room created with code: aaaa.
+10/24/2024 12:22:18 AM: INFO: cccc has received Flame towers
+10/24/2024 12:22:18 AM: INFO: Player cccc joined the game.
+10/24/2024 12:22:18 AM: INFO: Player cccc with connection ID 6wwNcGB5P48ofLetmy9EXg has joined room aaaa.
+10/24/2024 12:22:19 AM: INFO: Player cccc queued a tower of category LongDistance at position (5,4).
+10/24/2024 12:25:19 AM: INFO: GameService initialized and game tick timer started.
+10/24/2024 12:25:22 AM: INFO: Player cccc is attempting to join room aaa.
+10/24/2024 12:25:22 AM: INFO: New room created with code: aaa.
+10/24/2024 12:25:22 AM: INFO: cccc has received Flame towers
+10/24/2024 12:25:22 AM: INFO: Player cccc joined the game.
+10/24/2024 12:25:22 AM: INFO: Player cccc with connection ID j2ifkWVLHhNt6Qh_QDDPNA has joined room aaa.
+10/24/2024 12:25:26 AM: INFO: Player cccc queued a tower of category LongDistance at position (7,5).
+10/24/2024 12:27:54 AM: INFO: GameService initialized and game tick timer started.
+10/24/2024 12:27:59 AM: INFO: Player ccc is attempting to join room aaaa.
+10/24/2024 12:27:59 AM: INFO: New room created with code: aaaa.
+10/24/2024 12:27:59 AM: INFO: ccc has received Flame towers
+10/24/2024 12:27:59 AM: INFO: Player ccc joined the game.
+10/24/2024 12:27:59 AM: INFO: Player ccc with connection ID CICejvst2afLdWGe0XYB2Q has joined room aaaa.
+10/24/2024 12:28:02 AM: INFO: Player ccc queued a tower of category LongDistance at position (6,7).
+10/24/2024 12:28:16 AM: INFO: Player ccc left the game.
+10/24/2024 12:28:16 AM: INFO: Player ccc left room aaaa.
+10/24/2024 12:28:34 AM: INFO: GameService initialized and game tick timer started.
+10/24/2024 12:28:37 AM: INFO: Player cccc is attempting to join room aaaaa.
+10/24/2024 12:28:37 AM: INFO: New room created with code: aaaaa.
+10/24/2024 12:28:37 AM: INFO: cccc has received Flame towers
+10/24/2024 12:28:37 AM: INFO: Player cccc joined the game.
+10/24/2024 12:28:37 AM: INFO: Player cccc with connection ID 8galrKxOuQLKFXrc9gHYBA has joined room aaaaa.
+10/24/2024 12:28:39 AM: INFO: Player cccc queued a tower of category Heavy at position (7,6).
+10/24/2024 12:28:42 AM: INFO: Player cccc left the game.
+10/24/2024 12:28:42 AM: INFO: Player cccc left room aaaaa.
+10/24/2024 12:29:14 AM: INFO: Player cccc is attempting to join room aaa.
+10/24/2024 12:29:14 AM: INFO: New room created with code: aaa.
+10/24/2024 12:29:14 AM: INFO: cccc has received Flame towers
+10/24/2024 12:29:14 AM: INFO: Player cccc joined the game.
+10/24/2024 12:29:14 AM: INFO: Player cccc with connection ID tGOCincVGkWjkKjbSo-hKg has joined room aaa.
+10/24/2024 12:29:23 AM: INFO: Player cccc queued a tower of category LongDistance at position (2,7).
+10/24/2024 12:29:24 AM: INFO: Player cccc queued a tower of category LongDistance at position (8,5).
+10/24/2024 12:29:30 AM: INFO: Player cccc left the game.
+10/24/2024 12:29:30 AM: INFO: Player cccc left room aaa.
+10/24/2024 12:29:43 AM: INFO: GameService initialized and game tick timer started.
+10/24/2024 12:29:46 AM: INFO: Player aaaaa is attempting to join room fasfsaf.
+10/24/2024 12:29:46 AM: INFO: New room created with code: fasfsaf.
+10/24/2024 12:29:46 AM: INFO: aaaaa has received Flame towers
+10/24/2024 12:29:46 AM: INFO: Player aaaaa joined the game.
+10/24/2024 12:29:46 AM: INFO: Player aaaaa with connection ID Ri0xkoHJ0h08kpfUoSdjmw has joined room fasfsaf.
+10/24/2024 12:29:50 AM: INFO: Player aaaaa queued a tower of category LongDistance at position (2,8).
+10/24/2024 12:29:51 AM: INFO: Player aaaaa queued a tower of category LongDistance at position (8,5).
+10/24/2024 12:29:56 AM: INFO: Player aaaaa queued a tower of category LongDistance at position (7,7).
+10/24/2024 12:32:56 AM: INFO: GameService initialized and game tick timer started.
+10/24/2024 12:32:59 AM: INFO: Player cccc is attempting to join room aaaa.
+10/24/2024 12:32:59 AM: INFO: New room created with code: aaaa.
+10/24/2024 12:32:59 AM: INFO: cccc has received Flame towers
+10/24/2024 12:32:59 AM: INFO: Player cccc joined the game.
+10/24/2024 12:32:59 AM: INFO: Player cccc with connection ID MBiHnQOJabN63gZGFnOpRA has joined room aaaa.
+10/24/2024 12:33:01 AM: INFO: Player cccc queued a tower of category LongDistance at position (1,7).
+10/24/2024 12:34:08 AM: INFO: Player cccc queued a tower of category Heavy at position (5,0).
+10/24/2024 12:34:09 AM: INFO: Player cccc queued a tower of category Heavy at position (3,0).
+10/24/2024 12:36:12 AM: INFO: GameService initialized and game tick timer started.
+10/24/2024 12:36:16 AM: INFO: Player ccccc is attempting to join room aaa.
+10/24/2024 12:36:16 AM: INFO: New room created with code: aaa.
+10/24/2024 12:36:16 AM: INFO: ccccc has received Flame towers
+10/24/2024 12:36:16 AM: INFO: Player ccccc joined the game.
+10/24/2024 12:36:16 AM: INFO: Player ccccc with connection ID 6Ryd8PcVbZp5TcxdqkFgqA has joined room aaa.
+10/24/2024 12:36:19 AM: INFO: Player ccccc queued a tower of category LongDistance at position (1,4).
+10/24/2024 12:36:36 AM: INFO: Player ccccc queued a tower of category Heavy at position (5,1).
+10/24/2024 12:36:57 AM: INFO: Player cccccc is attempting to join room aaa.
+10/24/2024 12:37:10 AM: INFO: Player ccccc left the game.
+10/24/2024 12:37:10 AM: INFO: Player ccccc left room aaa.

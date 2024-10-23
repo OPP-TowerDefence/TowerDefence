@@ -4,7 +4,7 @@
     {
         public FlyingEnemy(int x, int y) : base(x, y )
         {
-            Health = 75;
+            Health = 25;
             Speed = 2;
         }
     }

@@ -3,6 +3,7 @@ using TowerDefense.Enums;
 using TowerDefense.Interfaces;
 using TowerDefense.Models.Enemies;
 using TowerDefense.Models.Towers;
+using TowerDefense.Models.WeaponUpgrades;
 using TowerDefense.Utils;
 
 namespace TowerDefense.Models;
@@ -13,6 +14,7 @@ public class GameState
 
     public bool GameStarted { get; private set; }
 
+    private readonly string _roomCode;
     private readonly List<TowerTypes> _availableTowerTypes;
     private readonly IHubContext<GameHub> _hubContext;
     private readonly List<Player> _players;
@@ -23,13 +25,14 @@ public class GameState
 
     public List<Player> Players => _players;
 
-    public GameState(IHubContext<GameHub> hubContext)
+    public GameState(IHubContext<GameHub> hubContext, string roomCode)
     {
         _availableTowerTypes = Enum
             .GetValues(typeof(TowerTypes))
             .Cast<TowerTypes>()
             .ToList();
 
+        _roomCode = roomCode;
         _enemyFactory = RandomEnemyFactory();
         _hubContext = hubContext;
         _players = [];
@@ -87,6 +90,17 @@ public class GameState
                 t.Y,
                 Category = t.Category.ToString(),
                 Type = t.Type.ToString()
+            })
+            .ToList();
+    }
+
+    public object GetMapBullets()
+    {
+        return Map.Bullets
+            .Select(b => new
+            {
+                b.X,
+                b.Y
             })
             .ToList();
     }
@@ -229,5 +243,59 @@ public class GameState
         }
 
         GameStarted = true;
+    }
+
+    private void UpdateBulletPositions()
+    {
+        if (Map.Bullets.Count == 0)
+        {
+            return;
+        }
+        var bullets = Map.Bullets.ToList();
+
+        foreach (var bullet in bullets)
+        {
+            var enemyToAttack = Map.Enemies.FirstOrDefault(e => e.Id == bullet.EnemyId);
+            if (enemyToAttack != null) 
+            {
+                bullet.Move(enemyToAttack.X, enemyToAttack.Y);
+
+                if (bullet.X == enemyToAttack.X && bullet.Y == enemyToAttack.Y)
+                {
+                    DamageEnemy(enemyToAttack, bullet.Damage);
+
+                    if (enemyToAttack.IsDead())
+                    {
+                        Map.Enemies.Remove(enemyToAttack);
+                    }
+
+                    Map.Bullets.Remove(bullet);
+                }
+            }
+            else
+            {
+                Map.Bullets.Remove(bullet);
+            
+            }
+        }
+    }
+
+    public void TowerAttack()
+    {
+        if(Map.Enemies.Count == 0 || Map.Towers.Count == 0)
+        {
+            return;
+        }
+        UpdateBulletPositions();
+
+        foreach (var tower in Map.Towers)
+        {
+            var towerBullets = tower.Shoot(Map.Enemies);
+            if (towerBullets.Count == 0)
+            {
+                continue;
+            }
+            Map.Bullets.AddRange(towerBullets);
+        }
     }
 }

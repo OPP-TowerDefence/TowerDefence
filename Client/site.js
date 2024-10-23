@@ -130,11 +130,11 @@ connection.on("OnResourceChanged", function (newResourceAmount) {
     updateResources(newResourceAmount);
 });
 
-connection.on("OnTick", function (map, mapEnemies) {
-    renderMap(map, mapEnemies);
+connection.on("OnTick", function (map, mapEnemies, mapBullets) {
+    renderMap(map, mapEnemies, mapBullets);
 });
 
-function renderMap(map, mapEnemies) {
+function renderMap(map, mapEnemies, mapBullets) {
     const gameMap = document.getElementById('gameMap');
     gameMap.innerHTML = '';
 
@@ -166,6 +166,15 @@ function renderMap(map, mapEnemies) {
 
         cell.style.gridColumnStart = enemy.x + 1;
         cell.style.gridRowStart = enemy.y + 1;
+    });
+
+    mapBullets.forEach(bullet => {
+        const bulletElement = document.createElement('div');
+        bulletElement.className = 'bullet'; // Add a class for bullets
+        gameMap.appendChild(bulletElement);
+
+        bulletElement.style.gridColumnStart = bullet.x + 1;
+        bulletElement.style.gridRowStart = bullet.y + 1;
     });
 }
 

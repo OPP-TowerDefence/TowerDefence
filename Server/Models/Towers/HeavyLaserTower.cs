@@ -7,6 +7,7 @@ namespace TowerDefense.Models.Towers
         public HeavyLaserTower(int x, int y) : base(x, y)
         {
             this.Cost = 200;
+            this.TicksToShoot = 8;
         }
     }
 }

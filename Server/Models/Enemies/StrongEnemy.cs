@@ -4,7 +4,7 @@
     {
         public StrongEnemy(int x, int y) : base(x, y)
         {
-            Health = 150;
+            Health = 30;
             Speed = 1;
         }
     }
