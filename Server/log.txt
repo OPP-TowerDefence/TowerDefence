@@ -1171,3 +1171,97 @@
 10/24/2024 1:06:49 AM: INFO: Player fasfa queued a tower of category LongDistance at position (6,2).
 10/24/2024 1:06:54 AM: INFO: Player fasfa left the game.
 10/24/2024 1:06:54 AM: INFO: Player fasfa left room fafsafa.
+10/24/2024 1:15:21 AM: INFO: Player fasf is attempting to join room fsafsa.
+10/24/2024 1:15:21 AM: INFO: New room created with code: fsafsa.
+10/24/2024 1:15:21 AM: INFO: fasf has received Flame towers
+10/24/2024 1:15:21 AM: INFO: Player fasf joined the game.
+10/24/2024 1:15:21 AM: INFO: Player fasf with connection ID U2xfMi88YjGEAZqMFoNHNw has joined room fsafsa.
+10/24/2024 1:15:24 AM: INFO: Player fasf queued a tower of category LongDistance at position (2,5).
+10/24/2024 1:15:27 AM: INFO: Player fasf queued a tower of category LongDistance at position (0,0).
+10/24/2024 1:15:30 AM: INFO: Player fasf queued a tower of category LongDistance at position (6,3).
+10/24/2024 1:15:31 AM: INFO: Player fasf queued a tower of category LongDistance at position (7,1).
+10/24/2024 1:15:31 AM: INFO: Player fasf queued a tower of category LongDistance at position (4,1).
+10/24/2024 1:15:32 AM: INFO: Player fasf left the game.
+10/24/2024 1:15:32 AM: INFO: Player fasf left room fsafsa.
+10/24/2024 1:15:53 AM: INFO: GameService initialized and game tick timer started.
+10/24/2024 1:15:56 AM: INFO: Player cccc is attempting to join room aaaa.
+10/24/2024 1:15:56 AM: INFO: New room created with code: aaaa.
+10/24/2024 1:15:56 AM: INFO: cccc has received Flame towers
+10/24/2024 1:15:56 AM: INFO: Player cccc joined the game.
+10/24/2024 1:15:56 AM: INFO: Player cccc with connection ID _RU-CiWb6O_w-BDJnlyj5g has joined room aaaa.
+10/24/2024 1:15:59 AM: INFO: Player cccc queued a tower of category LongDistance at position (6,5).
+10/24/2024 1:16:00 AM: INFO: Player cccc queued a tower of category LongDistance at position (0,0).
+10/24/2024 1:16:04 AM: INFO: Player cccc queued a tower of category LongDistance at position (1,5).
+10/24/2024 1:16:59 AM: INFO: Player cccc left the game.
+10/24/2024 1:16:59 AM: INFO: Player cccc left room aaaa.
+10/24/2024 1:17:37 AM: INFO: Player faasf is attempting to join room fasfa.
+10/24/2024 1:17:37 AM: INFO: New room created with code: fasfa.
+10/24/2024 1:17:37 AM: INFO: faasf has received Flame towers
+10/24/2024 1:17:37 AM: INFO: Player faasf joined the game.
+10/24/2024 1:17:37 AM: INFO: Player faasf with connection ID -DfeMDqxWqZTSVOIlVppjA has joined room fasfa.
+10/24/2024 1:17:40 AM: INFO: Player faasf queued a tower of category LongDistance at position (4,5).
+10/24/2024 1:17:41 AM: INFO: Player faasf queued a tower of category LongDistance at position (0,0).
+10/24/2024 1:17:43 AM: INFO: Player faasf queued a tower of category LongDistance at position (6,3).
+10/24/2024 1:18:34 AM: INFO: Player faasf left the game.
+10/24/2024 1:18:34 AM: INFO: Player faasf left room fasfa.
+10/24/2024 1:18:41 AM: INFO: Player asdfa is attempting to join room afds.
+10/24/2024 1:18:41 AM: INFO: New room created with code: afds.
+10/24/2024 1:18:41 AM: INFO: asdfa has received Flame towers
+10/24/2024 1:18:41 AM: INFO: Player asdfa joined the game.
+10/24/2024 1:18:41 AM: INFO: Player asdfa with connection ID 1F7mKZUHXD3r6JzJ49JPwg has joined room afds.
+10/24/2024 1:18:47 AM: INFO: Player asdfa left the game.
+10/24/2024 1:18:47 AM: INFO: Player asdfa left room afds.
+10/24/2024 1:18:59 AM: INFO: GameService initialized and game tick timer started.
+10/24/2024 1:19:01 AM: INFO: Player fasaf is attempting to join room fasf.
+10/24/2024 1:19:01 AM: INFO: New room created with code: fasf.
+10/24/2024 1:19:01 AM: INFO: fasaf has received Flame towers
+10/24/2024 1:19:01 AM: INFO: Player fasaf joined the game.
+10/24/2024 1:19:01 AM: INFO: Player fasaf with connection ID dx3ie3y2paQX1ewRDH-aug has joined room fasf.
+10/24/2024 1:21:12 AM: INFO: Player fasaf left the game.
+10/24/2024 1:21:12 AM: INFO: Player fasaf left room fasf.
+10/24/2024 1:21:14 AM: INFO: Player fas is attempting to join room fasf.
+10/24/2024 1:21:30 AM: INFO: GameService initialized and game tick timer started.
+10/24/2024 1:21:34 AM: INFO: Player sss is attempting to join room aaa.
+10/24/2024 1:21:34 AM: INFO: New room created with code: aaa.
+10/24/2024 1:21:34 AM: INFO: sss has received Flame towers
+10/24/2024 1:21:34 AM: INFO: Player sss joined the game.
+10/24/2024 1:21:34 AM: INFO: Player sss with connection ID EpiyhoeGEsKrJyPSaBg2BQ has joined room aaa.
+10/24/2024 1:21:36 AM: INFO: Player sss left the game.
+10/24/2024 1:21:36 AM: INFO: Player sss left room aaa.
+10/24/2024 1:21:45 AM: INFO: Player fsaf is attempting to join room fasf.
+10/24/2024 1:21:45 AM: INFO: New room created with code: fasf.
+10/24/2024 1:21:45 AM: INFO: fsaf has received Flame towers
+10/24/2024 1:21:45 AM: INFO: Player fsaf joined the game.
+10/24/2024 1:21:45 AM: INFO: Player fsaf with connection ID gnlDYf-2zMfkfiucpTpx8Q has joined room fasf.
+10/24/2024 1:21:47 AM: INFO: Player fsaf queued a tower of category LongDistance at position (5,5).
+10/24/2024 1:21:55 AM: INFO: Player fsaf queued a tower of category LongDistance at position (0,0).
+10/24/2024 1:22:04 AM: INFO: Player fsaf queued a tower of category LongDistance at position (5,3).
+10/24/2024 1:22:06 AM: INFO: Player fsaf queued a tower of category Heavy at position (8,3).
+10/24/2024 1:22:11 AM: INFO: Player fsaf queued a tower of category Heavy at position (1,5).
+10/24/2024 1:24:49 AM: INFO: GameService initialized and game tick timer started.
+10/24/2024 1:24:52 AM: INFO: Player fasf is attempting to join room fassf.
+10/24/2024 1:24:52 AM: INFO: New room created with code: fassf.
+10/24/2024 1:24:52 AM: INFO: fasf has received Flame towers
+10/24/2024 1:24:52 AM: INFO: Player fasf joined the game.
+10/24/2024 1:24:52 AM: INFO: Player fasf with connection ID 08KZ3hz3E2voBqQp5G3zMw has joined room fassf.
+10/24/2024 1:24:54 AM: INFO: Player fasf queued a tower of category LongDistance at position (5,6).
+10/24/2024 1:25:00 AM: INFO: Player fasf queued a tower of category LongDistance at position (5,2).
+10/24/2024 1:25:05 AM: INFO: Player fasf queued a tower of category LongDistance at position (0,0).
+10/24/2024 1:28:49 AM: INFO: GameService initialized and game tick timer started.
+10/24/2024 1:29:03 AM: INFO: Player aaaa is attempting to join room aaa.
+10/24/2024 1:29:03 AM: INFO: New room created with code: aaa.
+10/24/2024 1:29:03 AM: INFO: aaaa has received Flame towers
+10/24/2024 1:29:03 AM: INFO: Player aaaa joined the game.
+10/24/2024 1:29:03 AM: INFO: Player aaaa with connection ID Fxncs1_Pr40z47ahhRwruA has joined room aaa.
+10/24/2024 1:29:05 AM: INFO: Player aaaa queued a tower of category LongDistance at position (7,4).
+10/24/2024 1:29:44 AM: INFO: Player aaaa queued a tower of category LongDistance at position (3,5).
+10/24/2024 1:29:46 AM: INFO: Player aaaa queued a tower of category LongDistance at position (0,0).
+10/24/2024 1:31:40 AM: INFO: GameService initialized and game tick timer started.
+10/24/2024 1:31:44 AM: INFO: Player fasf is attempting to join room fafs.
+10/24/2024 1:31:44 AM: INFO: New room created with code: fafs.
+10/24/2024 1:31:44 AM: INFO: fasf has received Flame towers
+10/24/2024 1:31:44 AM: INFO: Player fasf joined the game.
+10/24/2024 1:31:44 AM: INFO: Player fasf with connection ID LfO3aDwvdalUsm2XGMNsSQ has joined room fafs.
+10/24/2024 1:31:46 AM: INFO: Player fasf queued a tower of category LongDistance at position (6,7).
+10/24/2024 1:31:57 AM: INFO: Player fasf queued a tower of category Heavy at position (8,4).
+10/24/2024 1:32:01 AM: INFO: Player fasf queued a tower of category LongDistance at position (7,1).

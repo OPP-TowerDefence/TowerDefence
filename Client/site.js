@@ -76,21 +76,6 @@ connection.on("GameStarted", function (message) {
     document.getElementById('gameMap').addEventListener('click', handleMapClick);
 });
 
-function handleMapClick(event) {
-    const bounds = event.target.getBoundingClientRect();
-    const x = event.clientX - bounds.left;
-    const y = event.clientY - bounds.top;
-    const gridX = Math.floor(x / 50);
-    const gridY = Math.floor(y / 50);
-
-    if (gridX >= 0 && gridX < mapWidth && gridY >= 0 && gridY < mapHeight) {
-        const roomCode = document.getElementById('roomCode').value;
-        connection.invoke("PlaceTower", roomCode, gridX, gridY, activeTowerCategory);
-    } else {
-        console.log('Tower placement is outside the grid boundaries.');
-    }
-}
-
 connection.on("UserJoined", function (username, players) {
     const messageList = document.getElementById('messagesList');
     const listItem = document.createElement('li');
@@ -202,3 +187,103 @@ function selectTowerCategory(towerCategory) {
 
     activeSelectionDiv.classList.add('active');
 }
+
+function handleMapClick(event) {
+    const bounds = event.target.getBoundingClientRect();
+    const x = event.clientX - bounds.left;
+    const y = event.clientY - bounds.top;
+    const gridX = Math.floor(x / 50);
+    const gridY = Math.floor(y / 50);
+
+    if (event.target.classList.contains('tower')) {
+        // Display upgrade options for the clicked tower
+        showUpgradeOptions(gridX, gridY);
+    } else {
+        console.log('Clicked area is not a tower or is outside grid boundaries.');
+    }
+}
+
+function handleMapClick(event) {
+    const bounds = event.target.getBoundingClientRect();
+    const x = event.clientX - bounds.left;
+    const y = event.clientY - bounds.top;
+    const gridX = Math.floor(x / 50);
+    const gridY = Math.floor(y / 50);
+
+    if (gridX >= 0 && gridX < mapWidth && gridY >= 0 && gridY < mapHeight) {
+        if (event.target.classList.contains('tower')) {
+            showUpgradeOptions(gridX, gridY, event.target);
+        } else {
+            const roomCode = document.getElementById('roomCode').value;
+            connection.invoke("PlaceTower", roomCode, gridX, gridY, activeTowerCategory);
+        }
+    } else {
+        console.log('Clicked area is outside the grid boundaries.');
+    }
+}
+
+
+function showUpgradeOptions(x, y) {
+    const existingMenu = document.querySelector('.upgrade-options');
+    const overlay = document.querySelector('.overlay');
+    if (existingMenu) {
+        existingMenu.remove();
+        overlay.remove(); 
+    }
+
+    const overlayDiv = document.createElement('div');
+    overlayDiv.className = 'overlay';
+    overlayDiv.onclick = function(event) {
+
+    const upgradeDiv = document.querySelector('.upgrade-options');
+    if (upgradeDiv) {
+        upgradeDiv.remove();
+    }
+    overlayDiv.remove();
+};
+
+document.body.appendChild(overlayDiv);
+
+    const upgradeDiv = document.createElement('div');
+    upgradeDiv.className = 'upgrade-options';
+    upgradeDiv.innerHTML = '<h2>Upgrade</h2>'; 
+
+    const upgrades = ['Double Damage', 'Burst', 'Double Bullet'];
+    upgrades.forEach(upgrade => {
+        const upgradeButton = document.createElement('button');
+        upgradeButton.textContent = upgrade;
+        upgradeButton.className = 'upgrade-button';
+        upgradeButton.onclick = function() {
+            connection.invoke("UpgradeTower", document.getElementById('roomCode').value, x, y, upgrade);
+            upgradeDiv.remove(); 
+            overlayDiv.remove();
+        };
+        upgradeDiv.appendChild(upgradeButton);
+    });
+
+    document.body.appendChild(overlayDiv);
+    document.body.appendChild(upgradeDiv);
+
+
+    upgradeDiv.style.position = 'fixed';
+    upgradeDiv.style.top = '50%';
+    upgradeDiv.style.left = '50%';
+    upgradeDiv.style.transform = 'translate(-50%, -50%)';
+}
+
+document.addEventListener('click', function(event) {
+    const upgradeDiv = document.querySelector('.upgrade-options');
+    const overlay = document.querySelector('.overlay');
+    if (overlay && event.target === overlay) {
+        if (upgradeDiv) {
+            upgradeDiv.remove();
+        }
+        overlay.remove();
+    }
+}, true);
+
+
+
+
+
+
