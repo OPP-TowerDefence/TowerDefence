@@ -63,13 +63,9 @@ public class GameState
     {
         _enemyFactory = RandomEnemyFactory();
 
-        var enemy = _enemyFactory.CreateEnemy(8, 9);
-        var enemy2 = _enemyFactory.CreateEnemy(1, 9);
-        var enemy3 = _enemyFactory.CreateEnemy(5, 9);
+        var enemy = _enemyFactory.CreateEnemy(0, 0);
 
         Map.Enemies.Add(enemy);
-        Map.Enemies.Add(enemy2);
-        Map.Enemies.Add(enemy3);
     }
 
     public void UpdateEnemies()

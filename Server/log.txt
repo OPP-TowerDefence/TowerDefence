@@ -1684,3 +1684,11 @@
 10/24/2024 4:40:35 AM: INFO: Player fasfa queued a tower of category Heavy at position (5,2).
 10/24/2024 4:40:48 AM: INFO: Player fasfa left the game.
 10/24/2024 4:40:48 AM: INFO: Player fasfa left room fasfa.
+10/24/2024 4:42:06 AM: INFO: GameService initialized and game tick timer started.
+10/24/2024 4:42:40 AM: INFO: Player fasf is attempting to join room fasf.
+10/24/2024 4:42:40 AM: INFO: New room created with code: fasf.
+10/24/2024 4:42:40 AM: INFO: fasf has received Flame towers
+10/24/2024 4:42:40 AM: INFO: Player fasf joined the game.
+10/24/2024 4:42:40 AM: INFO: Player fasf with connection ID L-S1LUfHLdqNeLUh4sAJqg has joined room fasf.
+10/24/2024 4:42:47 AM: INFO: Player fasf queued a tower of category Heavy at position (4,4).
+10/24/2024 4:43:04 AM: INFO: Player fasf queued a tower of category LongDistance at position (7,4).

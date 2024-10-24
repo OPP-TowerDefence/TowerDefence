@@ -12,7 +12,6 @@ namespace TowerDefense.Models.WeaponUpgrades
 
         public override List<Bullet> Shoot(Tower tower, List<Enemy> enemies, int damage, int numbEnemies)
         {
-            Console.WriteLine("double shoot");
             var bullets = base.Shoot(tower, enemies, damage, numbEnemies);
             var resultBullets = new List<Bullet>();
 
