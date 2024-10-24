@@ -37,7 +37,7 @@ async function joinRoom() {
 
         const towerSelectionBar = document.getElementById('towerSelectionBar');
         towerSelectionBar.classList.remove('hidden');
-        towerSelectionBar.style.display = 'flex';
+        towerSelectionBar.style.display = 'block';
 
         activeSelectionDiv.classList.add('active');
 
@@ -176,8 +176,7 @@ function renderMap(map, mapEnemies, mapBullets) {
 }
 
 function updateResources(resources) {
-    const resourcesDisplay = document.getElementById('resourcesDisplay');
-    resourcesDisplay.textContent = `Resources: ${resources}`;
+    document.getElementById('resourcesDisplay').textContent = `Resources: ${resources}`;
 }
 
 connection.start().catch(function (err) {
@@ -198,6 +197,10 @@ function selectTowerCategory(towerCategory) {
     }
 
     activeSelectionDiv.classList.add('active');
+}
+
+function undoTower() {
+    connection.invoke("UndoTower", document.getElementById('roomCode').value);
 }
 
 function handleMapClick(event) {
@@ -225,6 +228,7 @@ function handleMapClick(event) {
 function showUpgradeOptions(gridX, gridY, appliedUpgrades) {
     const existingMenu = document.querySelector('.upgrade-options');
     const overlay = document.querySelector('.overlay');
+
     if (existingMenu) {
         existingMenu.remove();
         overlay.remove();
@@ -232,6 +236,7 @@ function showUpgradeOptions(gridX, gridY, appliedUpgrades) {
 
     const overlayDiv = document.createElement('div');
     overlayDiv.className = 'overlay';
+
     overlayDiv.onclick = function(event) {
         event.stopPropagation();
         overlayDiv.remove();
@@ -248,20 +253,25 @@ function showUpgradeOptions(gridX, gridY, appliedUpgrades) {
     if (availableUpgrades.length === 0) {
         const noUpgradesMsg = document.createElement('p');
         noUpgradesMsg.textContent = 'No upgrades available.';
+
         upgradeDiv.appendChild(noUpgradesMsg);
     } else {
         availableUpgrades.forEach(upgrade => {
             const upgradeButton = document.createElement('button');
-            // Format the upgrade name for display
-            const upgradeText = upgrade.replace(/([A-Z])/g, ' $1').trim();
-            upgradeButton.textContent = upgradeText;
             upgradeButton.className = 'upgrade-button';
+
+            // Format the upgrade name for display
+            upgradeButton.textContent = upgrade
+                .replace(/([A-Z])/g, ' $1')
+                .trim();
+
             upgradeButton.onclick = function() {
                 const upgradeType = upgradeMap[upgrade];
                 connection.invoke("UpgradeTower", document.getElementById('roomCode').value, gridX, gridY, upgradeType);
                 overlayDiv.remove();
                 upgradeDiv.remove();
             };
+
             upgradeDiv.appendChild(upgradeButton);
         });
     }
@@ -275,19 +285,19 @@ function showUpgradeOptions(gridX, gridY, appliedUpgrades) {
     upgradeDiv.style.transform = 'translate(-50%, -50%)';
 }
 
-document.addEventListener('click', function(event) {
-    const upgradeDiv = document.querySelector('.upgrade-options');
-    const overlay = document.querySelector('.overlay');
-    if (overlay && event.target === overlay) {
-        if (upgradeDiv) {
-            upgradeDiv.remove();
+document.addEventListener(
+    'click',
+    function(event) {
+        const upgradeDiv = document.querySelector('.upgrade-options');
+        const overlay = document.querySelector('.overlay');
+
+        if (overlay && event.target === overlay) {
+            if (upgradeDiv) {
+                upgradeDiv.remove();
+            }
+
+            overlay.remove();
         }
-        overlay.remove();
-    }
-}, true);
-
-
-
-
-
-
+    },
+    true
+);

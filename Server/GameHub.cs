@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using TowerDefense.Enums;
 using TowerDefense.Models;
+using TowerDefense.Models.Commands;
 using TowerDefense.Services;
 
 namespace TowerDefense;
@@ -77,7 +78,20 @@ public class GameHub(GameService gameService, Interfaces.ILogger logger) : Hub
     {
         if (_gameService.Rooms.TryGetValue(roomCode, out var gameState))
         {
-             gameState.QueueTowerPlacement(x, y, Context.ConnectionId, towerCategory);
+            var player = gameState.Players.FirstOrDefault(p => p.ConnectionId == Context.ConnectionId);
+
+            if (player is not null)
+            {
+                var tower = player.CreateTower(x, y, towerCategory);
+
+                var command = new PlaceTowerCommand(gameState.Map, tower);
+
+                gameState.ProcessCommand(player.ConnectionId, command);
+            }
+            else
+            {
+                _logger.LogError("Failed to place tower: Player not found.");
+            }
         }
         else
         {
@@ -98,6 +112,27 @@ public class GameHub(GameService gameService, Interfaces.ILogger logger) : Hub
         else
         {
             _logger.LogError($"Could not start game: room code {roomCode} does not exist or the game has already started.");
+        }
+    }
+
+    public async Task UndoTower(string roomCode)
+    {
+        if (_gameService.Rooms.TryGetValue(roomCode, out var gameState))
+        {
+            var player = gameState.Players.FirstOrDefault(p => p.ConnectionId == Context.ConnectionId);
+
+            if (player is not null)
+            {
+                gameState.UndoLastCommand(player.ConnectionId);
+            }
+            else
+            {
+                _logger.LogError("Failed to undo tower: Player not found.");
+            }
+        }
+        else
+        {
+            _logger.LogError($"Failed to undo tower: room code {roomCode} does not exist.");
         }
     }
 
