@@ -38,8 +38,6 @@ public class GameService
 
             try
             {
-                gameState.ProcessTowerPlacements();
-
                 if (_timeSinceLastSpawn >= SpawnInterval)
                 {
                     gameState.SpawnEnemies();

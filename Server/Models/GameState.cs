@@ -2,7 +2,6 @@
 using TowerDefense.Enums;
 using TowerDefense.Interfaces;
 using TowerDefense.Models.Enemies;
-using TowerDefense.Models.Towers;
 using TowerDefense.Models.WeaponUpgrades;
 using TowerDefense.Utils;
 
@@ -10,110 +9,74 @@ namespace TowerDefense.Models;
 
 public class GameState
 {
-    public Map Map { get; } = new Map(10, 10);
-    public int Health { get; set; }
-    public bool GameStarted { get; private set; }
-
+    private const int _commandHistoryLimit = 3;
     private const int _maxHealth = 100;
-    private readonly string _roomCode;
+
     private readonly List<TowerTypes> _availableTowerTypes;
     private readonly IHubContext<GameHub> _hubContext;
+    private readonly LevelManager _levelManager;
+    private readonly Dictionary<string, LinkedList<ICommand>> _playerCommands = [];
     private readonly List<Player> _players;
     private readonly ResourceManager _resourceManager;
-    private readonly Queue<Tower> _towerPlacementQueue;
-    private readonly LevelManager _levelManager;
+    private readonly string _roomCode;
 
-    private IEnemyFactory _enemyFactory;
-
+    public bool GameStarted { get; private set; }
+    public int Health { get; set; } = _maxHealth;
+    public Map Map { get; } = new Map(10, 10);
     public List<Player> Players => _players;
 
     public GameState(IHubContext<GameHub> hubContext, string roomCode)
     {
+        _hubContext = hubContext;
+        _players = [];
+        _resourceManager = new();
+        _roomCode = roomCode;
+
         _availableTowerTypes = Enum
             .GetValues(typeof(TowerTypes))
             .Cast<TowerTypes>()
             .ToList();
 
-        _roomCode = roomCode;
-        _enemyFactory = RandomEnemyFactory();
-        _hubContext = hubContext;
-        _players = [];
-        _resourceManager = new();
-        _towerPlacementQueue = new();
         _levelManager = new LevelManager(new LevelProgressionFacade(this, Map.Enemies, Map.Towers));
         _levelManager.OnLevelChanged += NotifyLevelChange;
-        Health = _maxHealth;
     }
 
-    private void NotifyLevelChange(int newLevel)
+    public void AddPlayer(string username, string connectionId)
     {
-        _hubContext.Clients.Group(_roomCode).SendAsync("LevelChanged", newLevel);
-    }
-
-    public void IncreaseHealth(int amount)
-    {
-        Health = Math.Min(Health + amount, _maxHealth);
-    }
-
-    public void DeacreaseHealth(int amount)
-    {
-        Health = Math.Max(0, Health - amount);
-    }
-
-    private IEnemyFactory RandomEnemyFactory()
-    {
-        Random rand = new Random();
-        int enemyType = rand.Next(0, 3);
-
-        switch (enemyType)
+        if (!_players.Any(p => p.ConnectionId == connectionId))
         {
-            case 0:
-                return new FastEnemyFactory();
-            case 1:
-                return new StrongEnemyFactory();
-            case 2:
-                return new FlyingEnemyFactory();
-            default:
-                Logger.Instance.LogError($"Unknown enemy type {enemyType} generated in RandomEnemyFactory.");
-                throw new Exception("Unknown enemy type");
-        }
-    }
-
-    public void SpawnEnemies()
-    {
-        _enemyFactory = RandomEnemyFactory();
-
-        var enemy = _enemyFactory.CreateEnemy(0, 0);
-
-        Map.Enemies.Add(enemy);
-
-        _levelManager.OnEnemySpawned();
-    }
-
-    public void UpdateEnemies()
-    {
-        foreach (var enemy in Map.Enemies.ToList())
-        {
-            enemy.MoveTowardsTarget();
-
-            if (enemy.HasReachedDestination())
+            if (_availableTowerTypes.Count > 0)
             {
-                DeacreaseHealth(5);
-                DamageEnemy(enemy, enemy.Health);
+                var playerTowerType = _availableTowerTypes.First();
+
+                var player = new Player(username, connectionId, playerTowerType, _hubContext);
+
+                _players.Add(player);
+                _resourceManager.Attach(player);
+
+                _availableTowerTypes.Remove(playerTowerType);
+
+                Logger.Instance.LogInfo($"Player {username} joined the game.");
+            }
+            else
+            {
+                Logger.Instance.LogError($"Player {username} could not be added. No available tower types left to assign to a new player.");
             }
         }
     }
 
-    public object GetMapTowers()
+    public void DecreaseHealth(int amount)
     {
-        return Map.Towers
-            .Select(t => new 
-            { 
-                t.X,
-                t.Y,
-                Category = t.Category.ToString(),
-                Type = t.Type.ToString(),
-                AppliedUpgrades = t.AppliedUpgrades.Select(u => u.ToString()).ToList()
+        Health = Math.Max(0, Health - amount);
+    }
+
+    public IEnumerable<object> GetActivePlayers()
+    {
+        return _players
+            .Select(p => new
+            {
+                Username = p.Username,
+                TowerType = p.TowerType.ToString()
             })
             .ToList();
     }
@@ -142,86 +105,51 @@ public class GameState
             .ToList();
     }
 
-    public bool IsOccupied(int x, int y)
+    public object GetMapTowers()
     {
-        return Map.Towers.Any(t => t.X == x && t.Y == y);
-    }
-
-    private bool IsValidPosition(int x, int y)
-    {
-        return x >= 0 && x < Map.Width && y >= 0 && y < Map.Height;
-    }
-
-    private void PlaceTower(Tower tower)
-    {
-        if (!IsOccupied(tower.X, tower.Y) && IsValidPosition(tower.X, tower.Y))
-        {
-            Map.Towers.Add(tower);
-        }
-        else
-        {
-            Logger.Instance.LogError($"Unable to place tower at position ({tower.X},{tower.Y}). Position is either occupied or invalid.");
-        }
-    }
-
-    public void ProcessTowerPlacements()
-    {
-        while (_towerPlacementQueue.Count > 0)
-        {
-            var tower  = _towerPlacementQueue.Dequeue();
-
-            PlaceTower(tower);
-        }
-    }
-
-    public void QueueTowerPlacement(int x, int y, string connectionId, TowerCategories towerCategory)
-    {
-        if (IsValidPosition(x, y) && !IsOccupied(x, y))
-        {
-            var player = _players.FirstOrDefault(p => p.ConnectionId == connectionId);
-
-            if (player != null)
+        return Map.Towers
+            .Select(t => new
             {
-                _towerPlacementQueue.Enqueue(player.CreateTower(x, y, towerCategory));
-
-                Logger.Instance.LogInfo($"Player {player.Username} queued a tower of category {towerCategory} at position ({x},{y}).");
-            }
-            else
-            {
-                Logger.Instance.LogError($"Unable to queue tower. Player with connection ID {connectionId} was not found.");
-            }
-        }
+                t.X,
+                t.Y,
+                Category = t.Category.ToString(),
+                Type = t.Type.ToString(),
+                AppliedUpgrades = t.AppliedUpgrades.Select(u => u.ToString()).ToList()
+            })
+            .ToList();
     }
 
-    public void AddPlayer(string username, string connectionId)
+    public void IncreaseHealth(int amount)
     {
-        if (!_players.Any(p => p.ConnectionId == connectionId))
+        Health = Math.Min(Health + amount, _maxHealth);
+    }
+
+    public void ProcessCommand(ICommand command, string connectionId)
+    {
+        var player = _players.FirstOrDefault(p => p.ConnectionId == connectionId);
+
+        if (!_playerCommands.ContainsKey(connectionId))
         {
-            if (_availableTowerTypes.Count > 0)
-            {
-                var playerTowerType = _availableTowerTypes.First();
-
-                var player = new Player(username, connectionId, playerTowerType, _hubContext);
-
-                _players.Add(player);
-                _resourceManager.Attach(player);
-
-                _availableTowerTypes.Remove(playerTowerType);
-
-                Logger.Instance.LogInfo($"Player {username} joined the game.");
-            }
-            else
-            {
-                Logger.Instance.LogError($"Player {username} could not be added. No available tower types left to assign to a new player.");
-            }
+            _playerCommands[connectionId] = new();
         }
+
+        var commands = _playerCommands[connectionId];
+
+        if (commands.Count >= _commandHistoryLimit)
+        {
+            commands.RemoveLast();
+        }
+
+        commands.AddFirst(command);
+
+        command.Execute();
     }
 
     public void RemovePlayer(string connectionId)
     {
         var player = _players.FirstOrDefault(p => p.ConnectionId == connectionId);
 
-        if (player != null)
+        if (player is not null)
         {
             _availableTowerTypes.Add(player.TowerType);
 
@@ -236,15 +164,105 @@ public class GameState
         }
     }
 
-    public IEnumerable<object> GetActivePlayers()
+    public void SpawnEnemies()
     {
-        return _players
-            .Select(p => new
+        var enemy = GetRandomEnemyFactory()
+            .CreateEnemy(0, 0);
+
+        Map.Enemies.Add(enemy);
+
+        _levelManager.OnEnemySpawned();
+    }
+
+    public void StartGame(string connectionId)
+    {
+        if (!_players.Any(p => string.Equals(p.ConnectionId, connectionId)))
+        {
+            throw new Exception($"Game could not be started. The user with connection ID {connectionId} is not in the game.");
+        }
+
+        GameStarted = true;
+    }
+
+    public void TowerAttack()
+    {
+        if (Map.Enemies.Count == 0 || Map.Towers.Count == 0)
+        {
+            return;
+        }
+
+        UpdateBulletPositions();
+
+        foreach (var tower in Map.Towers.ToList())
+        {
+            var towerBullets = tower.Shoot(Map.Enemies);
+
+            if (towerBullets.Count == 0)
             {
-                Username = p.Username,
-                TowerType = p.TowerType.ToString()
-            })
-            .ToList();
+                continue;
+            }
+
+            Map.Bullets.AddRange(towerBullets);
+        }
+    }
+
+    public ICommand? UndoLastCommand(string connectionId)
+    {
+        if (_playerCommands.TryGetValue(connectionId, out var commands) && commands.Any())
+        {
+            var command = commands.First();
+
+            command.Undo();
+
+            commands.RemoveFirst();
+
+            return command;
+        }
+
+        return default;
+    }
+
+    public void UpdateEnemies()
+    {
+        foreach (var enemy in Map.Enemies.ToList())
+        {
+            //enemy.MoveTowardsTarget();
+
+            if (enemy.HasReachedDestination())
+            {
+                DecreaseHealth(5);
+                DamageEnemy(enemy, enemy.Health);
+            }
+        }
+    }
+
+    public void UpgradeTower(int x, int y, TowerUpgrades towerUpgrade)
+    {
+        var tower = Map.Towers.FirstOrDefault(t => t.X == x && t.Y == y);
+
+        if (tower is null)
+        {
+            Logger.Instance.LogError($"Unable to upgrade tower at position ({x},{y}). Tower not found.");
+
+            return;
+        }
+
+        if (tower.AppliedUpgrades.Contains(towerUpgrade))
+        {
+            Logger.Instance.LogError($"Tower at position ({x},{y}) already has upgrade {towerUpgrade}.");
+
+            return;
+        }
+
+        tower.Weapon = towerUpgrade switch
+        {
+            TowerUpgrades.Burst => new Burst(tower.Weapon),
+            TowerUpgrades.DoubleDamage => new DoubleDamage(tower.Weapon),
+            TowerUpgrades.DoubleBullet => new DoubleBullet(tower.Weapon),
+            _ => throw new Exception("Unknown tower upgrade")
+        };
+
+        tower.AppliedUpgrades.Add(towerUpgrade);
     }
 
     private void DamageEnemy(Enemy enemy, int damage)
@@ -259,14 +277,29 @@ public class GameState
         }
     }
 
-    public void StartGame(string connectionId)
+    private IEnemyFactory GetRandomEnemyFactory()
     {
-        if (!_players.Any(p => string.Equals(p.ConnectionId, connectionId)))
-        {
-            throw new Exception($"Game could not be started. The user with connection ID {connectionId} is not in the game.");
-        }
+        Random rand = new();
 
-        GameStarted = true;
+        int enemyType = rand.Next(0, 3);
+
+        switch (enemyType)
+        {
+            case 0:
+                return new FastEnemyFactory();
+            case 1:
+                return new StrongEnemyFactory();
+            case 2:
+                return new FlyingEnemyFactory();
+            default:
+                Logger.Instance.LogError($"Unknown enemy type {enemyType} generated in RandomEnemyFactory.");
+                throw new Exception("Unknown enemy type");
+        }
+    }
+
+    private void NotifyLevelChange(int newLevel)
+    {
+        _hubContext.Clients.Group(_roomCode).SendAsync("LevelChanged", newLevel);
     }
 
     private void UpdateBulletPositions()
@@ -275,12 +308,14 @@ public class GameState
         {
             return;
         }
+
         var bullets = Map.Bullets.ToList();
 
         foreach (var bullet in bullets)
         {
             var enemyToAttack = Map.Enemies.FirstOrDefault(e => e.Id == bullet.EnemyId);
-            if (enemyToAttack != null) 
+
+            if (enemyToAttack is not null)
             {
                 bullet.Move(enemyToAttack.X, enemyToAttack.Y);
 
@@ -294,56 +329,7 @@ public class GameState
             else
             {
                 Map.Bullets.Remove(bullet);
-            
             }
         }
-    }
-
-    public void TowerAttack()
-    {
-        if(Map.Enemies.Count == 0 || Map.Towers.Count == 0)
-        {
-            return;
-        }
-        UpdateBulletPositions();
-
-        var towers = Map.Towers.ToList();
-
-        foreach (var tower in towers)
-        {
-            var towerBullets = tower.Shoot(Map.Enemies);
-            if (towerBullets.Count == 0)
-            {
-                continue;
-            }
-            Map.Bullets.AddRange(towerBullets);
-        }
-    }
-
-    public void UpgradeTower(int x, int y, TowerUpgrades towerUpgrade)
-    {
-        var tower = Map.Towers.FirstOrDefault(t => t.X == x && t.Y == y);
-
-        if (tower == null)
-        {
-            Logger.Instance.LogError($"Unable to upgrade tower at position ({x},{y}). Tower not found.");
-            return;
-        }
-
-        if (tower.AppliedUpgrades.Contains(towerUpgrade))
-        {
-            Logger.Instance.LogError($"Tower at position ({x},{y}) already has upgrade {towerUpgrade}.");
-            return;
-        }
-
-        tower.Weapon = towerUpgrade switch
-        {
-            TowerUpgrades.Burst => new Burst(tower.Weapon),
-            TowerUpgrades.DoubleDamage => new DoubleDamage(tower.Weapon),
-            TowerUpgrades.DoubleBullet => new DoubleBullet(tower.Weapon),
-            _ => throw new Exception("Unknown tower upgrade")
-        };
-
-        tower.AppliedUpgrades.Add(towerUpgrade);
     }
 }

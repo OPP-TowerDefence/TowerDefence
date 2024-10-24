@@ -1,13 +1,35 @@
-﻿using System.Xml.Serialization;
-using TowerDefense.Enums;
-using TowerDefense.Interfaces;
+﻿using TowerDefense.Enums;
 
 namespace TowerDefense.Models.Towers
 {
-    public class FlameTowerBuilder : TowerBuilder
+    public class FlameTowerBuilder(TowerCategories category) : TowerBuilder(category)
     {
-        public FlameTowerBuilder(TowerCategories category) : base(category)
+        public override FlameTowerBuilder AddArmor()
         {
+            if (_category == TowerCategories.Heavy)
+            {
+                _tower.Armor = new Armor("Heat Shield", 10);
+            }
+            else
+            {
+                _tower.Armor = new Armor("Heat Shield", 5);
+            }
+
+            return this;
+        }
+
+        public override FlameTowerBuilder AddWeapon()
+        {
+            if (_category == TowerCategories.Heavy)
+            {
+                _tower.Weapon = new Weapon("Flame cannon", 10, 10, 2);
+            }
+            else
+            {
+                _tower.Weapon = new Weapon("Flame Gun", 3, 10, 4);
+            }
+
+            return this;
         }
 
         public override FlameTowerBuilder BuildBase(int x, int y)
@@ -20,35 +42,10 @@ namespace TowerDefense.Models.Towers
             {
                 _tower = new LongDistanceFlameTower(x, y);
             }
+
             return this;
         }
-
-        public override FlameTowerBuilder AddWeapon()
-        {
-            if (_category == TowerCategories.Heavy)
-            {
-                _tower.Weapon = new Weapon("Flame cannon", 10, 10, 4);
-            }
-            else
-            {
-                _tower.Weapon = new Weapon("Flame Gun", 3, 10, 10);
-            }
-            return this;
-        }
-
-        public override FlameTowerBuilder AddArmor()
-        {
-            if (_category == TowerCategories.Heavy)
-            {
-                _tower.Armor = new Armor("Heat Shield", 10);
-            }
-            else
-            {
-                _tower.Armor = new Armor("Heat Shield", 5);
-            }
-            return this;
-        }
-
+     
         public override Tower GetResult()
         {
             return _tower;
