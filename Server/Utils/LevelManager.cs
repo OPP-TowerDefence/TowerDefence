@@ -1,31 +1,27 @@
 ﻿namespace TowerDefense.Utils
 {
-    public class LevelManager
+    public class LevelManager(LevelProgressionFacade levelFacade)
     {
-        private int enemiesSpawned = 0;
-        private int baseEnemiesPerLevel = 10;
-        private int currentLevel = 1;
-        private LevelProgressionFacade _levelFacade;
+        private int _enemiesSpawned = 0;
+        private int _baseEnemiesPerLevel = 10;
+        private int _currentLevel = 1;
 
-        public LevelManager(LevelProgressionFacade levelFacade)
-        {
-            _levelFacade = levelFacade;
-        }
+        private readonly LevelProgressionFacade _levelFacade = levelFacade;
 
         public event Action<int>? OnLevelChanged;
 
         public void OnEnemySpawned()
         {
-            enemiesSpawned++;
+            _enemiesSpawned++;
 
-            int enemiesRequiredForNextLevel = baseEnemiesPerLevel * currentLevel * (currentLevel + 1) / 2;
+            int enemiesRequiredForNextLevel = _baseEnemiesPerLevel * _currentLevel * (_currentLevel + 1) / 2;
 
-            if (enemiesSpawned >= enemiesRequiredForNextLevel)
+            if (_enemiesSpawned >= enemiesRequiredForNextLevel)
             {
                 _levelFacade.IncreaseLevel();
-                currentLevel = _levelFacade.GetCurrentLevel();
+                _currentLevel = _levelFacade.GetCurrentLevel();
 
-                OnLevelChanged?.Invoke(currentLevel);
+                OnLevelChanged?.Invoke(_currentLevel);
             }
         }
     }

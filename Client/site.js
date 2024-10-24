@@ -123,8 +123,7 @@ connection.on("OnResourceChanged", function (newResourceAmount) {
 });
 
 connection.on("LevelChanged", (level) => {
-    const levelDisplay = document.getElementById("levelDisplay");
-    levelDisplay.textContent = `Level: ${level}`;
+    document.getElementById("levelDisplay").textContent = `Level: ${level}`;
 });
 
 connection.on("OnTick", function (map, mapEnemies, mapBullets) {

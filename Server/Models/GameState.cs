@@ -12,10 +12,9 @@ public class GameState
 {
     public Map Map { get; } = new Map(10, 10);
     public int Health { get; set; }
-    private const int maxHealth = 100;
-
     public bool GameStarted { get; private set; }
 
+    private const int _maxHealth = 100;
     private readonly string _roomCode;
     private readonly List<TowerTypes> _availableTowerTypes;
     private readonly IHubContext<GameHub> _hubContext;
@@ -43,7 +42,7 @@ public class GameState
         _towerPlacementQueue = new();
         _levelManager = new LevelManager(new LevelProgressionFacade(this, Map.Enemies, Map.Towers));
         _levelManager.OnLevelChanged += NotifyLevelChange;
-        Health = maxHealth;
+        Health = _maxHealth;
     }
 
     private void NotifyLevelChange(int newLevel)
@@ -53,7 +52,7 @@ public class GameState
 
     public void IncreaseHealth(int amount)
     {
-        Health = Math.Min(Health + amount, maxHealth);
+        Health = Math.Min(Health + amount, _maxHealth);
     }
 
     public void DeacreaseHealth(int amount)
