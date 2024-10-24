@@ -15,9 +15,9 @@ namespace TowerDefense.Models.WeaponUpgrades
             return base.GetDamage()*2;
         }
 
-        public override List<Bullet> Shoot(Tower tower, List<Enemy> enemies, int numb)
+        public override List<Bullet> Shoot(Tower tower, List<Enemy> enemies, int damage, int numbEnemies)
         {
-            return base.Shoot(tower, enemies);
+            return base.Shoot(tower, enemies, GetDamage());
         }
     }
 }

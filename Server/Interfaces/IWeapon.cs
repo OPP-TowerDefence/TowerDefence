@@ -6,7 +6,7 @@ namespace TowerDefense.Interfaces
 {
     public interface IWeapon
     {
-        public List<Bullet> Shoot(Tower tower, List<Enemy> enemies, int numb = 1);
+        public List<Bullet> Shoot(Tower tower, List<Enemy> enemies, int damage,  int numb = 1);
         public int GetDamage();
     }
 }

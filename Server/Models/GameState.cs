@@ -63,9 +63,13 @@ public class GameState
     {
         _enemyFactory = RandomEnemyFactory();
 
-        var enemy = _enemyFactory.CreateEnemy(0, 0);
+        var enemy = _enemyFactory.CreateEnemy(8, 9);
+        var enemy2 = _enemyFactory.CreateEnemy(1, 9);
+        var enemy3 = _enemyFactory.CreateEnemy(5, 9);
 
         Map.Enemies.Add(enemy);
+        Map.Enemies.Add(enemy2);
+        Map.Enemies.Add(enemy3);
     }
 
     public void UpdateEnemies()
@@ -283,7 +287,9 @@ public class GameState
         }
         UpdateBulletPositions();
 
-        foreach (var tower in Map.Towers)
+        var towers = Map.Towers.ToList();
+
+        foreach (var tower in towers)
         {
             var towerBullets = tower.Shoot(Map.Enemies);
             if (towerBullets.Count == 0)
@@ -292,5 +298,25 @@ public class GameState
             }
             Map.Bullets.AddRange(towerBullets);
         }
+    }
+
+    public void UpgradeTower(int x, int y, TowerUpgrades towerUpgrade)
+    {
+        var tower = Map.Towers.FirstOrDefault(t => t.X == x && t.Y == y);
+
+        if (tower == null)
+        {
+            Logger.Instance.LogError($"Unable to upgrade tower at position ({x},{y}). Tower not found.");
+            return;
+        }
+
+        tower.Weapon = towerUpgrade switch
+        {
+            TowerUpgrades.Burst => new Burst(tower.Weapon),
+            TowerUpgrades.DoubleDamage => new DoubleDamage(tower.Weapon),
+            TowerUpgrades.DoubleBullet => new DoubleBullet(tower.Weapon),
+            _ => throw new Exception("Unknown tower upgrade")
+        };
+        Console.WriteLine(tower.Weapon.GetType().Name);
     }
 }

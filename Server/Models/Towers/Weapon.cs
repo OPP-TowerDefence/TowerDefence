@@ -9,7 +9,7 @@ namespace TowerDefense.Models.Towers
     public class Weapon : IWeapon
     {
         public string Name { get; set; }
-        public int Damage { get; set; }
+        public  int Damage { get; set; }
         public int Speed { get; set; }
         public int Range { get; set; }
 
@@ -21,7 +21,7 @@ namespace TowerDefense.Models.Towers
             Speed = speed;
         }
 
-        public List<Bullet> Shoot(Tower tower, List<Enemy> enemies, int numb = 1)
+        public List<Bullet> Shoot(Tower tower, List<Enemy> enemies, int damage, int numbEnemies = 1)
         {
             var bullets = new List<Bullet>();
             if(enemies == null || enemies.Count == 0)
@@ -29,10 +29,10 @@ namespace TowerDefense.Models.Towers
                 return bullets;
             }
 
-            var nearestEnemy = CalculateNearestEnemies(tower, enemies, numb);
+            var nearestEnemy = CalculateNearestEnemies(tower, enemies, numbEnemies);
             foreach (var enemy in nearestEnemy)
             {
-                bullets.Add(new Bullet(tower.X, tower.Y, enemy.Id, GetDamage(), Speed));
+                bullets.Add(new Bullet(tower.X, tower.Y, enemy.Id, damage, Speed));
             }
 
             return bullets;
@@ -51,7 +51,7 @@ namespace TowerDefense.Models.Towers
                   .ToList();
         }
 
-        public int GetDamage()
+        public virtual int GetDamage()
         {
             return Damage;
         }

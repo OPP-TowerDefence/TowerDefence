@@ -19,9 +19,9 @@ namespace TowerDefense.Models.Towers
             return _weapon.GetDamage();
         }
 
-        public virtual List<Bullet> Shoot(Tower tower, List<Enemy> enemies, int numb = 1)
+        public virtual List<Bullet> Shoot(Tower tower, List<Enemy> enemies, int damage, int numbEnemies = 1)
         {
-            return _weapon.Shoot(tower, enemies, numb);
+            return _weapon.Shoot(tower, enemies, damage, numbEnemies);
         }
 
     }

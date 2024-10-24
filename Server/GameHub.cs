@@ -100,4 +100,16 @@ public class GameHub(GameService gameService, Interfaces.ILogger logger) : Hub
             _logger.LogError($"Could not start game: room code {roomCode} does not exist or the game has already started.");
         }
     }
+
+    public async Task UpgradeTower(string roomCode, int x, int y, TowerUpgrades towerUpgrade)
+    {
+        if (_gameService.Rooms.TryGetValue(roomCode, out var gameState))
+        {
+            gameState.UpgradeTower(x, y, towerUpgrade);
+        }
+        else
+        {
+            _logger.LogError($"Failed to upgrade tower: room code {roomCode} does not exist.");
+        }
+    }
 }

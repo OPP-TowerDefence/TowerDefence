@@ -9,6 +9,13 @@ let mapHeight = 0;
 let activeTowerCategory = 0;
 let activeSelectionDiv = document.getElementById('longDistanceTowerDiv');
 
+const upgradeMap = {
+    'Double Damage': 0,
+    'Burst': 1,         
+    'Double Bullet': 2  
+};
+
+
 async function joinRoom() {
     const roomCode = document.getElementById('roomCode').value;
     const username = document.getElementById('username').value;
@@ -189,24 +196,10 @@ function selectTowerCategory(towerCategory) {
 }
 
 function handleMapClick(event) {
-    const bounds = event.target.getBoundingClientRect();
-    const x = event.clientX - bounds.left;
-    const y = event.clientY - bounds.top;
-    const gridX = Math.floor(x / 50);
-    const gridY = Math.floor(y / 50);
-
-    if (event.target.classList.contains('tower')) {
-        // Display upgrade options for the clicked tower
-        showUpgradeOptions(gridX, gridY);
-    } else {
-        console.log('Clicked area is not a tower or is outside grid boundaries.');
-    }
-}
-
-function handleMapClick(event) {
-    const bounds = event.target.getBoundingClientRect();
-    const x = event.clientX - bounds.left;
-    const y = event.clientY - bounds.top;
+    const gameMap = document.getElementById('gameMap');
+    const bounds = gameMap.getBoundingClientRect();
+    const x = event.clientX - bounds.left; // x position within the gameMap
+    const y = event.clientY - bounds.top; // y position within the gameMap
     const gridX = Math.floor(x / 50);
     const gridY = Math.floor(y / 50);
 
@@ -214,6 +207,7 @@ function handleMapClick(event) {
         if (event.target.classList.contains('tower')) {
             showUpgradeOptions(gridX, gridY, event.target);
         } else {
+            // Assuming you click on a valid empty grid space to place a tower
             const roomCode = document.getElementById('roomCode').value;
             connection.invoke("PlaceTower", roomCode, gridX, gridY, activeTowerCategory);
         }
@@ -223,7 +217,8 @@ function handleMapClick(event) {
 }
 
 
-function showUpgradeOptions(x, y) {
+
+function showUpgradeOptions(gridX, gridY) {
     const existingMenu = document.querySelector('.upgrade-options');
     const overlay = document.querySelector('.overlay');
     if (existingMenu) {
@@ -234,19 +229,14 @@ function showUpgradeOptions(x, y) {
     const overlayDiv = document.createElement('div');
     overlayDiv.className = 'overlay';
     overlayDiv.onclick = function(event) {
-
-    const upgradeDiv = document.querySelector('.upgrade-options');
-    if (upgradeDiv) {
+        event.stopPropagation();
+        overlayDiv.remove();
         upgradeDiv.remove();
-    }
-    overlayDiv.remove();
-};
-
-document.body.appendChild(overlayDiv);
+    };
 
     const upgradeDiv = document.createElement('div');
     upgradeDiv.className = 'upgrade-options';
-    upgradeDiv.innerHTML = '<h2>Upgrade</h2>'; 
+    upgradeDiv.innerHTML = '<h2>Upgrade</h2>';
 
     const upgrades = ['Double Damage', 'Burst', 'Double Bullet'];
     upgrades.forEach(upgrade => {
@@ -254,9 +244,10 @@ document.body.appendChild(overlayDiv);
         upgradeButton.textContent = upgrade;
         upgradeButton.className = 'upgrade-button';
         upgradeButton.onclick = function() {
-            connection.invoke("UpgradeTower", document.getElementById('roomCode').value, x, y, upgrade);
-            upgradeDiv.remove(); 
+            const upgradeType = upgradeMap[upgrade];
+            connection.invoke("UpgradeTower", document.getElementById('roomCode').value, gridX, gridY, upgradeType);
             overlayDiv.remove();
+            upgradeDiv.remove();
         };
         upgradeDiv.appendChild(upgradeButton);
     });
@@ -264,12 +255,12 @@ document.body.appendChild(overlayDiv);
     document.body.appendChild(overlayDiv);
     document.body.appendChild(upgradeDiv);
 
-
     upgradeDiv.style.position = 'fixed';
     upgradeDiv.style.top = '50%';
     upgradeDiv.style.left = '50%';
     upgradeDiv.style.transform = 'translate(-50%, -50%)';
 }
+
 
 document.addEventListener('click', function(event) {
     const upgradeDiv = document.querySelector('.upgrade-options');

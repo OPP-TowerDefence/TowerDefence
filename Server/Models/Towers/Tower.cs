@@ -27,6 +27,6 @@ public abstract class Tower : Unit
             return new List<Bullet>();
 
         TicksSinceLastShot = 0;
-        return Weapon.Shoot(this, enemies);
+        return Weapon.Shoot(this, enemies, Weapon.GetDamage());
     }
 }

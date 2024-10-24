@@ -10,9 +10,11 @@ namespace TowerDefense.Models.WeaponUpgrades
         {
         }
 
-        public override List<Bullet> Shoot(Tower tower, List<Enemy> enemies, int numb)
+        public override List<Bullet> Shoot(Tower tower, List<Enemy> enemies, int damage, int numbEnemies)
         {
-            return base.Shoot(tower, enemies, 2);
+            numbEnemies = Math.Max(numbEnemies, 2);
+            return base.Shoot(tower, enemies, damage, numbEnemies);
         }
+
     }
 }
