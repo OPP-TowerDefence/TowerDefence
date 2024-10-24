@@ -1,26 +1,21 @@
-﻿using System.Xml.Serialization;
-using TowerDefense.Enums;
-using TowerDefense.Interfaces;
+﻿using TowerDefense.Enums;
 
 namespace TowerDefense.Models.Towers
 {
-    public class LaserTowerBuilder : TowerBuilder
+    public class LaserTowerBuilder(TowerCategories catergory) : TowerBuilder(catergory)
     {
-
-        public LaserTowerBuilder(TowerCategories catergory) : base(catergory)
+        public override LaserTowerBuilder AddArmor()
         {
-        }
 
-        public override LaserTowerBuilder BuildBase(int x, int y)
-        {
             if (_category == TowerCategories.Heavy)
             {
-                _tower = new HeavyLaserTower(x, y);
+                _tower.Armor = new Armor("Laser Shield", 15);
             }
             else
             {
-                _tower = new LongDistanceLaserTower(x, y);
+                _tower.Armor = new Armor("Laser Shield", 7);
             }
+
             return this;
         }
 
@@ -34,20 +29,21 @@ namespace TowerDefense.Models.Towers
             {
                 _tower.Weapon = new Weapon("Laser Blaster", 1, 10, 10);
             }
+
             return this;
         }
 
-        public override LaserTowerBuilder AddArmor()
+        public override LaserTowerBuilder BuildBase(int x, int y)
         {
-
             if (_category == TowerCategories.Heavy)
             {
-                _tower.Armor = new Armor("Laser Shield", 15);
+                _tower = new HeavyLaserTower(x, y);
             }
             else
             {
-                _tower.Armor = new Armor("Laser Shield", 7);
+                _tower = new LongDistanceLaserTower(x, y);
             }
+
             return this;
         }
 

@@ -8,18 +8,20 @@ namespace TowerDefense.Models
 {
     public class Player : IResourceObserver
     {
+        public string ConnectionId { get; set; }
+        public int RemainingTowerRemovals { get; set; } = 0;
         public TowerTypes TowerType { get; set; }
         public string Username { get; set; }
-        public string ConnectionId { get; set; }
 
         private readonly IClientProxy _clientProxy;
         private readonly ITowerFactory _towerFactory;
 
         public Player(string username, string connectionId, TowerTypes towerType, IHubContext<GameHub> hubContext)
         {
-            TowerType = towerType;
             Username = username;
             ConnectionId = connectionId;
+            TowerType = towerType;
+
             _clientProxy = hubContext.Clients.Client(connectionId);
 
             _towerFactory = towerType switch
