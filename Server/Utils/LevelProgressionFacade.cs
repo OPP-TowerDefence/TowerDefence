@@ -27,19 +27,16 @@ namespace TowerDefense.Utils
             {
                 enemy.IncreaseHealth(10 * _currentLevel);
                 enemy.IncreaseSpeed(1);
-                Console.WriteLine($"Enemy health increased to {enemy.Health}, speed increased to {enemy.Speed}");
             }
 
             foreach (var tower in _towers)
             {         
                 tower.Weapon.IncreaseDamage(2);
                 tower.Weapon.IncreaseRange(1);
-                tower.Weapon.IncreaseSpeed(2);
-                Console.WriteLine($"Tower damage increased to {tower.Weapon.GetDamage()}");         
+                tower.Weapon.IncreaseSpeed(2);       
             }
 
             _gameState.IncreaseHealth(20);
-            Console.WriteLine($"Game state health {_gameState.Health})");
         }
 
         public int GetCurrentLevel()
