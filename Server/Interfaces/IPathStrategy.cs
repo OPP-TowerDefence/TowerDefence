@@ -1,5 +1,6 @@
+using TowerDefense.Models.Enemies;
 using TowerDefense.Models;
 public interface IPathStrategy
 {
-    Queue<(int X, int Y)> GetPath(GameState gameState);
+     Queue<PathPoint> GetPath(GameState gameState, Enemy enemy);
 }

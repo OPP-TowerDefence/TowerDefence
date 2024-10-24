@@ -6,6 +6,7 @@ using TowerDefense.Interfaces;
 using TowerDefense.Models.Enemies;
 using TowerDefense.Models.Towers;
 using TowerDefense.Utils;
+using TowerDefense.Models.Strategies;
 
 namespace TowerDefense.Models
 {
@@ -16,10 +17,11 @@ namespace TowerDefense.Models
         private readonly List<TowerTypes> _availableTowerTypes = Enum.GetValues(typeof(TowerTypes)).Cast<TowerTypes>().ToList();
         private readonly List<Player> _players = new();
         private readonly Queue<Tower> _towerPlacementQueue = new();
-        private List<List<(int X, int Y)>> _paths; // List to store all paths
+        private List<List<PathPoint>> _paths; // Updated to use PathPoint
         private IEnemyFactory _enemyFactory;
         private Random _random = new Random();
         private int _enemyCount = 0;
+        private List<Enemy> _waitingEnemies = new();
 
         public List<Player> Players => _players;
         public double TimeSinceLastSpawn { get; set; } = 0;
@@ -27,43 +29,11 @@ namespace TowerDefense.Models
         public GameState()
         {
             _enemyFactory = RandomEnemyFactory();
-            _paths = new List<List<(int X, int Y)>>(); // Initialize the paths list
-            GenerateRandomPath(Map.Height, Map.Width); // Generate paths when the game starts
+            _paths = new List<List<PathPoint>>(); // Initialize as list of lists of PathPoint
+            GenerateRandomPath(Map.Height, Map.Width);
         }
 
-public class Path1Strategy : IPathStrategy
-{
-    public Queue<(int X, int Y)> GetPath(GameState gameState)
-    {
-        return new Queue<(int X, int Y)>(gameState.GetPaths()[0]); // Select first path
-    }
-}
-
-public class Path2Strategy : IPathStrategy
-{
-    public Queue<(int X, int Y)> GetPath(GameState gameState)
-    {
-        return new Queue<(int X, int Y)>(gameState.GetPaths()[1]); // Select second path
-    }
-}
-
-public class Path3Strategy : IPathStrategy
-{
-    public Queue<(int X, int Y)> GetPath(GameState gameState)
-    {
-        return new Queue<(int X, int Y)>(gameState.GetPaths()[2]); // Select third path
-    }
-}
-
-public class Path4Strategy : IPathStrategy
-{
-    public Queue<(int X, int Y)> GetPath(GameState gameState)
-    {
-        return new Queue<(int X, int Y)>(gameState.GetPaths()[3]); // Select fourth path
-    }
-}
-
-        public List<List<(int X, int Y)>> GetPaths()
+        public List<List<PathPoint>> GetPaths()
         {
             return _paths;
         }
@@ -71,6 +41,7 @@ public class Path4Strategy : IPathStrategy
         private IEnemyFactory RandomEnemyFactory()
         {
             int enemyType = _random.Next(0, 3);
+
             return enemyType switch
             {
                 0 => new FastEnemyFactory(),
@@ -81,48 +52,74 @@ public class Path4Strategy : IPathStrategy
         }
 
 public void SpawnEnemies()
+{
+    _enemyFactory = RandomEnemyFactory();
+    // Create an enemy
+    Enemy enemy = _enemyFactory.CreateEnemy(0, 0, new List<PathPoint>());
+
+    // Retrieve the path based on the assigned strategy
+    enemy.RetrievePath(this);
+
+    // Add the enemy to the map if it has a valid path
+    if (enemy.Path.Count > 0)
     {
-        IPathStrategy pathStrategy;
-        // Choose strategy based on the enemy count or other criteria
-        switch (_enemyCount % 4)
-        {
-            case 0:
-                pathStrategy = new Path1Strategy();
-                break;
-            case 1:
-                pathStrategy = new Path2Strategy();
-                break;
-            case 2:
-                pathStrategy = new Path3Strategy();
-                break;
-            case 3:
-                pathStrategy = new Path4Strategy();
-                break;
-            default:
-                pathStrategy = new Path1Strategy(); // Fallback
-                break;
-        }
-
-        _enemyFactory = RandomEnemyFactory(); // Select a random enemy factory
-        Queue<(int X, int Y)> pathQueue = pathStrategy.GetPath(this); // Get path from the selected strategy
-        List<(int X, int Y)> pathList = pathQueue.ToList();
-        Enemy enemy = _enemyFactory.CreateEnemy(0, 0, pathList);
         Map.Enemies.Add(enemy);
-
         _enemyCount++;
     }
-
+    else
+    {
+        Logger.Instance.LogError("No valid path found for the enemy.");
+    }
+}
         public void UpdateEnemies()
         {
-            foreach (var enemy in Map.Enemies.ToList())
+    // List to keep track of waiting enemies
+    var waitingEnemies = new List<Enemy>();
+
+    foreach (var enemy in Map.Enemies.ToList())
+    {
+        enemy.UpdateStrategyBasedOnState(this);
+
+        // Check if the enemy is waiting based on the GroupProtectionStrategy
+        if (enemy.CurrentStrategy is GroupProtectionStrategy && enemy.Path.Count == 0)
+        {
+            waitingEnemies.Add(enemy); // Add to waiting list
+            continue; // Skip moving
+        }
+
+        // If enemy is not waiting, move towards the next waypoint
+        enemy.MoveTowardsNextWaypoint();
+        if (enemy.HasReachedDestination())
+        {
+            Map.Enemies.Remove(enemy);
+        }
+    }
+
+    // Move waiting enemies if we have enough of them
+    MoveWaitingEnemies(waitingEnemies);
+}
+
+private void MoveWaitingEnemies(List<Enemy> waitingEnemies)
+{
+    // Check if we have enough enemies waiting
+    if (waitingEnemies.Count >= 4)
+    {
+        // Move each waiting enemy
+        foreach (var waitingEnemy in waitingEnemies)
+        {
+            waitingEnemy.MoveTowardsNextWaypoint();
+
+            // Check if the enemy has reached its destination
+            if (waitingEnemy.HasReachedDestination())
             {
-                enemy.MoveTowardsNextWaypoint();
-                if (enemy.HasReachedDestination())
-                {
-                    Map.Enemies.Remove(enemy);
-                }
+                Map.Enemies.Remove(waitingEnemy); // Remove from the map if reached
             }
         }
+
+        // Clear the waiting enemies list after moving them
+        waitingEnemies.Clear();
+    }
+}
 
         public object GetMapTowers()
         {
@@ -135,20 +132,26 @@ public void SpawnEnemies()
             }).ToList();
         }
 
-        public object GetMapEnemies()
+public object GetMapEnemies()
+    {
+        return Map.Enemies.Select(e => new
         {
-            return Map.Enemies.Select(e => new
-            {
-                e.X,
-                e.Y,
-                e.Health,
-                e.Speed
-            }).ToList();
-        }
+            e.X,
+            e.Y,
+            e.Health,
+            e.Speed,
+            Type = e.GetType().Name
+        }).ToList();
+    }
 
         public object SendPath()
         {
-            return _paths.Select(path => path.Select(point => new { X = point.X, Y = point.Y }).ToList()).ToList();
+            return _paths.Select(path => path.Select(point => new 
+            {
+                X = point.X, 
+                Y = point.Y,
+                Type = point.Type.ToString() // Include tile type as a string
+            }).ToList()).ToList();
         }
 
         public bool IsOccupied(int x, int y)
@@ -156,7 +159,7 @@ public void SpawnEnemies()
             return Map.Towers.Any(t => t.X == x && t.Y == y);
         }
 
-        private bool IsValidPosition(int x, int y)
+        public bool IsValidPosition(int x, int y)
         {
             return x >= 0 && x < Map.Width && y >= 0 && y < Map.Height;
         }
@@ -247,77 +250,66 @@ public void SpawnEnemies()
 
             for (int i = 0; i < 4; i++) // Create 4 empty paths
             {
-                _paths.Add(new List<(int X, int Y)>());
+                _paths.Add(new List<PathPoint>());
             }
 
-            // Start at (0, 0)
-            int currentX = 0;
-            int currentY = 0;
-            List<(int X, int Y)> commonPath = new List<(int X, int Y)> { (currentX, currentY) };
+            var (objectiveX, objectiveY) = Map.GetObjectiveTile(); // Get the objective tile coordinates
 
-            // Determine the halfway point
-            int halfway = (mapWidth + mapHeight) / 4;
-
-            // First half of the path (before the split)
-            while (commonPath.Count < halfway)
+            for (int pathIndex = 0; pathIndex < 4; pathIndex++)
             {
-                bool moveX = _random.Next(0, 2) == 0;
+                int currentX = 0; // Start from the beginning
+                int currentY = pathIndex % 2; // Alternate the starting Y position for two-wide paths
 
-                if (moveX && currentX < mapWidth - 1)
+                while (currentX < objectiveX || currentY < objectiveY)
                 {
-                    currentX += 1;
-                }
-                else if (currentY < mapHeight - 1)
-                {
-                    currentY += 1;
-                }
+                    // Randomly decide to move horizontally or vertically
+                    if (currentX < objectiveX && (currentY == objectiveY || _random.Next(0, 2) == 0))
+                    {
+                        currentX++;
+                    }
+                    else if (currentY < objectiveY)
+                    {
+                        currentY++;
+                    }
 
-                if (!commonPath.Contains((currentX, currentY)))
-                {
-                    commonPath.Add((currentX, currentY));
-                }
-            }
+                    // Determine the tile type randomly (you can customize this logic)
+                    TileType tileType = TileType.Normal; // Default type
+                    double randomValue = _random.NextDouble();
+                    if (randomValue < 0.1)
+                    {
+                        tileType = TileType.Ice; // Example: 10% chance for ice
+                    }
+                    else if (randomValue < 0.2)
+                    {
+                        tileType = TileType.Mud; // Example: 10% chance for mud
+                    }
+                    else if (randomValue < 0.3)
+                    {
+                        tileType = TileType.PinkHealth; // Example: 10% chance for pink health
+                    }
 
-            // Split: copy the common path to all 4 paths
-            foreach (var path in _paths)
-            {
-                path.AddRange(commonPath);
-            }
+                    // Add the first tile of the path
+                    if (IsValidPosition(currentX, currentY))
+                    {
+                        _paths[pathIndex].Add(new PathPoint(currentX, currentY, tileType));
+                    }
 
-            // Generate the second half for each path
-            for (int i = 0; i < 4; i++)
-            {
-                GeneratePath(_paths[i], currentX, currentY, mapWidth, mapHeight);
-            }
-        }
-
-        private void GeneratePath(List<(int X, int Y)> path, int startX, int startY, int mapWidth, int mapHeight)
-        {
-            int splitX = startX;
-            int splitY = startY;
-
-            while (path.Last() != (mapWidth - 1, mapHeight - 1))
-            {
-                bool moveX = _random.Next(0, 2) == 0;
-
-                if (moveX && splitX < mapWidth - 1)
-                {
-                    splitX += 1;
-                }
-                else if (splitY < mapHeight - 1)
-                {
-                    splitY += 1;
+                    // Add the second tile to maintain the 2-wide path if it's valid
+                    if (IsValidPosition(currentX, currentY + 1) && pathIndex % 2 == 0)
+                    {
+                        _paths[pathIndex].Add(new PathPoint(currentX, currentY + 1, tileType));
+                    }
                 }
 
-                if (!path.Contains((splitX, splitY)))
+                if (!_paths[pathIndex].Any(p => p.X == objectiveX && p.Y == objectiveY))
                 {
-                    path.Add((splitX, splitY));
+                    _paths[pathIndex].Add(new PathPoint(objectiveX, objectiveY, TileType.Objective));
                 }
-            }
 
-            if (path.Last() != (mapWidth - 1, mapHeight - 1))
-            {
-                path.Add((mapWidth - 1, mapHeight - 1));
+                if (pathIndex % 2 == 0 && IsValidPosition(objectiveX, objectiveY + 1))
+                {
+                    _paths[pathIndex].Add(new PathPoint(objectiveX, objectiveY + 1, TileType.Objective));
+                }
             }
         }
     }

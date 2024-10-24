@@ -2,7 +2,7 @@
 {
     public class FlyingEnemy : Enemy
     {
-        public FlyingEnemy(int x, int y,List<(int X, int Y)> path) : base(x, y, path)
+        public FlyingEnemy(int x, int y,List<PathPoint> path) : base(x, y, path)
         {
             Health = 75;
             Speed = 2;

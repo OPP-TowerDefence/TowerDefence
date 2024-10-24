@@ -50,52 +50,35 @@
     100% { transform: scale(1); }
 }
 
-/* Hover effect for all enemies */
 .grid-cell.enemy:hover {
     transform: scale(1.2);           /* Slightly enlarge on hover for emphasis */
 }
 
-/* Path style */
-/* Style for Path1 */
-.grid-cell.path1 {
-    background-color: #ff5900;       /* Orange for Path1 */
-    border: 1px solid #0b110b;       /* Dark border */
-    opacity: 0.6;                    /* Slight transparency */
-    width: 10px;
-    height: 10px;
-    border-radius: 5%;
-    z-index: 5;                      /* Highest z-index among paths */
+.grid-cell.path {
+    width: 10px; /* Width for path tiles */
+    height: 10px; /* Height for path tiles */
+    border-radius: 5%; /* Slightly rounded corners */
+    z-index: 5; /* Z-index for layering */
 }
 
-/* Style for Path2 */
-.grid-cell.path2 {
-    background-color: #eaff00;       /* Yellow for Path2 */
-    border: 1px solid #0b110b;
-    opacity: 0.6;
-    width: 10px;
-    height: 10px;
-    border-radius: 5%;
-    z-index: 4;
+/* Specific tile type styles */
+.normal-tile {
+    background-color: #4d4744; /* Default path color */
 }
 
-/* Style for Path3 */
-.grid-cell.path3 {
-    background-color: #00ff00;       /* Green for Path3 */
-    border: 1px solid #0b110b;
-    opacity: 0.6;
-    width: 10px;
-    height: 10px;
-    border-radius: 5%;
-    z-index: 3;
+.ice-tile {
+    background-color: #add8e6; /* Light blue for Ice */
 }
 
-/* Style for Path4 */
-.grid-cell.path4 {
-    background-color: #00bfff;       /* Deep Sky Blue for Path4 */
-    border: 1px solid #0b110b;
-    opacity: 0.6;
-    width: 10px;
-    height: 10px;
-    border-radius: 5%;
-    z-index: 2;                      /* Lowest z-index among paths */
+.mud-tile {
+    background-color: #deb887; /* Burlywood for Mud */
 }
+
+.pinkhealth-tile {
+    background-color: #ff69b4; /* Hot Pink for PinkHealth */
+}
+
+.objective-tile {
+    background-color: #ff0000; /* Red for Objective */
+}
+
