@@ -124,7 +124,7 @@ public class GameState
         Health = Math.Min(Health + amount, _maxHealth);
     }
 
-    public void ProcessCommand(string connectionId, ICommand command)
+    public void ProcessCommand(ICommand command, string connectionId)
     {
         var player = _players.FirstOrDefault(p => p.ConnectionId == connectionId);
 
