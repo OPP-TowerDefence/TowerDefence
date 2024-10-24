@@ -244,73 +244,123 @@ public object GetMapEnemies()
             }).ToList();
         }
 
-        public void GenerateRandomPath(int mapWidth, int mapHeight)
-        {
-            _paths.Clear(); // Clear previous paths if any
+public void GenerateRandomPath(int mapWidth, int mapHeight)
+{
+    _paths.Clear(); // Clear previous paths if any
 
-            for (int i = 0; i < 4; i++) // Create 4 empty paths
+    for (int i = 0; i < 4; i++) // Create 4 empty paths
+    {
+        _paths.Add(new List<PathPoint>());
+    }
+
+    var (startX, startY) = (0,0); // Get the actual starting tile coordinates
+    var (objectiveX, objectiveY) = Map.GetObjectiveTile(); // Get the objective tile coordinates
+
+    int totalPathLength = Math.Abs(objectiveX - startX) + Math.Abs(objectiveY - startY);
+    int first33PercentLength = (int)(totalPathLength * 0.33); // First 33% of the path should be normal tiles
+    int sharedPathLength = 10; // The first 10 tiles are shared
+
+    // Generate the shared starting path for the first 10 tiles
+    List<PathPoint> sharedPath = new List<PathPoint>();
+    int currentX = startX;
+    int currentY = startY;
+
+    for (int i = 0; i < sharedPathLength; i++) // First 10 shared tiles
+    {
+        // Force all tiles to be TileType.Normal within the first 33% of the path
+        TileType tileType = i < first33PercentLength ? TileType.Normal : TileType.Normal; // Ensuring normal
+
+        if (currentX < objectiveX)
+        {
+            currentX++;
+        }
+        else if (currentY < objectiveY)
+        {
+            currentY++;
+        }
+
+        sharedPath.Add(new PathPoint(currentX, currentY, tileType));
+    }
+
+    // Assign the shared path to all 4 paths
+    foreach (var path in _paths)
+    {
+        path.AddRange(sharedPath);
+    }
+
+    // Now diverge the paths after the shared segment
+    for (int pathIndex = 0; pathIndex < 4; pathIndex++)
+    {
+        currentX = sharedPath.Last().X;
+        currentY = sharedPath.Last().Y;
+
+        HashSet<(int, int)> occupiedPositions = new HashSet<(int, int)>(
+            _paths[pathIndex].Select(p => (p.X, p.Y))
+        );
+
+        bool divergedFromShared = false;
+        while (currentX < objectiveX || currentY < objectiveY)
+        {
+            // Randomly decide to move horizontally or vertically, while avoiding overlap
+            bool moveHorizontally = _random.Next(0, 2) == 0;
+
+            if (moveHorizontally && currentX < objectiveX)
             {
-                _paths.Add(new List<PathPoint>());
+                currentX++;
+            }
+            else if (currentY < objectiveY)
+            {
+                currentY++;
             }
 
-            var (objectiveX, objectiveY) = Map.GetObjectiveTile(); // Get the objective tile coordinates
-
-            for (int pathIndex = 0; pathIndex < 4; pathIndex++)
+            // Ensure the path does not overlap with other diverged paths
+            if (!occupiedPositions.Contains((currentX, currentY)))
             {
-                int currentX = 0; // Start from the beginning
-                int currentY = pathIndex % 2; // Alternate the starting Y position for two-wide paths
+                TileType tileType;
 
-                while (currentX < objectiveX || currentY < objectiveY)
+                // Ensure the first 33% of the path is normal tiles
+                int pathLengthSoFar = _paths[pathIndex].Count + sharedPath.Count;
+                if (pathLengthSoFar < first33PercentLength)
                 {
-                    // Randomly decide to move horizontally or vertically
-                    if (currentX < objectiveX && (currentY == objectiveY || _random.Next(0, 2) == 0))
-                    {
-                        currentX++;
-                    }
-                    else if (currentY < objectiveY)
-                    {
-                        currentY++;
-                    }
-
-                    // Determine the tile type randomly (you can customize this logic)
-                    TileType tileType = TileType.Normal; // Default type
-                    double randomValue = _random.NextDouble();
-                    if (randomValue < 0.1)
-                    {
-                        tileType = TileType.Ice; // Example: 10% chance for ice
-                    }
-                    else if (randomValue < 0.2)
-                    {
-                        tileType = TileType.Mud; // Example: 10% chance for mud
-                    }
-                    else if (randomValue < 0.3)
-                    {
-                        tileType = TileType.PinkHealth; // Example: 10% chance for pink health
-                    }
-
-                    // Add the first tile of the path
-                    if (IsValidPosition(currentX, currentY))
-                    {
-                        _paths[pathIndex].Add(new PathPoint(currentX, currentY, tileType));
-                    }
-
-                    // Add the second tile to maintain the 2-wide path if it's valid
-                    if (IsValidPosition(currentX, currentY + 1) && pathIndex % 2 == 0)
-                    {
-                        _paths[pathIndex].Add(new PathPoint(currentX, currentY + 1, tileType));
-                    }
+                    tileType = TileType.Normal; // Force normal for first 33%
+                }
+                else
+                {
+                    tileType = DetermineTileType(); // After 33%, use random tiles
                 }
 
-                if (!_paths[pathIndex].Any(p => p.X == objectiveX && p.Y == objectiveY))
-                {
-                    _paths[pathIndex].Add(new PathPoint(objectiveX, objectiveY, TileType.Objective));
-                }
-
-                if (pathIndex % 2 == 0 && IsValidPosition(objectiveX, objectiveY + 1))
-                {
-                    _paths[pathIndex].Add(new PathPoint(objectiveX, objectiveY + 1, TileType.Objective));
-                }
+                _paths[pathIndex].Add(new PathPoint(currentX, currentY, tileType));
+                occupiedPositions.Add((currentX, currentY));
             }
         }
+
+        // Ensure the objective tile is added at the end of each path
+        if (!_paths[pathIndex].Any(p => p.X == objectiveX && p.Y == objectiveY))
+        {
+            _paths[pathIndex].Add(new PathPoint(objectiveX, objectiveY, TileType.Objective));
+        }
+    }
+}
+
+private TileType DetermineTileType()
+{
+    // Logic to determine tile type, can be customized
+    double randomValue = _random.NextDouble();
+    if (randomValue < 0.1)
+    {
+        return TileType.Ice;
+    }
+    else if (randomValue < 0.2)
+    {
+        return TileType.Mud;
+    }
+    else if (randomValue < 0.3)
+    {
+        return TileType.PinkHealth;
+    }
+    return TileType.Normal; // Default to normal if not special
+}
+
+
     }
 }
