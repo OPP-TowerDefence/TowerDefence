@@ -10,11 +10,10 @@ let activeTowerCategory = 0;
 let activeSelectionDiv = document.getElementById('longDistanceTowerDiv');
 
 const upgradeMap = {
-    'Double Damage': 0,
-    'Burst': 1,         
-    'Double Bullet': 2  
+    'DoubleDamage': 0,
+    'Burst': 1,
+    'DoubleBullet': 2
 };
-
 
 async function joinRoom() {
     const roomCode = document.getElementById('roomCode').value;
@@ -135,6 +134,7 @@ function renderMap(map, mapEnemies, mapBullets) {
         cell.className = 'grid-cell tower';
         cell.classList.add(tower.type.toLowerCase());
         cell.classList.add(tower.category.toLowerCase());
+        cell.dataset.appliedUpgrades = JSON.stringify(tower.appliedUpgrades);
         gameMap.appendChild(cell);
 
         cell.style.gridColumnStart = tower.x + 1;
@@ -198,16 +198,16 @@ function selectTowerCategory(towerCategory) {
 function handleMapClick(event) {
     const gameMap = document.getElementById('gameMap');
     const bounds = gameMap.getBoundingClientRect();
-    const x = event.clientX - bounds.left; // x position within the gameMap
-    const y = event.clientY - bounds.top; // y position within the gameMap
+    const x = event.clientX - bounds.left;
+    const y = event.clientY - bounds.top;
     const gridX = Math.floor(x / 50);
     const gridY = Math.floor(y / 50);
 
     if (gridX >= 0 && gridX < mapWidth && gridY >= 0 && gridY < mapHeight) {
         if (event.target.classList.contains('tower')) {
-            showUpgradeOptions(gridX, gridY, event.target);
+            const appliedUpgrades = JSON.parse(event.target.dataset.appliedUpgrades || '[]');
+            showUpgradeOptions(gridX, gridY, appliedUpgrades);
         } else {
-            // Assuming you click on a valid empty grid space to place a tower
             const roomCode = document.getElementById('roomCode').value;
             connection.invoke("PlaceTower", roomCode, gridX, gridY, activeTowerCategory);
         }
@@ -217,13 +217,12 @@ function handleMapClick(event) {
 }
 
 
-
-function showUpgradeOptions(gridX, gridY) {
+function showUpgradeOptions(gridX, gridY, appliedUpgrades) {
     const existingMenu = document.querySelector('.upgrade-options');
     const overlay = document.querySelector('.overlay');
     if (existingMenu) {
         existingMenu.remove();
-        overlay.remove(); 
+        overlay.remove();
     }
 
     const overlayDiv = document.createElement('div');
@@ -238,19 +237,29 @@ function showUpgradeOptions(gridX, gridY) {
     upgradeDiv.className = 'upgrade-options';
     upgradeDiv.innerHTML = '<h2>Upgrade</h2>';
 
-    const upgrades = ['Double Damage', 'Burst', 'Double Bullet'];
-    upgrades.forEach(upgrade => {
-        const upgradeButton = document.createElement('button');
-        upgradeButton.textContent = upgrade;
-        upgradeButton.className = 'upgrade-button';
-        upgradeButton.onclick = function() {
-            const upgradeType = upgradeMap[upgrade];
-            connection.invoke("UpgradeTower", document.getElementById('roomCode').value, gridX, gridY, upgradeType);
-            overlayDiv.remove();
-            upgradeDiv.remove();
-        };
-        upgradeDiv.appendChild(upgradeButton);
-    });
+    const allUpgrades = ['DoubleDamage', 'Burst', 'DoubleBullet'];
+    const availableUpgrades = allUpgrades.filter(upgrade => !appliedUpgrades.includes(upgrade));
+
+    if (availableUpgrades.length === 0) {
+        const noUpgradesMsg = document.createElement('p');
+        noUpgradesMsg.textContent = 'No upgrades available.';
+        upgradeDiv.appendChild(noUpgradesMsg);
+    } else {
+        availableUpgrades.forEach(upgrade => {
+            const upgradeButton = document.createElement('button');
+            // Format the upgrade name for display
+            const upgradeText = upgrade.replace(/([A-Z])/g, ' $1').trim();
+            upgradeButton.textContent = upgradeText;
+            upgradeButton.className = 'upgrade-button';
+            upgradeButton.onclick = function() {
+                const upgradeType = upgradeMap[upgrade];
+                connection.invoke("UpgradeTower", document.getElementById('roomCode').value, gridX, gridY, upgradeType);
+                overlayDiv.remove();
+                upgradeDiv.remove();
+            };
+            upgradeDiv.appendChild(upgradeButton);
+        });
+    }
 
     document.body.appendChild(overlayDiv);
     document.body.appendChild(upgradeDiv);
@@ -260,7 +269,6 @@ function showUpgradeOptions(gridX, gridY) {
     upgradeDiv.style.left = '50%';
     upgradeDiv.style.transform = 'translate(-50%, -50%)';
 }
-
 
 document.addEventListener('click', function(event) {
     const upgradeDiv = document.querySelector('.upgrade-options');

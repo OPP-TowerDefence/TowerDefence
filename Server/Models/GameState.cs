@@ -93,7 +93,8 @@ public class GameState
                 t.X,
                 t.Y,
                 Category = t.Category.ToString(),
-                Type = t.Type.ToString()
+                Type = t.Type.ToString(),
+                AppliedUpgrades = t.AppliedUpgrades.Select(u => u.ToString()).ToList()
             })
             .ToList();
     }
@@ -310,6 +311,12 @@ public class GameState
             return;
         }
 
+        if (tower.AppliedUpgrades.Contains(towerUpgrade))
+        {
+            Logger.Instance.LogError($"Tower at position ({x},{y}) already has upgrade {towerUpgrade}.");
+            return;
+        }
+
         tower.Weapon = towerUpgrade switch
         {
             TowerUpgrades.Burst => new Burst(tower.Weapon),
@@ -317,6 +324,7 @@ public class GameState
             TowerUpgrades.DoubleBullet => new DoubleBullet(tower.Weapon),
             _ => throw new Exception("Unknown tower upgrade")
         };
-        Console.WriteLine(tower.Weapon.GetType().Name);
+
+        tower.AppliedUpgrades.Add(towerUpgrade);
     }
 }

@@ -1636,3 +1636,51 @@
 10/24/2024 4:10:15 AM: INFO: Player fasfas joined the game.
 10/24/2024 4:10:15 AM: INFO: Player fasfas with connection ID MPc0n0Ga4gCiRqco1a0veA has joined room fasfsa.
 10/24/2024 4:10:18 AM: INFO: Player fasfas queued a tower of category Heavy at position (5,6).
+10/24/2024 4:24:40 AM: INFO: GameService initialized and game tick timer started.
+10/24/2024 4:24:45 AM: INFO: Player fasfa is attempting to join room fafsa.
+10/24/2024 4:24:45 AM: INFO: New room created with code: fafsa.
+10/24/2024 4:24:45 AM: INFO: fasfa has received Flame towers
+10/24/2024 4:24:45 AM: INFO: Player fasfa joined the game.
+10/24/2024 4:24:45 AM: INFO: Player fasfa with connection ID qA1wo21OloHhGVj-HcnCSA has joined room fafsa.
+10/24/2024 4:24:50 AM: INFO: Player fasfa queued a tower of category Heavy at position (5,1).
+10/24/2024 4:26:15 AM: INFO: GameService initialized and game tick timer started.
+10/24/2024 4:26:19 AM: INFO: Player fsafas is attempting to join room fasf.
+10/24/2024 4:26:19 AM: INFO: New room created with code: fasf.
+10/24/2024 4:26:19 AM: INFO: fsafas has received Flame towers
+10/24/2024 4:26:19 AM: INFO: Player fsafas joined the game.
+10/24/2024 4:26:19 AM: INFO: Player fsafas with connection ID 84hnoZW_CEU6jusQml7D_A has joined room fasf.
+10/24/2024 4:26:22 AM: INFO: Player fsafas queued a tower of category Heavy at position (4,6).
+10/24/2024 4:30:13 AM: INFO: GameService initialized and game tick timer started.
+10/24/2024 4:30:17 AM: INFO: Player fasf is attempting to join room fsaf.
+10/24/2024 4:30:17 AM: INFO: New room created with code: fsaf.
+10/24/2024 4:30:17 AM: INFO: fasf has received Flame towers
+10/24/2024 4:30:17 AM: INFO: Player fasf joined the game.
+10/24/2024 4:30:17 AM: INFO: Player fasf with connection ID 6LpNbhWx9VSvnfeqbUQNDg has joined room fsaf.
+10/24/2024 4:30:21 AM: INFO: Player fasf queued a tower of category Heavy at position (5,5).
+10/24/2024 4:31:31 AM: INFO: GameService initialized and game tick timer started.
+10/24/2024 4:31:34 AM: INFO: Player fffff is attempting to join room fasf.
+10/24/2024 4:31:34 AM: INFO: New room created with code: fasf.
+10/24/2024 4:31:34 AM: INFO: fffff has received Flame towers
+10/24/2024 4:31:34 AM: INFO: Player fffff joined the game.
+10/24/2024 4:31:34 AM: INFO: Player fffff with connection ID TddMeg8fJYfTSkvkb_R3FQ has joined room fasf.
+10/24/2024 4:31:37 AM: INFO: Player fffff queued a tower of category Heavy at position (5,4).
+10/24/2024 4:32:30 AM: INFO: GameService initialized and game tick timer started.
+10/24/2024 4:32:35 AM: INFO: Player fasfa is attempting to join room fasf.
+10/24/2024 4:32:35 AM: INFO: New room created with code: fasf.
+10/24/2024 4:32:35 AM: INFO: fasfa has received Flame towers
+10/24/2024 4:32:35 AM: INFO: Player fasfa joined the game.
+10/24/2024 4:32:35 AM: INFO: Player fasfa with connection ID hIohioDvP3Fs2opwod7Gew has joined room fasf.
+10/24/2024 4:32:37 AM: INFO: Player fasfa queued a tower of category Heavy at position (5,6).
+10/24/2024 4:39:55 AM: INFO: Player fasfa left the game.
+10/24/2024 4:39:55 AM: INFO: Player fasfa left room fasf.
+10/24/2024 4:40:06 AM: INFO: GameService initialized and game tick timer started.
+10/24/2024 4:40:11 AM: INFO: Player fasfa is attempting to join room fasfa.
+10/24/2024 4:40:11 AM: INFO: New room created with code: fasfa.
+10/24/2024 4:40:11 AM: INFO: fasfa has received Flame towers
+10/24/2024 4:40:11 AM: INFO: Player fasfa joined the game.
+10/24/2024 4:40:11 AM: INFO: Player fasfa with connection ID T1FZLZTTIuxJ3UwLzadnrw has joined room fasfa.
+10/24/2024 4:40:14 AM: INFO: Player fasfa queued a tower of category Heavy at position (4,4).
+10/24/2024 4:40:31 AM: INFO: Player fasfa queued a tower of category Heavy at position (8,3).
+10/24/2024 4:40:35 AM: INFO: Player fasfa queued a tower of category Heavy at position (5,2).
+10/24/2024 4:40:48 AM: INFO: Player fasfa left the game.
+10/24/2024 4:40:48 AM: INFO: Player fasfa left room fasfa.
