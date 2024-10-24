@@ -39,5 +39,15 @@ namespace TowerDefense.Models.Enemies
 
         public bool IsDead() => Health <= 0;
         public int DistanceTo(Tower tower) => Math.Abs(tower.X - X) + Math.Abs(tower.Y - Y);
+
+        public void IncreaseHealth(int amount)
+        {
+            Health += amount;
+        }
+
+        public void IncreaseSpeed(int amount)
+        {
+            Speed += amount;
+        }
     }
 }

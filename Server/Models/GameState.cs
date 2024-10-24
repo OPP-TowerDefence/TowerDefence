@@ -11,6 +11,8 @@ namespace TowerDefense.Models;
 public class GameState
 {
     public Map Map { get; } = new Map(10, 10);
+    public int Health { get; set; }
+    private const int maxHealth = 100;
 
     public bool GameStarted { get; private set; }
 
@@ -20,6 +22,7 @@ public class GameState
     private readonly List<Player> _players;
     private readonly ResourceManager _resourceManager;
     private readonly Queue<Tower> _towerPlacementQueue;
+    private readonly LevelManager _levelManager;
 
     private IEnemyFactory _enemyFactory;
 
@@ -38,6 +41,24 @@ public class GameState
         _players = [];
         _resourceManager = new();
         _towerPlacementQueue = new();
+        _levelManager = new LevelManager(new LevelProgressionFacade(this, Map.Enemies, Map.Towers));
+        _levelManager.OnLevelChanged += NotifyLevelChange;
+        Health = maxHealth;
+    }
+
+    private void NotifyLevelChange(int newLevel)
+    {
+        _hubContext.Clients.Group(_roomCode).SendAsync("LevelChanged", newLevel);
+    }
+
+    public void IncreaseHealth(int amount)
+    {
+        Health = Math.Min(Health + amount, maxHealth);
+    }
+
+    public void DeacreaseHealth(int amount)
+    {
+        Health = Math.Max(0, Health - amount);
     }
 
     private IEnemyFactory RandomEnemyFactory()
@@ -66,6 +87,8 @@ public class GameState
         var enemy = _enemyFactory.CreateEnemy(0, 0);
 
         Map.Enemies.Add(enemy);
+
+        _levelManager.OnEnemySpawned();
     }
 
     public void UpdateEnemies()
@@ -76,6 +99,7 @@ public class GameState
 
             if (enemy.HasReachedDestination())
             {
+                DeacreaseHealth(5);
                 DamageEnemy(enemy, enemy.Health);
             }
         }

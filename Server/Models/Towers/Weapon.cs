@@ -55,5 +55,20 @@ namespace TowerDefense.Models.Towers
         {
             return Damage;
         }
+
+        public void IncreaseDamage(int amount)
+        {
+            Damage += amount;
+        }
+
+        public void IncreaseRange(int amount)
+        {
+            Range += amount;
+        }
+
+        public void IncreaseSpeed(int amount)
+        {
+            Speed += amount;
+        }
     }
 }

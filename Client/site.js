@@ -25,6 +25,7 @@ async function joinRoom() {
         document.getElementById('loginForm').classList.add('hidden');
         document.getElementById('gameInterface').classList.remove('hidden');
         document.getElementById('resourcesDisplay').classList.remove('hidden');
+        document.getElementById('levelDisplay').classList.remove('hidden');
         document.getElementById('startButton').classList.remove('hidden');
 
         const roomInfo = document.getElementById('roomInfo');
@@ -119,6 +120,11 @@ connection.on("UserLeft", function (username, players) {
 
 connection.on("OnResourceChanged", function (newResourceAmount) {
     updateResources(newResourceAmount);
+});
+
+connection.on("LevelChanged", (level) => {
+    const levelDisplay = document.getElementById("levelDisplay");
+    levelDisplay.textContent = `Level: ${level}`;
 });
 
 connection.on("OnTick", function (map, mapEnemies, mapBullets) {

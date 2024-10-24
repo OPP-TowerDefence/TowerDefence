@@ -24,5 +24,19 @@ namespace TowerDefense.Models.Towers
             return _weapon.Shoot(tower, enemies, damage, numbEnemies);
         }
 
+        public virtual void IncreaseDamage(int amount)
+        {
+            _weapon.IncreaseDamage(amount);
+        }
+
+        public virtual void IncreaseRange(int amount)
+        {
+            _weapon.IncreaseRange(amount);
+        }
+
+        public virtual void IncreaseSpeed(int amount)
+        {
+            _weapon.IncreaseSpeed(amount);
+        }
     }
 }

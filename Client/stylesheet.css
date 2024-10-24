@@ -64,6 +64,17 @@ input, button {
     top: 10px;
 }
 
+.bottom-left {
+    background-color: #ffffff;
+    border: 2px solid #000;
+    border-radius: 5px;
+    font-size: 18px;
+    padding: 10px;
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
+}
+
 .top-right {
     background-color: #ffffff;
     border: 2px solid #000;
