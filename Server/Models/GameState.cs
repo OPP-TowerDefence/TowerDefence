@@ -3,6 +3,7 @@ using TowerDefense.Enums;
 using TowerDefense.Interfaces;
 using TowerDefense.Models.Enemies;
 using TowerDefense.Models.Towers;
+using TowerDefense.Models.WeaponUpgrades;
 using TowerDefense.Utils;
 
 namespace TowerDefense.Models;
@@ -13,6 +14,7 @@ public class GameState
 
     public bool GameStarted { get; private set; }
 
+    private readonly string _roomCode;
     private readonly List<TowerTypes> _availableTowerTypes;
     private readonly IHubContext<GameHub> _hubContext;
     private readonly List<Player> _players;
@@ -23,13 +25,14 @@ public class GameState
 
     public List<Player> Players => _players;
 
-    public GameState(IHubContext<GameHub> hubContext)
+    public GameState(IHubContext<GameHub> hubContext, string roomCode)
     {
         _availableTowerTypes = Enum
             .GetValues(typeof(TowerTypes))
             .Cast<TowerTypes>()
             .ToList();
 
+        _roomCode = roomCode;
         _enemyFactory = RandomEnemyFactory();
         _hubContext = hubContext;
         _players = [];
@@ -86,7 +89,19 @@ public class GameState
                 t.X,
                 t.Y,
                 Category = t.Category.ToString(),
-                Type = t.Type.ToString()
+                Type = t.Type.ToString(),
+                AppliedUpgrades = t.AppliedUpgrades.Select(u => u.ToString()).ToList()
+            })
+            .ToList();
+    }
+
+    public object GetMapBullets()
+    {
+        return Map.Bullets
+            .Select(b => new
+            {
+                b.X,
+                b.Y
             })
             .ToList();
     }
@@ -213,7 +228,7 @@ public class GameState
     {
         enemy.TakeDamage(damage);
 
-        if (enemy.Health <= 0)
+        if (enemy.IsDead())
         {
             Map.Enemies.Remove(enemy);
 
@@ -229,5 +244,83 @@ public class GameState
         }
 
         GameStarted = true;
+    }
+
+    private void UpdateBulletPositions()
+    {
+        if (Map.Bullets.Count == 0)
+        {
+            return;
+        }
+        var bullets = Map.Bullets.ToList();
+
+        foreach (var bullet in bullets)
+        {
+            var enemyToAttack = Map.Enemies.FirstOrDefault(e => e.Id == bullet.EnemyId);
+            if (enemyToAttack != null) 
+            {
+                bullet.Move(enemyToAttack.X, enemyToAttack.Y);
+
+                if (bullet.X == enemyToAttack.X && bullet.Y == enemyToAttack.Y)
+                {
+                    DamageEnemy(enemyToAttack, bullet.Damage);
+
+                    Map.Bullets.Remove(bullet);
+                }
+            }
+            else
+            {
+                Map.Bullets.Remove(bullet);
+            
+            }
+        }
+    }
+
+    public void TowerAttack()
+    {
+        if(Map.Enemies.Count == 0 || Map.Towers.Count == 0)
+        {
+            return;
+        }
+        UpdateBulletPositions();
+
+        var towers = Map.Towers.ToList();
+
+        foreach (var tower in towers)
+        {
+            var towerBullets = tower.Shoot(Map.Enemies);
+            if (towerBullets.Count == 0)
+            {
+                continue;
+            }
+            Map.Bullets.AddRange(towerBullets);
+        }
+    }
+
+    public void UpgradeTower(int x, int y, TowerUpgrades towerUpgrade)
+    {
+        var tower = Map.Towers.FirstOrDefault(t => t.X == x && t.Y == y);
+
+        if (tower == null)
+        {
+            Logger.Instance.LogError($"Unable to upgrade tower at position ({x},{y}). Tower not found.");
+            return;
+        }
+
+        if (tower.AppliedUpgrades.Contains(towerUpgrade))
+        {
+            Logger.Instance.LogError($"Tower at position ({x},{y}) already has upgrade {towerUpgrade}.");
+            return;
+        }
+
+        tower.Weapon = towerUpgrade switch
+        {
+            TowerUpgrades.Burst => new Burst(tower.Weapon),
+            TowerUpgrades.DoubleDamage => new DoubleDamage(tower.Weapon),
+            TowerUpgrades.DoubleBullet => new DoubleBullet(tower.Weapon),
+            _ => throw new Exception("Unknown tower upgrade")
+        };
+
+        tower.AppliedUpgrades.Add(towerUpgrade);
     }
 }

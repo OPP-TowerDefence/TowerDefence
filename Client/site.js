@@ -9,6 +9,12 @@ let mapHeight = 0;
 let activeTowerCategory = 0;
 let activeSelectionDiv = document.getElementById('longDistanceTowerDiv');
 
+const upgradeMap = {
+    'DoubleDamage': 0,
+    'Burst': 1,
+    'DoubleBullet': 2
+};
+
 async function joinRoom() {
     const roomCode = document.getElementById('roomCode').value;
     const username = document.getElementById('username').value;
@@ -76,21 +82,6 @@ connection.on("GameStarted", function (message) {
     document.getElementById('gameMap').addEventListener('click', handleMapClick);
 });
 
-function handleMapClick(event) {
-    const bounds = event.target.getBoundingClientRect();
-    const x = event.clientX - bounds.left;
-    const y = event.clientY - bounds.top;
-    const gridX = Math.floor(x / 50);
-    const gridY = Math.floor(y / 50);
-
-    if (gridX >= 0 && gridX < mapWidth && gridY >= 0 && gridY < mapHeight) {
-        const roomCode = document.getElementById('roomCode').value;
-        connection.invoke("PlaceTower", roomCode, gridX, gridY, activeTowerCategory);
-    } else {
-        console.log('Tower placement is outside the grid boundaries.');
-    }
-}
-
 connection.on("UserJoined", function (username, players) {
     const messageList = document.getElementById('messagesList');
     const listItem = document.createElement('li');
@@ -130,11 +121,11 @@ connection.on("OnResourceChanged", function (newResourceAmount) {
     updateResources(newResourceAmount);
 });
 
-connection.on("OnTick", function (map, mapEnemies) {
-    renderMap(map, mapEnemies);
+connection.on("OnTick", function (map, mapEnemies, mapBullets) {
+    renderMap(map, mapEnemies, mapBullets);
 });
 
-function renderMap(map, mapEnemies) {
+function renderMap(map, mapEnemies, mapBullets) {
     const gameMap = document.getElementById('gameMap');
     gameMap.innerHTML = '';
 
@@ -143,6 +134,7 @@ function renderMap(map, mapEnemies) {
         cell.className = 'grid-cell tower';
         cell.classList.add(tower.type.toLowerCase());
         cell.classList.add(tower.category.toLowerCase());
+        cell.dataset.appliedUpgrades = JSON.stringify(tower.appliedUpgrades);
         gameMap.appendChild(cell);
 
         cell.style.gridColumnStart = tower.x + 1;
@@ -166,6 +158,15 @@ function renderMap(map, mapEnemies) {
 
         cell.style.gridColumnStart = enemy.x + 1;
         cell.style.gridRowStart = enemy.y + 1;
+    });
+
+    mapBullets.forEach(bullet => {
+        const bulletElement = document.createElement('div');
+        bulletElement.className = 'bullet'; // Add a class for bullets
+        gameMap.appendChild(bulletElement);
+
+        bulletElement.style.gridColumnStart = bullet.x + 1;
+        bulletElement.style.gridRowStart = bullet.y + 1;
     });
 }
 
@@ -193,3 +194,95 @@ function selectTowerCategory(towerCategory) {
 
     activeSelectionDiv.classList.add('active');
 }
+
+function handleMapClick(event) {
+    const gameMap = document.getElementById('gameMap');
+    const bounds = gameMap.getBoundingClientRect();
+    const x = event.clientX - bounds.left;
+    const y = event.clientY - bounds.top;
+    const gridX = Math.floor(x / 50);
+    const gridY = Math.floor(y / 50);
+
+    if (gridX >= 0 && gridX < mapWidth && gridY >= 0 && gridY < mapHeight) {
+        if (event.target.classList.contains('tower')) {
+            const appliedUpgrades = JSON.parse(event.target.dataset.appliedUpgrades || '[]');
+            showUpgradeOptions(gridX, gridY, appliedUpgrades);
+        } else {
+            const roomCode = document.getElementById('roomCode').value;
+            connection.invoke("PlaceTower", roomCode, gridX, gridY, activeTowerCategory);
+        }
+    } else {
+        console.log('Clicked area is outside the grid boundaries.');
+    }
+}
+
+
+function showUpgradeOptions(gridX, gridY, appliedUpgrades) {
+    const existingMenu = document.querySelector('.upgrade-options');
+    const overlay = document.querySelector('.overlay');
+    if (existingMenu) {
+        existingMenu.remove();
+        overlay.remove();
+    }
+
+    const overlayDiv = document.createElement('div');
+    overlayDiv.className = 'overlay';
+    overlayDiv.onclick = function(event) {
+        event.stopPropagation();
+        overlayDiv.remove();
+        upgradeDiv.remove();
+    };
+
+    const upgradeDiv = document.createElement('div');
+    upgradeDiv.className = 'upgrade-options';
+    upgradeDiv.innerHTML = '<h2>Upgrade</h2>';
+
+    const allUpgrades = ['DoubleDamage', 'Burst', 'DoubleBullet'];
+    const availableUpgrades = allUpgrades.filter(upgrade => !appliedUpgrades.includes(upgrade));
+
+    if (availableUpgrades.length === 0) {
+        const noUpgradesMsg = document.createElement('p');
+        noUpgradesMsg.textContent = 'No upgrades available.';
+        upgradeDiv.appendChild(noUpgradesMsg);
+    } else {
+        availableUpgrades.forEach(upgrade => {
+            const upgradeButton = document.createElement('button');
+            // Format the upgrade name for display
+            const upgradeText = upgrade.replace(/([A-Z])/g, ' $1').trim();
+            upgradeButton.textContent = upgradeText;
+            upgradeButton.className = 'upgrade-button';
+            upgradeButton.onclick = function() {
+                const upgradeType = upgradeMap[upgrade];
+                connection.invoke("UpgradeTower", document.getElementById('roomCode').value, gridX, gridY, upgradeType);
+                overlayDiv.remove();
+                upgradeDiv.remove();
+            };
+            upgradeDiv.appendChild(upgradeButton);
+        });
+    }
+
+    document.body.appendChild(overlayDiv);
+    document.body.appendChild(upgradeDiv);
+
+    upgradeDiv.style.position = 'fixed';
+    upgradeDiv.style.top = '50%';
+    upgradeDiv.style.left = '50%';
+    upgradeDiv.style.transform = 'translate(-50%, -50%)';
+}
+
+document.addEventListener('click', function(event) {
+    const upgradeDiv = document.querySelector('.upgrade-options');
+    const overlay = document.querySelector('.overlay');
+    if (overlay && event.target === overlay) {
+        if (upgradeDiv) {
+            upgradeDiv.remove();
+        }
+        overlay.remove();
+    }
+}, true);
+
+
+
+
+
+

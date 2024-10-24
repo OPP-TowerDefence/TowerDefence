@@ -28,7 +28,7 @@ namespace TowerDefense.Models.Towers
         {
             if (_category == TowerCategories.Heavy)
             {
-                _tower.Weapon = new Weapon("Laser Cannon", 15, 5, 5);
+                _tower.Weapon = new Weapon("Laser Cannon", 15, 5, 4);
             }
             else
             {

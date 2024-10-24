@@ -7,6 +7,7 @@ namespace TowerDefense.Models.Towers
         public LongDistanceLaserTower(int x, int y) : base(x, y)
         {
             this.Cost = 100;
+            this.TicksToShoot = 4;
         }
     }
 }

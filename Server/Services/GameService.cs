@@ -47,10 +47,11 @@ public class GameService
                 }
 
                 gameState.UpdateEnemies();
+                gameState.TowerAttack();
 
                 await _hubContext.Clients
                     .Group(room.Key)
-                    .SendAsync("OnTick", gameState.GetMapTowers(), gameState.GetMapEnemies());
+                    .SendAsync("OnTick", gameState.GetMapTowers(), gameState.GetMapEnemies(),gameState.GetMapBullets());
             }
             catch (Exception ex)
             {
