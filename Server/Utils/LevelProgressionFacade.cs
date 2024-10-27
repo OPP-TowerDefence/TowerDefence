@@ -30,8 +30,7 @@ namespace TowerDefense.Utils
                 if (_currentLevel >= 3)
                 {
                     enemy.IncreaseSpeed(1);
-                }
-                Console.WriteLine($"Enemy health increased : {enemy.Health} Enemy speed increased : {enemy.Speed}");
+                }            
             }
 
             foreach (var tower in _towers)
@@ -39,11 +38,9 @@ namespace TowerDefense.Utils
                 tower.Weapon.IncreaseDamage(2);
                 tower.Weapon.IncreaseRange(1);
                 tower.Weapon.IncreaseSpeed(2);
-                Console.WriteLine($"Tower damage increased : {tower.Weapon.GetDamage()}");
             }
 
             _mainObject.IncreaseHealth(20);
-            Console.WriteLine($"Health is {_mainObject.Health}");
         }
 
         public void ApplyBuffToNewEnemy(Enemy enemy)

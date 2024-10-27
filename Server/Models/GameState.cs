@@ -166,8 +166,8 @@ public class GameState
             .CreateEnemy(0, 0);
 
         _levelFacade.ApplyBuffToNewEnemy(enemy);
+
         Map.Enemies.Add(enemy);
-        Console.WriteLine($"Health : {enemy.Health} Speed : {enemy.Speed}");
 
         OnEnemySpawned();
     }

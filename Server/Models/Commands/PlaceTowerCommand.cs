@@ -16,7 +16,6 @@ namespace TowerDefense.Models.Commands
             {
                 _levelFacade.ApplyBuffToNewTower(_tower);
                 _map.Towers.Add(_tower);
-                Console.WriteLine($"Tower damage : {_tower.Weapon.GetDamage()}");
             }
             else
             {
