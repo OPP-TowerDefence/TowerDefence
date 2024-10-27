@@ -150,9 +150,9 @@ function renderMap(map, mapEnemies, mapBullets) {
         const cell = document.createElement('div');
         cell.className = 'grid-cell enemy';
 
-        if (enemy.speed == 1) {
+        if (enemy.type == "Strong") {
             cell.classList.add('strong-enemy');
-        } else if (enemy.speed == 2) {
+        } else if (enemy.type == "Flying") {
             cell.classList.add('flying-enemy');
         }
         else{
