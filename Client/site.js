@@ -15,6 +15,18 @@ const upgradeMap = {
     'DoubleBullet': 2
 };
 
+const enemyTypes = {
+    STRONG: "Strong",
+    FLYING: "Flying",
+    FAST: "Fast"
+};
+
+const enemyClassMap = {
+    [enemyTypes.STRONG]: 'strong-enemy',
+    [enemyTypes.FLYING]: 'flying-enemy',
+    [enemyTypes.FAST]: 'fast-enemy'
+};
+
 async function joinRoom() {
     const roomCode = document.getElementById('roomCode').value;
     const username = document.getElementById('username').value;
@@ -150,13 +162,11 @@ function renderMap(map, mapEnemies, mapBullets) {
         const cell = document.createElement('div');
         cell.className = 'grid-cell enemy';
 
-        if (enemy.type == "Strong") {
-            cell.classList.add('strong-enemy');
-        } else if (enemy.type == "Flying") {
-            cell.classList.add('flying-enemy');
-        }
-        else{
-            cell.classList.add('fast-enemy');
+        const enemyClass = enemyClassMap[enemy.type];
+        if (enemyClass) {
+            cell.classList.add(enemyClass);
+        } else {
+            console.warn("Unknown enemy type:", enemy.type);
         }
 
         gameMap.appendChild(cell);

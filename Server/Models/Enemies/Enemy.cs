@@ -7,12 +7,12 @@ namespace TowerDefense.Models.Enemies
     public abstract class Enemy : Unit
     {
         public Guid Id { get; set; }
-        public abstract EnemyTypes Type { get; }
         public int Health { get; set; }
         public int RewardValue { get; set; } = 10;
         public int Speed { get; set; }
         public int TargetX { get; set; }
         public int TargetY { get; set; }
+        public abstract EnemyTypes Type { get; }
 
         public Enemy(int x, int y) : base(x, y)
         {

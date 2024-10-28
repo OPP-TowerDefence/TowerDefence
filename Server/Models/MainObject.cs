@@ -3,10 +3,11 @@
     public class MainObject : Unit
     {
         private const int _maxHealth = 100;
-        public int Health { get; private set; } = _maxHealth;
+        public int Health { get; private set; }
 
-        public MainObject(int x, int y) : base(x, y)
+        public MainObject(int x, int y, int initialHealth = _maxHealth) : base(x, y)
         {
+            Health = initialHealth;
         }
 
         public void DecreaseHealth(int amount)
