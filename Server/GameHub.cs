@@ -82,11 +82,7 @@ public class GameHub(GameService gameService, Interfaces.ILogger logger) : Hub
 
             if (player is not null)
             {
-                var tower = player.CreateTower(x, y, towerCategory);
-
-                var command = new PlaceTowerCommand(gameState.Map, tower);
-
-                gameState.ProcessCommand(player.ConnectionId, command);
+                gameState.PlaceTower(x, y, towerCategory, player);
             }
             else
             {

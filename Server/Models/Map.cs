@@ -11,6 +11,7 @@ namespace TowerDefense.Models
         public List<Tower> Towers { get; set; } = [];
         public List<Enemy> Enemies { get; set; } = [];
         public List<Bullet> Bullets { get; set; } = [];
+        public MainObject MainObject { get; private set; } = new MainObject(10, 10);
 
         public bool IsOccupied(int x, int y)
         {

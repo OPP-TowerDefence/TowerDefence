@@ -6,14 +6,21 @@ namespace TowerDefense.Utils
 {
     public class LevelProgressionFacade
     {
-        private GameState _gameState;
+        private const int HealthIncreasePerLevel = 20;
+        private const int EnemyHealthIncrease = 10;
+        private const int EnemySpeedIncrease = 1;
+        private const int TowerDamageIncrease = 2;
+        private const int TowerRangeIncrease = 1;
+        private const int TowerSpeedIncrease = 2;
+
+        private MainObject _mainObject;
         private List<Enemy> _enemies;
         private List<Tower> _towers;
         private int _currentLevel;
 
-        public LevelProgressionFacade(GameState gameState, List<Enemy> enemies, List<Tower> towers)
+        public LevelProgressionFacade(MainObject mainObject, List<Enemy> enemies, List<Tower> towers)
         {
-            _gameState = gameState;
+            _mainObject = mainObject;
             _enemies = enemies;
             _towers = towers;
             _currentLevel = 1;
@@ -25,18 +32,47 @@ namespace TowerDefense.Utils
 
             foreach (var enemy in _enemies)
             {
-                enemy.IncreaseHealth(10 * _currentLevel);
-                enemy.IncreaseSpeed(1);
+                int levelMultiplier = _currentLevel - 1;
+                enemy.IncreaseHealth(EnemyHealthIncrease * levelMultiplier);
+                if (_currentLevel >= 3)
+                {
+                    enemy.IncreaseSpeed(EnemySpeedIncrease);
+                }
             }
 
             foreach (var tower in _towers)
-            {         
-                tower.Weapon.IncreaseDamage(2);
-                tower.Weapon.IncreaseRange(1);
-                tower.Weapon.IncreaseSpeed(2);       
+            {
+                tower.Weapon.IncreaseDamage(TowerDamageIncrease);
+                tower.Weapon.IncreaseRange(TowerRangeIncrease);
+                tower.Weapon.IncreaseSpeed(TowerSpeedIncrease);
             }
 
-            _gameState.IncreaseHealth(20);
+            _mainObject.IncreaseHealth(HealthIncreasePerLevel);
+        }
+
+        public void ApplyBuffToNewEnemy(Enemy enemy)
+        {
+            if (_currentLevel > 1)
+            {
+                int levelMultiplier = _currentLevel - 1;
+                enemy.IncreaseHealth(EnemyHealthIncrease * levelMultiplier);
+
+                if (_currentLevel >= 3)
+                {
+                    enemy.IncreaseSpeed(EnemySpeedIncrease);
+                }
+            }
+        }
+
+        public void ApplyBuffToNewTower(Tower tower)
+        {
+            if (_currentLevel > 1)
+            {
+                int levelMultiplier = _currentLevel - 1;
+                tower.Weapon.IncreaseDamage(TowerDamageIncrease * levelMultiplier);
+                tower.Weapon.IncreaseRange(TowerRangeIncrease * levelMultiplier);
+                tower.Weapon.IncreaseSpeed(TowerSpeedIncrease * levelMultiplier);
+            }
         }
 
         public int GetCurrentLevel()
@@ -45,3 +81,4 @@ namespace TowerDefense.Utils
         }
     }
 }
+

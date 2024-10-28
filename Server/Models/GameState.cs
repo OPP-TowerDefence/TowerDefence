@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using TowerDefense.Enums;
 using TowerDefense.Interfaces;
+using TowerDefense.Models.Commands;
 using TowerDefense.Models.Enemies;
 using TowerDefense.Models.WeaponUpgrades;
 using TowerDefense.Utils;
@@ -10,18 +11,22 @@ namespace TowerDefense.Models;
 public class GameState
 {
     private const int _commandHistoryLimit = 3;
-    private const int _maxHealth = 100;
+    private const int _baseEnemiesPerLevel = 10;
+
+    private int _enemiesSpawned = 0;
+    private int _currentLevel = 1;
 
     private readonly List<TowerTypes> _availableTowerTypes;
     private readonly IHubContext<GameHub> _hubContext;
-    private readonly LevelManager _levelManager;
     private readonly Dictionary<string, LinkedList<ICommand>> _playerCommands = [];
     private readonly List<Player> _players;
     private readonly ResourceManager _resourceManager;
+    private readonly LevelProgressionFacade _levelFacade;
     private readonly string _roomCode;
 
+    public event Action<int>? OnLevelChanged;
+
     public bool GameStarted { get; private set; }
-    public int Health { get; set; } = _maxHealth;
     public Map Map { get; } = new Map(10, 10);
     public List<Player> Players => _players;
 
@@ -37,8 +42,8 @@ public class GameState
             .Cast<TowerTypes>()
             .ToList();
 
-        _levelManager = new LevelManager(new LevelProgressionFacade(this, Map.Enemies, Map.Towers));
-        _levelManager.OnLevelChanged += NotifyLevelChange;
+        _levelFacade = new LevelProgressionFacade(Map.MainObject, Map.Enemies, Map.Towers);
+        OnLevelChanged += NotifyLevelChange;
     }
 
     public void AddPlayer(string username, string connectionId)
@@ -63,11 +68,6 @@ public class GameState
                 Logger.Instance.LogError($"Player {username} could not be added. No available tower types left to assign to a new player.");
             }
         }
-    }
-
-    public void DecreaseHealth(int amount)
-    {
-        Health = Math.Max(0, Health - amount);
     }
 
     public IEnumerable<object> GetActivePlayers()
@@ -100,7 +100,8 @@ public class GameState
                 e.X,
                 e.Y,
                 e.Health,
-                e.Speed
+                e.Speed,
+                Type = e.Type.ToString()
             })
             .ToList();
     }
@@ -117,11 +118,6 @@ public class GameState
                 AppliedUpgrades = t.AppliedUpgrades.Select(u => u.ToString()).ToList()
             })
             .ToList();
-    }
-
-    public void IncreaseHealth(int amount)
-    {
-        Health = Math.Min(Health + amount, _maxHealth);
     }
 
     public void ProcessCommand(ICommand command, string connectionId)
@@ -169,9 +165,26 @@ public class GameState
         var enemy = GetRandomEnemyFactory()
             .CreateEnemy(0, 0);
 
+        _levelFacade.ApplyBuffToNewEnemy(enemy);
+
         Map.Enemies.Add(enemy);
 
-        _levelManager.OnEnemySpawned();
+        OnEnemySpawned();
+    }
+
+    private void OnEnemySpawned()
+    {
+        _enemiesSpawned++;
+
+        int enemiesRequiredForNextLevel = _baseEnemiesPerLevel * _currentLevel * (_currentLevel + 1) / 2;
+
+        if (_enemiesSpawned >= enemiesRequiredForNextLevel)
+        {
+            _levelFacade.IncreaseLevel();
+            _currentLevel = _levelFacade.GetCurrentLevel();
+
+            OnLevelChanged?.Invoke(_currentLevel);
+        }
     }
 
     public void StartGame(string connectionId)
@@ -182,6 +195,13 @@ public class GameState
         }
 
         GameStarted = true;
+    }
+
+    public void PlaceTower(int x, int y, TowerCategories towerCategory, Player player)
+    {
+        var tower = player.CreateTower(x, y, towerCategory);
+        var command = new PlaceTowerCommand(this.Map, tower, _levelFacade);
+        ProcessCommand(command, player.ConnectionId);
     }
 
     public void TowerAttack()
@@ -226,11 +246,14 @@ public class GameState
     {
         foreach (var enemy in Map.Enemies.ToList())
         {
-            //enemy.MoveTowardsTarget();
+            enemy.TargetX = Map.MainObject.X;
+            enemy.TargetY = Map.MainObject.Y;
+
+            enemy.MoveTowardsTarget();
 
             if (enemy.HasReachedDestination())
             {
-                DecreaseHealth(5);
+                Map.MainObject.DecreaseHealth(5);
                 DamageEnemy(enemy, enemy.Health);
             }
         }
