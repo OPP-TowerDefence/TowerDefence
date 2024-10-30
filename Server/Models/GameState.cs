@@ -199,6 +199,8 @@ public class GameState
 
     public void PlaceTower(int x, int y, TowerCategories towerCategory, Player player)
     {
+        ArgumentNullException.ThrowIfNull(player);
+
         var tower = player.CreateTower(x, y, towerCategory);
         var command = new PlaceTowerCommand(this.Map, tower, _levelFacade);
         ProcessCommand(command, player.ConnectionId);
