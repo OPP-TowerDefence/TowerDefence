@@ -19,7 +19,7 @@ namespace Tests
             // Act
             _gameState.TowerAttack();
 
-            // Assert - bullets should remain the same as no enemies exist
+            // Assert
             Assert.AreEqual(bulletsBefore, _gameState.Map.Bullets.Count, "No bullets should be added as there are no enemies.");
         }
 
@@ -35,7 +35,7 @@ namespace Tests
             // Act
             _gameState.TowerAttack();
 
-            // Assert - bullets should remain the same as no towers exist
+            // Assert
             Assert.AreEqual(bulletsBefore, _gameState.Map.Bullets.Count, "No bullets should be added as there are no towers.");
         }
 
