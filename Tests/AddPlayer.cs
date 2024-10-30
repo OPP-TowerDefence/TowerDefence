@@ -8,11 +8,11 @@ using TowerDefense.Tests;
 namespace Tests
 {
     [TestClass]
-    public class UpdateBulletPositions : GameStateTests
+    public class AddPlayer : GameStateTests
     {
 
         [TestMethod]
-        public void RandTest()
+        public void AddPlayer_ReturnNothing_WhenPlayerDoesNotExist()
         {
            Assert.IsTrue(true);
         }
