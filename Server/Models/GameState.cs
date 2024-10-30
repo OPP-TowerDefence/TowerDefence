@@ -32,6 +32,16 @@ public class GameState
 
     public GameState(IHubContext<GameHub> hubContext, string roomCode)
     {
+        if(hubContext is null)
+        {
+            throw new ArgumentNullException(nameof(hubContext));
+        }
+
+        if (String.IsNullOrEmpty(roomCode))
+        {
+            throw new ArgumentNullException(nameof(roomCode));
+        }
+
         _hubContext = hubContext;
         _players = [];
         _resourceManager = new();
