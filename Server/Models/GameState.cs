@@ -32,15 +32,9 @@ public class GameState
 
     public GameState(IHubContext<GameHub> hubContext, string roomCode)
     {
-        if(hubContext is null)
-        {
-            throw new ArgumentNullException(nameof(hubContext));
-        }
+        if (hubContext is null)  throw new ArgumentNullException(nameof(hubContext));
 
-        if (String.IsNullOrEmpty(roomCode))
-        {
-            throw new ArgumentNullException(nameof(roomCode));
-        }
+        if (String.IsNullOrEmpty(roomCode)) throw new ArgumentNullException(nameof(roomCode));
 
         _hubContext = hubContext;
         _players = [];
@@ -58,6 +52,10 @@ public class GameState
 
     public void AddPlayer(string username, string connectionId)
     {
+        if (String.IsNullOrEmpty(username)) throw new ArgumentNullException(nameof(username));
+
+        if (String.IsNullOrEmpty(connectionId)) throw new ArgumentNullException(nameof(connectionId));
+
         if (!_players.Any(p => p.ConnectionId == connectionId))
         {
             if (_availableTowerTypes.Count > 0)
@@ -132,8 +130,6 @@ public class GameState
 
     public void ProcessCommand(ICommand command, string connectionId)
     {
-        var player = _players.FirstOrDefault(p => p.ConnectionId == connectionId);
-
         if (!_playerCommands.ContainsKey(connectionId))
         {
             _playerCommands[connectionId] = new();

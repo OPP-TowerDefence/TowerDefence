@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Hosting;
+using Moq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +13,32 @@ using TowerDefense.Tests;
 namespace Tests
 {
     [TestClass]
-    public class AddPlayer : GameStateTests
+    public class AddPlayerTests : GameStateTests
     {
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void AddPlayer_ThrowArgumentNullException_WhenUsernameIsNull()
+        {
+            //Arrange
+            var username = null as string;
+            var connectionId = "TestRoom";
+
+            //Act & Assert
+            _gameState.AddPlayer(username, connectionId);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void AddPlayer_ThrowArgumentNullException_WhenConnectionIdIsNull()
+        {
+            //Arrange
+            var username = "user1";
+            var connectionId = null as string;
+
+            //Act & Assert
+            _gameState.AddPlayer(username, connectionId);
+        }
 
         [TestMethod]
         public void AddPlayer_ReturnNothing_WhenPlayerExists()
@@ -93,6 +118,5 @@ namespace Tests
             towerTypesSelected.ForEach(towerTypesSelected => Assert.IsFalse(availableTowerTypes.Contains(towerTypesSelected), "TowerType should be removed from Available tower types after player addition"));
             Assert.AreEqual(0, availableTowerTypes.Count, "All TowerTypes should be selected");
         }
-
     }
 }
