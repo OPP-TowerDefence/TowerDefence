@@ -130,6 +130,10 @@ public class GameState
 
     public void ProcessCommand(ICommand command, string connectionId)
     {
+        if(command is null) throw new ArgumentNullException(nameof(command));
+
+        if (String.IsNullOrEmpty(connectionId)) throw new ArgumentNullException(nameof(connectionId));
+
         if (!_playerCommands.ContainsKey(connectionId))
         {
             _playerCommands[connectionId] = new();
