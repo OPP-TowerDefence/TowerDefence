@@ -310,11 +310,9 @@ public class GameState
         }
     }
 
-    private IEnemyFactory GetRandomEnemyFactory()
+    private IEnemyFactory GetRandomEnemyFactory(int? testEnemyType = null)
     {
-        Random rand = new();
-
-        int enemyType = rand.Next(0, 3);
+        int enemyType = testEnemyType ?? new Random().Next(0, 3);
 
         switch (enemyType)
         {
