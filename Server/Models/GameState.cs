@@ -193,7 +193,12 @@ public class GameState
             _levelFacade.IncreaseLevel();
             _currentLevel = _levelFacade.GetCurrentLevel();
 
-            OnLevelChanged?.Invoke(_currentLevel);
+            if (OnLevelChanged is null)
+            {
+                throw new ArgumentNullException("OnLevelChanged event is null.");
+            }
+
+            OnLevelChanged.Invoke(_currentLevel);
         }
     }
 

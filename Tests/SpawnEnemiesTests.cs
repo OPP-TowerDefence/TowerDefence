@@ -3,7 +3,7 @@
 namespace Tests
 {
     [TestClass]
-    public class SpawnEnemies : GameStateTests
+    public class SpawnEnemiesTests : GameStateTests
     {
         [TestMethod]
         public void SpawnEnemies_IncreaseEnemyCount_EnemiesAreSpawned()

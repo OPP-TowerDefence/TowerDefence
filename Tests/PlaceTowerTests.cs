@@ -5,7 +5,7 @@ using TowerDefense.Tests;
 namespace Tests
 {
     [TestClass]
-    public class PlaceTower : GameStateTests
+    public class PlaceTowerTests : GameStateTests
     {
         [TestMethod]
         public void PlaceTower_ThrowArgumentNullException_WhenPlayerIsNull()

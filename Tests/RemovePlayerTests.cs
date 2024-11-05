@@ -3,7 +3,7 @@
 namespace Tests
 {
     [TestClass]
-    public class RemovePlayer : GameStateTests
+    public class RemovePlayerTests : GameStateTests
     {
         [TestMethod]
         public void RemovePlayer_ReturnsNothing_WhenPlayerDoesNotExist()

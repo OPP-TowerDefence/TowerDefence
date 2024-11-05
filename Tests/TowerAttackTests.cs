@@ -5,7 +5,7 @@ using TowerDefense.Tests;
 namespace Tests
 {
     [TestClass]
-    public class TowerAttack : GameStateTests
+    public class TowerAttackTests : GameStateTests
     {
         [TestMethod]
         public void TowerAttack_ReturnsNothing_WhenNoEnemies()
