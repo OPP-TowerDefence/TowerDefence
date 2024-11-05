@@ -364,3 +364,9 @@ FodyWeavers.xsd
 
 # Log files
 Server/log.txt
+
+# Ignore TestResults folder
+Tests/TestResults/
+
+# Ignore coverlet folder
+Tests/coverlet/
