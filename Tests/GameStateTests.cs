@@ -10,18 +10,17 @@ namespace TowerDefense.Tests
     {
         protected GameState _gameState;
         protected Mock<IHubContext<GameHub>> _mockHubContext;
-
-        private Mock<ISingleClientProxy> _mockClientProxy;
-        private string _roomCode = "TestRoom";
+        protected Mock<IClientProxy> _mockClientProxy;
+        protected string _roomCode = "TestRoom";
 
         [TestInitialize]
         public void Setup()
         {
             _mockHubContext = new Mock<IHubContext<GameHub>>();
-            _mockClientProxy = new Mock<ISingleClientProxy>();
+            _mockClientProxy = new Mock<IClientProxy>();
 
             var mockClients = new Mock<IHubClients>();
-            mockClients.Setup(clients => clients.Client(It.IsAny<string>())).Returns(_mockClientProxy.Object);
+            mockClients.Setup(clients => clients.Group(It.IsAny<string>())).Returns(_mockClientProxy.Object);
             _mockHubContext.Setup(hub => hub.Clients).Returns(mockClients.Object);
 
             _gameState = new GameState(_mockHubContext.Object, _roomCode);

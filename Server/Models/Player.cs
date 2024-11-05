@@ -16,6 +16,13 @@ namespace TowerDefense.Models
         private readonly IClientProxy _clientProxy;
         private readonly ITowerFactory _towerFactory;
 
+        public Player(string username, string connectionId, TowerTypes towerType)
+        {
+            Username = username;
+            ConnectionId = connectionId;
+            TowerType = towerType;
+        }
+
         public Player(string username, string connectionId, TowerTypes towerType, IHubContext<GameHub> hubContext)
         {
             Username = username;
