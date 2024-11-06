@@ -28,7 +28,7 @@ namespace TowerDefense.Models.Strategies
             }
 
             // Check if we should switch to a better path
-            selectedPath = CheckForBetterPath(map, enemy,gameState) ?? selectedPath;
+            selectedPath = CheckForBetterPath(map, enemy, gameState) ?? selectedPath;
 
             // Return the remaining portion of the current path from the enemy's position
             return GetRemainingPathFromCurrentPosition(selectedPath, enemy, gameState);
@@ -85,36 +85,36 @@ namespace TowerDefense.Models.Strategies
                 }
             }
 
-            return null;
+            return new List<PathPoint>();
         }
 
         private List<PathPoint> CheckForBetterPath(Map map, Enemy enemy, GameState gameState)
-{
-    var currentTile = map.GetTile(enemy.X, enemy.Y);
-
-    // Sort paths by their calculated threat level
-    var sortedPaths = map.Paths
-        .OrderBy(path => CalculatePathThreatLevel(map, path))
-        .ToList();
-
-    // Attempt to find the lowest-threat reachable path
-    foreach (var path in sortedPaths)
-    {
-        // Skip checking the currently selected path if it’s already in use
-        if (path == selectedPath) continue;
-
-        // Check if this path is reachable from the enemy's current position
-        var remainingPath = GetRemainingPathFromCurrentPosition(path, enemy, gameState);
-        if (remainingPath != null)
         {
-            // Found a reachable path with a lower threat level; use this one
-            return remainingPath;
-        }
-    }
+            var currentTile = map.GetTile(enemy.X, enemy.Y);
 
-    // If no alternative reachable paths are found, stick with the current path
-    return selectedPath;
-}
+            // Sort paths by their calculated threat level
+            var sortedPaths = map.Paths
+                .OrderBy(path => CalculatePathThreatLevel(map, path))
+                .ToList();
+
+            // Attempt to find the lowest-threat reachable path
+            foreach (var path in sortedPaths)
+            {
+                // Skip checking the currently selected path if it’s already in use
+                if (path == selectedPath) continue;
+
+                // Check if this path is reachable from the enemy's current position
+                var remainingPath = GetRemainingPathFromCurrentPosition(path, enemy, gameState);
+                if (remainingPath != null)
+                {
+                    // Found a reachable path with a lower threat level; use this one
+                    return remainingPath;
+                }
+            }
+
+            // If no alternative reachable paths are found, stick with the current path
+            return selectedPath;
+        }
 
 
         private List<PathPoint> GetAdjacentTiles(int x, int y, GameState gameState)

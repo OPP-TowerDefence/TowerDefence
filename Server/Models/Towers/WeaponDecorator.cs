@@ -18,6 +18,7 @@ namespace TowerDefense.Models.Towers
         {
             return _weapon.GetRange();
         }
+        
         public virtual int GetDamage()
         {
             return _weapon.GetDamage();

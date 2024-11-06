@@ -46,6 +46,7 @@ public class GameService
                     gameState.SpawnEnemies();
                     _timeSinceLastSpawn = 0;
                 }
+                
                 if (gameState.TimeSinceLastEnvironmentUpdate >= EnvironmentUpdateInterval)
                 {
                     gameState.UpdateEnvironment();
@@ -57,7 +58,7 @@ public class GameService
 
                 await _hubContext.Clients
                     .Group(room.Key)
-                    .SendAsync("OnTick", gameState.GetMapTowers(), gameState.GetMapEnemies(), gameState.GetMapBullets(),gameState.SendPath());
+                    .SendAsync("OnTick", gameState.GetMapTowers(), gameState.GetMapEnemies(), gameState.GetMapBullets(), gameState.SendPath());
             }
             catch (Exception ex)
             {

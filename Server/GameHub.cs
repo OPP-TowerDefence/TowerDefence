@@ -33,7 +33,7 @@ public class GameHub(GameService gameService, Interfaces.ILogger logger) : Hub
 
         gameState.AddPlayer(username, Context.ConnectionId);
 
-        await Clients.Caller.SendAsync("InitializeMap", gameState.Map.Width, gameState.Map.Height, gameState.GetMapTowers(), gameState.GetMapEnemies(),gameState.SendPath());
+        await Clients.Caller.SendAsync("InitializeMap", gameState.Map.Width, gameState.Map.Height, gameState.GetMapTowers(), gameState.GetMapEnemies(), gameState.SendPath());
 
         _logger.LogInfo($"Player {username} with connection ID {Context.ConnectionId} has joined room {roomCode}.");
 

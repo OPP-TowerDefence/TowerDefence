@@ -154,6 +154,8 @@ function renderMap(map, mapEnemies, mapBullets) {
         cell.classList.add(tower.category.toLowerCase());
         cell.dataset.appliedUpgrades = JSON.stringify(tower.appliedUpgrades);
         gameMap.appendChild(cell);
+        console.log(`Rendering tower at coordinates: (${tower.x}, ${tower.y})`);
+
 
         cell.style.gridColumnStart = tower.x + 1;
         cell.style.gridRowStart = tower.y + 1;
@@ -216,22 +218,6 @@ function renderPathTile(point) {
     cell.style.gridRowStart = point.y + 1;
 }
 
-// Event handler for map clicks, checking path and tower placement validity
-document.getElementById('gameMap').addEventListener('click', function (event) {
-    const bounds = event.target.getBoundingClientRect();
-    const x = event.clientX - bounds.left;
-    const y = event.clientY - bounds.top;
-    const gridX = Math.floor(x / 10);
-    const gridY = Math.floor(y / 10);
-    const roomCode = document.getElementById('roomCode').value;
-
-    if (!isPathBlocked(gridX, gridY)) {
-        connection.invoke("PlaceTower", roomCode, gridX, gridY, activeTowerCategory);
-    } else {
-        console.log('Cannot place the tower on the path or another tower.');
-    }
-});
-
 function isPathBlocked(x, y) {
     return paths.some(pathPoint => pathPoint.x === x && pathPoint.y === y);
 }
@@ -255,23 +241,76 @@ function undoTower() {
 function handleMapClick(event) {
     const gameMap = document.getElementById('gameMap');
     const bounds = gameMap.getBoundingClientRect();
-    const x = event.clientX - bounds.left;
-    const y = event.clientY - bounds.top;
-    const gridX = Math.floor(x / 10);
-    const gridY = Math.floor(y / 10);
 
-    if (gridX >= 0 && gridX < mapWidth && gridY >= 0 && gridY < mapHeight) {
-        if (event.target.classList.contains('tower')) {
-            const appliedUpgrades = JSON.parse(event.target.dataset.appliedUpgrades || '[]');
-            showUpgradeOptions(gridX, gridY, appliedUpgrades);
-        } else {
-            const roomCode = document.getElementById('roomCode').value;
-            connection.invoke("PlaceTower", roomCode, gridX, gridY, activeTowerCategory);
+    const cellSize = 10; // Each grid cell is 10x10 pixels
+    const relativeX = event.clientX - bounds.left;
+    const relativeY = event.clientY - bounds.top;
+
+    // Calculate the grid coordinates of the clicked cell
+    const clickedX = Math.floor(relativeX / cellSize)-1;
+    const clickedY = Math.floor(relativeY / cellSize)-1;
+
+    console.log(`Click coordinates: (${clickedX}, ${clickedY})`);
+
+    // Offsets for the 3x3 grid area around the clicked cell
+    const offsets = [
+        { dx: -1, dy: -1 }, { dx: 0, dy: -1 }, { dx: 1, dy: -1 },
+        { dx: -1, dy: 0 },  { dx: 0, dy: 0 },  { dx: 1, dy: 0 },
+        { dx: -1, dy: 1 },  { dx: 0, dy: 1 },  { dx: 1, dy: 1 },
+    ];
+
+    let towerFound = false;
+
+    for (const offset of offsets) {
+        const checkX = clickedX + offset.dx;
+        const checkY = clickedY + offset.dy;
+
+        console.log(`Checking coordinates: (${checkX}, ${checkY})`);
+
+        // Ensure coordinates are within map bounds
+        if (checkX >= 0 && checkX < mapWidth && checkY >= 0 && checkY < mapHeight) {
+            // Locate the cell at (checkX, checkY)
+            const cell = [...gameMap.children].find(child => 
+                parseInt(child.style.gridColumnStart) - 1 <= checkX &&
+                parseInt(child.style.gridColumnStart) - 1 + 2 >= checkX &&
+                parseInt(child.style.gridRowStart) - 1 <= checkY &&
+                parseInt(child.style.gridRowStart) - 1 + 2 >= checkY
+            );
+
+            // Check if this cell is part of a multi-cell turret
+            if (cell && cell.classList.contains('tower')) {
+                
+                // Retrieve the actual start coordinates of the turret
+                const turretX = parseInt(cell.style.gridColumnStart) - 1;
+                const turretY = parseInt(cell.style.gridRowStart) - 1;
+                const appliedUpgrades = JSON.parse(cell.dataset.appliedUpgrades || '[]');
+
+                // Show upgrade options for the entire turret (not just the clicked cell)
+                showUpgradeOptions(turretX, turretY, appliedUpgrades);
+                towerFound = true;
+                break; // Stop after finding the turret
+            }
+
+            // Check if this cell is a path
+            if (cell && cell.classList.contains('path')) {
+                console.log("Path found, blocking tower placement.");
+                towerFound = true;
+                break; // Stop checking further if a path is found
+            }
         }
-    } else {
-        console.log('Clicked area is outside the grid boundaries.');
     }
+
+    if (towerFound) {
+        console.log("Cannot place tower here: area is blocked by a path or existing turret.");
+        return; // Exit function to prevent placing a new tower
+    }
+
+    // If no obstacles are found, proceed to place a new tower
+    console.log("No obstacles found; placing new tower.");
+    const roomCode = document.getElementById('roomCode').value;
+    connection.invoke("PlaceTower", roomCode, clickedX, clickedY, activeTowerCategory);
 }
+
 
 function showUpgradeOptions(gridX, gridY, appliedUpgrades) {
     const existingMenu = document.querySelector('.upgrade-options');
