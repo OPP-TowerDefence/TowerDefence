@@ -1,13 +1,21 @@
 body {
     align-items: center;
     background-color: #f0f0f0;
-    display: flex;
-    height: 100vh;
-    justify-content: center;
     margin: 0;
     padding: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    overflow-y: auto;
 }
-
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
 button {
     cursor: pointer;
 }
@@ -16,6 +24,9 @@ button {
     align-items: center;
     display: flex;
     flex-direction: column;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 #gameMap {
@@ -25,6 +36,10 @@ button {
     display: grid;
     gap: 0px;
     margin-top: 20px;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    overflow: hidden;
 }
 
 input, button {

@@ -5,6 +5,7 @@ using TowerDefense.Models.Commands;
 using TowerDefense.Models.Enemies;
 using TowerDefense.Models.WeaponUpgrades;
 using TowerDefense.Utils;
+using TowerDefense.Models.Strategies;
 
 namespace TowerDefense.Models;
 
@@ -18,17 +19,24 @@ public class GameState
 
     private readonly List<TowerTypes> _availableTowerTypes;
     private readonly IHubContext<GameHub> _hubContext;
+    private Random _random = new Random();
     private readonly Dictionary<string, LinkedList<ICommand>> _playerCommands = [];
     private readonly List<Player> _players;
     private readonly ResourceManager _resourceManager;
     private readonly LevelProgressionFacade _levelFacade;
     private readonly string _roomCode;
 
+    public int EnemyCount { get; private set; } = 0;
+
     public event Action<int>? OnLevelChanged;
 
     public bool GameStarted { get; private set; }
-    public Map Map { get; } = new Map(10, 10);
+    public Map Map { get; } = new Map(100, 100);
     public List<Player> Players => _players;
+
+    public double TimeSinceLastSpawn { get; set; } = 0;
+
+    public double TimeSinceLastEnvironmentUpdate { get; set; } = 0;
 
     public GameState(IHubContext<GameHub> hubContext, string roomCode)
     {
@@ -160,16 +168,39 @@ public class GameState
         }
     }
 
+    public object SendPath()
+    {
+        return Map.Paths.Select(path => path.Select(tile => new
+        {
+            X = tile.X,
+            Y = tile.Y,
+            Type = tile.Type.ToString()
+        })).ToList();
+    }
+
     public void SpawnEnemies()
     {
         var enemy = GetRandomEnemyFactory()
             .CreateEnemy(0, 0);
 
-        _levelFacade.ApplyBuffToNewEnemy(enemy);
-
+        enemy.RetrievePath(this);
         Map.Enemies.Add(enemy);
 
+        _levelFacade.ApplyBuffToNewEnemy(enemy);
+
         OnEnemySpawned();
+        if (_enemiesSpawned % 5 == 0)
+        {
+            enemy.MarkAsShadowEnemy(); // Mark this enemy as shadow enemy
+        }
+
+        if (enemy is StrongEnemy strongEnemy)
+        {
+            if (!enemy.IsShadowEnemy)
+            {
+                NotifyShadowEnemies(strongEnemy);
+            }
+        }
     }
 
     private void OnEnemySpawned()
@@ -184,6 +215,30 @@ public class GameState
             _currentLevel = _levelFacade.GetCurrentLevel();
 
             OnLevelChanged?.Invoke(_currentLevel);
+        }
+    }
+    private void NotifyShadowEnemies(StrongEnemy newStrongEnemy)
+    {
+        foreach (var shadowEnemy in Map.Enemies.OfType<Enemy>().Where(e => e.CurrentStrategy is ShadowStrategy))
+        {
+            var shadowStrategy = (ShadowStrategy)shadowEnemy.CurrentStrategy;
+
+            // Only assign the new strong enemy if the shadow enemy has no current target
+            if (!shadowStrategy.HasTarget())
+            {
+                shadowStrategy.SetTargetStrongEnemy(newStrongEnemy);  // Set target and start following
+                shadowEnemy.RetrievePath(this);
+            }
+        }
+    }
+    public void RecalculatePathsForStrategy(IPathStrategy strategy)
+    {
+        foreach (var enemy in Map.Enemies)
+        {
+            if (enemy.CurrentStrategy == strategy)
+            {
+                enemy.RetrievePath(this);
+            }
         }
     }
 
@@ -202,6 +257,9 @@ public class GameState
         var tower = player.CreateTower(x, y, towerCategory);
         var command = new PlaceTowerCommand(this.Map, tower, _levelFacade);
         ProcessCommand(command, player.ConnectionId);
+        Map.UpdateDefenseMap();
+        var threat = new ThreatAvoidanceStrategy();
+        RecalculatePathsForStrategy(threat);
     }
 
     public void TowerAttack()
@@ -246,17 +304,60 @@ public class GameState
     {
         foreach (var enemy in Map.Enemies.ToList())
         {
-            enemy.TargetX = Map.MainObject.X;
-            enemy.TargetY = Map.MainObject.Y;
-
-            enemy.MoveTowardsTarget();
+            enemy.MoveTowardsNextWaypoint(this);
 
             if (enemy.HasReachedDestination())
             {
                 Map.MainObject.DecreaseHealth(5);
                 DamageEnemy(enemy, enemy.Health);
+
+                if (enemy is StrongEnemy strongEnemy)
+                {
+                    foreach (var shadowEnemy in Map.Enemies.OfType<Enemy>()
+                             .Where(e => e.CurrentStrategy is ShadowStrategy shadowStrategy && shadowStrategy.targetStrongEnemy == strongEnemy))
+                    {
+                        ((ShadowStrategy)shadowEnemy.CurrentStrategy).StopFollowing();
+                    }
+                }
             }
         }
+    }
+    public void UpdateEnvironment()
+    {
+        var objective = Map.GetObjectiveTile();
+
+        for (int x = 0; x < Map.Width; x++)
+        {
+            for (int y = 0; y < Map.Height; y++)
+            {
+                var tile = Map.GetTile(x, y);
+
+                if (tile.Type == TileType.Turret || (x == objective.X && y == objective.Y))
+                    continue;
+
+                tile.Type = TileType.Normal;
+                tile.Effect = null;
+            }
+        }
+
+        for (int x = 0; x < Map.Width; x++)
+        {
+            for (int y = 0; y < Map.Height; y++)
+            {
+                var tile = Map.GetTile(x, y);
+
+                if (tile.Type == TileType.Normal && _random.NextDouble() < 0.9)
+                {
+                    var newTileType = Map.DetermineTileType();
+                    tile.Type = newTileType;
+                    tile.Effect = tile.CreateEffectForTileType(newTileType);
+                }
+            }
+        }
+        var speedstrategy = new SpeedPrioritizationStrategy();
+        var survival = new SurvivalStrategy();
+        RecalculatePathsForStrategy(speedstrategy);
+        RecalculatePathsForStrategy(survival);
     }
 
     public void UpgradeTower(int x, int y, TowerUpgrades towerUpgrade)

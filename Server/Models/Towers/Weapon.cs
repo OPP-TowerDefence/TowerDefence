@@ -15,6 +15,10 @@ namespace TowerDefense.Models.Towers
         {
             return Damage;
         }
+        public virtual int GetRange()
+        {
+            return Range;
+        }
 
         public void IncreaseDamage(int amount)
         {

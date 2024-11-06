@@ -1,26 +1,78 @@
 .grid-cell.enemy {
     background-color: red;
+    width: 10px;
+    height: 10px;
+    border-radius: 10%;
+    border: 1px solid #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.3s ease-in-out;
+    z-index: 10;
 }
 
+
 .grid-cell.enemy.fast-enemy {
-    background-color: #ff6347;  
-    width: 30px;
-    height: 30px;
-    border-radius: 50%; 
-    border: 2px solid #000;
+    background-color: #ff6347;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: 1px solid #000;
+    animation: pulse 1s infinite;
 }
 
 .grid-cell.enemy.flying-enemy {
-    background-color: #87ceeb;  
-    width: 40px;
-    height: 40px;
+    background-color: #87ceeb;
+    width: 10px;
+    height: 10px;
     transform: rotate(45deg);
-    border: 2px solid #000;
+    border: 1px solid #000;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+    opacity: 0.9;
 }
 
 .grid-cell.enemy.strong-enemy {
     background-color: #8b0000;
-    width: 50px;
-    height: 50px;
-    border: 3px solid #000;
+    width: 12px;
+    height: 12px;
+    border: 2px solid #000;
+    border-radius: 10%;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.7);
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.grid-cell.enemy:hover {
+    transform: scale(1.2); 
+}
+
+.grid-cell.path {
+    width: 10px;
+    height: 10px;
+    border-radius: 5%;
+    z-index: 5; 
+}
+
+.normal-tile {
+    background-color: #4d4744; 
+}
+
+.ice-tile {
+    background-color: #add8e6;
+}
+
+.mud-tile {
+    background-color: #deb887;
+}
+
+.pinkhealth-tile {
+    background-color: #ff69b4; 
+}
+
+.objective-tile {
+    background-color: #ff0000;
 }

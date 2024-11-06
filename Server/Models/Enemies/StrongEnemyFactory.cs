@@ -1,4 +1,5 @@
 ﻿using TowerDefense.Interfaces;
+using TowerDefense.Models.Strategies;
 
 namespace TowerDefense.Models.Enemies
 {
@@ -6,7 +7,9 @@ namespace TowerDefense.Models.Enemies
     {
         public Enemy CreateEnemy(int x, int y)
         {
-            return new StrongEnemy(x, y);
+            var enemy = new StrongEnemy(x, y);
+            enemy.SetInitialStrategy(new SurvivalStrategy());
+            return enemy;
         }
     }
 }

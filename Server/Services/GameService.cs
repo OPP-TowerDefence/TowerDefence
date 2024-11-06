@@ -6,13 +6,16 @@ using TowerDefense.Utils;
 
 namespace TowerDefense.Services;
 public class GameService
-{    
+{
     private static readonly ConcurrentDictionary<string, GameState> _rooms = new();
     private readonly System.Timers.Timer _gameTickTimer;
     private readonly IHubContext<GameHub> _hubContext;
 
     private double _timeSinceLastSpawn = 0;
     private const double SpawnInterval = 3000;
+
+    private const double EnvironmentUpdateInterval = 15000;
+    private double _timeSinceLastEnvironmentUpdate = 0;
 
     public GameService(IHubContext<GameHub> hubContext)
     {
@@ -43,13 +46,18 @@ public class GameService
                     gameState.SpawnEnemies();
                     _timeSinceLastSpawn = 0;
                 }
+                if (gameState.TimeSinceLastEnvironmentUpdate >= EnvironmentUpdateInterval)
+                {
+                    gameState.UpdateEnvironment();
+                    gameState.TimeSinceLastEnvironmentUpdate = 0;
+                }
 
                 gameState.UpdateEnemies();
                 gameState.TowerAttack();
 
                 await _hubContext.Clients
                     .Group(room.Key)
-                    .SendAsync("OnTick", gameState.GetMapTowers(), gameState.GetMapEnemies(),gameState.GetMapBullets());
+                    .SendAsync("OnTick", gameState.GetMapTowers(), gameState.GetMapEnemies(), gameState.GetMapBullets(),gameState.SendPath());
             }
             catch (Exception ex)
             {

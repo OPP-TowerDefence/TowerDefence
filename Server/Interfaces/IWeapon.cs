@@ -8,6 +8,8 @@ namespace TowerDefense.Interfaces
     {
         public int GetDamage();
 
+        public int GetRange();
+
         public void IncreaseDamage(int amount);
         
         public void IncreaseRange(int amount);
