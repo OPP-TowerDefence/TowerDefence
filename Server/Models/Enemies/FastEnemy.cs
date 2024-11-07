@@ -1,8 +1,9 @@
 ﻿using TowerDefense.Enums;
+using TowerDefense.Interfaces;
 
 namespace TowerDefense.Models.Enemies
 {
-    public class FastEnemy : Enemy
+    public class FastEnemy : Enemy, IPrototype<FastEnemy>
     {
         public override EnemyTypes Type => EnemyTypes.Fast;
 
@@ -10,6 +11,10 @@ namespace TowerDefense.Models.Enemies
         {
             Health = 20;
             Speed = 3;
+        }
+        public FastEnemy Clone()
+        {
+            return (FastEnemy)this.MemberwiseClone();
         }
     }
 }

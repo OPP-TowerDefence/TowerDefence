@@ -1,8 +1,9 @@
 ﻿using TowerDefense.Enums;
+using TowerDefense.Interfaces;
 
 namespace TowerDefense.Models.Enemies
 {
-    public class StrongEnemy : Enemy
+    public class StrongEnemy : Enemy, IPrototype<StrongEnemy>
     {
         public override EnemyTypes Type => EnemyTypes.Strong;
 
@@ -10,6 +11,10 @@ namespace TowerDefense.Models.Enemies
         {
             Health = 30;
             Speed = 1;
+        }
+        public StrongEnemy Clone()
+        {
+            return (StrongEnemy)this.MemberwiseClone();
         }
     }
 }
