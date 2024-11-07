@@ -1,4 +1,5 @@
 using TowerDefense.Models.Enemies;
+using TowerDefense.Interfaces;
 
 namespace TowerDefense.Models.TileEffects
 {

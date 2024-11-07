@@ -1,4 +1,5 @@
 using TowerDefense.Models.Enemies;
+using TowerDefense.Interfaces;
 
 namespace TowerDefense.Models.TileEffects
 {
@@ -6,7 +7,7 @@ namespace TowerDefense.Models.TileEffects
     {
         public void ApplyEffect(Enemy enemy)
         {
-            enemy.IncreaseHealth(30);
+            enemy.IncreaseHealth(10);
         }
     }
 }

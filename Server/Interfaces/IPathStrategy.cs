@@ -1,6 +1,10 @@
 using TowerDefense.Models.Enemies;
 using TowerDefense.Models;
-public interface IPathStrategy
+
+namespace TowerDefense.Interfaces
 {
-     List<PathPoint> SelectPath(GameState gameState, Enemy enemy);
+     public interface IPathStrategy
+     {
+          List<PathPoint> SelectPath(GameState gameState, Enemy enemy);
+     }
 }

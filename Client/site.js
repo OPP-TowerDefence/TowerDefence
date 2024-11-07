@@ -5,7 +5,7 @@ const connection = new signalR.HubConnectionBuilder()
 
 let mapWidth = 0;
 let mapHeight = 0;
-let paths = []; // Flat array to store all path tiles
+let paths = [];
 
 let activeTowerCategory = 0;
 let activeSelectionDiv = document.getElementById('longDistanceTowerDiv');
@@ -28,7 +28,6 @@ const enemyClassMap = {
     [enemyTypes.FAST]: 'fast-enemy'
 };
 
-// Room join functionality
 async function joinRoom() {
     const roomCode = document.getElementById('roomCode').value;
     const username = document.getElementById('username').value;
@@ -59,7 +58,6 @@ async function joinRoom() {
     }
 }
 
-// Start game functionality
 async function startGame() {
     const roomCode = document.getElementById('roomCode').value;
     const username = document.getElementById('username').value;
@@ -72,7 +70,6 @@ function clearMap() {
     gameMap.innerHTML = '';
 }
 
-// Map initialization with paths and grid setup
 connection.on("InitializeMap", function (width, height, map, mapEnemies, newPaths) {
     mapWidth = width;
     mapHeight = height;
@@ -121,7 +118,6 @@ connection.on("UserLeft", function (username, players) {
     updateActiveUsersList(players);
 });
 
-// Resource update event
 connection.on("OnResourceChanged", function (newResourceAmount) {
     updateResources(newResourceAmount);
 });
@@ -130,7 +126,6 @@ connection.on("LevelChanged", (level) => {
     document.getElementById("levelDisplay").textContent = `Level: ${level}`;
 });
 
-// Update active users list
 function updateActiveUsersList(players) {
     const activeUsersList = document.getElementById('activeUsersList');
     activeUsersList.innerHTML = '';
@@ -142,7 +137,6 @@ function updateActiveUsersList(players) {
     });
 }
 
-// Render map with towers, paths, enemies, and bullets
 function renderMap(map, mapEnemies, mapBullets) {
     const gameMap = document.getElementById('gameMap');
     gameMap.innerHTML = '';
@@ -186,7 +180,6 @@ function renderMap(map, mapEnemies, mapBullets) {
     });
 }
 
-// Render path tile based on point type
 function renderPathTile(point) {
     const gameMap = document.getElementById('gameMap');
     const cell = document.createElement('div');
@@ -222,7 +215,6 @@ function isPathBlocked(x, y) {
     return paths.some(pathPoint => pathPoint.x === x && pathPoint.y === y);
 }
 
-// Tower selection and upgrade functions
 function selectTowerCategory(towerCategory) {
     activeTowerCategory = towerCategory;
 
@@ -241,18 +233,11 @@ function undoTower() {
 function handleMapClick(event) {
     const gameMap = document.getElementById('gameMap');
     const bounds = gameMap.getBoundingClientRect();
-
-    const cellSize = 10; // Each grid cell is 10x10 pixels
+    const cellSize = 10;
     const relativeX = event.clientX - bounds.left;
     const relativeY = event.clientY - bounds.top;
-
-    // Calculate the grid coordinates of the clicked cell
     const clickedX = Math.floor(relativeX / cellSize)-1;
     const clickedY = Math.floor(relativeY / cellSize)-1;
-
-    console.log(`Click coordinates: (${clickedX}, ${clickedY})`);
-
-    // Offsets for the 3x3 grid area around the clicked cell
     const offsets = [
         { dx: -1, dy: -1 }, { dx: 0, dy: -1 }, { dx: 1, dy: -1 },
         { dx: -1, dy: 0 },  { dx: 0, dy: 0 },  { dx: 1, dy: 0 },
@@ -265,11 +250,7 @@ function handleMapClick(event) {
         const checkX = clickedX + offset.dx;
         const checkY = clickedY + offset.dy;
 
-        console.log(`Checking coordinates: (${checkX}, ${checkY})`);
-
-        // Ensure coordinates are within map bounds
         if (checkX >= 0 && checkX < mapWidth && checkY >= 0 && checkY < mapHeight) {
-            // Locate the cell at (checkX, checkY)
             const cell = [...gameMap.children].find(child => 
                 parseInt(child.style.gridColumnStart) - 1 <= checkX &&
                 parseInt(child.style.gridColumnStart) - 1 + 2 >= checkX &&
@@ -277,40 +258,34 @@ function handleMapClick(event) {
                 parseInt(child.style.gridRowStart) - 1 + 2 >= checkY
             );
 
-            // Check if this cell is part of a multi-cell turret
             if (cell && cell.classList.contains('tower')) {
                 
-                // Retrieve the actual start coordinates of the turret
                 const turretX = parseInt(cell.style.gridColumnStart) - 1;
                 const turretY = parseInt(cell.style.gridRowStart) - 1;
                 const appliedUpgrades = JSON.parse(cell.dataset.appliedUpgrades || '[]');
 
-                // Show upgrade options for the entire turret (not just the clicked cell)
                 showUpgradeOptions(turretX, turretY, appliedUpgrades);
                 towerFound = true;
-                break; // Stop after finding the turret
+                break;
             }
 
-            // Check if this cell is a path
             if (cell && cell.classList.contains('path')) {
                 console.log("Path found, blocking tower placement.");
                 towerFound = true;
-                break; // Stop checking further if a path is found
+                break;
             }
         }
     }
 
     if (towerFound) {
         console.log("Cannot place tower here: area is blocked by a path or existing turret.");
-        return; // Exit function to prevent placing a new tower
+        return;
     }
 
-    // If no obstacles are found, proceed to place a new tower
     console.log("No obstacles found; placing new tower.");
     const roomCode = document.getElementById('roomCode').value;
     connection.invoke("PlaceTower", roomCode, clickedX, clickedY, activeTowerCategory);
 }
-
 
 function showUpgradeOptions(gridX, gridY, appliedUpgrades) {
     const existingMenu = document.querySelector('.upgrade-options');
@@ -333,7 +308,6 @@ function showUpgradeOptions(gridX, gridY, appliedUpgrades) {
     const upgradeDiv = document.createElement('div');
     upgradeDiv.className = 'upgrade-options';
     upgradeDiv.innerHTML = '<h2>Upgrade</h2>';
-
     const allUpgrades = ['DoubleDamage', 'Burst', 'DoubleBullet'];
     const availableUpgrades = allUpgrades.filter(upgrade => !appliedUpgrades.includes(upgrade));
 
@@ -341,7 +315,8 @@ function showUpgradeOptions(gridX, gridY, appliedUpgrades) {
         const noUpgradesMsg = document.createElement('p');
         noUpgradesMsg.textContent = 'No upgrades available.';
         upgradeDiv.appendChild(noUpgradesMsg);
-    } else {
+    } 
+    else {
         availableUpgrades.forEach(upgrade => {
             const upgradeButton = document.createElement('button');
             upgradeButton.className = 'upgrade-button';
@@ -361,7 +336,6 @@ function showUpgradeOptions(gridX, gridY, appliedUpgrades) {
 
     document.body.appendChild(overlayDiv);
     document.body.appendChild(upgradeDiv);
-
     upgradeDiv.style.position = 'fixed';
     upgradeDiv.style.top = '50%';
     upgradeDiv.style.left = '50%';
@@ -372,7 +346,6 @@ function updateResources(resources) {
     document.getElementById('resourcesDisplay').textContent = `Resources: ${resources}`;
 }
 
-// Start connection
 connection.start().catch(function (err) {
     console.error(err.toString());
 });

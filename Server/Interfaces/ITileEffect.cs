@@ -1,5 +1,9 @@
 using TowerDefense.Models.Enemies;
-public interface ITileEffect
+
+namespace TowerDefense.Interfaces
 {
-    void ApplyEffect(Enemy enemy);
+    public interface ITileEffect
+    {
+        void ApplyEffect(Enemy enemy);
+    }
 }

@@ -13,10 +13,8 @@ public class GameState
 {
     private const int _commandHistoryLimit = 3;
     private const int _baseEnemiesPerLevel = 10;
-
     private int _enemiesSpawned = 0;
     private int _currentLevel = 1;
-
     private readonly List<TowerTypes> _availableTowerTypes;
     private readonly IHubContext<GameHub> _hubContext;
     private Random _random = new Random();
@@ -25,19 +23,13 @@ public class GameState
     private readonly ResourceManager _resourceManager;
     private readonly LevelProgressionFacade _levelFacade;
     private readonly string _roomCode;
-
     public int EnemyCount { get; private set; } = 0;
-
     public event Action<int>? OnLevelChanged;
-
     public bool GameStarted { get; private set; }
     public Map Map { get; } = new Map(100, 100);
     public List<Player> Players => _players;
-
     public double TimeSinceLastSpawn { get; set; } = 0;
-
     public double TimeSinceLastEnvironmentUpdate { get; set; } = 0;
-
     public GameState(IHubContext<GameHub> hubContext, string roomCode)
     {
         _hubContext = hubContext;
@@ -53,7 +45,6 @@ public class GameState
         _levelFacade = new LevelProgressionFacade(Map.MainObject, Map.Enemies, Map.Towers);
         OnLevelChanged += NotifyLevelChange;
     }
-
     public void AddPlayer(string username, string connectionId)
     {
         if (!_players.Any(p => p.ConnectionId == connectionId))
@@ -77,7 +68,6 @@ public class GameState
             }
         }
     }
-
     public IEnumerable<object> GetActivePlayers()
     {
         return _players
@@ -88,7 +78,6 @@ public class GameState
             })
             .ToList();
     }
-
     public object GetMapBullets()
     {
         return Map.Bullets
@@ -99,7 +88,6 @@ public class GameState
             })
             .ToList();
     }
-
     public object GetMapEnemies()
     {
         return Map.Enemies
@@ -113,7 +101,6 @@ public class GameState
             })
             .ToList();
     }
-
     public object GetMapTowers()
     {
         return Map.Towers
@@ -127,7 +114,6 @@ public class GameState
             })
             .ToList();
     }
-
     public void ProcessCommand(ICommand command, string connectionId)
     {
         var player = _players.FirstOrDefault(p => p.ConnectionId == connectionId);
@@ -148,7 +134,6 @@ public class GameState
 
         command.Execute();
     }
-
     public void RemovePlayer(string connectionId)
     {
         var player = _players.FirstOrDefault(p => p.ConnectionId == connectionId);
@@ -167,7 +152,6 @@ public class GameState
             Logger.Instance.LogError($"Could not remove player with connection ID {connectionId}. Player was not found.");
         }
     }
-
     public object SendPath()
     {
         return Map.Paths.Select(path => path.Select(tile => new
@@ -177,7 +161,6 @@ public class GameState
             Type = tile.Type.ToString()
         })).ToList();
     }
-
     public void SpawnEnemies()
     {
         var enemy = GetRandomEnemyFactory()
@@ -191,7 +174,7 @@ public class GameState
         OnEnemySpawned();
         if (_enemiesSpawned % 5 == 0)
         {
-            enemy.MarkAsShadowEnemy(); // Mark this enemy as shadow enemy
+            enemy.MarkAsShadowEnemy();
         }
 
         if (enemy is StrongEnemy strongEnemy)
@@ -202,7 +185,6 @@ public class GameState
             }
         }
     }
-
     private void OnEnemySpawned()
     {
         _enemiesSpawned++;
@@ -223,10 +205,9 @@ public class GameState
         {
             var shadowStrategy = (ShadowStrategy)shadowEnemy.CurrentStrategy;
 
-            // Only assign the new strong enemy if the shadow enemy has no current target
             if (!shadowStrategy.HasTarget())
             {
-                shadowStrategy.SetTargetStrongEnemy(newStrongEnemy);  // Set target and start following
+                shadowStrategy.SetTargetStrongEnemy(newStrongEnemy);
                 shadowEnemy.RetrievePath(this);
             }
         }
@@ -241,7 +222,6 @@ public class GameState
             }
         }
     }
-
     public void StartGame(string connectionId)
     {
         if (!_players.Any(p => string.Equals(p.ConnectionId, connectionId)))
@@ -251,17 +231,14 @@ public class GameState
 
         GameStarted = true;
     }
-
     public void PlaceTower(int x, int y, TowerCategories towerCategory, Player player)
     {
         var tower = player.CreateTower(x, y, towerCategory);
         var command = new PlaceTowerCommand(this.Map, tower, _levelFacade);
         ProcessCommand(command, player.ConnectionId);
         Map.UpdateDefenseMap();
-        var threat = new ThreatAvoidanceStrategy();
-        RecalculatePathsForStrategy(threat);
+        RecalculatePathsForStrategy(new ThreatAvoidanceStrategy());
     }
-
     public void TowerAttack()
     {
         if (Map.Enemies.Count == 0 || Map.Towers.Count == 0)
@@ -283,7 +260,6 @@ public class GameState
             Map.Bullets.AddRange(towerBullets);
         }
     }
-
     public ICommand? UndoLastCommand(string connectionId)
     {
         if (_playerCommands.TryGetValue(connectionId, out var commands) && commands.Any())
@@ -299,7 +275,6 @@ public class GameState
 
         return default;
     }
-
     public void UpdateEnemies()
     {
         foreach (var enemy in Map.Enemies.ToList())
@@ -354,12 +329,9 @@ public class GameState
                 }
             }
         }
-        var speedstrategy = new SpeedPrioritizationStrategy();
-        var survival = new SurvivalStrategy();
-        RecalculatePathsForStrategy(speedstrategy);
-        RecalculatePathsForStrategy(survival);
+        RecalculatePathsForStrategy(new SpeedPrioritizationStrategy());
+        RecalculatePathsForStrategy(new SurvivalStrategy());
     }
-
     public void UpgradeTower(int x, int y, TowerUpgrades towerUpgrade)
     {
         var tower = Map.Towers.FirstOrDefault(t => t.X == x && t.Y == y);
@@ -388,7 +360,6 @@ public class GameState
 
         tower.AppliedUpgrades.Add(towerUpgrade);
     }
-
     private void DamageEnemy(Enemy enemy, int damage)
     {
         enemy.TakeDamage(damage);
@@ -400,7 +371,6 @@ public class GameState
             _resourceManager.OnEnemyDeath(enemy);
         }
     }
-
     private IEnemyFactory GetRandomEnemyFactory()
     {
         Random rand = new();
@@ -420,12 +390,10 @@ public class GameState
                 throw new Exception("Unknown enemy type");
         }
     }
-
     private void NotifyLevelChange(int newLevel)
     {
         _hubContext.Clients.Group(_roomCode).SendAsync("LevelChanged", newLevel);
     }
-
     private void UpdateBulletPositions()
     {
         if (Map.Bullets.Count == 0)

@@ -28,8 +28,8 @@ namespace TowerDefense.Models
         }
         public void UpdateDefenseMap()
         {
-            defenseMap.Clear();  // Clear previous defense levels
-            const int maxRange = 10; // Only apply defense influence within this range
+            defenseMap.Clear();
+            const int maxRange = 10;
 
             foreach (var turret in Towers)
             {
@@ -72,7 +72,7 @@ namespace TowerDefense.Models
             {
                 for (int y = 0; y < Height; y++)
                 {
-                    tiles[x, y] = new PathPoint(x, y, TileType.Turret); // Default type to Turret
+                    tiles[x, y] = new PathPoint(x, y, TileType.Turret);
                 }
             }
         }
@@ -106,13 +106,12 @@ namespace TowerDefense.Models
                     }
                 }
             }
-
             return tilesOfType;
         }
         private void PlaceObjectiveTile()
         {
-            int objectiveX = Width - 1; // Rightmost column
-            int objectiveY = Height - 1; // Bottom row
+            int objectiveX = Width - 1;
+            int objectiveY = Height - 1;
             SetTileType(objectiveX, objectiveY, TileType.Objective);
             MainObject = new MainObject(objectiveX, objectiveY);
         }
@@ -137,18 +136,16 @@ namespace TowerDefense.Models
                 PathPoint sharedPoint = GetTile(currentX, currentY);
                 if (sharedPoint != null)
                 {
-                    SetTileType(currentX, currentY, DetermineTileType());  // Set a potential special tile type
+                    SetTileType(currentX, currentY, DetermineTileType());
                     sharedPath.Add(sharedPoint);
                 }
             }
 
-            // Generate four unique paths branching from the shared segment
             for (int i = 0; i < 4; i++)
             {
                 List<PathPoint> newPath = new List<PathPoint>(sharedPath);
-
-                // Extend path to the objective, using random movement but ensuring the path ends at the objective tile
                 List<PathPoint> randomPath = GenerateRandomPathToObjective(newPath.Last().X, newPath.Last().Y, objective.X, objective.Y);
+                
                 foreach (var pathPoint in randomPath)
                 {
                     SetTileType(pathPoint.X, pathPoint.Y, DetermineTileType());
@@ -156,14 +153,12 @@ namespace TowerDefense.Models
 
                 newPath.AddRange(randomPath);
 
-                // Ensure the objective tile is set as the last tile in each path and has the correct type
                 if (newPath.Last() != objective)
                 {
                     newPath.Add(objective);
                 }
                 SetTileType(objective.X, objective.Y, TileType.Objective);
-
-                Paths.Add(newPath);  // Add the completed path to the Paths list
+                Paths.Add(newPath);
             }
         }
         private List<PathPoint> GenerateRandomPathToObjective(int startX, int startY, int endX, int endY)
@@ -172,7 +167,6 @@ namespace TowerDefense.Models
             int currentX = startX;
             int currentY = startY;
 
-            // Randomized movement towards the objective
             while (currentX != endX || currentY != endY)
             {
                 bool moveHorizontally = _random.Next(0, 2) == 0;
@@ -213,12 +207,10 @@ namespace TowerDefense.Models
 
             return TileType.Normal;
         }
-
         public bool IsOccupied(int x, int y)
         {
             return Towers.Any(t => t.X == x && t.Y == y);
         }
-
         public bool IsValidPosition(int x, int y)
         {
             return x >= 0 && x < Width && y >= 0 && y < Height;
