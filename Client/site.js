@@ -137,6 +137,7 @@ function updateActiveUsersList(players) {
         activeUsersList.appendChild(userItem);
     });
 }
+
 function renderMap(map, mapEnemies, mapBullets) {
     const gameMap = document.getElementById('gameMap');
     gameMap.innerHTML = '';
@@ -179,6 +180,7 @@ function renderMap(map, mapEnemies, mapBullets) {
         bulletElement.style.gridRowStart = bullet.y + 1;
     });
 }
+
 function renderPathTile(point) {
     const gameMap = document.getElementById('gameMap');
     const cell = document.createElement('div');
@@ -209,6 +211,7 @@ function renderPathTile(point) {
     cell.style.gridColumnStart = point.x + 1;
     cell.style.gridRowStart = point.y + 1;
 }
+
 function isPositionBlocked(x, y) {
     const isPath = paths.some(pathPoint => pathPoint.x === x && pathPoint.y === y);
     if (isPath) {
@@ -217,6 +220,7 @@ function isPositionBlocked(x, y) {
 
     return blockedPositions.has(`${x},${y}`);
 }
+
 function selectTowerCategory(towerCategory) {
     activeTowerCategory = towerCategory;
 
@@ -227,9 +231,11 @@ function selectTowerCategory(towerCategory) {
     activeSelectionDiv = document.getElementById(towerCategory === 0 ? 'longDistanceTowerDiv' : 'heavyTowerDiv');
     activeSelectionDiv.classList.add('active');
 }
+
 function undoTower() {
     connection.invoke("UndoTower", document.getElementById('roomCode').value);
 }
+
 function addTowerToBlockedPositions(towerX, towerY) {
     for (let dx = -1; dx <= 1; dx++) {
         for (let dy = -1; dy <= 1; dy++) {
@@ -237,6 +243,7 @@ function addTowerToBlockedPositions(towerX, towerY) {
         }
     }
 }
+
 function handleMapClick(event) {
     const gameMap = document.getElementById('gameMap');
     const bounds = gameMap.getBoundingClientRect();
@@ -290,6 +297,7 @@ function handleMapClick(event) {
         addTowerToBlockedPositions(clickedX, clickedY);
     }
 }
+
 function showUpgradeOptions(gridX, gridY, appliedUpgrades) {
     const existingMenu = document.querySelector('.upgrade-options');
     const overlay = document.querySelector('.overlay');
@@ -311,6 +319,7 @@ function showUpgradeOptions(gridX, gridY, appliedUpgrades) {
     const upgradeDiv = document.createElement('div');
     upgradeDiv.className = 'upgrade-options';
     upgradeDiv.innerHTML = '<h2>Upgrade</h2>';
+    
     const allUpgrades = ['DoubleDamage', 'Burst', 'DoubleBullet'];
     const availableUpgrades = allUpgrades.filter(upgrade => !appliedUpgrades.includes(upgrade));
 
@@ -344,6 +353,7 @@ function showUpgradeOptions(gridX, gridY, appliedUpgrades) {
     upgradeDiv.style.left = '50%';
     upgradeDiv.style.transform = 'translate(-50%, -50%)';
 }
+
 function updateResources(resources) {
     document.getElementById('resourcesDisplay').textContent = `Resources: ${resources}`;
 }
