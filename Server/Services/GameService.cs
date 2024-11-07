@@ -34,6 +34,7 @@ public class GameService
     private async void GameTickHandler(object sender, ElapsedEventArgs e)
     {
         _timeSinceLastSpawn += 250;
+        _timeSinceLastEnvironmentUpdate += 250;
 
         foreach (var room in _rooms.Where(r => r.Value.GameStarted))
         {
@@ -47,10 +48,10 @@ public class GameService
                     _timeSinceLastSpawn = 0;
                 }
                 
-                if (gameState.TimeSinceLastEnvironmentUpdate >= EnvironmentUpdateInterval)
+                if (_timeSinceLastEnvironmentUpdate >= EnvironmentUpdateInterval)
                 {
                     gameState.UpdateEnvironment();
-                    gameState.TimeSinceLastEnvironmentUpdate = 0;
+                    _timeSinceLastEnvironmentUpdate = 0;
                 }
 
                 gameState.UpdateEnemies();

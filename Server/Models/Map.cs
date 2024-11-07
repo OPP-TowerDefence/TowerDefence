@@ -81,7 +81,7 @@ namespace TowerDefense.Models
             if (IsValidPosition(x, y))
             {
                 tiles[x, y].Type = newTileType;
-                tiles[x, y].Effect = tiles[x, y].CreateEffectForTileType(newTileType);
+                tiles[x, y].SetEffectAndApplication(newTileType);
             }
         }
         public TileType GetTileType(int x, int y)

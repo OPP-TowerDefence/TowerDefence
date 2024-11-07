@@ -28,8 +28,6 @@ public class GameState
     public bool GameStarted { get; private set; }
     public Map Map { get; } = new Map(100, 100);
     public List<Player> Players => _players;
-    public double TimeSinceLastSpawn { get; set; } = 0;
-    public double TimeSinceLastEnvironmentUpdate { get; set; } = 0;
     public GameState(IHubContext<GameHub> hubContext, string roomCode)
     {
         _hubContext = hubContext;
@@ -312,6 +310,7 @@ public class GameState
 
                 tile.Type = TileType.Normal;
                 tile.Effect = null;
+                tile.EffectApplicationType = null;
             }
         }
 
@@ -325,7 +324,7 @@ public class GameState
                 {
                     var newTileType = Map.DetermineTileType();
                     tile.Type = newTileType;
-                    tile.Effect = tile.CreateEffectForTileType(newTileType);
+                    tile.SetEffectAndApplication(newTileType);
                 }
             }
         }

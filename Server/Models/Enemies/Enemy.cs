@@ -22,6 +22,7 @@ namespace TowerDefense.Models.Enemies
         public abstract EnemyTypes Type { get; }
         const int lowHealthThreshold = 20;
         const int closeDistanceThreshold = 15;
+        private List<(ITileEffect effect, int turnsRemaining)> _scheduledEffects = new List<(ITileEffect, int)>();
 
         public Enemy(int x, int y) : base(x, y)
         {
@@ -57,6 +58,34 @@ namespace TowerDefense.Models.Enemies
                 _modifierDuration = duration;
             }
         }
+        public void ScheduleEffect(ITileEffect effect, int delay)
+        {
+            if (delay <= 0)
+            {
+                effect.ApplyEffect(this);
+            }
+            else
+            {
+                _scheduledEffects.Add((effect, delay));
+            }
+        }
+        public void UpdateScheduledEffects()
+        {
+            for (int i = _scheduledEffects.Count - 1; i >= 0; i--)
+            {
+                var (effect, turnsRemaining) = _scheduledEffects[i];
+
+                if (turnsRemaining <= 0)
+                {
+                    effect.ApplyEffect(this);
+                    _scheduledEffects.RemoveAt(i);
+                }
+                else
+                {
+                    _scheduledEffects[i] = (effect, turnsRemaining - 1);
+                }
+            }
+        }
         public void MarkAsShadowEnemy()
         {
             IsShadowEnemy = true;
@@ -85,13 +114,13 @@ namespace TowerDefense.Models.Enemies
                 return;
             }
 
-             if (IsHealthLow())
-             {
-                 IsShadowEnemy = false;
-                 SetStrategy(new SurvivalStrategy());
-                 RetrievePath(gameState);
-                 return;
-             }
+            if (IsHealthLow())
+            {
+                IsShadowEnemy = false;
+                SetStrategy(new SurvivalStrategy());
+                RetrievePath(gameState);
+                return;
+            }
 
             if (IsInTurretRange(map.Towers))
             {
@@ -123,7 +152,7 @@ namespace TowerDefense.Models.Enemies
         {
             foreach (var turret in towers)
             {
-                if (CalculateManhattanDistance(X, Y, turret.X, turret.Y) <= turret.Weapon.GetRange())
+                if (CalculateManhattanDistance(X, Y, turret.X, turret.Y) <= turret.Weapon.GetRange() +10)
                 {
                     return true;
                 }
@@ -140,6 +169,7 @@ namespace TowerDefense.Models.Enemies
         }
         public void MoveTowardsNextWaypoint(GameState gameState)
         {
+            UpdateScheduledEffects();
             UpdateSpeed();
             UpdateStrategy(gameState);
 
@@ -224,7 +254,7 @@ namespace TowerDefense.Models.Enemies
             {
                 if (_lastTilePosition.x != X || _lastTilePosition.y != Y)
                 {
-                    currentTile.Effect?.ApplyEffect(this);
+                    currentTile.ApplyEffect(this);
                     _lastTilePosition = (X, Y);
                 }
             }
