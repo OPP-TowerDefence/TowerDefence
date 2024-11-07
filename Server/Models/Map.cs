@@ -27,6 +27,7 @@ namespace TowerDefense.Models
             PlaceObjectiveTile();
             GenerateRandomPaths();
         }
+
         public void UpdateDefenseMap()
         {
             defenseMap.Clear();

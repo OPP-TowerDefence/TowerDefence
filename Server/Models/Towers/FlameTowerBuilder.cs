@@ -22,7 +22,7 @@ namespace TowerDefense.Models.Towers
         {
             if (_category == TowerCategories.Heavy)
             {
-                _tower.Weapon = new Weapon("Flame cannon",4, 30, 2);
+                _tower.Weapon = new Weapon("Flame cannon", 4, 30, 2);
             }
             else
             {
