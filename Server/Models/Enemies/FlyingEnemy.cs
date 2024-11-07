@@ -13,13 +13,9 @@ namespace TowerDefense.Models.Enemies
             Speed = 2;
         }
 
-        public FlyingEnemy Clone()
+        public FlyingEnemy ShallowClone()
         {
             var clonedEnemy = (FlyingEnemy)this.MemberwiseClone();
-            // clonedEnemy.Id = Guid.NewGuid();
-            // clonedEnemy._currentSpeedModifier = this._currentSpeedModifier;
-            // clonedEnemy._modifierDuration = this._modifierDuration;
-            // clonedEnemy._lastTilePosition = this._lastTilePosition;
 
             return clonedEnemy;
         }

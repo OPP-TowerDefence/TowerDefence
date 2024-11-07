@@ -22,7 +22,7 @@ namespace TowerDefense.Models.Enemies
         public abstract EnemyTypes Type { get; }
         const int lowHealthThreshold = 20;
         const int closeDistanceThreshold = 15;
-        private List<(ITileEffect effect, int turnsRemaining)> _scheduledEffects = new List<(ITileEffect, int)>();
+        public List<(ITileEffect effect, int turnsRemaining)> _scheduledEffects = new List<(ITileEffect, int)>();
 
         public Enemy(int x, int y) : base(x, y)
         {

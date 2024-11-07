@@ -6,6 +6,7 @@ using TowerDefense.Models.Enemies;
 using TowerDefense.Models.WeaponUpgrades;
 using TowerDefense.Utils;
 using TowerDefense.Models.Strategies;
+using TowerDefense.Models.TileEffects;
 
 namespace TowerDefense.Models;
 
@@ -244,7 +245,6 @@ public class GameState
         {
             throw new Exception($"Game could not be started. The user with connection ID {connectionId} is not in the game.");
         }
-
         GameStarted = true;
     }
 

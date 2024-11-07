@@ -1,4 +1,5 @@
 ﻿using TowerDefense.Interfaces;
+using TowerDefense.Models.Enemies;
 using TowerDefense.Models.Strategies;
 
 namespace TowerDefense.Models.Enemies
@@ -15,7 +16,7 @@ namespace TowerDefense.Models.Enemies
 
         public Enemy CreateEnemy(int x, int y)
         {
-            var enemy = _prototypeEnemy.Clone();
+            var enemy = _prototypeEnemy.ShallowClone();
             enemy.X = x;
             enemy.Y = y;
             return enemy;
