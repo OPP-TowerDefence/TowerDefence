@@ -1,15 +1,11 @@
-﻿using System.Reflection.Metadata.Ecma335;
-using TowerDefense.Interfaces;
+﻿using TowerDefense.Interfaces;
 using TowerDefense.Models.Enemies;
 using TowerDefense.Models.Towers;
 
 namespace TowerDefense.Models.WeaponUpgrades
 {
-    public class DoubleDamage : WeaponDecorator
+    public class DoubleDamage(IWeapon weapon) : WeaponDecorator(weapon)
     {
-        public DoubleDamage(IWeapon weapon) : base(weapon)
-        {
-        }
         public override int GetDamage()
         {
             return base.GetDamage()*2;

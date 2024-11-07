@@ -1,15 +1,9 @@
 ﻿namespace TowerDefense.Models
 {
-    public abstract class Unit
+    public abstract class Unit(int x, int y)
     {
-        public int X { get; set; }
+        public int X { get; set; } = x;
 
-        public int Y { get; set; }
-
-        public Unit(int x, int y)
-        {
-            X = x;
-            Y = y;
-        }
+        public int Y { get; set; } = y;
     }
 }

@@ -2,22 +2,13 @@
 
 namespace TowerDefense.Models.WeaponUpgrades
 {
-    public class Bullet
+    public class Bullet(int x, int y, Guid enemyId, int damage, int speed)
     {
-        public int X { get; set; }
-        public int Y { get; set; }
-        public Guid EnemyId { get; set; }
-        public int Damage { get; set; }
-        public int Speed { get; set; }
-
-        public Bullet(int x, int y, Guid enemyId, int damage, int speed)
-        {
-            X = x;
-            Y = y;
-            EnemyId = enemyId;
-            Damage = damage;
-            Speed = speed;
-        }
+        public int X { get; set; } = x;
+        public int Y { get; set; } = y;
+        public Guid EnemyId { get; set; } = enemyId;
+        public int Damage { get; set; } = damage;
+        public int Speed { get; set; } = speed;
 
         public void Move(int targetX, int targetY)
         {
@@ -52,6 +43,5 @@ namespace TowerDefense.Models.WeaponUpgrades
                 Y += (int)moveY;
             }
         }
-
     }
 }

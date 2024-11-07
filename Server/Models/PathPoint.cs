@@ -2,6 +2,7 @@ using TowerDefense.Interfaces;
 using TowerDefense.Models.Tiles;
 using TowerDefense.Models.TileEffects;
 using TowerDefense.Models.Enemies;
+using TowerDefense.Enums;
 
 namespace TowerDefense.Models
 {
@@ -39,6 +40,7 @@ namespace TowerDefense.Models
                 _ => new InstantApplication()
             };
         }
+
         public void ApplyEffect(Enemy enemy)
         {
             if (Effect != null && EffectApplicationType != null)

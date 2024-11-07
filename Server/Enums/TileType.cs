@@ -1,9 +1,12 @@
-public enum TileType
+namespace TowerDefense.Enums
 {
-    Normal,
-    Ice,
-    Mud,
-    PinkHealth,
-    Objective,
-    Turret
+    public enum TileType
+    {
+        Normal,
+        Ice,
+        Mud,
+        PinkHealth,
+        Objective,
+        Turret
+    }
 }

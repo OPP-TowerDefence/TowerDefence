@@ -15,7 +15,7 @@ public abstract class Tower : Unit
     public abstract TowerCategories Category { get; }
     public List<TowerUpgrades> AppliedUpgrades { get; set; }
 
-    public Tower(int x, int y): base(x, y)
+    public Tower(int x, int y) : base(x, y)
     {
         TicksSinceLastShot = 0;
         AppliedUpgrades = new List<TowerUpgrades>();

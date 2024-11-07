@@ -1,146 +1,147 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using TowerDefense.Enums;
 using TowerDefense.Models;
-using TowerDefense.Models.Commands;
 using TowerDefense.Services;
 
-namespace TowerDefense;
-public class GameHub(GameService gameService, Interfaces.ILogger logger) : Hub
+namespace TowerDefense
 {
-    private readonly GameService _gameService = gameService;
-    private readonly Interfaces.ILogger _logger = logger;
-
-    public async Task JoinRoom(string roomCode, string username)
+    public class GameHub(GameService gameService, Interfaces.ILogger logger) : Hub
     {
-        _logger.LogInfo($"Player {username} is attempting to join room {roomCode}.");
+        private readonly GameService _gameService = gameService;
+        private readonly Interfaces.ILogger _logger = logger;
 
-        if (!_gameService.Rooms.TryGetValue(roomCode, out var gameState))
+        public async Task JoinRoom(string roomCode, string username)
         {
-            gameState = new GameState(Context.GetHttpContext()!.RequestServices.GetService<IHubContext<GameHub>>()!, roomCode);
+            _logger.LogInfo($"Player {username} is attempting to join room {roomCode}.");
 
-            _gameService.Rooms.TryAdd(roomCode, gameState);
-
-            _logger.LogInfo($"New room created with code: {roomCode}.");
-        }
-        else if (gameState.GameStarted)
-        {
-            await Clients.Caller.SendAsync("Game has already started.");
-
-            return;
-        }
-
-        await Groups.AddToGroupAsync(Context.ConnectionId, roomCode);
-
-        gameState.AddPlayer(username, Context.ConnectionId);
-
-        await Clients.Caller.SendAsync("InitializeMap", gameState.Map.Width, gameState.Map.Height, gameState.GetMapTowers(), gameState.GetMapEnemies(), gameState.SendPath());
-
-        _logger.LogInfo($"Player {username} with connection ID {Context.ConnectionId} has joined room {roomCode}.");
-
-        var activeUsernames = gameState.GetActivePlayers();
-
-        await Clients
-            .Group(roomCode)
-            .SendAsync("UserJoined", username, activeUsernames);
-    }
-
-    public override async Task OnDisconnectedAsync(Exception? exception)
-    {
-        foreach (var room in _gameService.Rooms)
-        {
-            var gameState = room.Value;
-
-            var player = gameState.Players.FirstOrDefault(p => p.ConnectionId == Context.ConnectionId);
-
-            if (player != null)
+            if (!_gameService.Rooms.TryGetValue(roomCode, out var gameState))
             {
-                gameState.RemovePlayer(Context.ConnectionId);
+                gameState = new GameState(Context.GetHttpContext()!.RequestServices.GetService<IHubContext<GameHub>>()!, roomCode);
 
-                _logger.LogInfo($"Player {player.Username} left room {room.Key}.");
+                _gameService.Rooms.TryAdd(roomCode, gameState);
 
-                var activeUsernames = gameState.GetActivePlayers();
-
-                await Clients
-                    .Group(room.Key)
-                    .SendAsync("UserLeft", player.Username, activeUsernames);
+                _logger.LogInfo($"New room created with code: {roomCode}.");
             }
-        }
-
-        if (exception != null)
-        {
-            _logger.LogException(exception);
-        }
-
-        await base.OnDisconnectedAsync(exception);
-    }
-
-    public async Task PlaceTower(string roomCode, int x, int y, TowerCategories towerCategory)
-    {
-        if (_gameService.Rooms.TryGetValue(roomCode, out var gameState))
-        {
-            var player = gameState.Players.FirstOrDefault(p => p.ConnectionId == Context.ConnectionId);
-
-            if (player is not null)
+            else if (gameState.GameStarted)
             {
-                gameState.PlaceTower(x, y, towerCategory, player);
-            }
-            else
-            {
-                _logger.LogError("Failed to place tower: Player not found.");
-            }
-        }
-        else
-        {
-            _logger.LogError($"Failed to place tower: room code {roomCode} does not exist.");
-        }
-    }
+                await Clients.Caller.SendAsync("Game has already started.");
 
-    public async Task StartGame(string roomCode, string username)
-    {
-        if (_gameService.Rooms.TryGetValue(roomCode, out var gameState) && !gameState.GameStarted)
-        {
-            gameState.StartGame(Context.ConnectionId);
+                return;
+            }
+
+            await Groups.AddToGroupAsync(Context.ConnectionId, roomCode);
+
+            gameState.AddPlayer(username, Context.ConnectionId);
+
+            await Clients.Caller.SendAsync("InitializeMap", gameState.Map.Width, gameState.Map.Height, gameState.GetMapTowers(), gameState.GetMapEnemies(), gameState.SendPath());
+
+            _logger.LogInfo($"Player {username} with connection ID {Context.ConnectionId} has joined room {roomCode}.");
+
+            var activeUsernames = gameState.GetActivePlayers();
 
             await Clients
                 .Group(roomCode)
-                .SendAsync("GameStarted", $"Game has been started by {username}!");
+                .SendAsync("UserJoined", username, activeUsernames);
         }
-        else
-        {
-            _logger.LogError($"Could not start game: room code {roomCode} does not exist or the game has already started.");
-        }
-    }
 
-    public async Task UndoTower(string roomCode)
-    {
-        if (_gameService.Rooms.TryGetValue(roomCode, out var gameState))
+        public override async Task OnDisconnectedAsync(Exception? exception)
         {
-            var player = gameState.Players.FirstOrDefault(p => p.ConnectionId == Context.ConnectionId);
-
-            if (player is not null)
+            foreach (var room in _gameService.Rooms)
             {
-                gameState.UndoLastCommand(player.ConnectionId);
+                var gameState = room.Value;
+
+                var player = gameState.Players.FirstOrDefault(p => p.ConnectionId == Context.ConnectionId);
+
+                if (player != null)
+                {
+                    gameState.RemovePlayer(Context.ConnectionId);
+
+                    _logger.LogInfo($"Player {player.Username} left room {room.Key}.");
+
+                    var activeUsernames = gameState.GetActivePlayers();
+
+                    await Clients
+                        .Group(room.Key)
+                        .SendAsync("UserLeft", player.Username, activeUsernames);
+                }
+            }
+
+            if (exception != null)
+            {
+                _logger.LogException(exception);
+            }
+
+            await base.OnDisconnectedAsync(exception);
+        }
+
+        public async Task PlaceTower(string roomCode, int x, int y, TowerCategories towerCategory)
+        {
+            if (_gameService.Rooms.TryGetValue(roomCode, out var gameState))
+            {
+                var player = gameState.Players.FirstOrDefault(p => p.ConnectionId == Context.ConnectionId);
+
+                if (player is not null)
+                {
+                    gameState.PlaceTower(x, y, towerCategory, player);
+                }
+                else
+                {
+                    _logger.LogError("Failed to place tower: Player not found.");
+                }
             }
             else
             {
-                _logger.LogError("Failed to undo tower: Player not found.");
+                _logger.LogError($"Failed to place tower: room code {roomCode} does not exist.");
             }
         }
-        else
-        {
-            _logger.LogError($"Failed to undo tower: room code {roomCode} does not exist.");
-        }
-    }
 
-    public async Task UpgradeTower(string roomCode, int x, int y, TowerUpgrades towerUpgrade)
-    {
-        if (_gameService.Rooms.TryGetValue(roomCode, out var gameState))
+        public async Task StartGame(string roomCode, string username)
         {
-            gameState.UpgradeTower(x, y, towerUpgrade);
+            if (_gameService.Rooms.TryGetValue(roomCode, out var gameState) && !gameState.GameStarted)
+            {
+                gameState.StartGame(Context.ConnectionId);
+
+                await Clients
+                    .Group(roomCode)
+                    .SendAsync("GameStarted", $"Game has been started by {username}!");
+            }
+            else
+            {
+                _logger.LogError($"Could not start game: room code {roomCode} does not exist or the game has already started.");
+            }
         }
-        else
+
+        public async Task UndoTower(string roomCode)
         {
-            _logger.LogError($"Failed to upgrade tower: room code {roomCode} does not exist.");
+            if (_gameService.Rooms.TryGetValue(roomCode, out var gameState))
+            {
+                var player = gameState.Players.FirstOrDefault(p => p.ConnectionId == Context.ConnectionId);
+
+                if (player is not null)
+                {
+                    gameState.UndoLastCommand(player.ConnectionId);
+                }
+                else
+                {
+                    _logger.LogError("Failed to undo tower: Player not found.");
+                }
+            }
+            else
+            {
+                _logger.LogError($"Failed to undo tower: room code {roomCode} does not exist.");
+            }
+        }
+
+        public async Task UpgradeTower(string roomCode, int x, int y, TowerUpgrades towerUpgrade)
+        {
+            if (_gameService.Rooms.TryGetValue(roomCode, out var gameState))
+            {
+                gameState.UpgradeTower(x, y, towerUpgrade);
+            }
+            else
+            {
+                _logger.LogError($"Failed to upgrade tower: room code {roomCode} does not exist.");
+            }
         }
     }
 }

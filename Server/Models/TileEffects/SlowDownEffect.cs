@@ -3,15 +3,9 @@ using TowerDefense.Interfaces;
 
 namespace TowerDefense.Models.TileEffects
 {
-    public class SlowDownEffect : ITileEffect
+    public class SlowDownEffect(int duration) : ITileEffect
     {
-        private readonly int _speedReduction;
-        private readonly int _duration;
-
-        public SlowDownEffect(int duration)
-        {
-            _duration = duration;
-        }
+        private readonly int _duration = duration;
 
         public void ApplyEffect(Enemy enemy)
         {

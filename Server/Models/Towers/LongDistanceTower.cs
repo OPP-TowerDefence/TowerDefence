@@ -2,11 +2,8 @@
 
 namespace TowerDefense.Models.Towers
 {
-    public abstract class LongDistanceTower : Tower
+    public abstract class LongDistanceTower(int x, int y) : Tower(x, y)
     {
         public override TowerCategories Category => TowerCategories.LongDistance;
-        public LongDistanceTower(int x, int y) : base(x, y)
-        {
-        }
     }
 }

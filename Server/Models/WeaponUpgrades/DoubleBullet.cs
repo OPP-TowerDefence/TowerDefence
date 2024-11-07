@@ -4,12 +4,8 @@ using TowerDefense.Models.Towers;
 
 namespace TowerDefense.Models.WeaponUpgrades
 {
-    public class DoubleBullet : WeaponDecorator
+    public class DoubleBullet(IWeapon weapon) : WeaponDecorator(weapon)
     {
-        public DoubleBullet(IWeapon weapon) : base(weapon)
-        {
-        }
-
         public override List<Bullet> Shoot(Tower tower, List<Enemy> enemies, int damage, int numbEnemies)
         {
             var bullets = base.Shoot(tower, enemies, damage, numbEnemies);

@@ -12,6 +12,7 @@ namespace TowerDefense.Models.Enemies
             _prototypeEnemy = new FlyingEnemy(0, 0);
             _prototypeEnemy.SetInitialStrategy(new SpeedPrioritizationStrategy());
         }
+
         public Enemy CreateEnemy(int x, int y)
         {
             var enemy = _prototypeEnemy.Clone();

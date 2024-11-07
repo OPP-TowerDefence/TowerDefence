@@ -4,7 +4,7 @@ using TowerDefense.Models;
 
 namespace TowerDefense.Utils
 {
-    public class LevelProgressionFacade
+    public class LevelProgressionFacade(MainObject mainObject, List<Enemy> enemies, List<Tower> towers)
     {
         private const int HealthIncreasePerLevel = 20;
         private const int EnemyHealthIncrease = 10;
@@ -13,18 +13,10 @@ namespace TowerDefense.Utils
         private const int TowerRangeIncrease = 1;
         private const int TowerSpeedIncrease = 2;
 
-        private MainObject _mainObject;
-        private List<Enemy> _enemies;
-        private List<Tower> _towers;
-        private int _currentLevel;
-
-        public LevelProgressionFacade(MainObject mainObject, List<Enemy> enemies, List<Tower> towers)
-        {
-            _mainObject = mainObject;
-            _enemies = enemies;
-            _towers = towers;
-            _currentLevel = 1;
-        }
+        private MainObject _mainObject = mainObject;
+        private List<Enemy> _enemies = enemies;
+        private List<Tower> _towers = towers;
+        private int _currentLevel = 1;
 
         public void IncreaseLevel()
         {

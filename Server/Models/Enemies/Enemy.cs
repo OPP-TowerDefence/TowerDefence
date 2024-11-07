@@ -29,10 +29,12 @@ namespace TowerDefense.Models.Enemies
             Id = Guid.NewGuid();
             _lastTilePosition = (x, y);
         }
+
         public void SetInitialStrategy(IPathStrategy strategy)
         {
             CurrentStrategy = strategy;
         }
+
         public void RetrievePath(GameState gameState)
         {
             if (CurrentStrategy != null)
@@ -41,15 +43,18 @@ namespace TowerDefense.Models.Enemies
                 Path = new Queue<PathPoint>(selectedPath);
             }
         }
+
         private void SetStrategy(IPathStrategy strategy)
         {
             CurrentStrategy = strategy;
         }
+
         public void ClearSpeedModifier()
         {
             _currentSpeedModifier = 0;
             _modifierDuration = 0;
         }
+
         public void ApplySpeedModifier(int modifier, int duration)
         {
             if (_modifierDuration <= 0)
@@ -58,6 +63,7 @@ namespace TowerDefense.Models.Enemies
                 _modifierDuration = duration;
             }
         }
+
         public void ScheduleEffect(ITileEffect effect, int delay)
         {
             if (delay <= 0)
@@ -69,6 +75,7 @@ namespace TowerDefense.Models.Enemies
                 _scheduledEffects.Add((effect, delay));
             }
         }
+
         public void UpdateScheduledEffects()
         {
             for (int i = _scheduledEffects.Count - 1; i >= 0; i--)
@@ -86,10 +93,12 @@ namespace TowerDefense.Models.Enemies
                 }
             }
         }
+
         public void MarkAsShadowEnemy()
         {
             IsShadowEnemy = true;
         }
+
         private void UpdateSpeed()
         {
             if (_modifierDuration > 0)
@@ -101,6 +110,7 @@ namespace TowerDefense.Models.Enemies
                 }
             }
         }
+
         public void UpdateStrategy(GameState gameState)
         {
             var map = gameState.Map;
@@ -140,14 +150,17 @@ namespace TowerDefense.Models.Enemies
                 return;
             }
         }
+
         private bool IsCloseToObjective(PathPoint objective)
         {
             return CalculateManhattanDistance(X, Y, objective.X, objective.Y) <= closeDistanceThreshold;
         }
+
         private bool IsHealthLow()
         {
             return Health < lowHealthThreshold;
         }
+
         private bool IsInTurretRange(List<Tower> towers)
         {
             foreach (var turret in towers)
@@ -159,14 +172,17 @@ namespace TowerDefense.Models.Enemies
             }
             return false;
         }
+
         private int CalculateManhattanDistance(int x1, int y1, int x2, int y2)
         {
             return Math.Abs(x1 - x2) + Math.Abs(y1 - y2);
         }
+
         public bool HasReachedDestination()
         {
             return IsAtFinalDestination;
         }
+
         public void MoveTowardsNextWaypoint(GameState gameState)
         {
             UpdateScheduledEffects();
@@ -194,6 +210,7 @@ namespace TowerDefense.Models.Enemies
                 Path.Dequeue();
             }
         }
+
         private void MoveTo(PathPoint waypoint, GameState gameState)
         {
             int currentSpeed = GetCurrentSpeed();
@@ -259,20 +276,26 @@ namespace TowerDefense.Models.Enemies
                 }
             }
         }
+
         public void TakeDamage(int damage)
         {
             Health -= damage;
         }
+
         public bool IsDead() => Health <= 0;
+
         public int DistanceTo(Tower tower) => Math.Abs(tower.X - X) + Math.Abs(tower.Y - Y);
+
         public void IncreaseHealth(int amount)
         {
             Health += amount;
         }
+
         public void IncreaseSpeed(int amount)
         {
             Speed += amount;
         }
+
         public int GetCurrentSpeed()
         {
             return Speed + _currentSpeedModifier;

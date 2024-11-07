@@ -1,13 +1,9 @@
-﻿using System.Runtime.CompilerServices;
-using TowerDefense.Enums;
+﻿using TowerDefense.Enums;
 
 namespace TowerDefense.Models.Towers
 {
-    public abstract class HeavyTower : Tower
+    public abstract class HeavyTower(int x, int y) : Tower(x, y)
     {
         public override TowerCategories Category => TowerCategories.Heavy;
-        public HeavyTower(int x, int y) : base(x, y)
-        {
-        }
     }
 }

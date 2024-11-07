@@ -1,6 +1,7 @@
 ﻿using TowerDefense.Models.Towers;
 using TowerDefense.Models.Enemies;
 using TowerDefense.Models.WeaponUpgrades;
+using TowerDefense.Enums;
 
 namespace TowerDefense.Models
 {
@@ -61,10 +62,12 @@ namespace TowerDefense.Models
                 }
             }
         }
+
         public int GetDefenseLevel(int x, int y)
         {
             return defenseMap.TryGetValue((x, y), out int level) ? level : 0;
         }
+
         private void InitializeTiles()
         {
             tiles = new PathPoint[Width, Height];
@@ -76,6 +79,7 @@ namespace TowerDefense.Models
                 }
             }
         }
+
         public void SetTileType(int x, int y, TileType newTileType)
         {
             if (IsValidPosition(x, y))
@@ -84,14 +88,17 @@ namespace TowerDefense.Models
                 tiles[x, y].SetEffectAndApplication(newTileType);
             }
         }
+
         public TileType GetTileType(int x, int y)
         {
             return IsValidPosition(x, y) ? tiles[x, y].Type : TileType.Turret;
         }
+
         public PathPoint GetTile(int x, int y)
         {
             return IsValidPosition(x, y) ? tiles[x, y] : null;
         }
+
         public List<PathPoint> GetAllTilesOfType(TileType type)
         {
             var tilesOfType = new List<PathPoint>();
@@ -108,6 +115,7 @@ namespace TowerDefense.Models
             }
             return tilesOfType;
         }
+
         private void PlaceObjectiveTile()
         {
             int objectiveX = Width - 1;
@@ -115,6 +123,7 @@ namespace TowerDefense.Models
             SetTileType(objectiveX, objectiveY, TileType.Objective);
             MainObject = new MainObject(objectiveX, objectiveY);
         }
+
         public void GenerateRandomPaths()
         {
             Paths.Clear();
@@ -161,6 +170,7 @@ namespace TowerDefense.Models
                 Paths.Add(newPath);
             }
         }
+
         private List<PathPoint> GenerateRandomPathToObjective(int startX, int startY, int endX, int endY)
         {
             var pathSegment = new List<PathPoint>();
@@ -190,10 +200,12 @@ namespace TowerDefense.Models
 
             return pathSegment;
         }
+
         public PathPoint GetObjectiveTile()
         {
             return tiles[Width - 1, Height - 1];
         }
+
         public TileType DetermineTileType()
         {
             double randomValue = _random.NextDouble();
@@ -207,10 +219,12 @@ namespace TowerDefense.Models
 
             return TileType.Normal;
         }
+
         public bool IsOccupied(int x, int y)
         {
             return Towers.Any(t => t.X == x && t.Y == y);
         }
+
         public bool IsValidPosition(int x, int y)
         {
             return x >= 0 && x < Width && y >= 0 && y < Height;

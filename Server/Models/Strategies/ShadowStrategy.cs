@@ -1,23 +1,24 @@
-using System.Collections.Generic;
-using System.Linq;
+using TowerDefense.Enums;
 using TowerDefense.Interfaces;
-using TowerDefense.Models;
 using TowerDefense.Models.Enemies;
 
 namespace TowerDefense.Models.Strategies
 {
     public class ShadowStrategy : IPathStrategy
     {
-        public StrongEnemy targetStrongEnemy = null;
-        private Queue<PathPoint> delayedPath = new Queue<PathPoint>();
-        private int delayTiles = 1;
-        private int waitDuration = 3;
+        private const int delayTiles = 1;
+        private const int waitDuration = 3;
+
+        private Queue<PathPoint> delayedPath = new();
+
+        public StrongEnemy? targetStrongEnemy = null;
         public bool HasTarget() => targetStrongEnemy != null;
 
         public List<PathPoint> SelectPath(GameState gameState, Enemy enemy)
         {
-            return delayedPath.Count > 0 ? delayedPath.ToList() : new List<PathPoint>();
+            return delayedPath.Count > 0 ? delayedPath.ToList() : [];
         }
+
         public void SetTargetStrongEnemy(StrongEnemy strongEnemy)
         {
             if (targetStrongEnemy == null)
@@ -32,6 +33,7 @@ namespace TowerDefense.Models.Strategies
                 }
             }
         }
+
         private Queue<PathPoint> ApplyDelay(List<PathPoint> fullPath, Enemy enemy)
         {
             var delayedQueue = new Queue<PathPoint>();
@@ -46,8 +48,10 @@ namespace TowerDefense.Models.Strategies
             {
                 delayedQueue.Enqueue(fullPath[i]);
             }
+
             return delayedQueue;
         }
+
         public void StopFollowing()
         {
             targetStrongEnemy = null;

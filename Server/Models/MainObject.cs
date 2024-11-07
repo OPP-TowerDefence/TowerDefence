@@ -1,14 +1,10 @@
 ﻿namespace TowerDefense.Models
 {
-    public class MainObject : Unit
+    public class MainObject(int x, int y, int initialHealth = MainObject._maxHealth) : Unit(x, y)
     {
         private const int _maxHealth = 100;
-        public int Health { get; private set; }
 
-        public MainObject(int x, int y, int initialHealth = _maxHealth) : base(x, y)
-        {
-            Health = initialHealth;
-        }
+        public int Health { get; private set; } = initialHealth;
 
         public void DecreaseHealth(int amount)
         {

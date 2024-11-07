@@ -1,8 +1,5 @@
 ﻿using TowerDefense.Enums;
 using TowerDefense.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace TowerDefense.Models.Enemies
 {
@@ -15,6 +12,7 @@ namespace TowerDefense.Models.Enemies
             Health = 20;
             Speed = 3;
         }
+
         public FastEnemy Clone()
         {
             var clonedEnemy = (FastEnemy)this.MemberwiseClone();

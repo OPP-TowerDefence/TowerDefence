@@ -1,6 +1,4 @@
-using System.Collections.Generic;
-using System.Linq;
-using TowerDefense.Models;
+using TowerDefense.Enums;
 using TowerDefense.Interfaces;
 using TowerDefense.Models.Enemies;
 
@@ -17,7 +15,7 @@ namespace TowerDefense.Models.Strategies
 
             if (map.Towers.Count == 0)
             {
-                selectedPath = map.Paths.Count > 0 ? map.Paths[0] : new List<PathPoint> { map.GetTile(enemy.X, enemy.Y) };
+                selectedPath = map.Paths.Count > 0 ? map.Paths[0] : [map.GetTile(enemy.X, enemy.Y)];
             }
             else if (gameState != lastGameState || selectedPath == null)
             {
@@ -28,9 +26,10 @@ namespace TowerDefense.Models.Strategies
             selectedPath = CheckForBetterPath(map, enemy, gameState) ?? selectedPath;
             return GetRemainingPathFromCurrentPosition(selectedPath, enemy, gameState);
         }
+
         private List<PathPoint> SelectLeastThreatenedPath(Map map)
         {
-            List<PathPoint> safestPath = null;
+            var safestPath = map.Paths[0];
             var lowestThreatLevel = int.MaxValue;
 
             foreach (var path in map.Paths)
@@ -44,17 +43,21 @@ namespace TowerDefense.Models.Strategies
                 }
             }
 
-            return safestPath ?? map.Paths[0];
+            return safestPath;
         }
+
         private int CalculatePathThreatLevel(Map map, List<PathPoint> path)
         {
             var totalThreatLevel = 0;
+
             foreach (var point in path)
             {
                 totalThreatLevel += map.GetDefenseLevel(point.X, point.Y);
             }
+
             return totalThreatLevel;
         }
+
         private List<PathPoint> GetRemainingPathFromCurrentPosition(List<PathPoint> path, Enemy enemy, GameState gameState)
         {
             var currentTile = gameState.Map.GetTile(enemy.X, enemy.Y);
@@ -76,8 +79,10 @@ namespace TowerDefense.Models.Strategies
                     return adjustedPath.Skip(startIndex).ToList();
                 }
             }
-            return new List<PathPoint>();
+
+            return [];
         }
+
         private List<PathPoint> CheckForBetterPath(Map map, Enemy enemy, GameState gameState)
         {
             var sortedPaths = map.Paths
@@ -98,15 +103,16 @@ namespace TowerDefense.Models.Strategies
 
             return selectedPath;
         }
+
         private List<PathPoint> GetAdjacentTiles(int x, int y, GameState gameState)
         {
-            var adjacentTiles = new List<PathPoint>
+            return new List<PathPoint>
             {
                 gameState.Map.GetTile(x + 1, y),
                 gameState.Map.GetTile(x, y + 1),
-            };
-
-            return adjacentTiles.Where(tile => tile != null && tile.Type != TileType.Turret).ToList();
+            }
+            .Where(tile => tile != null && tile.Type != TileType.Turret)
+            .ToList();
         }
     }
 }

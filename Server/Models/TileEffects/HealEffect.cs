@@ -4,14 +4,9 @@ using TowerDefense.Interfaces;
 namespace TowerDefense.Models.TileEffects
 {
 
-    public class HealEffect : ITileEffect
+    public class HealEffect(int healAmount) : ITileEffect
     {
-        private readonly int _healAmount;
-
-        public HealEffect(int healAmount)
-        {
-            _healAmount = healAmount;
-        }
+        private readonly int _healAmount = healAmount;
 
         public void ApplyEffect(Enemy enemy)
         {

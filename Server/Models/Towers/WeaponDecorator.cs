@@ -1,18 +1,12 @@
-﻿using TowerDefense.Enums;
-using TowerDefense.Interfaces;
+﻿using TowerDefense.Interfaces;
 using TowerDefense.Models.Enemies;
 using TowerDefense.Models.WeaponUpgrades;
 
 namespace TowerDefense.Models.Towers
 {
-    public class WeaponDecorator : IWeapon
+    public class WeaponDecorator(IWeapon weapon) : IWeapon
     {
-        private IWeapon _weapon;
-
-        public WeaponDecorator(IWeapon weapon)
-        {
-            _weapon = weapon;
-        }
+        private IWeapon _weapon = weapon;
 
         public virtual int GetRange()
         {
