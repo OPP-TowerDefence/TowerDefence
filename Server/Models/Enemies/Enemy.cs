@@ -85,13 +85,13 @@ namespace TowerDefense.Models.Enemies
                 return;
             }
 
-             if (IsHealthLow())
-             {
-                 IsShadowEnemy = false;
-                 SetStrategy(new SurvivalStrategy());
-                 RetrievePath(gameState);
-                 return;
-             }
+            if (IsHealthLow())
+            {
+                IsShadowEnemy = false;
+                SetStrategy(new SurvivalStrategy());
+                RetrievePath(gameState);
+                return;
+            }
 
             if (IsInTurretRange(map.Towers))
             {
