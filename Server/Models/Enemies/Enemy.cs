@@ -13,9 +13,9 @@ namespace TowerDefense.Models.Enemies
         public int RewardValue { get; set; } = 10;
         public int Speed { get; set; }
         public Queue<PathPoint> Path { get; set; }
-        private int _currentSpeedModifier = 0;
-        private int _modifierDuration = 0;
-        private (int x, int y) _lastTilePosition;
+        protected int _currentSpeedModifier = 0;
+        protected int _modifierDuration = 0;
+        protected (int x, int y) _lastTilePosition;
         private bool IsAtFinalDestination { get; set; } = false;
         public IPathStrategy CurrentStrategy { get; private set; }
         public bool IsShadowEnemy { get; private set; } = false;
@@ -85,13 +85,13 @@ namespace TowerDefense.Models.Enemies
                 return;
             }
 
-            if (IsHealthLow())
-            {
-                IsShadowEnemy = false;
-                SetStrategy(new SurvivalStrategy());
-                RetrievePath(gameState);
-                return;
-            }
+             if (IsHealthLow())
+             {
+                 IsShadowEnemy = false;
+                 SetStrategy(new SurvivalStrategy());
+                 RetrievePath(gameState);
+                 return;
+             }
 
             if (IsInTurretRange(map.Towers))
             {

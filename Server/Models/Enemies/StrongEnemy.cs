@@ -1,5 +1,8 @@
 ﻿using TowerDefense.Enums;
 using TowerDefense.Interfaces;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace TowerDefense.Models.Enemies
 {
@@ -12,9 +15,16 @@ namespace TowerDefense.Models.Enemies
             Health = 30;
             Speed = 1;
         }
+
         public StrongEnemy Clone()
         {
-            return (StrongEnemy)this.MemberwiseClone();
+            var clonedEnemy = (StrongEnemy)this.MemberwiseClone();
+            // clonedEnemy.Id = Guid.NewGuid();
+            // clonedEnemy._currentSpeedModifier = this._currentSpeedModifier;
+            // clonedEnemy._modifierDuration = this._modifierDuration;
+            // clonedEnemy._lastTilePosition = this._lastTilePosition;
+
+            return clonedEnemy;
         }
     }
 }
