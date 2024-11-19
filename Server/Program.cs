@@ -35,6 +35,8 @@ builder.Services.AddSignalR();
 
 var app = builder.Build();
 
+app.UseStaticFiles();
+
 app.UseCors("CorsPolicy");
 
 app.UseRouting();

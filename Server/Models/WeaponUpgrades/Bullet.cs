@@ -1,14 +1,14 @@
-﻿using TowerDefense.Models.Enemies;
+﻿using TowerDefense.Models.Towers;
 
 namespace TowerDefense.Models.WeaponUpgrades
 {
-    public class Bullet(int x, int y, Guid enemyId, int damage, int speed)
+    public class Bullet(int x, int y, Guid enemyId, int damage, BulletFlyweight flyweight)
     {
         public int X { get; set; } = x;
         public int Y { get; set; } = y;
         public Guid EnemyId { get; set; } = enemyId;
         public int Damage { get; set; } = damage;
-        public int Speed { get; set; } = speed;
+        public BulletFlyweight Flyweight { get; set; } = flyweight;
 
         public void Move(int targetX, int targetY)
         {
@@ -22,8 +22,8 @@ namespace TowerDefense.Models.WeaponUpgrades
                 return;
             }
 
-            double moveX = (deltaX / distance) * Speed;
-            double moveY = (deltaY / distance) * Speed;
+            double moveX = (deltaX / distance) * Flyweight.Speed;
+            double moveY = (deltaY / distance) * Flyweight.Speed;
 
             if (Math.Abs(moveX) >= Math.Abs(deltaX))
             {
