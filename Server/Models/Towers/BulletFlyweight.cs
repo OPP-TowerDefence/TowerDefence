@@ -4,14 +4,12 @@ namespace TowerDefense.Models.Towers
 {
     public class BulletFlyweight
     {
-        public string FileName { get; private set; }
         public string Path { get; private set; }
         public int Speed { get; private set; }
 
-        public BulletFlyweight(string fileName, string baseUrl, int speed)
+        public BulletFlyweight(string path, int speed)
         {
-            FileName = fileName;
-            Path = $"{baseUrl}/{fileName}";
+            Path = path;
             Speed = speed;
         }
     }

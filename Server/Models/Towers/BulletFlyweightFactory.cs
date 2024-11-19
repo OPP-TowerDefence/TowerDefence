@@ -19,7 +19,7 @@ namespace TowerDefense.Models.Towers
 
             if (!_flyweights.ContainsKey(key))
             {
-                _flyweights[key] = new BulletFlyweight(fileName, _baseUrl, speed);
+                _flyweights[key] = new BulletFlyweight($"{_baseUrl}/{fileName}", speed);
             }
             return _flyweights[key];
         }
