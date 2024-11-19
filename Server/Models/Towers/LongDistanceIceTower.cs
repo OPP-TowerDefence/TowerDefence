@@ -4,7 +4,6 @@ namespace TowerDefense.Models.Towers
     public class LongDistanceIceTower : LongDistanceTower
     {
         public override TowerTypes Type => TowerTypes.Ice;
-        public override string BulletFileName => "iceBullet.gif";
 
         public LongDistanceIceTower(int x, int y) : base(x, y)
         {

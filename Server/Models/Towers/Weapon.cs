@@ -1,4 +1,5 @@
-﻿using TowerDefense.Interfaces;
+﻿using TowerDefense.Enums;
+using TowerDefense.Interfaces;
 using TowerDefense.Models.Enemies;
 using TowerDefense.Models.WeaponUpgrades;
 
@@ -49,7 +50,7 @@ namespace TowerDefense.Models.Towers
 
             foreach (var enemy in nearestEnemy)
             {
-                bullets.Add(new Bullet(tower.X, tower.Y, enemy.Id, damage, Speed, tower.BulletFileName));
+                bullets.Add(new Bullet(tower.X, tower.Y, enemy.Id, damage, Speed, GetBulletFileName(tower.Type)));
             }
 
             return bullets;
@@ -66,6 +67,17 @@ namespace TowerDefense.Models.Towers
                   .OrderBy(enemy => enemy.DistanceTo(tower))
                   .Take(numb)
                   .ToList();
+        }
+
+        private string GetBulletFileName(TowerTypes towerType)
+        {
+            return towerType switch
+            {
+                TowerTypes.Flame => "fireBullet.gif",
+                TowerTypes.Ice => "iceBullet.gif",
+                TowerTypes.Laser => "laserBullet.gif",
+                _ => throw new ArgumentException($"Unknown tower type: {towerType}")
+            };
         }
     }
 }
