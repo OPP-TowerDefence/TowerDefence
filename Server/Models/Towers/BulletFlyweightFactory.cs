@@ -1,17 +1,9 @@
-﻿using static System.Net.Mime.MediaTypeNames;
-
-namespace TowerDefense.Models.Towers
+﻿namespace TowerDefense.Models.Towers
 {
-    public class BulletFlyweightFactory
+    public class BulletFlyweightFactory(string baseUrl)
     {
         private readonly Dictionary<string, BulletFlyweight> _flyweights = new();
-        private readonly string _baseUrl;
-
-
-        public BulletFlyweightFactory(string baseUrl)
-        {
-            _baseUrl = baseUrl;
-        }
+        private readonly string _baseUrl = baseUrl;
 
         public BulletFlyweight GetFlyweight(string fileName, int speed)
         {
@@ -24,5 +16,4 @@ namespace TowerDefense.Models.Towers
             return _flyweights[key];
         }
     }
-
 }

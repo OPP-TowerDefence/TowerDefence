@@ -1,6 +1,4 @@
-﻿using TowerDefense.Enums;
-using TowerDefense.Models.Enemies;
-using TowerDefense.Models.Towers;
+﻿using TowerDefense.Models.Towers;
 
 namespace TowerDefense.Models.WeaponUpgrades
 {
@@ -44,6 +42,6 @@ namespace TowerDefense.Models.WeaponUpgrades
             {
                 Y += (int)moveY;
             }
-        } 
+        }
     }
 }
