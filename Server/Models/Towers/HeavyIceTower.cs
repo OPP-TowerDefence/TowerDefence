@@ -5,7 +5,6 @@ namespace TowerDefense.Models.Towers
     public class HeavyIceTower : HeavyTower
     {
         public override TowerTypes Type => TowerTypes.Ice;
-        public override string BulletFileName => "iceBullet.gif";
 
         public HeavyIceTower(int x, int y) : base(x, y)
         {

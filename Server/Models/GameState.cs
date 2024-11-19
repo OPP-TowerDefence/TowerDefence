@@ -92,7 +92,7 @@ public class GameState
             {
                 b.X,
                 b.Y,
-                b.Path
+                b.Flyweight.Path
             })
             .ToList();
     }

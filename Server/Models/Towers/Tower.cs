@@ -13,7 +13,7 @@ public abstract class Tower : Unit
     public Armor Armor { get; set; }
     public abstract TowerTypes Type { get; }
     public abstract TowerCategories Category { get; }
-    public abstract string BulletFileName { get; }
+    public static BulletFlyweightFactory BulletFlyweightFactory { get; set; } = new BulletFlyweightFactory("http://localhost:7041/Bullets");
     public List<TowerUpgrades> AppliedUpgrades { get; set; }
 
     public Tower(int x, int y) : base(x, y)
