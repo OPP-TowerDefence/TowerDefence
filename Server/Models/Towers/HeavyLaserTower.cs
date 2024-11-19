@@ -4,6 +4,7 @@ namespace TowerDefense.Models.Towers
     public class HeavyLaserTower : HeavyTower
     {
         public override TowerTypes Type => TowerTypes.Laser;
+        public override string BulletFileName => "laserBullet.gif";
 
         public HeavyLaserTower(int x, int y) : base(x, y)
         {

@@ -176,8 +176,15 @@ function renderMap(map, mapEnemies, mapBullets) {
         const bulletElement = document.createElement('div');
         bulletElement.className = 'bullet';
         gameMap.appendChild(bulletElement);
+
         bulletElement.style.gridColumnStart = bullet.x + 1;
         bulletElement.style.gridRowStart = bullet.y + 1;
+
+        const bulletImage = document.createElement('img');
+        bulletImage.src = bullet.path;
+        bulletImage.style.width = '100%';
+        bulletImage.style.height = '100%';
+        bulletElement.appendChild(bulletImage);
     });
 }
 

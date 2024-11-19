@@ -49,7 +49,7 @@ namespace TowerDefense.Models.Towers
 
             foreach (var enemy in nearestEnemy)
             {
-                bullets.Add(new Bullet(tower.X, tower.Y, enemy.Id, damage, Speed));
+                bullets.Add(new Bullet(tower.X, tower.Y, enemy.Id, damage, Speed, tower.BulletFileName));
             }
 
             return bullets;

@@ -91,7 +91,8 @@ public class GameState
             .Select(b => new
             {
                 b.X,
-                b.Y
+                b.Y,
+                b.Path
             })
             .ToList();
     }

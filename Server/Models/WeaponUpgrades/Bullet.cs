@@ -2,13 +2,17 @@
 
 namespace TowerDefense.Models.WeaponUpgrades
 {
-    public class Bullet(int x, int y, Guid enemyId, int damage, int speed)
+    public class Bullet(int x, int y, Guid enemyId, int damage, int speed, string fileName)
     {
         public int X { get; set; } = x;
         public int Y { get; set; } = y;
         public Guid EnemyId { get; set; } = enemyId;
         public int Damage { get; set; } = damage;
         public int Speed { get; set; } = speed;
+        public string FileName { get; set; } = fileName;
+        public string Path = $"{_baseUrl}/Bullets/{fileName}";
+
+        private static readonly string _baseUrl = "http://localhost:7041";
 
         public void Move(int targetX, int targetY)
         {

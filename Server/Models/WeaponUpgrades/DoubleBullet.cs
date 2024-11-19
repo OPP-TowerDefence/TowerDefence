@@ -39,7 +39,7 @@ namespace TowerDefense.Models.WeaponUpgrades
 
             if (distance == 0)
             {
-                return new Bullet(firstBullet.X, firstBullet.Y, firstBullet.EnemyId, firstBullet.Damage, firstBullet.Speed);
+                return new Bullet(firstBullet.X, firstBullet.Y, firstBullet.EnemyId, firstBullet.Damage, firstBullet.Speed, firstBullet.FileName);
             }
 
             double normalizedX = deltaX / distance;
@@ -48,7 +48,7 @@ namespace TowerDefense.Models.WeaponUpgrades
             int secondBulletX = firstBullet.X + (int)Math.Round(normalizedX);
             int secondBulletY = firstBullet.Y + (int)Math.Round(normalizedY);
 
-            return new Bullet(secondBulletX, secondBulletY, firstBullet.EnemyId, firstBullet.Damage, firstBullet.Speed);
+            return new Bullet(secondBulletX, secondBulletY, firstBullet.EnemyId, firstBullet.Damage, firstBullet.Speed, firstBullet.FileName);
         }
 
     }
