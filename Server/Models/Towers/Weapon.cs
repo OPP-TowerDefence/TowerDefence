@@ -11,6 +11,7 @@ namespace TowerDefense.Models.Towers
         public int Damage { get; set; } = damage;
         public int Range { get; set; } = range;
         public int Speed { get; set; } = speed;
+        public static BulletFlyweightFactory BulletFlyweightFactory { get; set; } = new BulletFlyweightFactory("http://localhost:7041/Bullets");
 
         public virtual int GetDamage()
         {
@@ -48,7 +49,7 @@ namespace TowerDefense.Models.Towers
 
             var nearestEnemy = CalculateNearestEnemies(tower, enemies, numbEnemies);
 
-            BulletFlyweight bulletFlyweight = Tower.BulletFlyweightFactory.GetFlyweight(GetBulletFileName(tower.Type), Speed);
+            BulletFlyweight bulletFlyweight = BulletFlyweightFactory.GetFlyweight(GetBulletFileName(tower.Type), Speed);
 
             foreach (var enemy in nearestEnemy)
             {
