@@ -1,4 +1,5 @@
-﻿using TowerDefense.Interfaces;
+﻿using System.Collections;
+using TowerDefense.Interfaces;
 
 namespace TowerDefense.Models.Enemies
 {
@@ -60,5 +61,21 @@ namespace TowerDefense.Models.Enemies
 
         public void Add(IEnemyComponent child) => _children.Add(child);
         public void Remove(IEnemyComponent child) => _children.Remove(child);
+
+        public IEnumerator<Enemy> GetEnumerator()
+        {
+            foreach (var child in _children)
+            {
+                foreach (var enemy in child)
+                {
+                    yield return enemy;
+                }
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
     }
 }

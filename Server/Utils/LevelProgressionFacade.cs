@@ -13,9 +13,10 @@ namespace TowerDefense.Utils
         private const int TowerRangeIncrease = 1;
         private const int TowerSpeedIncrease = 2;
 
-        private MainObject _mainObject = mainObject;
-        private List<Enemy> _enemies = enemies;
-        private List<Tower> _towers = towers;
+        private readonly MainObject _mainObject = mainObject;
+        private readonly List<Enemy> _enemies = enemies;
+        private readonly List<Tower> _towers = towers;
+
         private int _currentLevel = 1;
 
         public void IncreaseLevel()
