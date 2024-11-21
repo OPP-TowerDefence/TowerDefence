@@ -108,12 +108,12 @@ namespace TowerDefense.Models.Strategies
         {
             return new List<PathPoint>
             {
-                 gameState.Map.GetTile(x + 1, y),
-                 gameState.Map.GetTile(x - 1, y),
-                 gameState.Map.GetTile(x, y + 1),
-                 gameState.Map.GetTile(x, y - 1),
+                gameState.Map.GetTile(x + 1, y),
+                gameState.Map.GetTile(x - 1, y),
+                gameState.Map.GetTile(x, y + 1),
+                gameState.Map.GetTile(x, y - 1),
             }
-             .Where(tile => tile != null && tile.Type != TileType.Turret)
+            .Where(tile => tile != null && tile.Type != TileType.Turret)
             .ToList();
         }
     }
