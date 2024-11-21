@@ -203,13 +203,11 @@ public class GameState
 
         if (spawnType == 0)
         {
-            Console.WriteLine("Spawning a single enemy.");
             enemyComponent = CreateAndInitializeEnemy(0, 0);
         }
         else
         {
             int numberOfEnemies = spawnType == 1 ? 2 : 3;
-            Console.WriteLine($"Spawning a group of {numberOfEnemies} enemies.");
             var enemyGroup = new EnemyGroup();
 
             var spawnPositions = GetGroupOffsets(numberOfEnemies);
@@ -218,7 +216,6 @@ public class GameState
             {
                 var enemy = CreateAndInitializeEnemy(offsetX, offsetY);
                 enemyGroup.Add(enemy);
-                Console.WriteLine($"HP: {enemy.Health}");
             }
 
             enemyComponent = enemyGroup;
@@ -468,8 +465,6 @@ public class GameState
         Map.Enemies.Remove(enemy);
 
         _resourceManager.OnEnemyDeath(enemy);
-
-        Console.WriteLine($"Enemy {enemy} has died and resources updated.");
     }
 
     private void DamageEnemy(IEnemyComponent enemyComponent, int damage)

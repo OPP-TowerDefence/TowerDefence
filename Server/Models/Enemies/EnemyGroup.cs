@@ -31,13 +31,11 @@ namespace TowerDefense.Models.Enemies
             {
                 child.HandleDestination(mainObject, gameState);
                 Remove(child);
-                Console.WriteLine($"Enemy {child} reached destination and was handled.");
             }
 
             if (IsDead())
             {
                 gameState.Map.Enemies.Remove(this);
-                Console.WriteLine($"Group {this} is empty and removed from map.");
             }
         }
 
@@ -51,14 +49,12 @@ namespace TowerDefense.Models.Enemies
                 {
                     Remove(child);
                     gameState.Map.Enemies.Remove(child);
-                    Console.WriteLine($"Enemy {child} is dead and removed from group and map.");
                 }
             }
 
             if (IsDead())
             {
                 gameState.Map.Enemies.Remove(this);
-                Console.WriteLine($"Group {this} is empty and removed from map.");
             }
         }
 
