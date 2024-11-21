@@ -6,7 +6,6 @@ using TowerDefense.Models.Enemies;
 using TowerDefense.Models.WeaponUpgrades;
 using TowerDefense.Utils;
 using TowerDefense.Models.Strategies;
-using TowerDefense.Models.TileEffects;
 
 namespace TowerDefense.Models;
 
@@ -21,33 +20,38 @@ public class GameState
     private readonly List<Player> _players;
     private readonly ResourceManager _resourceManager;
     private readonly LevelProgressionFacade _levelFacade;
-    private readonly string _roomCode;
 
     private int _enemiesSpawned = 0;
     private int _currentLevel = 1;
-    private Random _random = new Random();
+    private Random _random = new();
 
     public int EnemyCount { get; private set; } = 0;
     public bool GameStarted { get; private set; }
-    public event Action<int>? OnLevelChanged;
+
 
     public Map Map { get; } = new Map(100, 100);
+    public event Action<int>? OnLevelChanged;
+
     public List<Player> Players => _players;
+
+    public string RoomCode { get; private set; }
 
     public GameState(IHubContext<GameHub> hubContext, string roomCode)
     {
         _hubContext = hubContext;
         _players = [];
         _resourceManager = new();
-        _roomCode = roomCode;
 
         _availableTowerTypes = Enum
             .GetValues(typeof(TowerTypes))
             .Cast<TowerTypes>()
             .ToList();
 
-        _levelFacade = new LevelProgressionFacade(Map.MainObject, GetAllEnemies(Map.Enemies).ToList(), Map.Towers);
+        _levelFacade = new LevelProgressionFacade(Map.MainObject, Map.Enemies.ToList(), Map.Towers);
+
         OnLevelChanged += NotifyLevelChange;
+        RoomCode = roomCode;
+
     }
 
     public void AddPlayer(string username, string connectionId)
@@ -99,9 +103,7 @@ public class GameState
 
     public object GetMapEnemies()
     {
-        var allEnemies = GetAllEnemies(Map.Enemies);
-
-        return allEnemies
+        return Map.Enemies
             .Select(e => new
             {
                 e.X,
@@ -166,9 +168,7 @@ public class GameState
 
     public void RecalculatePathsForStrategy(IPathStrategy strategy)
     {
-        var allEnemies = GetAllEnemies(Map.Enemies);
-
-        foreach (var enemy in allEnemies)
+        foreach (var enemy in Map.Enemies)
         {
             if (enemy.CurrentStrategy == strategy)
             {
@@ -252,11 +252,9 @@ public class GameState
 
         UpdateBulletPositions();
 
-        var allEnemies = GetAllEnemies(Map.Enemies);
-
         foreach (var tower in Map.Towers.ToList())
         {
-            var towerBullets = tower.Shoot(allEnemies.ToList());
+            var towerBullets = tower.Shoot(Map.Enemies.ToList());
 
             if (towerBullets.Count == 0)
             {
@@ -408,23 +406,23 @@ public class GameState
         }
     }
 
-    private IEnumerable<Enemy> GetAllEnemies(IEnumerable<IEnemyComponent> components)
-    {
-        foreach (var component in components)
-        {
-            if (component is Enemy enemy)
-            {
-                yield return enemy;
-            }
-            else if (component is EnemyGroup group)
-            {
-                foreach (var subEnemy in GetAllEnemies(group.Children))
-                {
-                    yield return subEnemy;
-                }
-            }
-        }
-    }
+    //private IEnumerable<Enemy> GetAllEnemies(IEnumerable<IEnemyComponent> components)
+    //{
+    //    foreach (var component in components)
+    //    {
+    //        if (component is Enemy enemy)
+    //        {
+    //            yield return enemy;
+    //        }
+    //        else if (component is EnemyGroup group)
+    //        {
+    //            foreach (var subEnemy in GetAllEnemies(group.Children))
+    //            {
+    //                yield return subEnemy;
+    //            }
+    //        }
+    //    }
+    //}
 
     private List<(int X, int Y)> GetGroupOffsets(int groupSize)
     {
@@ -463,7 +461,7 @@ public class GameState
     private void NotifyLevelChange(int newLevel)
     {
         _hubContext.Clients
-            .Group(_roomCode)
+            .Group(RoomCode)
             .SendAsync("LevelChanged", newLevel);
     }
 
@@ -504,11 +502,10 @@ public class GameState
         }
 
         var bullets = Map.Bullets.ToList();
-        var allEnemies = GetAllEnemies(Map.Enemies);
 
         foreach (var bullet in bullets)
         {
-            var enemyToAttack = allEnemies.FirstOrDefault(e => e.Id == bullet.EnemyId);
+            var enemyToAttack = Map.Enemies.FirstOrDefault(e => e.Id == bullet.EnemyId);
 
             if (enemyToAttack is not null)
             {

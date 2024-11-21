@@ -1,29 +1,37 @@
 ﻿using TowerDefense.Models.Towers;
-using TowerDefense.Models.Enemies;
 using TowerDefense.Models.WeaponUpgrades;
 using TowerDefense.Enums;
-using TowerDefense.Interfaces;
+using TowerDefense.Models.Collections;
 
 namespace TowerDefense.Models
 {
     public class Map
     {
-        public int Width { get; private set; }
         public int Height { get; private set; }
-        public List<Tower> Towers { get; set; } = [];
-        public List<IEnemyComponent> Enemies { get; set; } = [];
+
+        public int Width { get; private set; }
+
+        public EnemyCollection Enemies { get; set; } = [];
+        
         public List<Bullet> Bullets { get; set; } = [];
+
+        public List<List<PathPoint>> Paths { get; private set; } = [];
+
+        public List<Tower> Towers { get; set; } = [];
+
         public MainObject MainObject { get; private set; }
-        private Random _random = new Random();
-        private PathPoint[,] tiles;
-        public List<List<PathPoint>> Paths { get; private set; } = new List<List<PathPoint>>();
-        private Dictionary<(int x, int y), int> defenseMap;
+
+        private Dictionary<(int x, int y), int> _defenseMap = [];
+
+        private Random _random = new();
+        
+        private PathPoint[,] _tiles;
 
         public Map(int width, int height)
         {
             Width = width;
             Height = height;
-            defenseMap = new Dictionary<(int, int), int>();
+
             InitializeTiles();
             PlaceObjectiveTile();
             GenerateRandomPaths();
@@ -31,7 +39,7 @@ namespace TowerDefense.Models
 
         public void UpdateDefenseMap()
         {
-            defenseMap.Clear();
+            _defenseMap.Clear();
             const int maxRange = 10;
 
             foreach (var turret in Towers)
@@ -51,13 +59,13 @@ namespace TowerDefense.Models
                             int distance = Math.Abs(dx) + Math.Abs(dy);
                             int defenseValue = maxRange - distance + 1;
 
-                            if (defenseMap.ContainsKey((x, y)))
+                            if (_defenseMap.ContainsKey((x, y)))
                             {
-                                defenseMap[(x, y)] += defenseValue;
+                                _defenseMap[(x, y)] += defenseValue;
                             }
                             else
                             {
-                                defenseMap[(x, y)] = defenseValue;
+                                _defenseMap[(x, y)] = defenseValue;
                             }
                         }
                     }
@@ -67,17 +75,17 @@ namespace TowerDefense.Models
 
         public int GetDefenseLevel(int x, int y)
         {
-            return defenseMap.TryGetValue((x, y), out int level) ? level : 0;
+            return _defenseMap.TryGetValue((x, y), out int level) ? level : 0;
         }
 
         private void InitializeTiles()
         {
-            tiles = new PathPoint[Width, Height];
+            _tiles = new PathPoint[Width, Height];
             for (int x = 0; x < Width; x++)
             {
                 for (int y = 0; y < Height; y++)
                 {
-                    tiles[x, y] = new PathPoint(x, y, TileType.Turret);
+                    _tiles[x, y] = new PathPoint(x, y, TileType.Turret);
                 }
             }
         }
@@ -86,19 +94,19 @@ namespace TowerDefense.Models
         {
             if (IsValidPosition(x, y))
             {
-                tiles[x, y].Type = newTileType;
-                tiles[x, y].SetEffectAndApplication(newTileType);
+                _tiles[x, y].Type = newTileType;
+                _tiles[x, y].SetEffectAndApplication(newTileType);
             }
         }
 
         public TileType GetTileType(int x, int y)
         {
-            return IsValidPosition(x, y) ? tiles[x, y].Type : TileType.Turret;
+            return IsValidPosition(x, y) ? _tiles[x, y].Type : TileType.Turret;
         }
 
         public PathPoint GetTile(int x, int y)
         {
-            return IsValidPosition(x, y) ? tiles[x, y] : null;
+            return IsValidPosition(x, y) ? _tiles[x, y] : null;
         }
 
         public List<PathPoint> GetAllTilesOfType(TileType type)
@@ -109,9 +117,9 @@ namespace TowerDefense.Models
             {
                 for (int y = 0; y < Height; y++)
                 {
-                    if (tiles[x, y].Type == type)
+                    if (_tiles[x, y].Type == type)
                     {
-                        tilesOfType.Add(tiles[x, y]);
+                        tilesOfType.Add(_tiles[x, y]);
                     }
                 }
             }
@@ -205,7 +213,7 @@ namespace TowerDefense.Models
 
         public PathPoint GetObjectiveTile()
         {
-            return tiles[Width - 1, Height - 1];
+            return _tiles[Width - 1, Height - 1];
         }
 
         public TileType DetermineTileType()

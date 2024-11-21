@@ -3,6 +3,7 @@ using TowerDefense.Models.Towers;
 using TowerDefense.Utils;
 using TowerDefense.Models.Strategies;
 using TowerDefense.Interfaces;
+using System.Collections;
 
 namespace TowerDefense.Models.Enemies
 {
@@ -315,6 +316,16 @@ namespace TowerDefense.Models.Enemies
         public int GetCurrentSpeed()
         {
             return Speed + _currentSpeedModifier;
+        }
+
+        public IEnumerator<Enemy> GetEnumerator()
+        {
+            yield return this;
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }
