@@ -48,21 +48,28 @@ namespace TowerDefense
         {
             foreach (var room in _gameService.Rooms)
             {
-                var gameState = room.Value;
-
-                var player = gameState.Players.FirstOrDefault(p => p.ConnectionId == Context.ConnectionId);
+                var player = room.Players.FirstOrDefault(p => p.ConnectionId == Context.ConnectionId);
 
                 if (player != null)
                 {
-                    gameState.RemovePlayer(Context.ConnectionId);
+                    room.RemovePlayer(Context.ConnectionId);
 
-                    _logger.LogInfo($"Player {player.Username} left room {room.Key}.");
+                    _logger.LogInfo($"Player {player.Username} left room {room.RoomCode}.");
 
-                    var activeUsernames = gameState.GetActivePlayers();
+                    var activeUsernames = room.GetActivePlayers();
 
-                    await Clients
-                        .Group(room.Key)
-                        .SendAsync("UserLeft", player.Username, activeUsernames);
+                    if (room.Players.Count == 0)
+                    {
+                        _gameService.Rooms.Remove(room.RoomCode, out _);
+
+                        _logger.LogInfo($"Room {room.RoomCode} has been removed.");
+                    }
+                    else
+                    {
+                        await Clients
+                            .Group(room.RoomCode)
+                            .SendAsync("UserLeft", player.Username, activeUsernames);
+                    }
                 }
             }
 
@@ -76,13 +83,13 @@ namespace TowerDefense
 
         public async Task PlaceTower(string roomCode, int x, int y, TowerCategories towerCategory)
         {
-            if (_gameService.Rooms.TryGetValue(roomCode, out var gameState))
+            if (_gameService.Rooms.TryGetValue(roomCode, out var room) && room is not null)
             {
-                var player = gameState.Players.FirstOrDefault(p => p.ConnectionId == Context.ConnectionId);
+                var player = room.Players.FirstOrDefault(p => p.ConnectionId == Context.ConnectionId);
 
                 if (player is not null)
                 {
-                    gameState.PlaceTower(x, y, towerCategory, player);
+                    room.PlaceTower(x, y, towerCategory, player);
                 }
                 else
                 {
@@ -97,9 +104,9 @@ namespace TowerDefense
 
         public async Task StartGame(string roomCode, string username)
         {
-            if (_gameService.Rooms.TryGetValue(roomCode, out var gameState) && !gameState.GameStarted)
+            if (_gameService.Rooms.TryGetValue(roomCode, out var room) && room is not null && !room.GameStarted)
             {
-                gameState.StartGame(Context.ConnectionId);
+                room.StartGame(Context.ConnectionId);
 
                 await Clients
                     .Group(roomCode)
@@ -113,13 +120,13 @@ namespace TowerDefense
 
         public async Task UndoTower(string roomCode)
         {
-            if (_gameService.Rooms.TryGetValue(roomCode, out var gameState))
+            if (_gameService.Rooms.TryGetValue(roomCode, out var room) && room is not null)
             {
-                var player = gameState.Players.FirstOrDefault(p => p.ConnectionId == Context.ConnectionId);
+                var player = room.Players.FirstOrDefault(p => p.ConnectionId == Context.ConnectionId);
 
                 if (player is not null)
                 {
-                    gameState.UndoLastCommand(player.ConnectionId);
+                    room.UndoLastCommand(player.ConnectionId);
                 }
                 else
                 {
@@ -134,9 +141,9 @@ namespace TowerDefense
 
         public async Task UpgradeTower(string roomCode, int x, int y, TowerUpgrades towerUpgrade)
         {
-            if (_gameService.Rooms.TryGetValue(roomCode, out var gameState))
+            if (_gameService.Rooms.TryGetValue(roomCode, out var room) && room is not null)
             {
-                gameState.UpgradeTower(x, y, towerUpgrade);
+                room.UpgradeTower(x, y, towerUpgrade);
             }
             else
             {
