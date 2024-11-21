@@ -53,7 +53,10 @@ namespace TowerDefense.Models.Towers
 
             foreach (var enemy in nearestEnemy)
             {
-                bullets.Add(new Bullet(tower.X, tower.Y, enemy.Id, damage, bulletFlyweight));
+                if (!enemy.IsDead())
+                {
+                    bullets.Add(new Bullet(tower.X, tower.Y, enemy.Id, damage, bulletFlyweight));
+                }
             }
 
             return bullets;
