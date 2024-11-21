@@ -12,7 +12,7 @@ public class GameService
     private readonly IHubContext<GameHub> _hubContext;
 
     private double _timeSinceLastSpawn = 0;
-    private const double SpawnInterval = 3000;
+    private const double SpawnInterval = 5000;
 
     private const double EnvironmentUpdateInterval = 15000;
     private double _timeSinceLastEnvironmentUpdate = 0;
