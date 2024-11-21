@@ -5,7 +5,8 @@ namespace TowerDefense.Models.Enemies
 {
     public class EnemyGroup : IEnemyComponent
     {
-        private List<IEnemyComponent> _children = new();
+        private readonly List<IEnemyComponent> _children = [];
+
         public IEnumerable<IEnemyComponent> Children => _children;
 
         public void MoveTowardsNextWaypoint(GameState gameState)
@@ -60,6 +61,7 @@ namespace TowerDefense.Models.Enemies
         }
 
         public void Add(IEnemyComponent child) => _children.Add(child);
+
         public void Remove(IEnemyComponent child) => _children.Remove(child);
 
         public IEnumerator<Enemy> GetEnumerator()

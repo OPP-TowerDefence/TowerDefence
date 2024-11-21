@@ -6,18 +6,18 @@ namespace TowerDefense.Models.Collections
 {
     public class EnemyCollection : IEnumerable<Enemy>
     {
-        private readonly List<IEnemyComponent> _components = [];
+        public List<IEnemyComponent> Components { get; set; } = [];
 
-        public int Count => _components.Count;
+        public int Count => Components.Count;
 
         public void Add(IEnemyComponent component)
         {
-            _components.Add(component);
+            Components.Add(component);
         }
 
         public IEnumerator<Enemy> GetEnumerator()
         {
-            foreach (var component in _components)
+            foreach (var component in Components)
             {
                 foreach (var enemy in component)
                 {
@@ -33,7 +33,7 @@ namespace TowerDefense.Models.Collections
 
         public void Remove(IEnemyComponent component)
         {
-            _components.Remove(component);
+            Components.Remove(component);
         }
     }
 }
