@@ -281,7 +281,7 @@ public class GameState
 
     public void UpdateEnemies()
     {
-        foreach (var enemyComponent in Map.Enemies.ToList())
+        foreach (var enemyComponent in Map.Enemies.Components.ToList())
         {
             enemyComponent.MoveTowardsNextWaypoint(this);
 
