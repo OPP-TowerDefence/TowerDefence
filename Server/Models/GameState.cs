@@ -46,7 +46,7 @@ public class GameState
             .Cast<TowerTypes>()
             .ToList();
 
-        _levelFacade = new LevelProgressionFacade(Map.MainObject, Map.Enemies, Map.Towers);
+        _levelFacade = new LevelProgressionFacade(Map.MainObject, GetAllEnemies(Map.Enemies).ToList(), Map.Towers);
         OnLevelChanged += NotifyLevelChange;
     }
 
@@ -99,7 +99,9 @@ public class GameState
 
     public object GetMapEnemies()
     {
-        return Map.Enemies
+        var allEnemies = GetAllEnemies(Map.Enemies);
+
+        return allEnemies
             .Select(e => new
             {
                 e.X,
@@ -109,6 +111,24 @@ public class GameState
                 Type = e.Type.ToString()
             })
             .ToList();
+    }
+
+    private IEnumerable<Enemy> GetAllEnemies(IEnumerable<IEnemyComponent> components)
+    {
+        foreach (var component in components)
+        {
+            if (component is Enemy enemy)
+            {
+                yield return enemy;
+            }
+            else if (component is EnemyGroup group)
+            {
+                foreach (var subEnemy in GetAllEnemies(group.Children))
+                {
+                    yield return subEnemy;
+                }
+            }
+        }
     }
 
     public object GetMapTowers()
@@ -177,27 +197,86 @@ public class GameState
 
     public void SpawnEnemies()
     {
-        var enemy = GetRandomEnemyFactory()
-            .CreateEnemy(0, 0);
+        int spawnType = DetermineSpawnType(_currentLevel);
 
+        IEnemyComponent enemyComponent;
+
+        if (spawnType == 0)
+        {
+            Console.WriteLine("Spawning a single enemy.");
+            enemyComponent = CreateAndInitializeEnemy(0, 0);
+        }
+        else
+        {
+            int numberOfEnemies = spawnType == 1 ? 2 : 3;
+            Console.WriteLine($"Spawning a group of {numberOfEnemies} enemies.");
+            var enemyGroup = new EnemyGroup();
+
+            var spawnPositions = GetGroupOffsets(numberOfEnemies);
+
+            foreach (var (offsetX, offsetY) in spawnPositions)
+            {
+                var enemy = CreateAndInitializeEnemy(offsetX, offsetY);
+                enemyGroup.Add(enemy);
+                Console.WriteLine($"HP: {enemy.Health}");
+            }
+
+            enemyComponent = enemyGroup;
+        }
+
+        Map.Enemies.Add(enemyComponent);
+    }
+
+    private int DetermineSpawnType(int currentLevel)
+    {
+        if (currentLevel == 1)
+        {
+            return 0;
+        }
+        else if (currentLevel == 2)
+        {
+            return _random.Next(0, 2);
+        }
+        else
+        {
+            return _random.Next(0, 3);
+        }
+    }
+
+    private Enemy CreateAndInitializeEnemy(int offsetX, int offsetY)
+    {
+        var enemy = GetRandomEnemyFactory().CreateEnemy(offsetX, offsetY);
         enemy.RetrievePath(this);
-        Map.Enemies.Add(enemy);
-
         _levelFacade.ApplyBuffToNewEnemy(enemy);
-
         OnEnemySpawned();
-        if (_enemiesSpawned % 5 == 0)
+
+        if (_enemiesSpawned % 30 == 0)
         {
             enemy.MarkAsShadowEnemy();
         }
 
-        if (enemy is StrongEnemy strongEnemy)
+        if (enemy is StrongEnemy strongEnemy && !enemy.IsShadowEnemy)
         {
-            if (!enemy.IsShadowEnemy)
-            {
-                NotifyShadowEnemies(strongEnemy);
-            }
+            NotifyShadowEnemies(strongEnemy);
         }
+
+        return enemy;
+    }
+
+    private List<(int X, int Y)> GetGroupOffsets(int groupSize)
+    {
+        var offsets = new List<(int X, int Y)>();
+        int cols = (int)Math.Ceiling(Math.Sqrt(groupSize));
+        int rows = (int)Math.Ceiling((double)groupSize / cols);
+
+        for (int i = 0; i < groupSize; i++)
+        {
+            int offsetX = (i % cols);
+            int offsetY = (i / cols);
+            offsets.Add((offsetX, offsetY));
+        }
+
+        return offsets;
     }
 
     private void OnEnemySpawned()
@@ -231,7 +310,9 @@ public class GameState
 
     public void RecalculatePathsForStrategy(IPathStrategy strategy)
     {
-        foreach (var enemy in Map.Enemies)
+        var allEnemies = GetAllEnemies(Map.Enemies);
+
+        foreach (var enemy in allEnemies)
         {
             if (enemy.CurrentStrategy == strategy)
             {
@@ -267,9 +348,11 @@ public class GameState
 
         UpdateBulletPositions();
 
+        var allEnemies = GetAllEnemies(Map.Enemies);
+
         foreach (var tower in Map.Towers.ToList())
         {
-            var towerBullets = tower.Shoot(Map.Enemies);
+            var towerBullets = tower.Shoot(allEnemies.ToList());
 
             if (towerBullets.Count == 0)
             {
@@ -298,23 +381,18 @@ public class GameState
 
     public void UpdateEnemies()
     {
-        foreach (var enemy in Map.Enemies.ToList())
+        foreach (var enemyComponent in Map.Enemies.ToList())
         {
-            enemy.MoveTowardsNextWaypoint(this);
+            enemyComponent.MoveTowardsNextWaypoint(this);
 
-            if (enemy.HasReachedDestination())
+            if (enemyComponent.HasReachedDestination())
             {
-                Map.MainObject.DecreaseHealth(5);
-                DamageEnemy(enemy, enemy.Health);
+                enemyComponent.HandleDestination(Map.MainObject, this);
+            }
 
-                if (enemy is StrongEnemy strongEnemy)
-                {
-                    foreach (var shadowEnemy in Map.Enemies.OfType<Enemy>()
-                             .Where(e => e.CurrentStrategy is ShadowStrategy shadowStrategy && shadowStrategy.targetStrongEnemy == strongEnemy))
-                    {
-                        ((ShadowStrategy)shadowEnemy.CurrentStrategy).StopFollowing();
-                    }
-                }
+            if (enemyComponent.IsDead())
+            {
+                Map.Enemies.Remove(enemyComponent);
             }
         }
     }
@@ -385,16 +463,18 @@ public class GameState
         tower.AppliedUpgrades.Add(towerUpgrade);
     }
 
-    private void DamageEnemy(Enemy enemy, int damage)
+    public void HandleEnemyDeath(Enemy enemy)
     {
-        enemy.TakeDamage(damage);
+        Map.Enemies.Remove(enemy);
 
-        if (enemy.IsDead())
-        {
-            Map.Enemies.Remove(enemy);
+        _resourceManager.OnEnemyDeath(enemy);
 
-            _resourceManager.OnEnemyDeath(enemy);
-        }
+        Console.WriteLine($"Enemy {enemy} has died and resources updated.");
+    }
+
+    private void DamageEnemy(IEnemyComponent enemyComponent, int damage)
+    {
+        enemyComponent.TakeDamage(damage, this);
     }
 
     private IEnemyFactory GetRandomEnemyFactory()
@@ -432,10 +512,11 @@ public class GameState
         }
 
         var bullets = Map.Bullets.ToList();
+        var allEnemies = GetAllEnemies(Map.Enemies);
 
         foreach (var bullet in bullets)
         {
-            var enemyToAttack = Map.Enemies.FirstOrDefault(e => e.Id == bullet.EnemyId);
+            var enemyToAttack = allEnemies.FirstOrDefault(e => e.Id == bullet.EnemyId);
 
             if (enemyToAttack is not null)
             {

@@ -2,6 +2,7 @@
 using TowerDefense.Models.Enemies;
 using TowerDefense.Models.WeaponUpgrades;
 using TowerDefense.Enums;
+using TowerDefense.Interfaces;
 
 namespace TowerDefense.Models
 {
@@ -10,7 +11,7 @@ namespace TowerDefense.Models
         public int Width { get; private set; }
         public int Height { get; private set; }
         public List<Tower> Towers { get; set; } = [];
-        public List<Enemy> Enemies { get; set; } = [];
+        public List<IEnemyComponent> Enemies { get; set; } = [];
         public List<Bullet> Bullets { get; set; } = [];
         public MainObject MainObject { get; private set; }
         private Random _random = new Random();

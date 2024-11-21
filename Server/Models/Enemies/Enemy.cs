@@ -6,7 +6,7 @@ using TowerDefense.Interfaces;
 
 namespace TowerDefense.Models.Enemies
 {
-    public abstract class Enemy : Unit
+    public abstract class Enemy : Unit, IEnemyComponent
     {
         public Guid Id { get; set; }
         public int Health { get; set; }
@@ -183,6 +183,13 @@ namespace TowerDefense.Models.Enemies
             return IsAtFinalDestination;
         }
 
+        public void HandleDestination(MainObject mainObject, GameState gameState)
+        {
+            mainObject.DecreaseHealth(5);
+
+            gameState.HandleEnemyDeath(this);
+        }
+
         public void MoveTowardsNextWaypoint(GameState gameState)
         {
             UpdateScheduledEffects();
@@ -277,9 +284,18 @@ namespace TowerDefense.Models.Enemies
             }
         }
 
-        public void TakeDamage(int damage)
+        public void TakeDamage(int damage, GameState gameState)
         {
+            if (IsDead())
+            {             
+                return;
+            }
             Health -= damage;
+
+            if (IsDead())
+            {
+                gameState.HandleEnemyDeath(this); 
+            }
         }
 
         public bool IsDead() => Health <= 0;

@@ -9,7 +9,7 @@ namespace TowerDefense.Models.Enemies
 
         public FlyingEnemy(int x, int y) : base(x, y)
         {
-            Health = 25;
+            Health = 15;
             Speed = 2;
         }
 
