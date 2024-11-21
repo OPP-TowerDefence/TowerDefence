@@ -16,25 +16,23 @@ public class GameState
 
     private readonly List<TowerTypes> _availableTowerTypes;
     private readonly IHubContext<GameHub> _hubContext;
+    private readonly LevelProgressionFacade _levelFacade;
     private readonly Dictionary<string, LinkedList<ICommand>> _playerCommands = [];
     private readonly List<Player> _players;
     private readonly ResourceManager _resourceManager;
-    private readonly LevelProgressionFacade _levelFacade;
 
-    private int _enemiesSpawned = 0;
     private int _currentLevel = 1;
+    private int _enemiesSpawned = 0;
+    private event Action<int>? _onLevelChanged;
     private Random _random = new();
 
     public int EnemyCount { get; private set; } = 0;
     public bool GameStarted { get; private set; }
-
-
     public Map Map { get; } = new Map(100, 100);
-    public event Action<int>? OnLevelChanged;
-
     public List<Player> Players => _players;
-
     public string RoomCode { get; private set; }
+    public int TimeSinceLastSpawn { get; set; } = 0;
+    public int TimeSinceLastEnvironmentUpdate { get; set; } = 0;
 
     public GameState(IHubContext<GameHub> hubContext, string roomCode)
     {
@@ -49,7 +47,7 @@ public class GameState
 
         _levelFacade = new LevelProgressionFacade(Map.MainObject, Map.Enemies.ToList(), Map.Towers);
 
-        OnLevelChanged += NotifyLevelChange;
+        _onLevelChanged += NotifyLevelChange;
         RoomCode = roomCode;
 
     }
@@ -490,7 +488,7 @@ public class GameState
             _levelFacade.IncreaseLevel();
             _currentLevel = _levelFacade.GetCurrentLevel();
 
-            OnLevelChanged?.Invoke(_currentLevel);
+            _onLevelChanged?.Invoke(_currentLevel);
         }
     }
 

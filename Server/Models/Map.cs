@@ -7,25 +7,18 @@ namespace TowerDefense.Models
 {
     public class Map
     {
-        public int Height { get; private set; }
+        private readonly Dictionary<(int x, int y), int> _defenseMap = [];
+        private readonly Random _random = new();
 
-        public int Width { get; private set; }
-
-        public EnemyCollection Enemies { get; set; } = [];
-        
-        public List<Bullet> Bullets { get; set; } = [];
-
-        public List<List<PathPoint>> Paths { get; private set; } = [];
-
-        public List<Tower> Towers { get; set; } = [];
-
-        public MainObject MainObject { get; private set; }
-
-        private Dictionary<(int x, int y), int> _defenseMap = [];
-
-        private Random _random = new();
-        
         private PathPoint[,] _tiles;
+
+        public int Height { get; private set; }
+        public int Width { get; private set; }
+        public EnemyCollection Enemies { get; set; } = [];
+        public List<Bullet> Bullets { get; set; } = [];
+        public List<List<PathPoint>> Paths { get; private set; } = [];
+        public List<Tower> Towers { get; set; } = [];
+        public MainObject MainObject { get; private set; }
 
         public Map(int width, int height)
         {
@@ -51,11 +44,8 @@ namespace TowerDefense.Models
                         int x = turret.X + dx;
                         int y = turret.Y + dy;
 
-                        if (IsValidPosition(x, y))
+                        if (IsValidPosition(x, y) && GetTileType(x, y ) != TileType.Turret)
                         {
-                            if (GetTileType(x, y) == TileType.Turret)
-                                continue;
-
                             int distance = Math.Abs(dx) + Math.Abs(dy);
                             int defenseValue = maxRange - distance + 1;
 
@@ -81,6 +71,7 @@ namespace TowerDefense.Models
         private void InitializeTiles()
         {
             _tiles = new PathPoint[Width, Height];
+
             for (int x = 0; x < Width; x++)
             {
                 for (int y = 0; y < Height; y++)
@@ -130,18 +121,25 @@ namespace TowerDefense.Models
         {
             int objectiveX = Width - 1;
             int objectiveY = Height - 1;
+
             SetTileType(objectiveX, objectiveY, TileType.Objective);
+
             MainObject = new MainObject(objectiveX, objectiveY);
         }
 
         public void GenerateRandomPaths()
         {
             Paths.Clear();
+
             int startX = 0;
             int startY = 0;
-            PathPoint objective = GetObjectiveTile();
+            
+            var objective = GetObjectiveTile();
+            
             int sharedPathLength = Math.Min(10, Math.Abs(objective.X - startX) + Math.Abs(objective.Y - startY));
-            List<PathPoint> sharedPath = new List<PathPoint> { GetTile(startX, startY) };
+            
+            var sharedPath = new List<PathPoint> { GetTile(startX, startY) };
+            
             SetTileType(startX, startY, DetermineTileType());
 
             int currentX = startX;
@@ -149,21 +147,29 @@ namespace TowerDefense.Models
 
             for (int i = 1; i < sharedPathLength && (currentX != objective.X || currentY != objective.Y); i++)
             {
-                if (currentX < objective.X) currentX++;
-                else if (currentY < objective.Y) currentY++;
+                if (currentX < objective.X)
+                {
+                    currentX++;
+                }
+                else if (currentY < objective.Y)
+                {
+                    currentY++;
+                }
 
-                PathPoint sharedPoint = GetTile(currentX, currentY);
+                var sharedPoint = GetTile(currentX, currentY);
+
                 if (sharedPoint != null)
                 {
                     SetTileType(currentX, currentY, DetermineTileType());
+
                     sharedPath.Add(sharedPoint);
                 }
             }
 
             for (int i = 0; i < 4; i++)
             {
-                List<PathPoint> newPath = new List<PathPoint>(sharedPath);
-                List<PathPoint> randomPath = GenerateRandomPathToObjective(newPath.Last().X, newPath.Last().Y, objective.X, objective.Y);
+                var newPath = new List<PathPoint>(sharedPath);
+                var randomPath = GenerateRandomPathToObjective(newPath.Last().X, newPath.Last().Y, objective.X, objective.Y);
                 
                 foreach (var pathPoint in randomPath)
                 {
@@ -176,6 +182,7 @@ namespace TowerDefense.Models
                 {
                     newPath.Add(objective);
                 }
+
                 SetTileType(objective.X, objective.Y, TileType.Objective);
                 Paths.Add(newPath);
             }
