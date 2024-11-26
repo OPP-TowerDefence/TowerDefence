@@ -1,19 +1,45 @@
-﻿namespace TowerDefense.Models
+﻿using TowerDefense.Interfaces;
+using TowerDefense.Models.MainObjectStates;
+
+namespace TowerDefense.Models
 {
-    public class MainObject(int x, int y, int initialHealth = MainObject._maxHealth) : Unit(x, y)
+    public class MainObject : Unit
     {
+        public int Health { get; set; }
+
         private const int _maxHealth = 100;
+        private const string _stateGifBase = "http://localhost:7041/MainObject";
+        private IMainObjectState _state;
 
-        public int Health { get; private set; } = initialHealth;
-
-        public void DecreaseHealth(int amount)
+        public MainObject(int x, int y, int initialHealth = _maxHealth) : base(x, y)
         {
-            Health = Math.Max(0, Health - amount);
+            Health = initialHealth;
+            _state = new NormalState();
         }
 
-        public void IncreaseHealth(int amount)
+        public void ChangeState(IMainObjectState state)
         {
-            Health = Math.Min(Health + amount, _maxHealth);
+            _state = state;
+        }
+
+        public void DealDamage(int damage)
+        {
+            _state.DealDamage(this, damage);
+        }
+
+        public void Repair(int health)
+        {
+            _state.Repair(this, health);
+        }
+
+        public string GetStateGif()
+        {
+            return _stateGifBase + _state.GetStateGif();
+        }
+
+        public bool IsDestroyed()
+        {
+            return _state.IsDestroyed();
         }
     }
 }

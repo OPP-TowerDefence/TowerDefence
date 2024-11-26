@@ -39,7 +39,7 @@ async function joinRoom() {
         document.getElementById('loginForm').classList.add('hidden');
         document.getElementById('gameInterface').classList.remove('hidden');
         document.getElementById('resourcesDisplay').classList.remove('hidden');
-        document.getElementById('levelDisplay').classList.remove('hidden');
+        document.getElementById('display').classList.remove('hidden');
         document.getElementById('startButton').classList.remove('hidden');
 
         const roomInfo = document.getElementById('roomInfo');
@@ -71,7 +71,7 @@ function clearMap() {
     gameMap.innerHTML = '';
 }
 
-connection.on("InitializeMap", function (width, height, map, mapEnemies, newPaths) {
+connection.on("InitializeMap", function (width, height, map, mapEnemies, newPaths, mainObject, mapBullets) {
     mapWidth = width;
     mapHeight = height;
     paths = newPaths.flat();
@@ -82,13 +82,13 @@ connection.on("InitializeMap", function (width, height, map, mapEnemies, newPath
     gameMap.style.width = `${width * 10}px`;
     gameMap.style.height = `${height * 10}px`;
 
-    renderMap(map, mapEnemies);
+    renderMap(map, mapEnemies, mapBullets, mainObject);
 });
 
-connection.on("OnTick", function (map, mapEnemies, mapBullets, newPaths) {
+connection.on("OnTick", function (map, mapEnemies, mapBullets, newPaths, mainObject) {
     paths = newPaths.flat();
 
-    renderMap(map, mapEnemies, mapBullets);
+    renderMap(map, mapEnemies, mapBullets, mainObject);
 });
 
 connection.on("GameStarted", function (message) {
@@ -99,6 +99,57 @@ connection.on("GameStarted", function (message) {
 
     document.getElementById('startButton').classList.add('hidden');
     document.getElementById('gameMap').addEventListener('click', handleMapClick);
+});
+
+connection.on("OnGameOver", function (GameOverInfo) {
+    document.getElementById('roomInfo').classList.add('hidden');
+    document.getElementById('display').classList.add('hidden');
+    document.getElementById('resourcesDisplay').classList.add('hidden');
+    document.getElementById('activePlayersContainer').classList.add('hidden');
+
+    const towerSelectionBar = document.getElementById('towerSelectionBar');
+    towerSelectionBar.classList.add('hidden');
+    towerSelectionBar.style.display = 'none';
+    activeSelectionDiv.classList.remove('active');
+
+    document.getElementById('gameInterface').classList.add('hidden');
+
+    updateResources(0);
+    document.getElementById("levelDisplay").textContent = `Level: 1`;
+
+    document.getElementById("gameMap").innerHTML = '';
+    document.getElementById('messagesList').innerHTML = '';
+
+    document.getElementById('loginForm').classList.remove('hidden');
+
+    const gameOverDiv = document.createElement('div');
+    gameOverDiv.id = 'gameOverInfo';
+    gameOverDiv.className = 'game-over-info';
+
+    const header = document.createElement('h3');
+    header.textContent = 'Game Results';
+    gameOverDiv.appendChild(header);
+
+    const gameOverImage = document.createElement('img');
+    gameOverImage.src = GameOverInfo.path;
+    gameOverImage.style.width = '100%';
+    gameOverImage.alt = 'Game Over Image';
+
+    const gameOverText = document.createElement('p');
+    gameOverText.innerHTML = `Health: ${GameOverInfo.health}<br>Level: ${GameOverInfo.level}<br>Resources: ${GameOverInfo.resources}`;
+    gameOverText.style.marginTop = '20px';
+
+    gameOverDiv.appendChild(gameOverImage);
+    gameOverDiv.appendChild(gameOverText);
+
+    document.body.appendChild(gameOverDiv);
+
+    document.addEventListener('click', function(event) {
+        if (!gameOverDiv.contains(event.target)) {
+            gameOverDiv.remove();
+            document.removeEventListener('click', arguments.callee);
+        }
+    });
 });
 
 connection.on("UserJoined", function (username, players) {
@@ -138,7 +189,7 @@ function updateActiveUsersList(players) {
     });
 }
 
-function renderMap(map, mapEnemies, mapBullets) {
+function renderMap(map, mapEnemies, mapBullets, mainObject) {
     const gameMap = document.getElementById('gameMap');
     gameMap.innerHTML = '';
 
@@ -186,6 +237,20 @@ function renderMap(map, mapEnemies, mapBullets) {
         bulletImage.style.height = '100%';
         bulletElement.appendChild(bulletImage);
     });
+
+    const mainObjectFunction = (mainObject) => {
+        const mainObjectHealth = document.getElementById('healthDisplay');
+        mainObjectHealth.textContent = `Health: ${mainObject.health}`;
+
+        const mainObjectElement = document.getElementById('mainObject');
+        mainObjectElement.innerHTML = '';
+
+        const mainObjectImage = document.createElement('img');
+        mainObjectImage.src = mainObject.path;
+        mainObjectElement.appendChild(mainObjectImage);
+    };
+
+    mainObjectFunction(mainObject);
 }
 
 function renderPathTile(point) {

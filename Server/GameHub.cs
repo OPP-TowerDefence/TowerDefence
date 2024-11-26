@@ -33,7 +33,7 @@ namespace TowerDefense
 
             gameState.AddPlayer(username, Context.ConnectionId);
 
-            await Clients.Caller.SendAsync("InitializeMap", gameState.Map.Width, gameState.Map.Height, gameState.GetMapTowers(), gameState.GetMapEnemies(), gameState.SendPath());
+            await Clients.Caller.SendAsync("InitializeMap", gameState.Map.Width, gameState.Map.Height, gameState.GetMapTowers(), gameState.GetMapEnemies(), gameState.SendPath(), gameState.GetMainObject(), gameState.GetMapBullets());
 
             _logger.LogInfo($"Player {username} with connection ID {Context.ConnectionId} has joined room {roomCode}.");
 

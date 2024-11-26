@@ -105,11 +105,45 @@ input, button {
     background-color: #ffffff;
     border: 2px solid #000;
     border-radius: 5px;
-    font-size: 18px;
-    padding: 10px;
+    padding: 15px;
     position: absolute;
     left: 10px;
     bottom: 10px;
+}
+
+.bottom-left .levelDisplay {
+    font-size: 14px;
+    margin-top: 5px;
+    text-align: center;
+}
+
+.bottom-left .mainObject {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.bottom-left .healthDisplay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 5px;
+}
+
+.bottom-left .h3 {
+    font-size: 100px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.bottom-left .mainObject img {
+    width: 100px;
+    height: auto;
+    border-radius: 5px;
+    margin-left: 5px;
 }
 
 .top-right {
@@ -149,3 +183,22 @@ input, button {
     transform: translateX(-50%);
     justify-content: space-around;
 }
+
+.game-over-info {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    font-size: 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    z-index: 1001;
+    border-radius: 10px;
+    max-width: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+

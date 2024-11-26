@@ -33,5 +33,10 @@ namespace TowerDefense.Utils
                 observer.OnResourceChanged(_resources);
             }
         }
+
+        public int GetResources()
+        {
+            return _resources;
+        }
     }
 }
