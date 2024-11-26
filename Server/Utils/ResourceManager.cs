@@ -1,4 +1,5 @@
 ﻿using TowerDefense.Interfaces;
+using TowerDefense.Models;
 using TowerDefense.Models.Enemies;
 
 namespace TowerDefense.Utils
@@ -22,6 +23,13 @@ namespace TowerDefense.Utils
         public void OnEnemyDeath(Enemy enemy)
         {
             _resources += enemy.RewardValue;
+
+            NotifyResourceChanged();
+        }
+
+        public void OnMainObjectGenerated(MainObject mainObject)
+        {
+            _resources += mainObject.GenerateResources();
 
             NotifyResourceChanged();
         }

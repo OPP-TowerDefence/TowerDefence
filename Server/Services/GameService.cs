@@ -65,6 +65,7 @@ public class GameService
                     _timeSinceLastEnvironmentUpdate = 0;
                 }
 
+                room.GenerateResources();
                 room.UpdateEnemies();
                 room.TowerAttack();
 

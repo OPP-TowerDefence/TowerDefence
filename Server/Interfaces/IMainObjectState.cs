@@ -8,5 +8,6 @@ namespace TowerDefense.Interfaces
         void Repair(MainObject mainobject, int heal);
         bool IsDestroyed();
         string GetStateGif();
+        int GenerateResources();
     }
 }

@@ -41,5 +41,10 @@ namespace TowerDefense.Models
         {
             return _state.IsDestroyed();
         }
+
+        public int GenerateResources()
+        {
+            return _state.GenerateResources();
+        }
     }
 }

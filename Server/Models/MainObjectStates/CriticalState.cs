@@ -1,4 +1,5 @@
-﻿using TowerDefense.Interfaces;
+﻿using System.Diagnostics.Metrics;
+using TowerDefense.Interfaces;
 
 namespace TowerDefense.Models.MainObjectStates
 {
@@ -45,7 +46,11 @@ namespace TowerDefense.Models.MainObjectStates
                 default:
                     break;
             }
+        }
 
+        public int GenerateResources()
+        {
+            return 0;
         }
     }
 }

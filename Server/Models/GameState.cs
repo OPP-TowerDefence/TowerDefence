@@ -547,4 +547,9 @@ public class GameState
             }
         }
     }
+
+    public void GenerateResources()
+    {
+        _resourceManager.OnMainObjectGenerated(Map.MainObject);
+    }
 }

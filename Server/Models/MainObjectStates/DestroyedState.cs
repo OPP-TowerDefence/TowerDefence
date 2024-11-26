@@ -11,6 +11,11 @@ namespace TowerDefense.Models.MainObjectStates
             return;
         }
 
+        public int GenerateResources()
+        {
+            return 0;
+        }
+
         public string GetStateGif()
         {
             return "/destroyed.gif";

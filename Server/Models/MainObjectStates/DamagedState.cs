@@ -5,6 +5,9 @@ namespace TowerDefense.Models.MainObjectStates
     public class DamagedState : IMainObjectState
     {
         public static readonly int MinHealth = 30;
+        private int resourceGenerationRate = 30;
+        private int counter = 0;
+        private const int resource = 5;
 
         public void DealDamage(MainObject mainobject, int damage)
         {
@@ -41,6 +44,18 @@ namespace TowerDefense.Models.MainObjectStates
             {
                 mainobject.ChangeState(new NormalState());
             }
+        }
+
+        public int GenerateResources()
+        {
+            counter++;
+
+            if (counter == resourceGenerationRate)
+            {
+                counter = 0;
+                return resource;
+            }
+            return 0;
         }
     }
 }
