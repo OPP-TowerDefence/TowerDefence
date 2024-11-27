@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="347b523a-638e-4661-9e9a-806be6cc4fdb" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Server/Interfaces/IMainObjectState.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Server/Models/MainObjectStates/CriticalState.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Server/Models/MainObjectStates/DamagedState.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Server/Models/MainObjectStates/DestroyedState.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Server/Models/MainObjectStates/NormalState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/site.js" beforeDir="false" afterPath="$PROJECT_DIR$/site.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stylesheet.css" beforeDir="false" afterPath="$PROJECT_DIR$/stylesheet.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Server/Models/Enemies/Enemy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Server/Models/Enemies/Enemy.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Server/Models/GameState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Server/Models/GameState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Server/Models/MainObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Server/Models/MainObject.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Server/Services/GameService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Server/Services/GameService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Server/Utils/LevelProgressionFacade.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Server/Utils/LevelProgressionFacade.cs" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 0
+}</component>
+  <component name="ProjectId" id="2p4olaYNCGUVSw49B5XQxAQlu0z" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Node.js.site.js.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "State",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-WS-242.23726.96" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="347b523a-638e-4661-9e9a-806be6cc4fdb" name="Changes" comment="" />
+      <created>1732034867696</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1732034867696</updated>
+      <workItem from="1732034870041" duration="6498000" />
+      <workItem from="1732201605823" duration="235000" />
+      <workItem from="1732638503467" duration="9004000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

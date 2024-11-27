@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using System.Collections.Concurrent;
 using System.Timers;
+using TowerDefense.Models;
 using TowerDefense.Models.Collections;
 using TowerDefense.Utils;
 
@@ -41,6 +42,17 @@ public class GameService
         {
             try
             {
+                if(room.Map.MainObject.IsDestroyed())
+                {                   
+                    await _hubContext.Clients
+                        .Group(room.RoomCode)
+                        .SendAsync("OnGameOver", room.GetGameOverInfo());
+
+                    DestroyRoom(room.RoomCode, room);
+
+                    continue;
+                }
+
                 if (_timeSinceLastSpawn >= _spawnInterval)
                 {
                     room.SpawnEnemies();
@@ -53,17 +65,23 @@ public class GameService
                     _timeSinceLastEnvironmentUpdate = 0;
                 }
 
+                room.GenerateResources();
                 room.UpdateEnemies();
                 room.TowerAttack();
 
                 await _hubContext.Clients
                     .Group(room.RoomCode)
-                    .SendAsync("OnTick", room.GetMapTowers(), room.GetMapEnemies(), room.GetMapBullets(), room.SendPath());
+                    .SendAsync("OnTick", room.GetMapTowers(), room.GetMapEnemies(), room.GetMapBullets(), room.SendPath(), room.GetMainObject());
             }
             catch (Exception ex)
             {
                 Logger.Instance.LogException(ex);
             }
         }
+    }
+
+    private void DestroyRoom(string roomCode, GameState? gameState)
+    {
+        _rooms.Remove(roomCode, out gameState);
     }
 }

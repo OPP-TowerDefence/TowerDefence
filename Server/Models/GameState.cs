@@ -99,6 +99,20 @@ public class GameState
             .ToList();
     }
 
+    public object GetMainObject()
+    {
+        MainObject mainObject = Map.MainObject;
+
+        return new
+        {
+            mainObject.X,
+            mainObject.Y,
+            mainObject.Health,
+            IsDestroyed = mainObject.IsDestroyed(),
+            Path = mainObject.GetStateGif()
+        };
+    }
+
     public object GetMapEnemies()
     {
         return Map.Enemies
@@ -125,6 +139,17 @@ public class GameState
                 AppliedUpgrades = t.AppliedUpgrades.Select(u => u.ToString()).ToList()
             })
             .ToList();
+    }
+
+    public object GetGameOverInfo()
+    {
+        return new
+        {
+            Path = Map.MainObject.GetStateGif(),
+            Health = Map.MainObject.Health,
+            Level = _currentLevel,
+            Resources = _resourceManager.GetResources()
+        };
     }
 
     public void HandleEnemyDeath(Enemy enemy)
@@ -521,5 +546,10 @@ public class GameState
                 Map.Bullets.Remove(bullet);
             }
         }
+    }
+
+    public void GenerateResources()
+    {
+        _resourceManager.OnMainObjectGenerated(Map.MainObject);
     }
 }

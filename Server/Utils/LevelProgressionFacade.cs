@@ -40,7 +40,7 @@ namespace TowerDefense.Utils
                 tower.Weapon.IncreaseSpeed(TowerSpeedIncrease);
             }
 
-            _mainObject.IncreaseHealth(HealthIncreasePerLevel);
+            _mainObject.Repair(HealthIncreasePerLevel);
         }
 
         public void ApplyBuffToNewEnemy(Enemy enemy)

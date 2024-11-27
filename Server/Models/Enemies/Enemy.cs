@@ -23,6 +23,7 @@ namespace TowerDefense.Models.Enemies
         public abstract EnemyTypes Type { get; }
         const int lowHealthThreshold = 20;
         const int closeDistanceThreshold = 15;
+        const int defaultDamage = 2;
         public List<(ITileEffect effect, int turnsRemaining)> _scheduledEffects = new List<(ITileEffect, int)>();
 
         public Enemy(int x, int y) : base(x, y)
@@ -186,7 +187,7 @@ namespace TowerDefense.Models.Enemies
 
         public void HandleDestination(MainObject mainObject, GameState gameState)
         {
-            mainObject.DecreaseHealth(5);
+            mainObject.DealDamage(defaultDamage);
 
             gameState.HandleEnemyDeath(this);
         }

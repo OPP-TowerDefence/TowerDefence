@@ -1,4 +1,5 @@
 ﻿using TowerDefense.Interfaces;
+using TowerDefense.Models;
 using TowerDefense.Models.Enemies;
 
 namespace TowerDefense.Utils
@@ -26,12 +27,24 @@ namespace TowerDefense.Utils
             NotifyResourceChanged();
         }
 
+        public void OnMainObjectGenerated(MainObject mainObject)
+        {
+            _resources += mainObject.GenerateResources();
+
+            NotifyResourceChanged();
+        }
+
         private void NotifyResourceChanged()
         {
             foreach (var observer in _observers)
             {
                 observer.OnResourceChanged(_resources);
             }
+        }
+
+        public int GetResources()
+        {
+            return _resources;
         }
     }
 }
