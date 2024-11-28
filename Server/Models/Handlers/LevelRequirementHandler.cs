@@ -26,11 +26,9 @@ namespace TowerDefense.Models.Handlers
 
             if (currentLevel < requiredLevel)
             {
-                Logger.Instance.LogError($"The current game level is too low for the {requestedUpgrade} upgrade. Required level: {requiredLevel}, Current level: {currentLevel}.");
                 return;
             }
 
-            Logger.Instance.LogInfo($"Level requirement check passed for {requestedUpgrade}. Required level: {requiredLevel}, Current level: {currentLevel}.");
             HandleNext(tower, requestedUpgrade);
         }
     }

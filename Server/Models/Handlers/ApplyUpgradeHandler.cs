@@ -18,8 +18,6 @@ namespace TowerDefense.Models.Handlers
             };
 
             tower.AppliedUpgrades.Add(requestedUpgrade);
-
-            Logger.Instance.LogInfo($"Upgrade {requestedUpgrade} successfully applied to tower at position ({tower.X},{tower.Y}).");
         }
     }
 }

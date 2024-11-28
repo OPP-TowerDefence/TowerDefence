@@ -24,11 +24,9 @@ namespace TowerDefense.Models.Handlers
 
             if (!_resourceManager.DeductResources(upgradeCost))
             {
-                Logger.Instance.LogError($"Not enough shared resources to apply the {requestedUpgrade} upgrade (Cost: {upgradeCost}).");
                 return;
             }
 
-            Logger.Instance.LogInfo($"Resources check passed for upgrade {requestedUpgrade} (Cost: {upgradeCost}).");
             HandleNext(tower, requestedUpgrade);
         }
     }

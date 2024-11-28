@@ -10,11 +10,9 @@ namespace TowerDefense.Models.Handlers
         {
             if (tower.AppliedUpgrades.Contains(requestedUpgrade))
             {
-                Logger.Instance.LogError($"Tower at position ({tower.X},{tower.Y}) already has the {requestedUpgrade} upgrade.");
                 return;
             }
 
-            Logger.Instance.LogInfo($"Upgrade availability check passed for {requestedUpgrade}.");
             HandleNext(tower, requestedUpgrade);
         }
     }
