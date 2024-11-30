@@ -370,22 +370,8 @@ public class GameState
             return;
         }
 
-        if (tower.AppliedUpgrades.Contains(towerUpgrade))
-        {
-            Logger.Instance.LogError($"Tower at position ({x},{y}) already has upgrade {towerUpgrade}.");
-
-            return;
-        }
-
-        tower.Weapon = towerUpgrade switch
-        {
-            TowerUpgrades.Burst => new Burst(tower.Weapon),
-            TowerUpgrades.DoubleDamage => new DoubleDamage(tower.Weapon),
-            TowerUpgrades.DoubleBullet => new DoubleBullet(tower.Weapon),
-            _ => throw new Exception("Unknown tower upgrade")
-        };
-
-        tower.AppliedUpgrades.Add(towerUpgrade);
+        var upgradeProcessor = new UpgradeProcessor(_resourceManager, _levelFacade);
+        upgradeProcessor.Process(tower, towerUpgrade);
     }
 
     private Enemy CreateAndInitializeEnemy(int offsetX, int offsetY)

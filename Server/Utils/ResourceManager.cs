@@ -15,6 +15,18 @@ namespace TowerDefense.Utils
             _observers.Add(observer);
         }
 
+        public bool DeductResources(int amount)
+        {
+            if (_resources >= amount)
+            {
+                _resources -= amount;
+                NotifyResourceChanged();
+                return true;
+            }
+
+            return false;
+        }
+
         public void Detach(IResourceObserver observer)
         {
             _observers.Remove(observer);

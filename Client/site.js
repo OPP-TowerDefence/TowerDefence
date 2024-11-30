@@ -17,6 +17,12 @@ const upgradeMap = {
     'DoubleBullet': 2
 };
 
+const upgradeCosts = {
+    Burst: 30,
+    DoubleBullet: 60, 
+    DoubleDamage: 90
+};
+
 const enemyTypes = {
     STRONG: "Strong",
     FLYING: "Flying",
@@ -392,7 +398,7 @@ function showUpgradeOptions(gridX, gridY, appliedUpgrades) {
     upgradeDiv.className = 'upgrade-options';
     upgradeDiv.innerHTML = '<h2>Upgrade</h2>';
     
-    const allUpgrades = ['DoubleDamage', 'Burst', 'DoubleBullet'];
+    const allUpgrades = Object.keys(upgradeCosts);
     const availableUpgrades = allUpgrades.filter(upgrade => !appliedUpgrades.includes(upgrade));
 
     if (availableUpgrades.length === 0) {
@@ -405,7 +411,7 @@ function showUpgradeOptions(gridX, gridY, appliedUpgrades) {
             const upgradeButton = document.createElement('button');
             upgradeButton.className = 'upgrade-button';
 
-            upgradeButton.textContent = upgrade.replace(/([A-Z])/g, ' $1').trim();
+            upgradeButton.textContent = `${upgrade.replace(/([A-Z])/g, ' $1').trim()} (Cost: ${upgradeCosts[upgrade]})`;
 
             upgradeButton.onclick = function() {
                 const upgradeType = upgradeMap[upgrade];
