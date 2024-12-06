@@ -6,6 +6,8 @@ using TowerDefense.Models.Enemies;
 using TowerDefense.Models.WeaponUpgrades;
 using TowerDefense.Utils;
 using TowerDefense.Models.Strategies;
+using TowerDefense.Interfaces.Visitor;
+using TowerDefense.Visitors;
 
 namespace TowerDefense.Models;
 
@@ -19,12 +21,16 @@ public class GameState
     private readonly LevelProgressionFacade _levelFacade;
     private readonly Dictionary<string, LinkedList<ICommand>> _playerCommands = [];
     private readonly List<Player> _players;
+    private readonly Random _random = new();
     private readonly ResourceManager _resourceManager;
 
     private int _currentLevel = 1;
     private int _enemiesSpawned = 0;
     private event Action<int>? _onLevelChanged;
-    private Random _random = new();
+
+    public Queue<Effect> EffectsToApply { get; set; } = [];
+
+    public IList<Effect> EffectsToReverse { get; set; } = [];
 
     public int EnemyCount { get; private set; } = 0;
     public bool GameStarted { get; private set; }
@@ -74,6 +80,57 @@ public class GameState
                 Logger.Instance.LogError($"Player {username} could not be added. No available tower types left to assign to a new player.");
             }
         }
+    }
+
+    public bool ApplyEffects()
+    {
+        if (EffectsToApply.Count == 0)
+        {
+            return false;
+        }
+
+        while (EffectsToApply.Count > 0)
+        {
+            var effect = EffectsToApply.Dequeue();
+
+            ApplyEffect(effect.Applicator);
+
+            NotifyEffectApplied(effect.Applicator);
+            Logger.Instance.LogInfo($"Effect {effect.Applicator} applied.");
+
+            EffectsToReverse.Add(effect);
+        }
+
+        return true;
+    }
+
+    public void ReverseEffects()
+    {
+        if (EffectsToReverse.Count == 0)
+        {
+            return;
+        }
+
+        var effectsEnded = new List<Effect>();
+
+        foreach (var effect in EffectsToReverse)
+        {
+            effect.DurationInTicks--;
+
+            if (effect.DurationInTicks <= 0)
+            {
+                ApplyEffect(effect.Reverser);
+
+                NotifyEffectEnded(effect.Applicator);
+                effectsEnded.Add(effect);
+
+                Logger.Instance.LogInfo($"Effect {effect.Applicator} has ended.");
+            }
+        }
+
+        EffectsToReverse = EffectsToReverse
+            .Except(effectsEnded)
+            .ToList();
     }
 
     public IEnumerable<object> GetActivePlayers()
@@ -374,6 +431,21 @@ public class GameState
         upgradeProcessor.Process(tower, towerUpgrade);
     }
 
+    private void ApplyEffect(IEffectVisitor effectVisitor)
+    {
+        foreach (var enemy in Map.Enemies)
+        {
+            enemy.Accept(effectVisitor);
+        }
+
+        foreach (var tower in Map.Towers)
+        {
+            tower.Accept(effectVisitor);
+        }
+
+        Map.MainObject.Accept(effectVisitor);
+    }
+
     private Enemy CreateAndInitializeEnemy(int offsetX, int offsetY)
     {
         var enemy = GetRandomEnemyFactory().CreateEnemy(offsetX, offsetY);
@@ -414,24 +486,6 @@ public class GameState
             return _random.Next(0, 3);
         }
     }
-
-    //private IEnumerable<Enemy> GetAllEnemies(IEnumerable<IEnemyComponent> components)
-    //{
-    //    foreach (var component in components)
-    //    {
-    //        if (component is Enemy enemy)
-    //        {
-    //            yield return enemy;
-    //        }
-    //        else if (component is EnemyGroup group)
-    //        {
-    //            foreach (var subEnemy in GetAllEnemies(group.Children))
-    //            {
-    //                yield return subEnemy;
-    //            }
-    //        }
-    //    }
-    //}
 
     private List<(int X, int Y)> GetGroupOffsets(int groupSize)
     {
@@ -474,6 +528,40 @@ public class GameState
             .SendAsync("LevelChanged", newLevel);
     }
 
+    private void NotifyEffectApplied(IEffectVisitor effect)
+    {
+        var messageObjects = new List<object>
+        {
+            effect.EffectType.ToString()
+        };
+
+        if (effect is EnvironmentalHazardVisitor environmentalHazard)
+        {
+            messageObjects.Add(environmentalHazard.EnvironmentType.ToString());
+        }
+
+        _hubContext.Clients
+            .Group(RoomCode)
+            .SendAsync("EffectApplied", messageObjects);
+    }
+
+    private void NotifyEffectEnded(IEffectVisitor effect)
+    {
+        var messageObjects = new List<object>
+        {
+            effect.EffectType.ToString()
+        };
+
+        if (effect is EnvironmentalHazardVisitor environmentalHazard)
+        {
+            messageObjects.Add(environmentalHazard.EnvironmentType.ToString());
+        }
+
+        _hubContext.Clients
+            .Group(RoomCode)
+            .SendAsync("EffectEnded", messageObjects);
+    }
+
     private void NotifyShadowEnemies(StrongEnemy newStrongEnemy)
     {
         foreach (var shadowEnemy in Map.Enemies.OfType<Enemy>().Where(e => e.CurrentStrategy is ShadowStrategy))
@@ -498,6 +586,13 @@ public class GameState
         {
             _levelFacade.IncreaseLevel();
             _currentLevel = _levelFacade.GetCurrentLevel();
+
+            var effectsToApply = EffectResolver.GetEffects(_currentLevel);
+
+            foreach(var effect in effectsToApply)
+            {
+                EffectsToApply.Enqueue(effect);
+            }
 
             _onLevelChanged?.Invoke(_currentLevel);
         }

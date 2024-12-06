@@ -1,35 +1,44 @@
 ﻿using TowerDefense.Enums;
 using TowerDefense.Models.Towers;
-using TowerDefense.Utils;
 using TowerDefense.Models.Strategies;
 using TowerDefense.Interfaces;
 using System.Collections;
+using TowerDefense.Interfaces.Visitor;
 
 namespace TowerDefense.Models.Enemies
 {
-    public abstract class Enemy : Unit, IEnemyComponent
+    public abstract class Enemy : Unit, IEnemyComponent, IVisitable
     {
+        protected int _currentSpeedModifier = 0;
+        protected int _modifierDuration = 0;
+        protected (int x, int y) _lastTilePosition;
+
+        private const int _lowHealthThreshold = 20;
+        private const int _closeDistanceThreshold = 15;
+        private const int _defaultDamage = 2;
+
+        private bool IsAtFinalDestination { get; set; } = false;
+
         public Guid Id { get; set; }
         public int Health { get; set; }
         public int RewardValue { get; set; } = 10;
         public int Speed { get; set; }
         public Queue<PathPoint> Path { get; set; }
-        protected int _currentSpeedModifier = 0;
-        protected int _modifierDuration = 0;
-        protected (int x, int y) _lastTilePosition;
-        private bool IsAtFinalDestination { get; set; } = false;
         public IPathStrategy CurrentStrategy { get; private set; }
         public bool IsShadowEnemy { get; private set; } = false;
         public abstract EnemyTypes Type { get; }
-        const int lowHealthThreshold = 20;
-        const int closeDistanceThreshold = 15;
-        const int defaultDamage = 2;
-        public List<(ITileEffect effect, int turnsRemaining)> _scheduledEffects = new List<(ITileEffect, int)>();
+
+        public List<(ITileEffect effect, int turnsRemaining)> _scheduledEffects = [];
 
         public Enemy(int x, int y) : base(x, y)
         {
             Id = Guid.NewGuid();
             _lastTilePosition = (x, y);
+        }
+
+        public void Accept(IEffectVisitor visitor)
+        {
+            visitor.Visit(this);
         }
 
         public void SetInitialStrategy(IPathStrategy strategy)
@@ -155,12 +164,12 @@ namespace TowerDefense.Models.Enemies
 
         private bool IsCloseToObjective(PathPoint objective)
         {
-            return CalculateManhattanDistance(X, Y, objective.X, objective.Y) <= closeDistanceThreshold;
+            return CalculateManhattanDistance(X, Y, objective.X, objective.Y) <= _closeDistanceThreshold;
         }
 
         private bool IsHealthLow()
         {
-            return Health < lowHealthThreshold;
+            return Health < _lowHealthThreshold;
         }
 
         private bool IsInTurretRange(List<Tower> towers)
@@ -187,7 +196,7 @@ namespace TowerDefense.Models.Enemies
 
         public void HandleDestination(MainObject mainObject, GameState gameState)
         {
-            mainObject.DealDamage(defaultDamage);
+            mainObject.DealDamage(_defaultDamage);
 
             gameState.HandleEnemyDeath(this);
         }

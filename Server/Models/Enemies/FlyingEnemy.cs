@@ -10,7 +10,7 @@ namespace TowerDefense.Models.Enemies
         public FlyingEnemy(int x, int y) : base(x, y)
         {
             Health = 15;
-            Speed = 2;
+            Speed = 3;
         }
 
         public FlyingEnemy ShallowClone()
