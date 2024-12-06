@@ -10,7 +10,7 @@ namespace TowerDefense.Models.Enemies
         public FastEnemy(int x, int y) : base(x, y)
         {
             Health = 10;
-            Speed = 3;
+            Speed = 4;
         }
         public FastEnemy ShallowClone()
         {

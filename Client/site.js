@@ -206,8 +206,6 @@ function renderMap(map, mapEnemies, mapBullets, mainObject) {
         cell.classList.add(tower.category.toLowerCase());
         cell.dataset.appliedUpgrades = JSON.stringify(tower.appliedUpgrades);
         gameMap.appendChild(cell);
-        console.log(`Rendering tower at coordinates: (${tower.x}, ${tower.y})`);
-
 
         cell.style.gridColumnStart = tower.x + 1;
         cell.style.gridRowStart = tower.y + 1;
@@ -435,6 +433,59 @@ function showUpgradeOptions(gridX, gridY, appliedUpgrades) {
 function updateResources(resources) {
     document.getElementById('resourcesDisplay').textContent = `Resources: ${resources}`;
 }
+
+connection.on("EffectApplied", function (messageObjects) {
+    const [effectType, environmentType] = messageObjects;
+
+    console.log('effectApplied', effectType, environmentType);
+
+    const messageList = document.getElementById('messagesList');
+    const listItem = document.createElement('li');
+    listItem.textContent = `Effect of type ${effectType} has been applied!`;
+    messageList.appendChild(listItem);
+
+    if (environmentType) {
+        highlightPlayersWithMatchingTowerType(environmentType, "applied");
+    }
+});
+
+connection.on("EffectEnded", function (messageObjects) {
+    const [effectType, environmentType] = messageObjects;
+
+    console.log('effectEnded', effectType, environmentType);
+
+    const messageList = document.getElementById('messagesList');
+    const listItem = document.createElement('li');
+    listItem.textContent = `Effect of type ${effectType} has ended.`;
+    messageList.appendChild(listItem);
+
+    if (environmentType) {
+        highlightPlayersWithMatchingTowerType(environmentType, "ended");
+    }
+});
+
+function highlightPlayersWithMatchingTowerType(environmentType, status) {
+    const activeUsersList = document.getElementById('activeUsersList');
+
+    [...activeUsersList.children].forEach((userItem) => {
+        const [username, towerType] = userItem.textContent.split(" - ");
+
+        const towerTypeCleared = towerType
+            .replace(/\s*\(.*\)$/, "")
+            .trim();
+
+        if (towerTypeCleared.trim().toLowerCase() === environmentType.toLowerCase()) {
+            if (status === "applied") {
+                userItem.classList.add('highlight-effect');
+                userItem.textContent = `${username} - ${towerTypeCleared} (buffed)`;
+            } else if (status === "ended") {
+                userItem.classList.remove('highlight-effect');
+                userItem.textContent = `${username} - ${towerTypeCleared}`;
+            }
+        }
+    });
+}
+
 
 connection.start().catch(function (err) {
     console.error(err.toString());

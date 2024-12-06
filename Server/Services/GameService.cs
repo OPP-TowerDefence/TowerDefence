@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.SignalR;
-using System.Collections.Concurrent;
 using System.Timers;
 using TowerDefense.Models;
 using TowerDefense.Models.Collections;
@@ -42,7 +41,7 @@ public class GameService
         {
             try
             {
-                if(room.Map.MainObject.IsDestroyed())
+                if (room.Map.MainObject.IsDestroyed())
                 {                   
                     await _hubContext.Clients
                         .Group(room.RoomCode)
@@ -65,6 +64,8 @@ public class GameService
                     _timeSinceLastEnvironmentUpdate = 0;
                 }
 
+                room.ReverseEffects();
+                room.ApplyEffects();
                 room.GenerateResources();
                 room.UpdateEnemies();
                 room.TowerAttack();

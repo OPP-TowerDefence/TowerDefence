@@ -1,9 +1,10 @@
 ﻿using TowerDefense.Interfaces;
+using TowerDefense.Interfaces.Visitor;
 using TowerDefense.Models.MainObjectStates;
 
 namespace TowerDefense.Models
 {
-    public class MainObject : Unit
+    public class MainObject : Unit, IVisitable
     {
         public int Health { get; set; }
 
@@ -15,6 +16,11 @@ namespace TowerDefense.Models
         {
             Health = initialHealth;
             _state = new NormalState();
+        }
+
+        public void Accept(IEffectVisitor visitor)
+        {
+            visitor.Visit(this);
         }
 
         public void ChangeState(IMainObjectState state)

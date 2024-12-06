@@ -1,10 +1,11 @@
 ﻿using TowerDefense.Enums;
 using TowerDefense.Interfaces;
+using TowerDefense.Interfaces.Visitor;
 using TowerDefense.Models.Enemies;
 using TowerDefense.Models.WeaponUpgrades;
 
 namespace TowerDefense.Models.Towers;
-public abstract class Tower : Unit
+public abstract class Tower : Unit, IVisitable
 {
     public int Cost { get; set; }
     public IWeapon Weapon { get; set; }
@@ -19,6 +20,11 @@ public abstract class Tower : Unit
     {
         TicksSinceLastShot = 0;
         AppliedUpgrades = new List<TowerUpgrades>();
+    }
+
+    public void Accept(IEffectVisitor visitor)
+    {
+        visitor.Visit(this);
     }
 
     public List<Bullet> Shoot(List<Enemy> enemies)
