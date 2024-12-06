@@ -115,9 +115,9 @@ public class GameState
 
         foreach (var effect in EffectsToReverse)
         {
-            effect.DurationInTicks--;
+            effect.TicksToEnd--;
 
-            if (effect.DurationInTicks <= 0)
+            if (effect.TicksToEnd <= 0)
             {
                 ApplyEffect(effect.Reverser);
 

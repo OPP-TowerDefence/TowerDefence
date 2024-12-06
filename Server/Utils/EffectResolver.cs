@@ -18,8 +18,8 @@ namespace TowerDefense.Utils
                 effects.Add(new Effect
                 {
                     Applicator = new PowerSurgeVisitor(),
-                    DurationInTicks = Visitor.PowerSurge.DurationInTicks,
-                    Reverser = new PowerSurgeReversalVisitor()
+                    Reverser = new PowerSurgeReversalVisitor(),
+                    TicksToEnd = Visitor.PowerSurge.DurationInTicks
                 });
             }
 
@@ -35,8 +35,8 @@ namespace TowerDefense.Utils
                 effects.Add(new Effect
                 {
                     Applicator = new EnvironmentalHazardVisitor(effectType),
-                    DurationInTicks = Visitor.Environmental.DurationInTicks,
-                    Reverser = new EnvironmentalHazardReversalVisitor(effectType)
+                    Reverser = new EnvironmentalHazardReversalVisitor(effectType),
+                    TicksToEnd = Visitor.Environmental.DurationInTicks
                 });
             }
 

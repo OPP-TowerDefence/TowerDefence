@@ -8,6 +8,6 @@ namespace TowerDefense.Models
 
         public required IEffectVisitor Reverser { get; set; }
 
-        public required int DurationInTicks { get; set; }
+        public required int TicksToEnd { get; set; }
     }
 }
