@@ -51,7 +51,7 @@ public class GameState
             .Cast<TowerTypes>()
             .ToList();
 
-        _levelFacade = new LevelProgressionFacade(Map.MainObject, Map.Enemies.ToList(), Map.Towers);
+        _levelFacade = new LevelProgressionFacade(Map.MainObject, Map.Enemies.ToList(), Map.TowerManager.Towers);
 
         _onLevelChanged += NotifyLevelChange;
         RoomCode = roomCode;
@@ -186,7 +186,7 @@ public class GameState
 
     public object GetMapTowers()
     {
-        return Map.Towers
+        return Map.TowerManager.Towers
             .Select(t => new
             {
                 t.X,
@@ -218,7 +218,8 @@ public class GameState
 
     public void PlaceTower(int x, int y, TowerCategories towerCategory, Player player)
     {
-        var tower = player.CreateTower(x, y, towerCategory);
+        var tower = Map.TowerManager.BuyTower(x, y, towerCategory, player);
+
         var command = new PlaceTowerCommand(this.Map, tower, _levelFacade);
         ProcessCommand(command, player.ConnectionId);
         Map.UpdateDefenseMap();
@@ -325,14 +326,14 @@ public class GameState
 
     public void TowerAttack()
     {
-        if (Map.Enemies.Count == 0 || Map.Towers.Count == 0)
+        if (Map.Enemies.Count == 0 || Map.TowerManager.Towers.Count == 0)
         {
             return;
         }
 
         UpdateBulletPositions();
 
-        foreach (var tower in Map.Towers.ToList())
+        foreach (var tower in Map.TowerManager.Towers.ToList())
         {
             var towerBullets = tower.Shoot(Map.Enemies.ToList());
 
@@ -418,17 +419,7 @@ public class GameState
     }
     public void UpgradeTower(int x, int y, TowerUpgrades towerUpgrade)
     {
-        var tower = Map.Towers.FirstOrDefault(t => t.X == x && t.Y == y);
-
-        if (tower is null)
-        {
-            Logger.Instance.LogError($"Unable to upgrade tower at position ({x},{y}). Tower not found.");
-
-            return;
-        }
-
-        var upgradeProcessor = new UpgradeProcessor(_resourceManager, _levelFacade);
-        upgradeProcessor.Process(tower, towerUpgrade);
+        Map.TowerManager.UpgradeTower(x, y, towerUpgrade, _resourceManager, _levelFacade);
     }
 
     private void ApplyEffect(IEffectVisitor effectVisitor)
@@ -438,7 +429,7 @@ public class GameState
             enemy.Accept(effectVisitor);
         }
 
-        foreach (var tower in Map.Towers)
+        foreach (var tower in Map.TowerManager.Towers)
         {
             tower.Accept(effectVisitor);
         }

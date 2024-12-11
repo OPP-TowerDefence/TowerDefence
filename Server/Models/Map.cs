@@ -17,7 +17,7 @@ namespace TowerDefense.Models
         public EnemyCollection Enemies { get; set; } = [];
         public List<Bullet> Bullets { get; set; } = [];
         public List<List<PathPoint>> Paths { get; private set; } = [];
-        public List<Tower> Towers { get; set; } = [];
+        public TowerManager TowerManager = new TowerManager();
         public MainObject MainObject { get; private set; }
 
         public Map(int width, int height)
@@ -35,7 +35,7 @@ namespace TowerDefense.Models
             _defenseMap.Clear();
             const int maxRange = 10;
 
-            foreach (var turret in Towers)
+            foreach (var turret in TowerManager.Towers)
             {
                 for (int dx = -maxRange; dx <= maxRange; dx++)
                 {
@@ -235,11 +235,6 @@ namespace TowerDefense.Models
                 return TileType.Mud;
 
             return TileType.Normal;
-        }
-
-        public bool IsOccupied(int x, int y)
-        {
-            return Towers.Any(t => t.X == x && t.Y == y);
         }
 
         public bool IsValidPosition(int x, int y)
