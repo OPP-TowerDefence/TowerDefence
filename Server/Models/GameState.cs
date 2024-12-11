@@ -24,7 +24,7 @@ public class GameState
     private readonly Random _random = new();
     private ResourceManager _resourceManager;
     private AchievementManager _achievementManager;
-    private readonly IMediator _achievementMediator;
+    private readonly IMediator _resourceFlowMediator;
 
     private int _currentLevel = 1;
     private int _enemiesSpawned = 0;
@@ -51,11 +51,11 @@ public class GameState
         _achievementManager = new AchievementManager(null);
         _resourceManager = new ResourceManager(null);
 
-        _achievementMediator = new AchievementMediator(Map.TowerManager, _achievementManager, _resourceManager, this);
+        _resourceFlowMediator = new ResourceFlowMediator(Map.TowerManager, _achievementManager, _resourceManager, this);
 
-        _resourceManager.SetMediator(_achievementMediator);
-        Map.TowerManager.SetMediator(_achievementMediator);
-        _achievementManager.SetMediator(_achievementMediator);
+        _resourceManager.SetMediator(_resourceFlowMediator);
+        Map.TowerManager.SetMediator(_resourceFlowMediator);
+        _achievementManager.SetMediator(_resourceFlowMediator);
 
         _availableTowerTypes = Enum
             .GetValues(typeof(TowerTypes))

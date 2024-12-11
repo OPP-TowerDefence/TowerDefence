@@ -5,7 +5,7 @@ using TowerDefense.Utils;
 
 namespace TowerDefense.Models.Mediator
 {
-    public class AchievementMediator(TowerManager towerManager, AchievementManager achievementManager, ResourceManager resourceManager, GameState gameState) :IMediator
+    public class ResourceFlowMediator(TowerManager towerManager, AchievementManager achievementManager, ResourceManager resourceManager, GameState gameState) :IMediator
     {
         private TowerManager _towerManager = towerManager;
         private AchievementManager _achievementManager = achievementManager;
