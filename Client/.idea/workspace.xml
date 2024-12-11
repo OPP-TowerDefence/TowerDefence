@@ -5,20 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="347b523a-638e-4661-9e9a-806be6cc4fdb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Server/Interfaces/IMainObjectState.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Server/Models/MainObjectStates/CriticalState.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Server/Models/MainObjectStates/DamagedState.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Server/Models/MainObjectStates/DestroyedState.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Server/Models/MainObjectStates/NormalState.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/site.js" beforeDir="false" afterPath="$PROJECT_DIR$/site.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stylesheet.css" beforeDir="false" afterPath="$PROJECT_DIR$/stylesheet.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Server/Models/Enemies/Enemy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Server/Models/Enemies/Enemy.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Server/Models/GameState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Server/Models/GameState.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Server/Models/MainObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Server/Models/MainObject.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Server/Services/GameService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Server/Services/GameService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Server/Utils/LevelProgressionFacade.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Server/Utils/LevelProgressionFacade.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,6 +15,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "ugnspa"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/OPP-TowerDefence/TowerDefence.git",
+    "accountId": "e3a253f8-6dc9-400c-bcfa-ca5239ea4fa8"
+  }
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 0
@@ -41,7 +40,8 @@
   "keyToString": {
     "Node.js.site.js.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "State",
+    "git-widget-placeholder": "Mediator",
+    "last_opened_file_path": "C:/Users/Mano/Desktop/TowerDefence/Client",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -53,7 +53,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-WS-242.23726.96" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-WS-242.24807.6" />
       </set>
     </attachedChunks>
   </component>
@@ -68,6 +68,7 @@
       <workItem from="1732034870041" duration="6498000" />
       <workItem from="1732201605823" duration="235000" />
       <workItem from="1732638503467" duration="9004000" />
+      <workItem from="1733907787273" duration="7444000" />
     </task>
     <servers />
   </component>

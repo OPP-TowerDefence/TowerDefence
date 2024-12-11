@@ -12,10 +12,10 @@ namespace TowerDefense.Models.Commands
 
         public void Execute()
         {
-            if (!_map.IsOccupied(tower.X, tower.Y) && _map.IsValidPosition(tower.X, tower.Y))
+            if (!_map.TowerManager.IsOccupied(tower.X, tower.Y) && _map.IsValidPosition(tower.X, tower.Y))
             {
                 _levelFacade.ApplyBuffToNewTower(_tower);
-                _map.Towers.Add(_tower);
+                _map.TowerManager.Towers.Add(_tower);
             }
             else
             {
@@ -25,7 +25,7 @@ namespace TowerDefense.Models.Commands
 
         public void Undo()
         {
-            _map.Towers.Remove(_tower);
+            _map.TowerManager.Towers.Remove(_tower);
         }
     }
 }

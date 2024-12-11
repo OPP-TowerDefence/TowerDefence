@@ -49,5 +49,12 @@ namespace TowerDefense.Models
         {
             await _clientProxy.SendAsync("OnResourceChanged", resources);
         }
+
+        public int PlayerTowerCost(TowerCategories towerCategory)
+        {
+            var tower = CreateTower(0, 0, towerCategory);
+
+            return tower.Cost;
+        }
     }
 }

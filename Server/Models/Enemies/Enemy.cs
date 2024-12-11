@@ -143,7 +143,7 @@ namespace TowerDefense.Models.Enemies
                 return;
             }
 
-            if (IsInTurretRange(map.Towers))
+            if (IsInTurretRange(map.TowerManager.Towers))
             {
                 if (!(CurrentStrategy is ThreatAvoidanceStrategy))
                 {

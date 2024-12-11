@@ -3,11 +3,11 @@ using TowerDefense.Enums;
 using TowerDefense.Interfaces;
 using TowerDefense.Models.Commands;
 using TowerDefense.Models.Enemies;
-using TowerDefense.Models.WeaponUpgrades;
 using TowerDefense.Utils;
 using TowerDefense.Models.Strategies;
 using TowerDefense.Interfaces.Visitor;
 using TowerDefense.Visitors;
+using TowerDefense.Models.Mediator;
 
 namespace TowerDefense.Models;
 
@@ -22,7 +22,9 @@ public class GameState
     private readonly Dictionary<string, LinkedList<ICommand>> _playerCommands = [];
     private readonly List<Player> _players;
     private readonly Random _random = new();
-    private readonly ResourceManager _resourceManager;
+    private ResourceManager _resourceManager;
+    private AchievementManager _achievementManager;
+    private readonly IMediator _resourceFlowMediator;
 
     private int _currentLevel = 1;
     private int _enemiesSpawned = 0;
@@ -44,14 +46,23 @@ public class GameState
     {
         _hubContext = hubContext;
         _players = [];
-        _resourceManager = new();
+
+        Map.TowerManager = new TowerManager(null);
+        _achievementManager = new AchievementManager(null);
+        _resourceManager = new ResourceManager(null);
+
+        _resourceFlowMediator = new ResourceFlowMediator(Map.TowerManager, _achievementManager, _resourceManager, this);
+
+        _resourceManager.SetMediator(_resourceFlowMediator);
+        Map.TowerManager.SetMediator(_resourceFlowMediator);
+        _achievementManager.SetMediator(_resourceFlowMediator);
 
         _availableTowerTypes = Enum
             .GetValues(typeof(TowerTypes))
             .Cast<TowerTypes>()
             .ToList();
 
-        _levelFacade = new LevelProgressionFacade(Map.MainObject, Map.Enemies.ToList(), Map.Towers);
+        _levelFacade = new LevelProgressionFacade(Map.MainObject, Map.Enemies.ToList(), Map.TowerManager.Towers);
 
         _onLevelChanged += NotifyLevelChange;
         RoomCode = roomCode;
@@ -186,7 +197,7 @@ public class GameState
 
     public object GetMapTowers()
     {
-        return Map.Towers
+        return Map.TowerManager.Towers
             .Select(t => new
             {
                 t.X,
@@ -218,7 +229,16 @@ public class GameState
 
     public void PlaceTower(int x, int y, TowerCategories towerCategory, Player player)
     {
-        var tower = player.CreateTower(x, y, towerCategory);
+        if (!_resourceManager.CanAfford(player.PlayerTowerCost(towerCategory)))
+        {
+            DisplayMessage("Not enough resources to place tower.");
+            return;
+        }
+
+        var tower = Map.TowerManager.BuyTower(x, y, towerCategory, player);
+
+        if (tower == null) return;
+
         var command = new PlaceTowerCommand(this.Map, tower, _levelFacade);
         ProcessCommand(command, player.ConnectionId);
         Map.UpdateDefenseMap();
@@ -325,14 +345,14 @@ public class GameState
 
     public void TowerAttack()
     {
-        if (Map.Enemies.Count == 0 || Map.Towers.Count == 0)
+        if (Map.Enemies.Count == 0 || Map.TowerManager.Towers.Count == 0)
         {
             return;
         }
 
         UpdateBulletPositions();
 
-        foreach (var tower in Map.Towers.ToList())
+        foreach (var tower in Map.TowerManager.Towers.ToList())
         {
             var towerBullets = tower.Shoot(Map.Enemies.ToList());
 
@@ -418,17 +438,7 @@ public class GameState
     }
     public void UpgradeTower(int x, int y, TowerUpgrades towerUpgrade)
     {
-        var tower = Map.Towers.FirstOrDefault(t => t.X == x && t.Y == y);
-
-        if (tower is null)
-        {
-            Logger.Instance.LogError($"Unable to upgrade tower at position ({x},{y}). Tower not found.");
-
-            return;
-        }
-
-        var upgradeProcessor = new UpgradeProcessor(_resourceManager, _levelFacade);
-        upgradeProcessor.Process(tower, towerUpgrade);
+        Map.TowerManager.UpgradeTower(x, y, towerUpgrade, _resourceManager, _levelFacade);
     }
 
     private void ApplyEffect(IEffectVisitor effectVisitor)
@@ -438,7 +448,7 @@ public class GameState
             enemy.Accept(effectVisitor);
         }
 
-        foreach (var tower in Map.Towers)
+        foreach (var tower in Map.TowerManager.Towers)
         {
             tower.Accept(effectVisitor);
         }
@@ -632,5 +642,12 @@ public class GameState
     public void GenerateResources()
     {
         _resourceManager.OnMainObjectGenerated(Map.MainObject);
+    }
+
+    public void DisplayMessage(string message)
+    {
+        _hubContext.Clients
+            .Group(RoomCode)
+            .SendAsync("DisplayMessage", message);
     }
 }

@@ -8,7 +8,7 @@ namespace TowerDefense.Models.Towers
 
         public HeavyIceTower(int x, int y) : base(x, y)
         {
-            this.Cost = 200;
+            this.Cost = 25;
             this.TicksToShoot = 10;
         }
     }

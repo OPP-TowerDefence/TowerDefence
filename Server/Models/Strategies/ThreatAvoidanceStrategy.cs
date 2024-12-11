@@ -13,7 +13,7 @@ namespace TowerDefense.Models.Strategies
         {
             var map = gameState.Map;
 
-            if (map.Towers.Count == 0)
+            if (map.TowerManager.Towers.Count == 0)
             {
                 selectedPath = map.Paths.Count > 0 ? map.Paths[0] : [map.GetTile(enemy.X, enemy.Y)];
             }

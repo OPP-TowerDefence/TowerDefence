@@ -97,6 +97,13 @@ connection.on("OnTick", function (map, mapEnemies, mapBullets, newPaths, mainObj
     renderMap(map, mapEnemies, mapBullets, mainObject);
 });
 
+connection.on("DisplayMessage", function(message) {
+    const messageList = document.getElementById('messagesList');
+    const listItem = document.createElement('li');
+    listItem.textContent = `${message}`;
+    messageList.appendChild(listItem);
+});
+
 connection.on("GameStarted", function (message) {
     const messageList = document.getElementById('messagesList');
     const listItem = document.createElement('li');

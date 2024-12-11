@@ -8,7 +8,7 @@ namespace TowerDefense.Models.Towers
 
         public LongDistanceFlameTower(int x, int y) : base(x, y)
         {
-            this.Cost = 100;
+            this.Cost = 40;
             this.TicksToShoot = 4;
         }
     }
