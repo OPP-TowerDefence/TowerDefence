@@ -42,7 +42,7 @@ namespace TowerDefense.Models.Mediator
 
         public Tower? BuyTower(int x, int y, TowerCategories towerCategory, Player player)
         {
-            if(_mediator == null)
+            if (_mediator == null)
             {
                 Logger.Instance.LogError("Mediator is not set in TowerManager");
                 return null;

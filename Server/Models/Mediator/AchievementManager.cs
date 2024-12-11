@@ -44,7 +44,7 @@ namespace TowerDefense.Models.Mediator
         {
             resourcesSpent += resource;
 
-            if(resourcesSpent >= resourceSpentGoal)
+            if (resourcesSpent >= resourceSpentGoal)
             {
                 resourceSpentGoal *= 2;
                 resourcesSpent = 0;
@@ -59,7 +59,7 @@ namespace TowerDefense.Models.Mediator
         {
             enemiesKilled += amount;
 
-            if(enemiesKilled >= enemyKilledGoal)
+            if (enemiesKilled >= enemyKilledGoal)
             {
                 enemyKilledGoal *= 3;
                 enemiesKilled = 0;
@@ -74,7 +74,7 @@ namespace TowerDefense.Models.Mediator
         {
             towersPlaced += amount;
 
-            if(towersPlaced >= towerPlacedGoal)
+            if (towersPlaced >= towerPlacedGoal)
             {
                 towerPlacedGoal *= 2;
                 towersPlaced = 0;
@@ -87,7 +87,7 @@ namespace TowerDefense.Models.Mediator
 
         private void AchievementReached(string message, int reward)
         {
-            if(_mediator == null)
+            if (_mediator == null)
             {
                 Logger.Instance.LogError("Mediator is not set in AchievementManager");
                 return;

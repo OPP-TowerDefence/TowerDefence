@@ -229,7 +229,7 @@ public class GameState
 
     public void PlaceTower(int x, int y, TowerCategories towerCategory, Player player)
     {
-        if(!_resourceManager.CanAfford(player.PlayerTowerCost(towerCategory)))
+        if (!_resourceManager.CanAfford(player.PlayerTowerCost(towerCategory)))
         {
             DisplayMessage("Not enough resources to place tower.");
             return;

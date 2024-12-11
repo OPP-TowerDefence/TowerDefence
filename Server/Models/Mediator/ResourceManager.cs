@@ -31,7 +31,7 @@ namespace TowerDefense.Models.Mediator
 
         public bool OnTowerUpgrade(int amount)
         {
-            if(_mediator == null)
+            if (_mediator == null)
             {
                 Logger.Instance.LogError("Mediator is not set in ResourceManager");
                 return false;

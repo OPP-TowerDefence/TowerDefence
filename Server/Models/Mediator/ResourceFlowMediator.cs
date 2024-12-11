@@ -14,7 +14,7 @@ namespace TowerDefense.Models.Mediator
     
         public void Notify(object sender, string eventCode, object data)
         {
-            if(Enum.TryParse(eventCode, out AchievementMediatorEvents achievementEvent) == false)
+            if (Enum.TryParse(eventCode, out AchievementMediatorEvents achievementEvent) == false)
             {
                 Logger.Instance.LogError($"Invalid event code: {eventCode}");
                 return;
