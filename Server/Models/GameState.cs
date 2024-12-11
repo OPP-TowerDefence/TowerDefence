@@ -3,7 +3,6 @@ using TowerDefense.Enums;
 using TowerDefense.Interfaces;
 using TowerDefense.Models.Commands;
 using TowerDefense.Models.Enemies;
-using TowerDefense.Models.WeaponUpgrades;
 using TowerDefense.Utils;
 using TowerDefense.Models.Strategies;
 using TowerDefense.Interfaces.Visitor;

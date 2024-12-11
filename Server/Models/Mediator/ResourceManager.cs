@@ -1,6 +1,5 @@
 ﻿using TowerDefense.Enums;
 using TowerDefense.Interfaces;
-using TowerDefense.Models;
 using TowerDefense.Models.Enemies;
 using TowerDefense.Utils;
 
