@@ -8,6 +8,7 @@ using TowerDefense.Utils;
 using TowerDefense.Models.Strategies;
 using TowerDefense.Interfaces.Visitor;
 using TowerDefense.Visitors;
+using TowerDefense.Models.Mediator;
 
 namespace TowerDefense.Models;
 
@@ -22,7 +23,9 @@ public class GameState
     private readonly Dictionary<string, LinkedList<ICommand>> _playerCommands = [];
     private readonly List<Player> _players;
     private readonly Random _random = new();
-    private readonly ResourceManager _resourceManager;
+    private ResourceManager _resourceManager;
+    private AchievementManager _achievementManager;
+    private readonly IMediator _achievementMediator;
 
     private int _currentLevel = 1;
     private int _enemiesSpawned = 0;
@@ -44,7 +47,16 @@ public class GameState
     {
         _hubContext = hubContext;
         _players = [];
-        _resourceManager = new();
+
+        Map.TowerManager = new TowerManager(null);
+        _achievementManager = new AchievementManager(null);
+        _resourceManager = new ResourceManager(null);
+
+        _achievementMediator = new AchievementMediator(Map.TowerManager, _achievementManager, _resourceManager, this);
+
+        _resourceManager.SetMediator(_achievementMediator);
+        Map.TowerManager.SetMediator(_achievementMediator);
+        _achievementManager.SetMediator(_achievementMediator);
 
         _availableTowerTypes = Enum
             .GetValues(typeof(TowerTypes))
@@ -218,7 +230,15 @@ public class GameState
 
     public void PlaceTower(int x, int y, TowerCategories towerCategory, Player player)
     {
+        if(!_resourceManager.CanAfford(player.PlayerTowerCost(towerCategory)))
+        {
+            DisplayMessage("Not enough resources to place tower.");
+            return;
+        }
+
         var tower = Map.TowerManager.BuyTower(x, y, towerCategory, player);
+
+        if (tower == null) return;
 
         var command = new PlaceTowerCommand(this.Map, tower, _levelFacade);
         ProcessCommand(command, player.ConnectionId);
@@ -623,5 +643,12 @@ public class GameState
     public void GenerateResources()
     {
         _resourceManager.OnMainObjectGenerated(Map.MainObject);
+    }
+
+    public void DisplayMessage(string message)
+    {
+        _hubContext.Clients
+            .Group(RoomCode)
+            .SendAsync("DisplayMessage", message);
     }
 }

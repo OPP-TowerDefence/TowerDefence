@@ -1,6 +1,6 @@
 ﻿using TowerDefense.Enums;
+using TowerDefense.Models.Mediator;
 using TowerDefense.Models.Towers;
-using TowerDefense.Utils;
 
 namespace TowerDefense.Models.Handlers
 {
@@ -22,7 +22,7 @@ namespace TowerDefense.Models.Handlers
                 _ => throw new Exception($"Unknown upgrade type: {requestedUpgrade}")
             };
 
-            if (!_resourceManager.DeductResources(upgradeCost))
+            if (!_resourceManager.OnTowerUpgrade(upgradeCost))
             {
                 return;
             }

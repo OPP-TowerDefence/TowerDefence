@@ -2,6 +2,7 @@
 using TowerDefense.Models.WeaponUpgrades;
 using TowerDefense.Enums;
 using TowerDefense.Models.Collections;
+using TowerDefense.Models.Mediator;
 
 namespace TowerDefense.Models
 {
@@ -17,7 +18,7 @@ namespace TowerDefense.Models
         public EnemyCollection Enemies { get; set; } = [];
         public List<Bullet> Bullets { get; set; } = [];
         public List<List<PathPoint>> Paths { get; private set; } = [];
-        public TowerManager TowerManager = new TowerManager();
+        public TowerManager TowerManager;
         public MainObject MainObject { get; private set; }
 
         public Map(int width, int height)
