@@ -25,11 +25,11 @@ namespace TowerDefense.Visitors
         {
             if (tower.Type == EnvironmentType)
             {
-                tower.Weapon.IncreaseDamage(-tower.Weapon.GetDamage() * Visitor.Environmental.TowerDamageChange);
+                tower.Weapon.SetDamage(tower.Weapon.GetDamage() / Visitor.Environmental.TowerDamageChange);
             }
             else
             {
-                tower.Weapon.IncreaseDamage(tower.Weapon.GetDamage() * Visitor.Environmental.TowerDamageChange);
+                tower.Weapon.SetDamage(tower.Weapon.GetDamage() / Visitor.Environmental.TowerDamageChange);
             }
         }
     }

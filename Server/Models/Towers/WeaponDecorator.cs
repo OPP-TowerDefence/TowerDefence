@@ -37,5 +37,20 @@ namespace TowerDefense.Models.Towers
         {
             _weapon.IncreaseSpeed(amount);
         }
+
+        public void SetDamage(int value)
+        {
+            _weapon.SetDamage(value);
+        }
+
+        public void SetRange(int value)
+        {
+            _weapon.SetRange(value);
+        }
+
+        public void SetSpeed(int value)
+        {
+            _weapon.SetSpeed(value);
+        }
     }
 }

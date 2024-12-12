@@ -23,9 +23,9 @@ namespace TowerDefense.Visitors
 
         public void Visit(Tower tower)
         {
-            tower.Weapon.IncreaseDamage(tower.Weapon.GetDamage() * Visitor.PowerSurge.TowerDamageIncrease);
+            tower.Weapon.SetDamage(tower.Weapon.GetDamage() * Visitor.PowerSurge.TowerDamageIncrease);
 
-            tower.Weapon.IncreaseRange(tower.Weapon.GetRange() * Visitor.PowerSurge.TowerRangeIncrease);
+            tower.Weapon.SetRange(tower.Weapon.GetRange() * Visitor.PowerSurge.TowerRangeIncrease);
 
             tower.Weapon.IncreaseSpeed(Visitor.PowerSurge.TowerSpeedIncrease);
         }

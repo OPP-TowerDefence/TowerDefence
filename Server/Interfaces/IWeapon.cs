@@ -16,6 +16,12 @@ namespace TowerDefense.Interfaces
 
         public void IncreaseSpeed(int amount);
 
+        public void SetDamage(int value);
+
+        public void SetRange(int value);
+
+        public void SetSpeed(int value);
+
         public List<Bullet> Shoot(Tower tower, List<Enemy> enemies, int damage, int numb = 1);
     }
 }
