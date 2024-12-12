@@ -1,5 +1,4 @@
-﻿using TowerDefense.Models.Towers;
-using TowerDefense.Models.WeaponUpgrades;
+﻿using TowerDefense.Models.WeaponUpgrades;
 using TowerDefense.Enums;
 using TowerDefense.Models.Collections;
 using TowerDefense.Models.Mediator;
