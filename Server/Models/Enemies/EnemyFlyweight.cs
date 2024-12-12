@@ -4,6 +4,6 @@
     {
         public string FileName { get; set; } = fileName;
 
-        public int RewardValue { get; private set; }
+        public int RewardValue { get; private set; } = rewardValue;
     }
 }

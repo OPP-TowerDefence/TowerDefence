@@ -31,7 +31,6 @@ namespace TowerDefense.Models.Enemies
         public abstract EnemyTypes Type { get; }
 
         public List<(ITileEffect effect, int turnsRemaining)> _scheduledEffects = [];
-
         public EnemyFlyweight Flyweight { get; protected set; }
 
         public Enemy(int x, int y) : base(x, y)
