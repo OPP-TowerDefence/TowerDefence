@@ -9,9 +9,12 @@ namespace TowerDefense.Models.Enemies
 
         public FastEnemy(int x, int y) : base(x, y)
         {
+            Flyweight = _flyweightFactory.GetFlyweight(GetEnemyFileName(EnemyTypes.Fast), 10);
+
             Health = 10;
             Speed = 4;
         }
+
         public FastEnemy ShallowClone()
         {
             return (FastEnemy)this.MemberwiseClone();
@@ -22,7 +25,7 @@ namespace TowerDefense.Models.Enemies
             {
                 Health = this.Health,
                 Speed = this.Speed,
-                RewardValue = this.RewardValue,
+                Flyweight = this.Flyweight,
                 Id = Guid.NewGuid(),
                 _currentSpeedModifier = this._currentSpeedModifier,
                 _modifierDuration = this._modifierDuration,

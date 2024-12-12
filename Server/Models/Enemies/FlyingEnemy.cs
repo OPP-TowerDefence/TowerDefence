@@ -9,6 +9,8 @@ namespace TowerDefense.Models.Enemies
 
         public FlyingEnemy(int x, int y) : base(x, y)
         {
+            Flyweight = _flyweightFactory.GetFlyweight(GetEnemyFileName(EnemyTypes.Flying), 10);
+
             Health = 15;
             Speed = 3;
         }

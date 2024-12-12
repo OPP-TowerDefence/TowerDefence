@@ -36,7 +36,7 @@ public class GameState
 
     public int EnemyCount { get; private set; } = 0;
     public bool GameStarted { get; private set; }
-    public Map Map { get; } = new Map(100, 100);
+    public Map Map { get; } = new Map(75, 75);
     public List<Player> Players => _players;
     public string RoomCode { get; private set; }
     public int TimeSinceLastSpawn { get; set; } = 0;
@@ -190,7 +190,8 @@ public class GameState
                 e.Y,
                 e.Health,
                 e.Speed,
-                Type = e.Type.ToString()
+                Type = e.Type.ToString(),
+                e.Flyweight.FileName
             })
             .ToList();
     }
