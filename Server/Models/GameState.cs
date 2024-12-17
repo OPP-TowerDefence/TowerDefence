@@ -8,6 +8,9 @@ using TowerDefense.Models.Strategies;
 using TowerDefense.Interfaces.Visitor;
 using TowerDefense.Visitors;
 using TowerDefense.Models.Mediator;
+using TowerDefense.Models.Mementos;
+using TowerDefense.Models.Collections;
+using TowerDefense.Models.MainObjectStates;
 
 namespace TowerDefense.Models;
 
@@ -29,6 +32,7 @@ public class GameState
     private int _currentLevel = 1;
     private int _enemiesSpawned = 0;
     private event Action<int>? _onLevelChanged;
+    private Guid _accessToken = Guid.NewGuid();
 
     public Queue<Effect> EffectsToApply { get; set; } = [];
 
@@ -36,7 +40,7 @@ public class GameState
 
     public int EnemyCount { get; private set; } = 0;
     public bool GameStarted { get; private set; }
-    public Map Map { get; } = new Map(75, 75);
+    public Map Map { get; set; } = new Map(75, 75);
     public List<Player> Players => _players;
     public string RoomCode { get; private set; }
     public int TimeSinceLastSpawn { get; set; } = 0;
@@ -297,6 +301,43 @@ public class GameState
         }
     }
 
+    public void RestoreState(GameStateMemento memento)
+    {
+        var (currentLevel, towers, enemies, resources, gameMap, mainObjectHealth, mainObjectState) = memento.GetState(_accessToken);
+
+        _currentLevel = currentLevel;
+        _levelFacade.SetCurrentLevel(_currentLevel);
+        _enemiesSpawned = 0;
+
+        NotifyLevelChange(_currentLevel);
+
+        Map.TowerManager.SetTowers(towers);
+        Map.Enemies = new EnemyCollection(enemies);
+        _resourceManager.SetResources(resources);
+        Map = gameMap;
+
+        Map.MainObject.Health = mainObjectHealth;
+        RestoreMainObjectState(Map.MainObject, mainObjectState);
+    }
+
+
+    public GameStateMemento SaveState()
+    {
+        string mainObjectStateUrl = Map.MainObject.GetStateGif();
+        string mainObjectStateName = ExtractStateName(mainObjectStateUrl);
+
+        return new GameStateMemento(
+            _accessToken,
+            _levelFacade.GetCurrentLevel(),
+            Map.TowerManager.Towers.ToList(),
+            Map.Enemies.Components.ToList(),
+            _resourceManager.GetResources(),
+            Map,
+            Map.MainObject.Health,
+            mainObjectStateName
+        );
+    }
+
     public object SendPath()
     {
         return Map.Paths.Select(path => path.Select(tile => new
@@ -498,6 +539,11 @@ public class GameState
         }
     }
 
+    private string ExtractStateName(string stateUrl)
+    {
+        return stateUrl.Split('/').Last().Replace(".gif", "");
+    }
+
     private List<(int X, int Y)> GetGroupOffsets(int groupSize)
     {
         var offsets = new List<(int X, int Y)>();
@@ -606,6 +652,29 @@ public class GameState
             }
 
             _onLevelChanged?.Invoke(_currentLevel);
+        }
+    }
+
+    private void RestoreMainObjectState(MainObject mainObject, string stateName)
+    {
+        switch (stateName.ToLower())
+        {
+            case "normal":
+                mainObject.ChangeState(new NormalState());
+                break;
+            case "damaged":
+                mainObject.ChangeState(new DamagedState());
+                break;
+            case "critical":
+                mainObject.ChangeState(new CriticalState());
+                break;
+            case "destroyed":
+                mainObject.ChangeState(new DestroyedState());
+                break;
+            default:
+                Logger.Instance.LogError($"Unknown MainObject state: {stateName}");
+                mainObject.ChangeState(new NormalState());
+                break;
         }
     }
 
