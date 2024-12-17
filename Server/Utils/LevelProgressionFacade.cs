@@ -72,6 +72,11 @@ namespace TowerDefense.Utils
         {
             return _currentLevel;
         }
+
+        public void SetCurrentLevel(int level)
+        {
+            _currentLevel = level;
+        }
     }
 }
 

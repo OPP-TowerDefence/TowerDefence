@@ -2,11 +2,13 @@
 using TowerDefense.Enums;
 using TowerDefense.Models;
 using TowerDefense.Services;
+using TowerDefense.Utils;
 
 namespace TowerDefense
 {
     public class GameHub(GameService gameService, Interfaces.ILogger logger) : Hub
     {
+        private static readonly Dictionary<string, GameCaretaker> _caretakers = new();
         private readonly GameService _gameService = gameService;
         private readonly Interfaces.ILogger _logger = logger;
 
@@ -99,6 +101,44 @@ namespace TowerDefense
             else
             {
                 _logger.LogError($"Failed to place tower: room code {roomCode} does not exist.");
+            }
+        }
+
+        public async Task RestoreGame(string roomCode)
+        {
+            if (_gameService.Rooms.TryGetValue(roomCode, out var room) && room is not null)
+            {
+                if (_caretakers.ContainsKey(roomCode))
+                {
+                    var memento = _caretakers[roomCode].Restore();
+                    if (memento != null)
+                    {
+                        room.RestoreState(memento);
+                        await Clients.Caller.SendAsync("DisplayMessage", "Game state restored successfully!");
+                    }
+                }
+            }
+            else
+            {
+                _logger.LogError($"Room {roomCode} not found for restoring game state.");
+            }
+        }
+
+        public async Task SaveGame(string roomCode)
+        {
+            if (_gameService.Rooms.TryGetValue(roomCode, out var room) && room is not null)
+            {
+                if (!_caretakers.ContainsKey(roomCode))
+                {
+                    _caretakers[roomCode] = new GameCaretaker();
+                }
+
+                _caretakers[roomCode].Save(room.SaveState());
+                await Clients.Caller.SendAsync("DisplayMessage", "Game state saved successfully!");
+            }
+            else
+            {
+                _logger.LogError($"Room {roomCode} not found for saving game state.");
             }
         }
 

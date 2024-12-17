@@ -205,3 +205,41 @@ input, button {
     font-weight: bold;
     color: red;
 }
+
+.save-restore-container {
+    display: flex;
+    justify-content: space-evenly; 
+    margin-top: 20px; 
+}
+
+.save-button, .restore-button {
+    flex: 1;
+    margin: 0 10px; 
+    padding: 10px 20px; 
+    font-size: 16px; 
+    font-weight: bold;
+    cursor: pointer;
+    border: 1px solid #000;
+    border-radius: 5px;
+    background-color: #e0e0e0;
+    text-align: center;
+    transition: all 0.3s ease; 
+}
+
+.save-button:hover {
+    background-color: #4CAF50; 
+    color: white;
+    border-color: #000;
+}
+
+.restore-button:hover {
+    background-color: #f44336;
+    color: white;
+    border-color: #000;
+}
+
+.save-button.active, .restore-button.active {
+    background-color: #778beb;
+    color: white;
+    border-color: #000;
+}

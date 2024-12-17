@@ -54,5 +54,9 @@ namespace TowerDefense.Models.Mediator
             return tower;
         }
 
+        public void SetTowers(List<Tower> towers)
+        {
+            Towers = towers;
+        }
     }
 }

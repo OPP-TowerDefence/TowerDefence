@@ -486,6 +486,15 @@ function highlightPlayersWithMatchingTowerType(environmentType, status) {
     });
 }
 
+async function saveGame() {
+    const roomCode = document.getElementById('roomCode').value;
+    await connection.invoke("SaveGame", roomCode);
+}
+
+async function restoreGame() {
+    const roomCode = document.getElementById('roomCode').value;
+    await connection.invoke("RestoreGame", roomCode);
+}
 
 connection.start().catch(function (err) {
     console.error(err.toString());
