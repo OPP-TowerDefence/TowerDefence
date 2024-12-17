@@ -23,18 +23,6 @@ const upgradeCosts = {
     DoubleDamage: 90
 };
 
-const enemyTypes = {
-    STRONG: "Strong",
-    FLYING: "Flying",
-    FAST: "Fast"
-};
-
-const enemyClassMap = {
-    [enemyTypes.STRONG]: 'strong-enemy',
-    [enemyTypes.FLYING]: 'flying-enemy',
-    [enemyTypes.FAST]: 'fast-enemy'
-};
-
 async function joinRoom() {
     const roomCode = document.getElementById('roomCode').value;
     const username = document.getElementById('username').value;
@@ -225,10 +213,15 @@ function renderMap(map, mapEnemies, mapBullets, mainObject) {
     mapEnemies.forEach(enemy => {
         const cell = document.createElement('div');
         cell.className = 'grid-cell enemy';
-        const enemyClass = enemyClassMap[enemy.type];
-        if (enemyClass) {
-            cell.classList.add(enemyClass);
-        }
+        
+        const enemyImage = document.createElement('img');
+
+        enemyImage.src = enemy.fileName;
+        enemyImage.style.width = '300%';
+        enemyImage.style.height = '300%';
+
+        cell.appendChild(enemyImage);
+
         gameMap.appendChild(cell);
         cell.style.gridColumnStart = enemy.x + 1;
         cell.style.gridRowStart = enemy.y + 1;

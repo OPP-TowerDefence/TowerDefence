@@ -64,7 +64,7 @@ namespace TowerDefense.Models.Mediator
                 return;
             }
 
-            _resources += enemy.RewardValue;
+            _resources += enemy.Flyweight.RewardValue;
 
             _mediator.Notify(this, AchievementMediatorEvents.EnemyKilled.ToString(), 1);
 

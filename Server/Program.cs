@@ -17,8 +17,8 @@ builder.Services.AddCors(options =>
 if (builder.Environment.IsProduction())
 {
     builder.Host.UseSerilog((hostingContext, loggerConfiguration) =>
-    loggerConfiguration.ReadFrom.Configuration(hostingContext.Configuration)
-);
+        loggerConfiguration.ReadFrom.Configuration(hostingContext.Configuration)
+    );
 
     builder.Services.AddSingleton<TowerDefense.Interfaces.ILogger, SerilogAdapter>();
 

@@ -38,6 +38,21 @@ namespace TowerDefense.Models.Towers
             Speed += amount;
         }
 
+        public void SetDamage(int value)
+        {
+            Damage = value;
+        }
+
+        public void SetRange(int value)
+        {
+            Range = value;
+        }
+
+        public void SetSpeed(int value)
+        {
+            Speed = value;
+        }
+
         public List<Bullet> Shoot(Tower tower, List<Enemy> enemies, int damage, int numbEnemies = 1)
         {
             var bullets = new List<Bullet>();

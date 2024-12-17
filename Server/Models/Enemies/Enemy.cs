@@ -9,7 +9,10 @@ namespace TowerDefense.Models.Enemies
 {
     public abstract class Enemy : Unit, IEnemyComponent, IVisitable
     {
+        protected const string _baseUrl = "http://localhost:7041/Enemies";
+
         protected int _currentSpeedModifier = 0;
+        protected EnemyFlyweightFactory _flyweightFactory = new(_baseUrl);
         protected int _modifierDuration = 0;
         protected (int x, int y) _lastTilePosition;
 
@@ -21,7 +24,6 @@ namespace TowerDefense.Models.Enemies
 
         public Guid Id { get; set; }
         public int Health { get; set; }
-        public int RewardValue { get; set; } = 10;
         public int Speed { get; set; }
         public Queue<PathPoint> Path { get; set; }
         public IPathStrategy CurrentStrategy { get; private set; }
@@ -29,6 +31,7 @@ namespace TowerDefense.Models.Enemies
         public abstract EnemyTypes Type { get; }
 
         public List<(ITileEffect effect, int turnsRemaining)> _scheduledEffects = [];
+        public EnemyFlyweight Flyweight { get; protected set; }
 
         public Enemy(int x, int y) : base(x, y)
         {
@@ -336,6 +339,17 @@ namespace TowerDefense.Models.Enemies
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
+        }
+
+        protected static string GetEnemyFileName(EnemyTypes enemyType)
+        {
+            return enemyType switch
+            {
+                EnemyTypes.Fast => "fastEnemy.gif",
+                EnemyTypes.Flying => "flyingEnemy.gif",
+                EnemyTypes.Strong => "strongEnemy.gif",
+                _ => throw new ArgumentException($"Unknown enemy type: {enemyType}")
+            };
         }
     }
 }
