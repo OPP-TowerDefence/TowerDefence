@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using TowerDefense.Enums;
 using TowerDefense.Interfaces;
 using TowerDefense.Models.Enemies;
@@ -15,11 +18,14 @@ namespace TowerDefense.Models.Strategies
             }
 
             var healthTiles = gameState.Map.GetAllTilesOfType(TileType.PinkHealth);
+
+            // If no health tiles, stay on the enemy's current path
             if (healthTiles.Count == 0)
             {
-                return paths[0];
+                return enemy.Path?.ToList() ?? paths[0];
             }
 
+            // Rank paths based on distance to the closest health tile
             var rankedPaths = paths
                 .OrderBy(path => GetManhattanDistanceToClosestHealthTile(path, healthTiles))
                 .ToList();
@@ -34,7 +40,8 @@ namespace TowerDefense.Models.Strategies
                 }
             }
 
-            return rankedPaths[0];
+            // Fallback to the enemy's current path if no better options are found
+            return enemy.Path?.ToList() ?? rankedPaths[0];
         }
 
         private int GetManhattanDistanceToClosestHealthTile(List<PathPoint> path, List<PathPoint> healthTiles)

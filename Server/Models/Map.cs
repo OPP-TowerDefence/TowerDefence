@@ -16,7 +16,7 @@ namespace TowerDefense.Models
         public int Width { get; private set; }
         public EnemyCollection Enemies { get; set; } = [];
         public List<Bullet> Bullets { get; set; } = [];
-        public List<List<PathPoint>> Paths { get; private set; } = [];
+        public List<List<PathPoint>> Paths { get; set; } = [];
         public TowerManager TowerManager;
         public MainObject MainObject { get; private set; }
 
@@ -160,7 +160,7 @@ namespace TowerDefense.Models
 
                 if (sharedPoint != null)
                 {
-                    SetTileType(currentX, currentY, DetermineTileType());
+                    SetTileType(currentX, currentY, TileType.Normal);
 
                     sharedPath.Add(sharedPoint);
                 }
@@ -173,7 +173,7 @@ namespace TowerDefense.Models
                 
                 foreach (var pathPoint in randomPath)
                 {
-                    SetTileType(pathPoint.X, pathPoint.Y, DetermineTileType());
+                    SetTileType(pathPoint.X, pathPoint.Y, TileType.Normal);
                 }
 
                 newPath.AddRange(randomPath);

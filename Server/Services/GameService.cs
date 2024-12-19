@@ -13,8 +13,6 @@ public class GameService
     private static readonly RoomCollection _rooms = new();
     private readonly System.Timers.Timer _gameTickTimer;
     private readonly IHubContext<GameHub> _hubContext;
-
-    private double _timeSinceLastEnvironmentUpdate = 0;
     private double _timeSinceLastSpawn = 0;
 
     public RoomCollection Rooms => _rooms;
@@ -35,7 +33,6 @@ public class GameService
     private async void GameTickHandler(object sender, ElapsedEventArgs e)
     {
         _timeSinceLastSpawn += _gameTickTimer.Interval;
-        _timeSinceLastEnvironmentUpdate += _gameTickTimer.Interval;
 
         foreach (var room in _rooms.Where(r => r.GameStarted))
         {
@@ -56,12 +53,6 @@ public class GameService
                 {
                     room.SpawnEnemies();
                     _timeSinceLastSpawn = 0;
-                }
-                
-                if (_timeSinceLastEnvironmentUpdate >= _environmentUpdateInterval)
-                {
-                    room.UpdateEnvironment();
-                    _timeSinceLastEnvironmentUpdate = 0;
                 }
 
                 room.ReverseEffects();

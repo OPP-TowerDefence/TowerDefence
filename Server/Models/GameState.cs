@@ -11,6 +11,7 @@ using TowerDefense.Models.Mediator;
 using TowerDefense.Models.Mementos;
 using TowerDefense.Models.Collections;
 using TowerDefense.Models.MainObjectStates;
+using TowerDefense.Models.Levels;
 
 namespace TowerDefense.Models;
 
@@ -45,6 +46,7 @@ public class GameState
     public string RoomCode { get; private set; }
     public int TimeSinceLastSpawn { get; set; } = 0;
     public int TimeSinceLastEnvironmentUpdate { get; set; } = 0;
+    private readonly List<Func<Map, LevelGenerationTemplate>> _levelGenerators;
 
     public GameState(IHubContext<GameHub> hubContext, string roomCode)
     {
@@ -71,6 +73,12 @@ public class GameState
         _onLevelChanged += NotifyLevelChange;
         RoomCode = roomCode;
 
+        _levelGenerators = new List<Func<Map, LevelGenerationTemplate>>
+            {
+                map => new RainbowLevelGenerator(map),
+                map => new SwampLevelGenerator(map),
+                map => new IceLevelGenerator(map)
+            };
     }
 
     public void AddPlayer(string username, string connectionId)
@@ -340,12 +348,17 @@ public class GameState
 
     public object SendPath()
     {
-        return Map.Paths.Select(path => path.Select(tile => new
-        {
-            X = tile.X,
-            Y = tile.Y,
-            Type = tile.Type.ToString()
-        })).ToList();
+        return Map.Paths
+            .Where(path => path != null)
+            .Select(path => path
+                .Where(tile => tile != null)
+                .Select(tile => new
+                {
+                    X = tile.X,
+                    Y = tile.Y,
+                    Type = tile.Type.ToString()
+                })
+            ).ToList();
     }
 
     public void SpawnEnemies()
@@ -439,44 +452,6 @@ public class GameState
                 Map.Enemies.Remove(enemyComponent);
             }
         }
-    }
-
-    public void UpdateEnvironment()
-    {
-        var objective = Map.GetObjectiveTile();
-
-        for (int x = 0; x < Map.Width; x++)
-        {
-            for (int y = 0; y < Map.Height; y++)
-            {
-                var tile = Map.GetTile(x, y);
-
-                if (tile.Type == TileType.Turret || (x == objective.X && y == objective.Y))
-                    continue;
-
-                tile.Type = TileType.Normal;
-                tile.Effect = null;
-                tile.EffectApplicationType = null;
-            }
-        }
-
-        for (int x = 0; x < Map.Width; x++)
-        {
-            for (int y = 0; y < Map.Height; y++)
-            {
-                var tile = Map.GetTile(x, y);
-
-                if (tile.Type == TileType.Normal && _random.NextDouble() < 0.9)
-                {
-                    var newTileType = Map.DetermineTileType();
-                    tile.Type = newTileType;
-                    tile.SetEffectAndApplication(newTileType);
-                }
-            }
-        }
-
-        RecalculatePathsForStrategy(new SpeedPrioritizationStrategy());
-        RecalculatePathsForStrategy(new SurvivalStrategy());
     }
     public void UpgradeTower(int x, int y, TowerUpgrades towerUpgrade)
     {
@@ -646,12 +621,15 @@ public class GameState
 
             var effectsToApply = EffectResolver.GetEffects(_currentLevel);
 
-            foreach(var effect in effectsToApply)
+            foreach (var effect in effectsToApply)
             {
                 EffectsToApply.Enqueue(effect);
             }
 
             _onLevelChanged?.Invoke(_currentLevel);
+            int generatorIndex = (_currentLevel - 1) % _levelGenerators.Count;
+            var currentLevelGenerator = _levelGenerators[generatorIndex](Map);
+            currentLevelGenerator.GeneratePaths();
         }
     }
 
