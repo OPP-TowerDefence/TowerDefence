@@ -1,5 +1,4 @@
-﻿using TowerDefense.Enums;
-using TowerDefense.Interfaces;
+﻿using TowerDefense.Interfaces;
 using TowerDefense.Models.Strategies;
 
 namespace TowerDefense.Models.Enemies
