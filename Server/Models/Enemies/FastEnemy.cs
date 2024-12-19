@@ -20,7 +20,7 @@ namespace TowerDefense.Models.Enemies
 
         public FastEnemy DeepClone()
         {
-            var deepClonedEnemy = new FastEnemy(this.X, this.Y, this.Flyweight)
+            var deepClonedEnemy = new FastEnemy(this.X, this.Y, new EnemyFlyweight(this.FileName, this.RewardValue))
             {
                 Health = this.Health,
                 Speed = this.Speed,

@@ -22,6 +22,8 @@ namespace TowerDefense.Models.Enemies
             var enemy = _prototypeEnemy.ShallowClone();
             enemy.X = x;
             enemy.Y = y;
+            enemy.FileName = $"http://localhost:7041/Enemies/{_fileName}";
+            enemy.RewardValue = _rewardValue;
             return enemy;
         }
     }

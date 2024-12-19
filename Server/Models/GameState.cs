@@ -194,7 +194,7 @@ public class GameState
                 e.Health,
                 e.Speed,
                 Type = e.Type.ToString(),
-                e.Flyweight.FileName
+                e.FileName
             })
             .ToList();
     }
@@ -312,30 +312,33 @@ public class GameState
 
     public void SpawnEnemies()
     {
-        int spawnType = DetermineSpawnType(_currentLevel);
-
-        IEnemyComponent enemyComponent;
-
-        if (spawnType == 0)
+        for (int i = 0; i < 10; i++)
         {
-            enemyComponent = CreateAndInitializeEnemy(0, 0);
-        }
-        else
-        {
-            int numberOfEnemies = spawnType == 1 ? 2 : 3;
-            var enemyGroup = new EnemyGroup();
+            int spawnType = DetermineSpawnType(_currentLevel);
 
-            var spawnPositions = GetGroupOffsets(numberOfEnemies);
+            IEnemyComponent enemyComponent;
 
-            foreach (var (offsetX, offsetY) in spawnPositions)
+            if (spawnType == 0)
             {
-                enemyGroup.Add(CreateAndInitializeEnemy(offsetX, offsetY));
+                enemyComponent = CreateAndInitializeEnemy(0, 0);
+            }
+            else
+            {
+                int numberOfEnemies = spawnType == 1 ? 2 : 3;
+                var enemyGroup = new EnemyGroup();
+
+                var spawnPositions = GetGroupOffsets(numberOfEnemies);
+
+                foreach (var (offsetX, offsetY) in spawnPositions)
+                {
+                    enemyGroup.Add(CreateAndInitializeEnemy(offsetX, offsetY));
+                }
+
+                enemyComponent = enemyGroup;
             }
 
-            enemyComponent = enemyGroup;
+            Map.Enemies.Add(enemyComponent);
         }
-
-        Map.Enemies.Add(enemyComponent);
     }
 
     public void StartGame(string connectionId)

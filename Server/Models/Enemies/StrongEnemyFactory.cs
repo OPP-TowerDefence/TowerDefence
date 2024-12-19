@@ -5,14 +5,14 @@ namespace TowerDefense.Models.Enemies
 {
     public class StrongEnemyFactory : IEnemyFactory
     {
-        private const string fileName = "strongEnemy.gif";
+        private const string _fileName = "strongEnemy.gif";
         private const int rewardValue = 15;
 
         private readonly StrongEnemy _prototypeEnemy;
 
         public StrongEnemyFactory()
         {
-            _prototypeEnemy = new StrongEnemy(0, 0, GameState.FlyweightFactory.GetFlyweight(fileName, rewardValue));
+            _prototypeEnemy = new StrongEnemy(0, 0, GameState.FlyweightFactory.GetFlyweight(_fileName, rewardValue));
             _prototypeEnemy.SetInitialStrategy(new SurvivalStrategy());
         }
 
@@ -21,6 +21,8 @@ namespace TowerDefense.Models.Enemies
             var enemy = _prototypeEnemy.ShallowClone();
             enemy.X = x;
             enemy.Y = y;
+            enemy.FileName = $"http://localhost:7041/Enemies/{_fileName}";
+            enemy.RewardValue = rewardValue;
             return enemy;
         }
     }

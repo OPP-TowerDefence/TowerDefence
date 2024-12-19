@@ -28,11 +28,16 @@ namespace TowerDefense.Models.Enemies
         public abstract EnemyTypes Type { get; }
 
         public List<(ITileEffect effect, int turnsRemaining)> _scheduledEffects = [];
-        public EnemyFlyweight Flyweight { get; protected set; }
+
+        public string FileName { get; set; }
+
+        public int RewardValue { get; set; }
+
+        //public EnemyFlyweight Flyweight { get; protected set; }
 
         public Enemy(int x, int y, EnemyFlyweight enemyFlyweight) : base(x, y)
         {
-            Flyweight = enemyFlyweight;
+            //Flyweight = enemyFlyweight;
             Id = Guid.NewGuid();
             _lastTilePosition = (x, y);
         }
