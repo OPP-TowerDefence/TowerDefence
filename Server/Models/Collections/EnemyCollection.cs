@@ -10,6 +10,13 @@ namespace TowerDefense.Models.Collections
 
         public int Count => Components.Count;
 
+        public EnemyCollection(IEnumerable<IEnemyComponent> enemies)
+        {
+            Components = enemies.ToList();
+        }
+
+        public EnemyCollection() { }
+
         public void Add(IEnemyComponent component)
         {
             Components.Add(component);

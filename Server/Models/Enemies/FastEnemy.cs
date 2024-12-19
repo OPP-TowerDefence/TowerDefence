@@ -9,6 +9,8 @@ namespace TowerDefense.Models.Enemies
 
         public FastEnemy(int x, int y, EnemyFlyweight enemyFlyweight) : base(x, y, enemyFlyweight)
         {
+            Flyweight = _flyweightFactory.GetFlyweight(GetEnemyFileName(EnemyTypes.Fast), 10);
+
             Health = 10;
             Speed = 4;
         }

@@ -9,7 +9,10 @@ namespace TowerDefense.Models.Enemies
 {
     public abstract class Enemy : Unit, IEnemyComponent, IVisitable
     {
+        protected const string _baseUrl = "http://localhost:7041/Enemies";
+
         protected int _currentSpeedModifier = 0;
+        protected EnemyFlyweightFactory _flyweightFactory = new(_baseUrl);
         protected int _modifierDuration = 0;
         protected (int x, int y) _lastTilePosition;
 

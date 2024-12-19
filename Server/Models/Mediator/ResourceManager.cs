@@ -119,5 +119,10 @@ namespace TowerDefense.Models.Mediator
 
             _mediator.Notify(this, AchievementMediatorEvents.ResourceSpent.ToString(), resources);
         }
+
+        public void SetResources(int rescources)
+        {
+            _resources = rescources;
+        }
     }
 }
