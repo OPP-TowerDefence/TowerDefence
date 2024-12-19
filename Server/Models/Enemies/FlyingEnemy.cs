@@ -7,7 +7,7 @@ namespace TowerDefense.Models.Enemies
     {
         public override EnemyTypes Type => EnemyTypes.Flying;
 
-        public FlyingEnemy(int x, int y) : base(x, y)
+        public FlyingEnemy(int x, int y, EnemyFlyweight enemyflyweight) : base(x, y, enemyflyweight)
         {
             Flyweight = _flyweightFactory.GetFlyweight(GetEnemyFileName(EnemyTypes.Flying), 10);
 

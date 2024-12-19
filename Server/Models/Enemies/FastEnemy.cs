@@ -7,7 +7,7 @@ namespace TowerDefense.Models.Enemies
     {
         public override EnemyTypes Type => EnemyTypes.Fast;
 
-        public FastEnemy(int x, int y) : base(x, y)
+        public FastEnemy(int x, int y, EnemyFlyweight enemyFlyweight) : base(x, y, enemyFlyweight)
         {
             Flyweight = _flyweightFactory.GetFlyweight(GetEnemyFileName(EnemyTypes.Fast), 10);
 
@@ -19,13 +19,13 @@ namespace TowerDefense.Models.Enemies
         {
             return (FastEnemy)this.MemberwiseClone();
         }
+
         public FastEnemy DeepClone()
         {
-            var deepClonedEnemy = new FastEnemy(this.X, this.Y)
+            var deepClonedEnemy = new FastEnemy(this.X, this.Y, this.Flyweight)
             {
                 Health = this.Health,
                 Speed = this.Speed,
-                Flyweight = this.Flyweight,
                 Id = Guid.NewGuid(),
                 _currentSpeedModifier = this._currentSpeedModifier,
                 _modifierDuration = this._modifierDuration,

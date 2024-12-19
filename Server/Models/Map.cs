@@ -2,11 +2,14 @@
 using TowerDefense.Enums;
 using TowerDefense.Models.Collections;
 using TowerDefense.Models.Mediator;
+using TowerDefense.Models.Enemies;
 
 namespace TowerDefense.Models
 {
     public class Map
     {
+        public static EnemyFlyweightFactory EnemyFlyweightFactory { get; set; } = new("http://localhost:7041/Enemies");
+
         private readonly Dictionary<(int x, int y), int> _defenseMap = [];
         private readonly Random _random = new();
 

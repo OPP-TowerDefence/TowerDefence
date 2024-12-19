@@ -33,8 +33,9 @@ namespace TowerDefense.Models.Enemies
         public List<(ITileEffect effect, int turnsRemaining)> _scheduledEffects = [];
         public EnemyFlyweight Flyweight { get; protected set; }
 
-        public Enemy(int x, int y) : base(x, y)
+        public Enemy(int x, int y, EnemyFlyweight enemyFlyweight) : base(x, y)
         {
+            Flyweight = enemyFlyweight;
             Id = Guid.NewGuid();
             _lastTilePosition = (x, y);
         }

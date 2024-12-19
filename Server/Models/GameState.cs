@@ -16,8 +16,9 @@ namespace TowerDefense.Models;
 
 public class GameState
 {
-    private const int _commandHistoryLimit = 3;
+    protected const string _baseUrl = "http://localhost:7041/Enemies";
     private const int _baseEnemiesPerLevel = 10;
+    private const int _commandHistoryLimit = 3;
 
     private readonly List<TowerTypes> _availableTowerTypes;
     private readonly IHubContext<GameHub> _hubContext;
@@ -33,6 +34,8 @@ public class GameState
     private int _enemiesSpawned = 0;
     private event Action<int>? _onLevelChanged;
     private Guid _accessToken = Guid.NewGuid();
+
+    public static EnemyFlyweightFactory FlyweightFactory = new(_baseUrl);
 
     public Queue<Effect> EffectsToApply { get; set; } = [];
 
