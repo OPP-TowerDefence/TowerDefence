@@ -2,7 +2,7 @@
 {
     public class EnemyFlyweightFactory(string baseUrl)
     {
-        private readonly Dictionary<string, EnemyFlyweight> _flyweights = new();
+        private readonly Dictionary<string, EnemyFlyweight> _flyweights = [];
         private readonly string _baseUrl = baseUrl;
 
         public EnemyFlyweight GetFlyweight(string fileName, int rewardValue)

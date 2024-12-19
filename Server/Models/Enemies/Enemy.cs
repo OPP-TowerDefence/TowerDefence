@@ -9,10 +9,7 @@ namespace TowerDefense.Models.Enemies
 {
     public abstract class Enemy : Unit, IEnemyComponent, IVisitable
     {
-        protected const string _baseUrl = "http://localhost:7041/Enemies";
-
         protected int _currentSpeedModifier = 0;
-        protected EnemyFlyweightFactory _flyweightFactory = new(_baseUrl);
         protected int _modifierDuration = 0;
         protected (int x, int y) _lastTilePosition;
 
@@ -33,8 +30,9 @@ namespace TowerDefense.Models.Enemies
         public List<(ITileEffect effect, int turnsRemaining)> _scheduledEffects = [];
         public EnemyFlyweight Flyweight { get; protected set; }
 
-        public Enemy(int x, int y) : base(x, y)
+        public Enemy(int x, int y, EnemyFlyweight enemyFlyweight) : base(x, y)
         {
+            Flyweight = enemyFlyweight;
             Id = Guid.NewGuid();
             _lastTilePosition = (x, y);
         }
